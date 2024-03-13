@@ -23,6 +23,7 @@ namespace BookingApp.Model
         public int Duration { get; set; }
         public List<string> Images { get; set; }
 
+        public Tour() { }
         public Tour(int id, string name, Location location, string description, string language, int maxTourists, List<string> keyPoints, List<DateTime> dates, int duration, List<string> images)
         {
             Id = id;
