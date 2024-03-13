@@ -13,7 +13,7 @@ namespace BookingApp.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
-        //public Location location{ get; set; }
+        public Location Location{ get; set; }
 
         public string Type { get; set; }
         public int MaxGuests { get; set; }
@@ -29,7 +29,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Type, MaxGuests.ToString(), MinBookingDays.ToString(), CancellationDays.ToString() };
+            string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type, MaxGuests.ToString(), MinBookingDays.ToString(), CancellationDays.ToString() };
             foreach (string imagePath in Images)
             {
                 csvValues.Append($"{imagePath};");
@@ -42,12 +42,13 @@ namespace BookingApp.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            Type = values[2];  //bice pomereni svi za jedan kada dodamo Location, User = new User() { Id = Convert.ToInt32(values[3]) mozda ce se Lokacija praviti ovako isto jer nije int/string
-            MaxGuests = Convert.ToInt32(values[3]);
-            MinBookingDays = Convert.ToInt32(values[4]);
-            CancellationDays = Convert.ToInt32(values[5]);
+            Location.Id = Convert.ToInt32(values[2]);
+            Type = values[3]; //bice pomereni svi za jedan kada dodamo Location, User = new User() { Id = Convert.ToInt32(values[3]) mozda ce se Lokacija praviti ovako isto jer nije int/string
+            MaxGuests = Convert.ToInt32(values[4]);
+            MinBookingDays = Convert.ToInt32(values[5]);
+            CancellationDays = Convert.ToInt32(values[6]);
             Images = new List<string>();
-            for (int i = 6; i < values.Length; i++)
+            for (int i = 7; i < values.Length; i++)
             {
                 Images.Add(values[i]); // Dodajemo svaku putanju slike u listu Images
             }
