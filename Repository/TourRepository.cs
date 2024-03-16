@@ -15,10 +15,10 @@ namespace BookingApp.Repository
 
         private List<Tour> _tours;
 
-        public TourRepository(Serializer<Tour> serializer, List<Tour> tours)
+        public TourRepository()
         {
             _serializer = new Serializer<Tour>();
-            _tours = serializer.FromCSV(FilePath);
+            _tours = _serializer.FromCSV(FilePath);
         }
 
         public List<Tour> GetAll()
