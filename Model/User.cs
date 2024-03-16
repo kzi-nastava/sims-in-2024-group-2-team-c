@@ -3,11 +3,14 @@ using System;
 
 namespace BookingApp.Model
 {
+   // enum role {Owner=0, Guest=1, Guide=2, Tourist=3 }
     public class User : ISerializable
     {
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+
+        //public role Role { get; set; }
 
         public User() { }
 
