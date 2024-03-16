@@ -1,0 +1,57 @@
+﻿<Window x:Class="BookingApp.View.TourForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="Create Tour" Height="450" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Location(City,Country):"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Description:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Language:"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Max Tourists:"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Key Points:"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding KeyPoints, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Dates:"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Dates, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="7" Grid.Column="0" Content="Duration:"/>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Label Grid.Row="8" Grid.Column="0" Content="Images:"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Images, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <Button Grid.Row="9" Grid.ColumnSpan="2" Click="SaveTour_Click" Content="Save" HorizontalAlignment="Center" Margin="5"/>
+    </Grid>
+</Window>
