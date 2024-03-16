@@ -11,24 +11,31 @@ namespace BookingApp.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
-        public List<string> KeyPoints { get; set; }
+        public List<int> KeyPointIds { get; set; }
         public int Duration { get; set; }
         public List<string> Images { get; set; }
 
-        public Tour() { }
-        public Tour(int id, string name, Location location, string description, string language, List<string> keyPoints, int duration, List<string> images)
+        public Tour() {
+
+            Name = string.Empty;
+            Description = string.Empty;
+            Language = string.Empty;
+            KeyPointIds = new List<int>();
+            Images = new List<string>();
+        
+        
+        }
+        public Tour(int id, string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images)
         {
             Id = id;
             Name = name;
-            Location = location;
+            LocationId = locationId;
             Description = description;
             Language = language;
-            //MaxTourists = maxTourists;
-            KeyPoints = keyPoints;
-            //Dates = dates;
+            KeyPointIds = keyPointIds;
             Duration = duration;
             Images = images;
         }
@@ -37,22 +44,17 @@ namespace BookingApp.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            string[] locationValues = new string[2];
-            locationValues[0] = values[2];
-            locationValues[1] = values[3];
-            Location.FromCSV(locationValues);
-            Description = values[4];
-            Language = values[5];
-            //MaxTourists = Convert.ToInt32(values[6]);
-            KeyPoints = values[6].Split(',').Select(point => point.Trim()).ToList();
-            //Dates = values[8].Split(',').Select(date => DateTime.Parse(date.Trim())).ToList();
-            Duration = Convert.ToInt32(values[7]);
-            Images = values[8].Split(',').Select(image => image.Trim()).ToList();
+            LocationId = Convert.ToInt32(values[2]);
+            Description = values[3];
+            Language = values[4];
+            KeyPointIds = values[5].Split(',').Select(int.Parse).ToList();
+            Duration = Convert.ToInt32(values[6]);
+            Images = values[7].Split(',').ToList();
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location.City, Location.Country, Description, Language, /*MaxTourists.ToString(),*/ string.Join(", ", KeyPoints), /*string.Join(", ", Dates),*/ Duration.ToString(), string.Join(", ", Images) };
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, string.Join(",", KeyPointIds),  Duration.ToString(), string.Join(", ", Images) };
             return csvValues;
         }
     }
