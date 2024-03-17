@@ -2,6 +2,7 @@
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,26 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
+        public Location FindLocation(string city, string country)
+        {
+            _locations = _serializer.FromCSV(FilePath);
+            Location current = _locations.Find(l => ((l.City.Equals(city)) && (l.Country.Equals(country))));
+            if (current == null)
+            {
+                Location newLocation = new Location(city, country);
+                Save(newLocation);
+                return newLocation;
+            }
+            return current;
+
+        }
+
+        /*public int GetLocationId(Location location)
+        {
+            _locations = _serializer.FromCSV(FilePath);
+            Location current = _locations.Find(c => c.Id == location.Id);
+            if (current == null)
+        }*/
 
 
     }

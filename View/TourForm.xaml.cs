@@ -25,97 +25,8 @@ namespace BookingApp.View
     {
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
-        //public Tour tour { get; set; }
-        private string _name;
-        private string _location;
-        private string _description;
-        private string _language;
-        private string _maxtourists;
-        private string _keypoints;
-        private string _dates;
-        private string _duration;
-        private string _images;
-
-    public string Name
-        {
-            get => _name;
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Location
-        {
-            get => _location;
-            set
-            {
-                if (value != _location)
-                {
-                    _location = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string KeyPoints
-        {
-            get => _keypoints;
-            set
-            {
-                if (value != _keypoints)
-                {
-                    _keypoints = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Dates
-        {
-            get => _dates;
-            set
-            {
-                if (value != _dates)
-                {
-                    _dates = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Duration
-        {
-            get => _duration;
-            set
-            {
-                if (value != _duration)
-                {
-                    _duration = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Images
-        {
-            get => _images;
-            set
-            {
-                if (value != _images)
-                {
-                    _images = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-
+        private readonly KeyPointRepository _keyPointRepository;
+        private readonly TourInstanceRepository _tourInstanceRepository;
 
         public TourForm()
         {
@@ -123,19 +34,124 @@ namespace BookingApp.View
             DataContext = this;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
-
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _keyPointRepository = new KeyPointRepository();
+            _tourInstanceRepository = new TourInstanceRepository();
         }
 
         private void SaveTour_Click(object sender, RoutedEventArgs e)
         {
-            //kod
+            /*try
+            {*/
+                string name = NameTextBox.Text;
+                string[] locationData = LocationTextBox.Text.Split(',');
+                /*if (locationData.Length != 2)
+                {
+                    MessageBox.Show("Unesite lokaciju u formatu 'grad,drzava'.");
+                    return;
+                }*/
+                string city = locationData[0].Trim();
+                string country = locationData[1].Trim();
+                string description = DescriptionTextBox.Text;
+                string language = LanguageTextBox.Text;
+                //int maxTourists = int.Parse(MaxTouristsTextBox.Text);
+                int maxTourists = Convert.ToInt32(MaxTouristsTextBox.Text);
+                List<string> keyPointsList = KeyPointsTextBox.Text.Split(',').Select(s => s.Trim()).ToList();
+                List<int> keyPointIds = ParseKeyPointIds(keyPointsList);
+                List<DateTime> tourDates = ParseTourDates(DatesTextBox.Text);
+                //int duration = int.Parse(DurationTextBox.Text);
+                int duration = Convert.ToInt32(DurationTextBox.Text);
+                List<string> imagePaths = ImagesTextBox.Text.Split(',').Select(s => s.Trim()).ToList();
+
+                // Kreiranje nove ture
+                CreateTour(name, city, country, description, language, maxTourists, keyPointIds, tourDates, duration, imagePaths);
+
+                MessageBox.Show("Nova tura je uspešno kreirana.");
+            /*}
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri kreiranju ture: {ex.Message}");
+            }*/
+        }
+
+        private List<int> ParseKeyPointIds(List<string> keyPointsList)
+        {
+            List<int> ids = new List<int>();
+            KeyPoint startedPoint = new KeyPoint();
+            startedPoint.Name = keyPointsList[0];
+            startedPoint.StartingPoint = true;
+            ids.Add(startedPoint.Id);
+            _keyPointRepository.Save(startedPoint);
+
+            for (int i = 1; i < keyPointsList.Count - 1; i++)
+            {
+                KeyPoint kp = new KeyPoint();
+                kp.Name = keyPointsList[i];
+                kp.StartingPoint = false;
+                kp.EndingPoint = false;
+                ids.Add(kp.Id);
+                _keyPointRepository.Save(kp);
+                kp = null;
+            }
+            KeyPoint endedPoint = new KeyPoint();
+            endedPoint.Name = keyPointsList[keyPointsList.Count - 1];
+            endedPoint.EndingPoint = true;
+            ids.Add(endedPoint.Id);
+            _keyPointRepository.Save(endedPoint);
+
+            return ids;
+        }
+
+        private List<DateTime> ParseTourDates(string tourDatesString)
+        {
+            //List<DateTime> tourDates = tourDatesString.Split(',').Select(s => DateTime.Parse(s.Trim())).ToList();
+            List<string> list = tourDatesString.Split(',').ToList();
+            List<DateTime> tourDates = new List<DateTime>();
+            foreach (var dt in list)
+            {
+                DateTime converted = Convert.ToDateTime(dt);
+                tourDates.Add(converted);
+            }
+            return tourDates;
+        }
+
+
+        private void CreateTour(string name, string city, string country, string description, string language, int maxTourists, List<int> keyPointIds, List<DateTime> tourDates, int duration, List<string> imagePaths)
+        {
+            // Prvo kreirajte ili pronađite lokaciju na osnovu grada i države
+            Location location = _locationRepository.FindLocation(city, country);
+            if (location == null)
+            {
+                location = new Location(city, country);
+                _locationRepository.Save(location);
+            }
+
+            // Proverite da li postoji dovoljno ključnih tačaka
+            if (keyPointIds.Count < 2)
+            {
+                throw new ArgumentException("Tura mora da sadrži barem dve ključne tačke.");
+            }
+
+            // Kreirajte turu
+            Tour newTour = new Tour
+            {
+                Name = name,
+                LocationId = location.Id,
+                Description = description,
+                Language = language,
+                KeyPointIds = keyPointIds,
+                Duration = duration,
+                Images = imagePaths
+            };
+
+            // Sačuvajte novu turu
+            _tourRepository.Save(newTour);
+            //instanca ture
+            for (int i = 0; i < tourDates.Count; i++)
+            {
+                TourInstance tourInstance = new TourInstance(newTour.Id, maxTourists, 0, false, false, tourDates[i]);
+                _tourInstanceRepository.Save(tourInstance);
+            }
         }
     }
 }
+

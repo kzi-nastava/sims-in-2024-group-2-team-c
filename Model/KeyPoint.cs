@@ -26,9 +26,8 @@ namespace BookingApp.Model
         
         }
 
-        public KeyPoint(int id,string name, string description, bool startingPoint, bool endingPoint,List<int> touristIds)
+        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> touristIds)
         {
-            Id = id;
             Name = name;
             Description = description;
             Active = false;

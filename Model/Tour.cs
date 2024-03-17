@@ -20,17 +20,16 @@ namespace BookingApp.Model
 
         public Tour() {
 
-            Name = string.Empty;
-            Description = string.Empty;
-            Language = string.Empty;
-            KeyPointIds = new List<int>();
-            Images = new List<string>();
+            //Name = string.Empty;
+            //Description = string.Empty;
+            //Language = string.Empty;
+            //KeyPointIds = new List<int>();
+            //Images = new List<string>();
         
         
         }
-        public Tour(int id, string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images)
+        public Tour(string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images)
         {
-            Id = id;
             Name = name;
             LocationId = locationId;
             Description = description;
@@ -47,6 +46,12 @@ namespace BookingApp.Model
             LocationId = Convert.ToInt32(values[2]);
             Description = values[3];
             Language = values[4];
+            /*List<string> keyPointIds = values[5].Split(',').ToList();
+            foreach (string kp in keyPointIds)
+            {
+                int id = Convert.ToInt32(kp);
+                KeyPointIds.Add(id);
+            }*/
             KeyPointIds = values[5].Split(',').Select(int.Parse).ToList();
             Duration = Convert.ToInt32(values[6]);
             Images = values[7].Split(',').ToList();
