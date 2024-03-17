@@ -68,6 +68,17 @@ namespace BookingApp.Repository
             return location;
         }
 
+        public Location Get(int id)
+        {
+            return _locations.FirstOrDefault(location => location.Id == id);
+        }
+
+        public int GetIdByCityorCoutry(string searchString)
+        {
+            Location location = _locations.FirstOrDefault(l => l.City.ToLower() == searchString.ToLower() || l.Country.ToLower() == searchString.ToLower());
+            return location != null ? location.Id : -1; // Return -1 if location not found
+        }
+
 
     }
 }

@@ -66,5 +66,16 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
+
+
+        public List<Tour> GetToursByLocationId(int locationId)
+        {
+            _tours = GetAll();
+            return _tours.Where(t => t.LocationId == locationId).ToList();
+        }
+
+
+
+
     }
 }

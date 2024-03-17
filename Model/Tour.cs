@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace BookingApp.Model
 {
@@ -18,6 +19,10 @@ namespace BookingApp.Model
         public int Duration { get; set; }
         public List<string> Images { get; set; }
 
+        public List<BitmapImage> BitmapImages { get; set; }
+
+        public string Location {  get; set; }
+
         public Tour() {
 
             Name = string.Empty;
@@ -25,10 +30,12 @@ namespace BookingApp.Model
             Language = string.Empty;
             KeyPointIds = new List<int>();
             Images = new List<string>();
+            Location = string.Empty;
+            BitmapImages = new List<BitmapImage>();
         
         
         }
-        public Tour(int id, string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images)
+        public Tour(int id, string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images,string location)
         {
             Id = id;
             Name = name;
@@ -38,6 +45,7 @@ namespace BookingApp.Model
             KeyPointIds = keyPointIds;
             Duration = duration;
             Images = images;
+            Location = location;
         }
 
         public void FromCSV(string[] values)
