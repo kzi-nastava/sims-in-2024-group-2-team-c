@@ -32,20 +32,21 @@ namespace BookingApp.Model
 
         public void FromCSV(string[] values)
         {
-            base.FromCSV(values); // Call base class's FromCSV method
-            Id = Convert.ToInt32(values[5]);
-            FirstName = values[6];
-            LastName = values[7];
-            Age = Convert.ToInt32(values[8]);
-            Active = Convert.ToBoolean(values[9]);
-            ReservationIds = values[10].Split(',').Select(int.Parse).ToList();
+            //base.FromCSV(values); // Call base class's FromCSV method
+            Id = Convert.ToInt32(values[0]);
+            Username = values[1];
+            FirstName = values[2];
+            LastName = values[3];
+            Age = Convert.ToInt32(values[4]);
+            Active = Convert.ToBoolean(values[5]);
+            ReservationIds = values[6].Split(',').Select(int.Parse).ToList();
         }
 
         public string[] ToCSV()
         {
-            string[] userCSV = base.ToCSV(); // Call base class's ToCSV method
-            string[] touristCSV = { Id.ToString(), FirstName, LastName, Age.ToString(), Active.ToString(), string.Join(",", ReservationIds) };
-            return userCSV.Concat(touristCSV).ToArray();
+            //string[] userCSV = base.ToCSV(); // Call base class's ToCSV method
+            string[] touristCSV = { Id.ToString(),Username, FirstName, LastName, Age.ToString(), Active.ToString(), string.Join(",", ReservationIds) };
+            return touristCSV;
         }
 
 

@@ -53,19 +53,33 @@ namespace BookingApp.Repository
             _tourInstances.Remove(founded);
             _serializer.ToCSV(FilePath, _tourInstances);
         }
+        /*
+                public TourInstance Update(TourInstance tourInstance)
+                {
+                    _tourInstances = _serializer.FromCSV(FilePath);
+                    TourInstance current = _tourInstances.Find(t => t.Id == tourInstance.Id);
+                    int index = _tourInstances.IndexOf(current);
+                    _tourInstances.Remove(current);
+                    _tourInstances.Insert(index, tourInstance);
+                    _serializer.ToCSV(FilePath, _tourInstances);
+                    return tourInstance;
+                }*/
 
         public TourInstance Update(TourInstance tourInstance)
         {
             _tourInstances = _serializer.FromCSV(FilePath);
             TourInstance current = _tourInstances.Find(t => t.Id == tourInstance.Id);
-            int index = _tourInstances.IndexOf(current);
-            _tourInstances.Remove(current);
-            _tourInstances.Insert(index, tourInstance);
-            _serializer.ToCSV(FilePath, _tourInstances);
+            if (current != null)
+            {
+                int index = _tourInstances.IndexOf(current);
+                _tourInstances[index] = tourInstance;
+                _serializer.ToCSV(FilePath, _tourInstances);
+            }
             return tourInstance;
         }
 
-       /* public List<TourInstance> GetTourInstancesByTourId(int tourId)
+
+        public List<TourInstance> GetTourInstancesByTourId(int tourId)
         {
             List<TourInstance> tourInstances = new List<TourInstance>();
 
@@ -80,7 +94,7 @@ namespace BookingApp.Repository
 
             return tourInstances;
         }
-       */
+       
         public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople)
         {
             // Retrieve instances for the specified tour ID

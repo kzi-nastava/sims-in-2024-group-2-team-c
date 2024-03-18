@@ -69,6 +69,26 @@ namespace BookingApp.Repository
         }
 
 
+        public List<int> GetTouristIdsByUsernames(List<string> usernames)
+        {
+            List<int> touristIds = new List<int>();
+
+            // Iterate through each username
+            foreach (string username in usernames)
+            {
+                // Find the tourist with the matching username
+                Tourist tourist = _tourists.FirstOrDefault(t => t.Username == username);
+                if (tourist != null)
+                {
+                    // If tourist found, add its ID to the list
+                    touristIds.Add(tourist.Id);
+                }
+            }
+
+            return touristIds;
+        }
+
+
 
 
 

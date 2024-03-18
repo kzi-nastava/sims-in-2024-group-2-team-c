@@ -1,0 +1,151 @@
+﻿<Window x:Class="BookingApp.View.ReservationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="ReservationView" Height="700" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=" 150"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height=" 50"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
+            <RowDefinition Height=" 40"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+
+
+
+        </Grid.RowDefinitions>
+      
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Row="0" Grid.Column="0" Header="Tour " Margin="10">
+                <StackPanel Margin="10">
+
+                    <TextBlock Text="{Binding Tour.Name}" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Description: " VerticalAlignment="Center" Foreground="Purple"  FontWeight="Medium"/>
+                        <TextBlock Text="{Binding Tour.Description}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Language: " VerticalAlignment="Center" Foreground="Purple"  FontWeight="Medium"/>
+                        <TextBlock Text="{Binding Tour.Language}" TextWrapping="Wrap"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Location: " VerticalAlignment="Center" Foreground="Purple"  FontWeight="Medium"/>
+                        <TextBlock Text="{Binding Location.City}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding Location.Country}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Duration: " VerticalAlignment="Center" Foreground="Purple"  FontWeight="Medium"/>
+                        <TextBlock Text="{Binding Tour.Duration}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <!-- Add more tour properties here as needed -->
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Row="0" Grid.Column="1" Header="Details" Margin="10">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="Date: " VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding TourInstance.Date}" Padding="3" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="Max Tourists: " VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding TourInstance.MaxTourists}" Padding="3" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="ALreadyBooked: " VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding TourInstance.ReservedTourists}" Padding="3" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
+                    <!-- Add more tour instance properties here as needed -->
+                </Grid>
+            </GroupBox>
+
+
+
+
+        </Grid>
+
+
+
+        
+
+        <!-- <ListView Grid.Row="1" ItemsSource="{Binding Tour.Images}">-->
+           <!-- <ListView.ItemTemplate>-->
+                <!--<DataTemplate>-->
+                <!--    <Image Source="{Binding}" Width="50" Height="50"/>-->
+              <!--  </DataTemplate>-->
+           <!-- </ListView.ItemTemplate>-->
+       <!-- </ListView>-->
+         <!--   -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <GroupBox  Grid.Column="0"  Header="Register">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Number of people to register" VerticalAlignment="Center" Padding="5"/>
+                    <TextBox x:Name="numberOfPeopleText" Width="150" Margin="5,5,5,5" />
+                    <Button Content="Check" Click="NUmberOfPeople_Click" Margin="5,0,0,0"/>
+                </StackPanel>
+            </GroupBox>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="remainingSpotsText" VerticalAlignment="Center" Width="350" Margin="0,0,0,0"/>
+
+
+        </Grid>
+
+
+
+
+
+       
+        <GroupBox Grid.Row="3" Grid.Column="0" Header="Tourist Registration" Margin="10">
+            <StackPanel x:Name="TouristFormsPanel" Margin="10">
+                <!-- Tourist forms will be dynamically added here -->
+            </StackPanel>
+        </GroupBox>
+        <Grid Grid.Row="4" Grid.Column="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+
+            <Button Grid.Column="0"  Content="Close Reservation" Click="CloseButton_Click" Margin="15,5,15,5" Background="Red"/>
+            <Button Grid.Column="1"  Content="Save Reservation" Click="SaveButton_Click" Margin="15,5,15,5" Background="ForestGreen"/>
+        </Grid>
+        
+
+
+
+    </Grid>
+</Window>

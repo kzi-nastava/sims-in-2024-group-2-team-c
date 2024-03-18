@@ -3,6 +3,7 @@ using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -150,6 +151,54 @@ namespace BookingApp.View
             }
         }
 
+
+        private bool isFull(TourInstance instance) {
+            int remainingSpots = instance.MaxTourists - instance.ReservedTourists;
+            if (remainingSpots == 0) {
+                return false;
+            }
+            return true;
+
+        }
+        
+        private void BookButton_Click(object sender, RoutedEventArgs e) {
+
+            Button button = sender as Button;
+            if (button != null)
+            {
+                // Get the corresponding tour instance object
+                TourInstance instance = button.DataContext as TourInstance;
+                Tour tour = _tourRepository.GetById(instance.IdTour);
+
+                if (instance != null && isFull(instance))
+                {
+                    
+                    // Open a new window to book the tour instance
+                    ReservationView bookWindow = new ReservationView(instance, tour);
+                    bookWindow.ShowDialog();
+                }
+                else {
+
+                    List<Tour> tours = _tourRepository.GetToursByLocationId(tour.LocationId);
+                    int indexToRemove = tours.FindIndex(tour => tour.Id == tour.Id);
+
+                    // If the index is found (not -1), remove the tour from the list
+                    if (indexToRemove != -1)
+                    {
+                        tours.RemoveAt(indexToRemove);
+                    }
+
+                    AlternativeToursView alternativeToursView = new AlternativeToursView(tours);
+                    alternativeToursView.ShowDialog();
+                
+                }
+            }
+
+        }
+            
+        
+
+       
 
 
     }

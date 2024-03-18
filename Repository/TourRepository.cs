@@ -74,7 +74,10 @@ namespace BookingApp.Repository
             return _tours.Where(t => t.LocationId == locationId).ToList();
         }
 
-
+        public Tour GetById(int id)
+        {
+            return _tours.FirstOrDefault(t => t.Id == id);
+        }
 
 
     }

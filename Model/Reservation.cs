@@ -19,9 +19,9 @@ namespace BookingApp.Model
             OtherTouristIds = new List<int>();
         }
 
-        public Reservation(int id, int tourInstanceId, int touristCount, List<int> otherTourists)
+        public Reservation(int tourInstanceId, int touristCount, List<int> otherTourists)
         {
-            Id = id;
+            //Id = id;
             TourInstanceId = tourInstanceId;
             TouristCount = touristCount;
             OtherTouristIds = otherTourists;
