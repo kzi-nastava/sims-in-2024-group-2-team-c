@@ -17,23 +17,23 @@ namespace BookingApp.Model
         public bool StartingPoint { get; set; }
         public bool EndingPoint {  get; set; }
 
-        public List<int> TouristsId { get; set; }
+        //public List<int> TouristsId { get; set; }
 
         public KeyPoint() {
             Name = string.Empty;
             Description = string.Empty;
-            TouristsId = new List<int>();
+            //TouristsId = new List<int>();
         
         }
 
-        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> touristIds)
+        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint/*,List<int> touristIds*/)
         {
             Name = name;
             Description = description;
             Active = false;
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
-            TouristsId = touristIds;
+            //TouristsId = touristIds;
         }
         public void FromCSV(string[] values)
         {
@@ -43,7 +43,7 @@ namespace BookingApp.Model
             Active = bool.Parse(values[3]);
             StartingPoint = bool.Parse(values[4]);
             EndingPoint = bool.Parse(values[5]);
-            TouristsId = values[6].Split(',').Select(int.Parse).ToList();
+            //TouristsId = values[6].Split(',').Select(int.Parse).ToList();
 
 
         }
@@ -51,7 +51,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             
-            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString() , string.Join(",", TouristsId) };
+            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString()/*, string.Join(",", TouristsId)*/ };
             return csvValues;
         }
     }

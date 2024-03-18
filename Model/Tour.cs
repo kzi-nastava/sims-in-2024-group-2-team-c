@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Model
 {
-    internal class Tour : ISerializable
+    public class Tour : ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,15 +16,15 @@ namespace BookingApp.Model
         public string Language { get; set; }
         public List<int> KeyPointIds { get; set; }
         public int Duration { get; set; }
-        public List<string> Images { get; set; }
+        public List<string> Images { get; set; } 
 
         public Tour() {
 
-            //Name = string.Empty;
-            //Description = string.Empty;
-            //Language = string.Empty;
-            //KeyPointIds = new List<int>();
-            //Images = new List<string>();
+            Name = string.Empty;
+            Description = string.Empty;
+            Language = string.Empty;
+            KeyPointIds = new List<int>();
+            Images = new List<string>();
         
         
         }
@@ -55,11 +55,12 @@ namespace BookingApp.Model
             KeyPointIds = values[5].Split(',').Select(int.Parse).ToList();
             Duration = Convert.ToInt32(values[6]);
             Images = values[7].Split(',').ToList();
+           
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, string.Join(",", KeyPointIds),  Duration.ToString(), string.Join(", ", Images) };
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, string.Join(",", KeyPointIds),  Duration.ToString(), string.Join(", ", Images), };
             return csvValues;
         }
     }

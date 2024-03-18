@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace BookingApp.Model
 {
-    class TourInstance : ISerializable
+    public class TourInstance : ISerializable
     {
         public int Id { get; set; }
         public int IdTour { get; set; }
@@ -24,6 +24,15 @@ namespace BookingApp.Model
             ReservedTourists = 0;
             Started = false;
             Ended = false;
+        }
+        public TourInstance(int idTour, int maxTourists, DateTime date)
+        {
+            IdTour = idTour;
+            MaxTourists = maxTourists;
+            this.ReservedTourists = 0;
+            this.Started = false;
+            this.Ended = false;
+            Date = date;
         }
         public TourInstance(int idTour, int maxTourists, int reservedTourists, bool started, bool ended, DateTime date)
         {
@@ -42,13 +51,14 @@ namespace BookingApp.Model
             ReservedTourists = Convert.ToInt32(values[3]);
             Started = Convert.ToBoolean(values[4]);
             Ended = Convert.ToBoolean(values[5]);
-            Date = Convert.ToDateTime(values[6]);
+            //Date = Convert.ToDateTime(values[6]);
+            Date = DateTime.Parse(values[6]);
         }
 
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), IdTour.ToString(), MaxTourists.ToString(),
-                ReservedTourists.ToString(), Started.ToString(),Ended.ToString(),Date.GetDateTimeFormats().ToString() };
+                ReservedTourists.ToString(), Started.ToString(),Ended.ToString(),Date.ToString("dd/MM/yyyy HH:mm:ss") };
             return csvValues;
         }
     }

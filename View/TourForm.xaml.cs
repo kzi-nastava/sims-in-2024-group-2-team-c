@@ -64,8 +64,8 @@ namespace BookingApp.View
 
                 // Kreiranje nove ture
                 CreateTour(name, city, country, description, language, maxTourists, keyPointIds, tourDates, duration, imagePaths);
-
-                MessageBox.Show("Nova tura je uspešno kreirana.");
+                infoTextBlock.Visibility = Visibility.Visible;
+            //MessageBox.Show("Nova tura je uspešno kreirana.");
             /*}
             catch (Exception ex)
             {
@@ -90,7 +90,6 @@ namespace BookingApp.View
                 kp.EndingPoint = false;
                 ids.Add(kp.Id);
                 _keyPointRepository.Save(kp);
-                kp = null;
             }
             KeyPoint endedPoint = new KeyPoint();
             endedPoint.Name = keyPointsList[keyPointsList.Count - 1];
@@ -117,21 +116,19 @@ namespace BookingApp.View
 
         private void CreateTour(string name, string city, string country, string description, string language, int maxTourists, List<int> keyPointIds, List<DateTime> tourDates, int duration, List<string> imagePaths)
         {
-            // Prvo kreirajte ili pronađite lokaciju na osnovu grada i države
+            
             Location location = _locationRepository.FindLocation(city, country);
             if (location == null)
             {
                 location = new Location(city, country);
                 _locationRepository.Save(location);
             }
-
-            // Proverite da li postoji dovoljno ključnih tačaka
+            
             if (keyPointIds.Count < 2)
             {
                 throw new ArgumentException("Tura mora da sadrži barem dve ključne tačke.");
             }
-
-            // Kreirajte turu
+            
             Tour newTour = new Tour
             {
                 Name = name,
@@ -140,17 +137,20 @@ namespace BookingApp.View
                 Language = language,
                 KeyPointIds = keyPointIds,
                 Duration = duration,
-                Images = imagePaths
+                Images = imagePaths,
             };
-
-            // Sačuvajte novu turu
             _tourRepository.Save(newTour);
-            //instanca ture
+            //kreiranje instanci ture
+            List<int> tourInstancesids = new List<int>();
+
             for (int i = 0; i < tourDates.Count; i++)
             {
                 TourInstance tourInstance = new TourInstance(newTour.Id, maxTourists, 0, false, false, tourDates[i]);
                 _tourInstanceRepository.Save(tourInstance);
+                int tourInstanceid = tourInstance.Id;
+                tourInstancesids.Add(tourInstanceid);
             }
+
         }
     }
 }

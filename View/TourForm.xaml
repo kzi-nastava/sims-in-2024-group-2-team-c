@@ -23,6 +23,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
@@ -53,5 +54,6 @@
         <TextBox x:Name="ImagesTextBox" Grid.Row="8" Grid.Column="1" Text="{Binding Images, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
         <Button Grid.Row="9" Grid.ColumnSpan="2" Click="SaveTour_Click" Content="Save" HorizontalAlignment="Center" Margin="5"/>
+        <TextBlock x:Name="infoTextBlock" Grid.Row ="10" Grid.ColumnSpan="2" Text="Tour is created." Foreground="Red" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/>
     </Grid>
 </Window>

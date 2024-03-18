@@ -12,23 +12,30 @@ namespace BookingApp.Model
 {
     class Guide : User, ISerializable
     {
-        public int Id { get; set; }
+       // public int Id { get; set; }
         public List<int> ToursIds { get; set; }
 
-        public Guide() { }
-        public Guide(string username, string password, List<id> toursIds)
+        public Guide() : base()
+        {
+            ToursIds = new List<int>();
+        }
+        public Guide(string username, string password, List<int> toursIds)
         {
             Username = username;
             Password = password;
             ToursIds = toursIds;
         }
 
-        public void FromCSV(string[] values)
+/*        public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
-            ToursIds = values[3].Split(',').Select(tour => tour.Trim()).ToList();
+            List<string> stringIds = values[0].Split(',').Select(tour => tour.Trim()).ToList();
+            foreach(var id in stringIds)
+            {
+                ToursIds.Add(Convert.ToInt32(id));
+            }
         }
 
         public string[] ToCSV()
@@ -45,7 +52,7 @@ namespace BookingApp.Model
                 csvValues.Add(t.Id.ToString());
             }
 
-            return csvValues.ToArray();*/
-        }
+            return csvValues.ToArray();
+        }*/
     }
 }
