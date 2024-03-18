@@ -73,6 +73,12 @@ namespace BookingApp.View
             }*/
         }
 
+        private void BackToTourOverviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            TourOverview tourOverviewWindow = new TourOverview();
+            tourOverviewWindow.Show();
+            Close();
+        }
         private List<int> ParseKeyPointIds(List<string> keyPointsList)
         {
             List<int> ids = new List<int>();

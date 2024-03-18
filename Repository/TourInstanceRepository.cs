@@ -64,5 +64,12 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _tourInstances);
             return tourInstance;
         }
+
+        public TourInstance FindByDate(DateTime date)
+        {
+            _tourInstances = _serializer.FromCSV(FilePath);
+            TourInstance founded = _tourInstances.Find(d => d.Date.Date == date);
+            return founded;
+        }
     }
 }

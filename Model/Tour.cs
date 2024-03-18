@@ -16,7 +16,7 @@ namespace BookingApp.Model
         public string Language { get; set; }
         public List<int> KeyPointIds { get; set; }
         public int Duration { get; set; }
-        public List<string> Images { get; set; } 
+        public List<string> Images { get; set; }
 
         public Tour() {
 

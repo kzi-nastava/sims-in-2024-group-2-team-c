@@ -1,0 +1,46 @@
+﻿<Window x:Class="BookingApp.View.TourOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Tour Overview" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Gornji deo sa dugmadima -->
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <!-- Dugme za kreiranje nove ture -->
+            <Button Click="CreateTourButton_Click">
+                <TextBlock Text="Create Tour" FontSize="14"/>
+            </Button>
+
+            <!-- Dugme za praćenje ture -->
+            <Button Click="FollowTourButton_Click">
+                <TextBlock Text="Follow Tour" FontSize="14"/>
+            </Button>
+
+            <!-- Kontrola za filtriranje po datumu -->
+            <DatePicker SelectedDate="{Binding FilterDate, Mode=TwoWay}" DisplayDateEnd="{x:Static sys:DateTime.Now}" Margin="5,0,0,0" FontSize="14" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Prikaz tura -->
+        <ListView x:Name="tourView" ItemsSource="{Binding Tours}" SelectedItem="{Binding SelectedTour}" IsEnabled="True" SelectionChanged="TourView_SelectionChanged" IsSynchronizedWithCurrentItem="True" Grid.Row="1" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="80" />
+                    <!--<GridViewColumn Header="Location" DisplayMemberBinding="{Binding Location.City}" Width="80" />-->
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="80" />
+                    <GridViewColumn Header="Language" DisplayMemberBinding="{Binding Language}" Width="80" />
+                    <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}" Width="80" />
+                    <!--<GridViewColumn Header="Date" DisplayMemberBinding="{Binding TourInstance.Date}" Width="80" />-->
+                    <!--<GridViewColumn Header="Reserved Tourists" DisplayMemberBinding="{Binding TourInstance.ReservedTourists}" Width="80" />-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
