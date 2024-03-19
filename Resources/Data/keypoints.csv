@@ -1,22 +1,21 @@
-0|Nis|des|False|True|False
-1|Kragujevac|des2|False|False|False
-2|Beograd|des3|False|False|False
-3|Novi Sad|des4|False|False|True
-4|Beograd|des4|False|True|False
-5|Beograd|description|False|True|False
-6|Nis||False|True|False
-7|Nis||False|True|False
-8|Nis||False|True|False
-9|Kragujevac||False|False|False
-10|Beograd||False|False|True
-11|Cannes||False|True|False
-12|Nica||False|False|True
-13|Cacak||False|True|False
-14|Ljig||False|False|False
-15|Obrenovac||False|False|True
-16|Beograd||False|True|False
-17|Zagreb||False|False|False
-18|Milano||False|False|True
-19|Beograd||False|True|False
-20|Kragujevac||False|False|False
-21|Nis||False|False|True
+0|Nis|des|False|True|False|0
+1|Kragujevac|des2|False|False|False|0
+2|Beograd|des3|False|False|False|0
+3|Novi Sad|des4|False|False|True|0
+4|Beograd|des4|False|True|False|1
+5|Beograd|description|False|True|False|2
+6|Kragujevac||False|False|False|2
+7|Beograd||False|False|True|2
+8|Cannes||False|True|False|3
+9|Nica||False|False|True|3
+10|Cacak||False|True|False|4
+11|Ljig||False|False|False|4
+12|Obrenovac||False|False|True|4
+13|Beograd||False|True|False|5
+14|Zagreb||False|False|False|5
+15|Milano||False|False|True|5
+16|Beograd||False|True|False|6
+17|Kragujevac||False|False|False|6
+18|Nis||False|False|True|6
+19|Beograd||False|True|False|7
+20|Novi Sad||False|False|True|7
