@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="450" Width="800" Background="Azure">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
@@ -17,7 +17,7 @@
                 <GridView>
                     <GridViewColumn Header="Tour ID" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Tour Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Location" DisplayMemberBinding="{Binding Location}"/>
+                    <GridViewColumn  x:Name="LocationTextBox" Header="Location" DisplayMemberBinding="{Binding ViewLocation}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
                     <GridViewColumn Header="Language" DisplayMemberBinding="{Binding Language}"/>
                     <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}"/>

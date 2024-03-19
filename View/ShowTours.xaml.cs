@@ -2,8 +2,10 @@
 using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,12 +28,15 @@ namespace BookingApp.View
         private TourRepository _tourRepository;
         private LocationRepository _locationRepository;
         private TourInstanceRepository _tourInstanceRepository;
+
+
         public Window1()
         {
             InitializeComponent();
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _tourInstanceRepository = new TourInstanceRepository();
+
             tourListView.IsEnabled = true;
             UpdateTourListView(ShowAllTours());
         }
@@ -49,11 +54,11 @@ namespace BookingApp.View
                 Location locationObject = _locationRepository.Get(tour.LocationId);
                 if (locationObject != null)
                 {
-                    tour.Location = $"{locationObject.City}, {locationObject.Country}";
+                    tour.ViewLocation = $"{locationObject.City}, {locationObject.Country}";
                 }
                 else
                 {
-                    tour.Location = "Location not found";
+                    tour.ViewLocation = "Location not found";
                 }
             }
 
@@ -99,10 +104,6 @@ namespace BookingApp.View
                 tours = tours.Where(t => t.Language.ToLower().Contains(language.ToLower())).ToList();
             }
 
-       
-            
-
-
 
             LoadLocations(tours);
 
@@ -131,23 +132,14 @@ namespace BookingApp.View
 
         private void TourListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if (tourListView.SelectedItem != null)
-            {
-               // Tour selectedTour = (Tour)tourListView.SelectedItem;
-                //List<TourInstance> tourInstances = _tourInstanceRepository.GetTourInstancesByTourId(selectedTour.Id);
-                // Display tour instances in your UI, e.g., populate another ListView
-                // Example:
-                //instancesListView.ItemsSource = tourInstances;
-            }*/
-
-
+            
             if (tourListView.SelectedItem != null)
             {
                 Tour selectedTour = (Tour)tourListView.SelectedItem;
-                int? numberOfPeople = string.IsNullOrEmpty(NumOfPeopleText.Text) ? null : int.Parse(NumOfPeopleText.Text);
-                List<TourInstance> tourInstances = _tourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(selectedTour.Id, numberOfPeople);
-                // Display tour instances in your UI
+                List<TourInstance>  tourInstances = _tourInstanceRepository.GetTourInstancesByTourId(selectedTour.Id);
+                
                 instancesListView.ItemsSource = tourInstances;
+                
             }
         }
 

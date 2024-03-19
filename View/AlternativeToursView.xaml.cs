@@ -44,11 +44,11 @@ namespace BookingApp.View
                 Location locationObject = _locationRepository.Get(tour.LocationId);
                 if (locationObject != null)
                 {
-                    tour.Location = $"{locationObject.City}, {locationObject.Country}";
+                    tour.ViewLocation = $"{locationObject.City}, {locationObject.Country}";
                 }
                 else
                 {
-                    tour.Location = "Location not found";
+                    tour.ViewLocation = "Location not found";
                 }
             }
 
@@ -104,7 +104,33 @@ namespace BookingApp.View
         public void CloseButton_Click(object sender, RoutedEventArgs e) { 
             Close(); 
         }
-    
+
+        private void FilterInstancesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (AlternativesListView.SelectedItem != null && !string.IsNullOrEmpty(NumberOfPeopleTextBox.Text))
+            {
+                Tour selectedTour = (Tour)AlternativesListView.SelectedItem;
+                int numberOfPeople;
+
+                if (int.TryParse(NumberOfPeopleTextBox.Text, out numberOfPeople))
+                {
+                    List<TourInstance> tourInstances = _tourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(selectedTour.Id, numberOfPeople);
+                    AlternativeinstancesView.ItemsSource = tourInstances;
+                }
+                else
+                {
+                    // Handle invalid input
+                    MessageBox.Show("Please enter a valid number of people.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                // Handle no selection or empty input
+                MessageBox.Show("Please select a tour and enter the number of people.", "Selection Required", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
 
 
     }

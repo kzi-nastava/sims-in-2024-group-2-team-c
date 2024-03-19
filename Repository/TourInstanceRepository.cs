@@ -94,7 +94,21 @@ namespace BookingApp.Repository
 
             return tourInstances;
         }
-       
+        /*
+         public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople)
+         {
+             // Retrieve instances for the specified tour ID
+             List<TourInstance> instances = GetAll().Where(instance => instance.IdTour == tourId).ToList();
+
+             // Filter instances based on available slots if numberOfPeople is specified
+             if (numberOfPeople.HasValue)
+             {
+                 instances = instances.Where(instance => (instance.MaxTourists - instance.ReservedTourists) >= numberOfPeople).ToList();
+             }
+
+             return instances;
+         }*/
+
         public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople)
         {
             // Retrieve instances for the specified tour ID
@@ -103,11 +117,12 @@ namespace BookingApp.Repository
             // Filter instances based on available slots if numberOfPeople is specified
             if (numberOfPeople.HasValue)
             {
-                instances = instances.Where(instance => (instance.MaxTourists - instance.ReservedTourists) >= numberOfPeople).ToList();
+                instances = instances.Where(instance => (instance.MaxTourists - instance.ReservedTourists) >= numberOfPeople.Value).ToList();
             }
 
             return instances;
         }
+
 
 
 

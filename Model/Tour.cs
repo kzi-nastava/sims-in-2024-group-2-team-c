@@ -19,9 +19,9 @@ namespace BookingApp.Model
         public int Duration { get; set; }
         public List<string> Images { get; set; }
 
-        public List<BitmapImage> BitmapImages { get; set; }
+       public List<BitmapImage> BitmapImages { get; set; }
 
-        public string Location {  get; set; }
+        public string ViewLocation {  get; set; }
 
         public Tour() {
 
@@ -30,12 +30,12 @@ namespace BookingApp.Model
             Language = string.Empty;
             KeyPointIds = new List<int>();
             Images = new List<string>();
-            Location = string.Empty;
+            ViewLocation = string.Empty;
             BitmapImages = new List<BitmapImage>();
         
         
         }
-        public Tour(int id, string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images,string location)
+        public Tour(int id, string name, int locationId, string description, string language, List<int> keyPointIds, int duration, List<string> images)
         {
             Id = id;
             Name = name;
@@ -45,7 +45,6 @@ namespace BookingApp.Model
             KeyPointIds = keyPointIds;
             Duration = duration;
             Images = images;
-            Location = location;
         }
 
         public void FromCSV(string[] values)

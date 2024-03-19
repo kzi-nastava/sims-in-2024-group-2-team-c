@@ -124,6 +124,8 @@ namespace BookingApp.View
                 var touristForm = CreateTouristForm(i + 1); // Start index from 1
                 TouristFormsPanel.Children.Add(touristForm);
             }
+
+            SaveButton.Visibility = Visibility.Visible;
         }
 
         private StackPanel CreateTouristForm(int index)

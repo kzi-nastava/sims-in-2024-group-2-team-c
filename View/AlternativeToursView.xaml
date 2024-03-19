@@ -14,14 +14,29 @@
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="TOURS IN THE SAME LOCATION!" FontSize="16" Foreground="Maroon" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"  Text="TOURS IN THE SAME LOCATION!" FontSize="12" Foreground="Maroon" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBox x:Name="NumberOfPeopleTextBox"  Width="50" Margin="10,10,10,10" />
+                <Button Content="Search" Click="FilterInstancesButton_Click"  Margin="15,5,15,5" />
+            </StackPanel>
+            
+            
+        </Grid>
 
+
+       
+        
         <ListView Grid.Row="1"  x:Name="AlternativesListView"  IsEnabled="True" SelectionChanged="Alternatives_SelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Tour ID" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Tour Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Location" DisplayMemberBinding="{Binding Location}"/>
+                    <GridViewColumn Header="Location" DisplayMemberBinding="{Binding ViewLocation}"/>
                     <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
                     <GridViewColumn Header="Language" DisplayMemberBinding="{Binding Language}"/>
                     <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}"/>

@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
       
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -42,6 +42,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Location: " VerticalAlignment="Center" Foreground="Purple"  FontWeight="Medium"/>
                         <TextBlock Text="{Binding Location.City}" TextWrapping="Wrap"/>
+                        <TextBlock Text=" , " TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding Location.Country}" TextWrapping="Wrap"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -67,17 +68,17 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                        <TextBlock Text="Date: " VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Date: " VerticalAlignment="Center" FontWeight="Bold"  Foreground="Purple"/>
                         <TextBlock Text="{Binding TourInstance.Date}" Padding="3" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-                        <TextBlock Text="Max Tourists: " VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Max Tourists: " VerticalAlignment="Center" FontWeight="Bold"  Foreground="Purple"/>
                         <TextBlock Text="{Binding TourInstance.MaxTourists}" Padding="3" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-                        <TextBlock Text="ALreadyBooked: " VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="ALreadyBooked: " VerticalAlignment="Center" FontWeight="Bold"  Foreground="Purple"/>
                         <TextBlock Text="{Binding TourInstance.ReservedTourists}" Padding="3" VerticalAlignment="Center"/>
                     </StackPanel>
 
@@ -141,7 +142,7 @@
             
 
             <Button Grid.Column="0"  Content="Close Reservation" Click="CloseButton_Click" Margin="15,5,15,5" Background="Red"/>
-            <Button Grid.Column="1"  Content="Save Reservation" Click="SaveButton_Click" Margin="15,5,15,5" Background="ForestGreen"/>
+            <Button Grid.Column="1" x:Name="SaveButton" Content="Save Reservation" Click="SaveButton_Click" Margin="15,5,15,5" Background="ForestGreen" Visibility="Collapsed"/>
         </Grid>
         
 
