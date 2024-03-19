@@ -85,40 +85,49 @@ namespace BookingApp.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             _locationRepository = new LocationRepository();
+            DataContext = this;
             SelectedTour = selectedTour;
-            Location =_locationRepository.GetById(SelectedTour.LocationId);
+            Location = _locationRepository.GetById(SelectedTour.LocationId);
+            LoadLocation(Location);
             DateTime today = DateTime.Today;
             //TourInstance = _tourInstanceRepository.GetByTourId(SelectedTour.Id);
             TourInstance = FilterInstanceByDate(today);
-            DataContext = this;
+
+
         }
         public TourInstance FilterInstanceByDate(DateTime date)
         {
-            List<TourInstance> instances = _tourInstanceRepository.FindByDate(date.Date);
+            List<TourInstance> instances = _tourInstanceRepository.FindByDate(date);
             if (instances != null)
             {
                 foreach (TourInstance instance in instances)
                 {
                     if (instance.IdTour == SelectedTour.Id)
                         return instance;
-                    
+
                 }
             }
             return instances.Find(i => i.IdTour == SelectedTour.Id);
         }
+        private void LoadLocation(Location location)
+        {
+            Location = location;
+            LocationTextBlock.Text = $"{location.City}, {location.Country}";
+        }
+
         private void StartTour_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacija početka ture
+            //početka ture
         }
 
         private void EndTour_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacija završetka ture
+            //završetak ture
         }
 
         private void BackToTourOverview_Click(object sender, RoutedEventArgs e)
         {
-            // Povratak na prethodni prozor (TourOverview)
+            // Povratak na prethodni prozor
             Close();
         }
 
@@ -132,3 +141,4 @@ namespace BookingApp.View
         }
     }
 }
+

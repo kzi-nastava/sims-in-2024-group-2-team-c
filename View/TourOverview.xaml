@@ -37,6 +37,7 @@
                     <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}" Width="80" />
                     <!--<GridViewColumn Header="Date" DisplayMemberBinding="{Binding TourInstance.Date}" Width="80" />-->
                     <!--<GridViewColumn Header="Reserved Tourists" DisplayMemberBinding="{Binding TourInstance.ReservedTourists}" Width="80" />-->
+                    
                 </GridView>
             </ListView.View>
         </ListView>
