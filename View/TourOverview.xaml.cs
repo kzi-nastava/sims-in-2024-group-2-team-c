@@ -21,7 +21,7 @@ namespace BookingApp.View
     /// <summary>
     /// Interaction logic for TourOverview.xaml
     /// </summary>
-    public partial class TourOverview : Window
+    public partial class TourOverview : Window, INotifyPropertyChanged
     {
         private ObservableCollection<Tour> _tours;
         public ObservableCollection<Tour> Tours
@@ -50,6 +50,20 @@ namespace BookingApp.View
                 }
             }
         }
+        private DateTime _filterDate = DateTime.Today;
+       /* public DateTime FilterDate
+        {
+            get { return _filterDate; }
+            set
+            {
+                if (_filterDate != value)
+                {
+                    _filterDate = value;
+                    OnPropertyChanged(nameof(FilterDate));
+                    FilterToursByDate(_filterDate);
+                }
+            }
+        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -68,7 +82,7 @@ namespace BookingApp.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             Tours = new ObservableCollection<Tour>(_tourRepository.GetAll());
-            //SelectedTour = tourView.SelectedItem;
+            //SelectedTour = (Tour)tourView.SelectedItem;
             tourView.IsEnabled = true;
             FilterToursByDate(DateTime.Today);
             UpdateTourView();
@@ -120,8 +134,19 @@ namespace BookingApp.View
 
         private void FollowTourButton_Click(object sender, RoutedEventArgs e)
         {
-            // Dodajte logiku za pracenje ture ovde
-            MessageBox.Show("Follow Tour button clicked!");
+            SelectedTour = (Tour)tourView.SelectedItem;
+            if (SelectedTour != null)
+            {
+                SelectedTour = (Tour)tourView.SelectedItem;
+                GuidedTourOverview guidedTourOverview = new GuidedTourOverview(SelectedTour);
+                guidedTourOverview.Show();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Please select a tour.");
+            }
+            //MessageBox.Show("Follow Tour button clicked!");
         }
         private void TourView_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -132,33 +157,29 @@ namespace BookingApp.View
             }
 
         }
+        private void FilterDate(object sender, RoutedEventArgs e)
+        {
+            FilterToursByDate(_filterDate);
+        }
 
         private void FilterToursByDate(DateTime date)
         {
-            TourInstance instance = _tourInstanceRepository.FindByDate(date.Date);
-            int tourId = instance != null ? instance.IdTour : -1;
-
-            if (tourId == -1)
+            List<TourInstance> instances = _tourInstanceRepository.FindByDate(date.Date);
+            if (instances != null)
             {
-                Tours = new ObservableCollection<Tour>();
+                foreach(TourInstance instance in instances)
+                {
+                    int tourId = instance.IdTour;
+                    Tours = new ObservableCollection<Tour>(_tours.Where(t => t.Id == tourId));
+                    tourView.ItemsSource = Tours;
+                }
             }
             else
             {
-                Tours = new ObservableCollection<Tour>(_tours.Where(t => t.Id == tourId));
+                Tours = new ObservableCollection<Tour>();
+                tourView.ItemsSource = Tours;
             }
-            /*Tours = new ObservableCollection<Tour>(_tourRepository.GetAll());
-            List<int> ids = new List<int>();
-            List<TourInstance> instances = _tourInstanceRepository.GetAll();
-            foreach (TourInstance t in instances)
-            {
-                TourInstance instance = _tourInstanceRepository.FindByDate(date.Date);
-                int TourId = instance.IdTour;
-                ids.Add(TourId);
-            }
-            foreach(int id in ids) 
-            {
-                Tours = (ObservableCollection<Tour>)_tourRepository.GetAll().Where(t => t.Id == id);
-            }*/
+           
         }
 
     }

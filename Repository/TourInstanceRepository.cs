@@ -65,11 +65,36 @@ namespace BookingApp.Repository
             return tourInstance;
         }
 
-        public TourInstance FindByDate(DateTime date)
+        public TourInstance GetByTourId(int id) 
         {
             _tourInstances = _serializer.FromCSV(FilePath);
-            TourInstance founded = _tourInstances.Find(d => d.Date.Date == date);
+            TourInstance founded = _tourInstances.Find(t => t.IdTour == id);
             return founded;
         }
+
+        public List<TourInstance> FindByDate(DateTime date)
+        {
+            _tourInstances = _serializer.FromCSV(FilePath).ToList();
+            DateTime searchDate = date.Date;
+            string formattedDate = searchDate.ToString("dd.MM.yyyy.");
+
+            List<TourInstance> foundedInstances = new List<TourInstance>();
+            foreach(TourInstance instance in  _tourInstances)
+            {
+                if (instance.Date.ToString("dd.MM.yyyy.") == formattedDate)
+                {
+                    foundedInstances.Add(instance);
+                }
+            }
+            return foundedInstances;
+        }
+
+        /*public TourInstance FindByDate(DateTime date)
+        {
+            _tourInstances = _serializer.FromCSV(FilePath);
+            DateTime searchDate = date.Date;
+            TourInstance founded = _tourInstances.Find(d => d.Date.Date.Equals(searchDate));
+            return founded;
+        }*/
     }
 }

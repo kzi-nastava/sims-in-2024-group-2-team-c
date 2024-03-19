@@ -1,6 +1,7 @@
 ﻿using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,12 +54,13 @@ namespace BookingApp.Model
             Ended = Convert.ToBoolean(values[5]);
             //Date = Convert.ToDateTime(values[6]);
             Date = DateTime.Parse(values[6]);
+           // Date = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), IdTour.ToString(), MaxTourists.ToString(),
-                ReservedTourists.ToString(), Started.ToString(),Ended.ToString(),Date.ToString("dd/MM/yyyy HH:mm:ss") };
+                ReservedTourists.ToString(), Started.ToString(),Ended.ToString(),Date.ToString("dd.MM.yyyy. HH:mm:ss") };
             return csvValues;
         }
     }

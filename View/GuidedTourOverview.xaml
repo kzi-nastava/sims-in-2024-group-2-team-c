@@ -1,0 +1,76 @@
+﻿<Window x:Class="BookingApp.View.GuidedTourOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="Tour Details" Height="450" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
+        <!--<TextBlock x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Text="{Binding Name}" IsReadOnly="True" Margin="5"/>-->
+        <TextBlock Text="{Binding Tour.Name}" FontWeight="Bold"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Location(City,Country):"/>
+        <TextBlock Text="{Binding Tour.Location}" FontWeight="Bold"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Description:"/>
+        <TextBlock Text="{Binding Tour.Description}" FontWeight="Bold"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Language:"/>
+        <TextBlock Text="{Binding Tour.Language}" FontWeight="Bold"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Max Tourists:"/>
+        <TextBlock Text="{Binding TourInstance.MaxTourists}" Padding="3" VerticalAlignment="Center"/>
+        
+        <Label Grid.Row="5" Grid.Column="0" Content="Key Points:"/>
+        <Button x:Name="ViewKeyPointsButton" Grid.Row="5" Grid.Column="1" Content="View Key Points" Click="ViewKeyPointsButton_Click" Margin="5"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Date:"/>
+        <TextBlock Text="{Binding TourInstance.Date}" Padding="3" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="7" Grid.Column="0" Content="Duration:"/>
+        <TextBlock Text="{Binding Tour.Duration}" Padding="3"/>
+
+        <Label Grid.Row="8" Grid.Column="0" Content="Images:"/>
+        <ItemsControl x:Name="ImagesItemsControl" Grid.Row="8" Grid.Column="1" Margin="5">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}" Width="100" Height="100" Margin="5"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Button Grid.Row="9" Grid.ColumnSpan="2" Content="Start Tour" Click="StartTour_Click" HorizontalAlignment="Center" Margin="5"/>
+        <Button Grid.Row="10" Grid.ColumnSpan="2" Content="End Tour" Click="EndTour_Click" HorizontalAlignment="Center" Margin="5"/>
+        <Button Grid.Row="11" Grid.ColumnSpan="2" Content="Back to Tour Overview" Click="BackToTourOverview_Click" HorizontalAlignment="Center" Margin="5"/>
+
+
+        <TextBlock x:Name="InfoTextBlock" Grid.Row="12" Grid.ColumnSpan="2" Text="Tour is created." Foreground="Red" HorizontalAlignment="Center" Margin="5" Visibility="Collapsed"/>
+    </Grid>
+</Window>
