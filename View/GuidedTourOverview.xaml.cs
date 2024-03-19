@@ -117,17 +117,40 @@ namespace BookingApp.View
 
         private void StartTour_Click(object sender, RoutedEventArgs e)
         {
-            //početka ture
+            if (TourInstance != null)
+            {
+                TourInstance.Started = true;
+                _tourInstanceRepository.Update(TourInstance);
+                InfoTextBlock.Text = "Tour started successfully.";
+                InfoTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                InfoTextBlock.Text = "Tour instance is not available.";
+                InfoTextBlock.Visibility = Visibility.Visible;
+            }
         }
 
         private void EndTour_Click(object sender, RoutedEventArgs e)
         {
-            //završetak ture
+            if (TourInstance != null)
+            {
+                TourInstance.Ended = true;
+                 _tourInstanceRepository.Update(TourInstance);
+                InfoTextBlock.Text = "Tour ended successfully.";
+                InfoTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                InfoTextBlock.Text = "Tour instance is not available.";
+                InfoTextBlock.Visibility = Visibility.Visible;
+            }
         }
 
         private void BackToTourOverview_Click(object sender, RoutedEventArgs e)
         {
-            // Povratak na prethodni prozor
+            TourOverview tourOverviewWindow = new TourOverview();
+            tourOverviewWindow.Show();
             Close();
         }
 
