@@ -44,7 +44,7 @@
         <Label Grid.Row="5" Grid.Column="0" Content="Key Points:"/>
         <TextBox x:Name="KeyPointsTextBox" Grid.Row="5" Grid.Column="1" Text="{Binding KeyPoints, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
-        <Label Grid.Row="6" Grid.Column="0" Content="Dates:"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Dates(dd.MM.yyyy. HH:mm:ss):"/>
         <TextBox x:Name="DatesTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding Dates, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
         <Label Grid.Row="7" Grid.Column="0" Content="Duration:"/>

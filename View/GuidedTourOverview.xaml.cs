@@ -156,9 +156,6 @@ namespace BookingApp.View
 
         private void ViewKeyPointsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Otvaranje prozora za prikaz ključnih tačaka ture
-            // Implementacija zavisi od vaših modela i logike aplikacije
-            // Na primer:
             // KeyPointsWindow keyPointsWindow = new KeyPointsWindow(_tour.KeyPoints);
             // keyPointsWindow.ShowDialog();
         }

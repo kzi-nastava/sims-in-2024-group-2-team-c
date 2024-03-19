@@ -54,7 +54,7 @@ namespace BookingApp.Model
             Ended = Convert.ToBoolean(values[5]);
             //Date = Convert.ToDateTime(values[6]);
             Date = DateTime.Parse(values[6]);
-           // Date = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            //Date = DateTime.ParseExact(values[6], "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
         public string[] ToCSV()
