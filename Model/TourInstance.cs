@@ -15,7 +15,7 @@ namespace BookingApp.Model
         public int Id { get; set; }
         public int IdTour { get; set; }
         public int MaxTourists { get; set; }
-        public int ReservedTourists { get; set; }
+        public int ReservedTourists { get; set; } 
         public bool Started { get; set; }
         public bool Ended { get; set; }
         public DateTime Date { get; set; }
@@ -52,9 +52,9 @@ namespace BookingApp.Model
             ReservedTourists = Convert.ToInt32(values[3]);
             Started = Convert.ToBoolean(values[4]);
             Ended = Convert.ToBoolean(values[5]);
-            //Date = Convert.ToDateTime(values[6]);
             Date = DateTime.Parse(values[6]);
-            //Date = DateTime.ParseExact(values[6], "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            //Date = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+          
         }
 
         public string[] ToCSV()

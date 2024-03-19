@@ -53,18 +53,30 @@ namespace BookingApp.Repository
             _tourInstances.Remove(founded);
             _serializer.ToCSV(FilePath, _tourInstances);
         }
+        /*
+                public TourInstance Update(TourInstance tourInstance)
+                {
+                    _tourInstances = _serializer.FromCSV(FilePath);
+                    TourInstance current = _tourInstances.Find(t => t.Id == tourInstance.Id);
+                    int index = _tourInstances.IndexOf(current);
+                    _tourInstances.Remove(current);
+                    _tourInstances.Insert(index, tourInstance);
+                    _serializer.ToCSV(FilePath, _tourInstances);
+                    return tourInstance;
+                }*/
 
         public TourInstance Update(TourInstance tourInstance)
         {
             _tourInstances = _serializer.FromCSV(FilePath);
             TourInstance current = _tourInstances.Find(t => t.Id == tourInstance.Id);
-            int index = _tourInstances.IndexOf(current);
-            _tourInstances.Remove(current);
-            _tourInstances.Insert(index, tourInstance);
-            _serializer.ToCSV(FilePath, _tourInstances);
+            if (current != null)
+            {
+                int index = _tourInstances.IndexOf(current);
+                _tourInstances[index] = tourInstance;
+                _serializer.ToCSV(FilePath, _tourInstances);
+            }
             return tourInstance;
         }
-
         public TourInstance GetByTourId(int id) 
         {
             _tourInstances = _serializer.FromCSV(FilePath);
@@ -96,5 +108,36 @@ namespace BookingApp.Repository
             TourInstance founded = _tourInstances.Find(d => d.Date.Date.Equals(searchDate));
             return founded;
         }*/
+
+        public List<TourInstance> GetTourInstancesByTourId(int tourId)
+        {
+            List<TourInstance> tourInstances = new List<TourInstance>();
+
+            // Iterate through all tour instances and filter out the ones with matching tour ID
+            foreach (TourInstance tourInstance in _tourInstances)
+            {
+                if (tourInstance.IdTour == tourId)
+                {
+                    tourInstances.Add(tourInstance);
+                }
+            }
+
+            return tourInstances;
+        }
+
+        public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople)
+        {
+            // Retrieve instances for the specified tour ID
+            List<TourInstance> instances = GetAll().Where(instance => instance.IdTour == tourId).ToList();
+
+            // Filter instances based on available slots if numberOfPeople is specified
+            if (numberOfPeople.HasValue)
+            {
+                instances = instances.Where(instance => (instance.MaxTourists - instance.ReservedTourists) >= numberOfPeople.Value).ToList();
+            }
+
+            return instances;
+        }
+
     }
 }

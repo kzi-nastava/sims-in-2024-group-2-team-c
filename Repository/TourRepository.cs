@@ -66,12 +66,23 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
-
         public Tour GetById(int id)
         {
             _tours = _serializer.FromCSV(FilePath);
             return _tours.Find(c => c.Id == id);
 
         }
+
+        public List<Tour> GetToursByLocationId(int locationId)
+        {
+            _tours = GetAll();
+            return _tours.Where(t => t.LocationId == locationId).ToList();
+        }
+
+        /*public Tour GetById(int id)
+        {
+            return _tours.FirstOrDefault(t => t.Id == id);
+        }*/
+
     }
 }
