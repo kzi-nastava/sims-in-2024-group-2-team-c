@@ -33,6 +33,8 @@ namespace BookingApp.View
         private TouristRepository _touristRepository = new TouristRepository();
         private ReservationRepository _reservationRepository = new ReservationRepository();
         private TourInstanceRepository _tourInstanceRepository = new TourInstanceRepository();
+        private TourRepository _tourRepository = new TourRepository();
+        private KeyPointRepository _keyPointRepository = new KeyPointRepository();
 
         public TourInstance TourInstance
         {
@@ -213,7 +215,8 @@ namespace BookingApp.View
         }
 
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e) {
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
 
 
             List<string> usernames = ReadingUsernames();
@@ -221,7 +224,9 @@ namespace BookingApp.View
             List<int> touristIds = _touristRepository.GetTouristIdsByUsernames(usernames);
             int idInstance = TourInstance.Id;
 
-            Reservation reservation = new Reservation(idInstance,num,touristIds);
+            UpdateKeyPoints(touristIds);
+
+            Reservation reservation = new Reservation(idInstance, num, touristIds);
 
             _reservationRepository.Save(reservation);
 
@@ -231,6 +236,26 @@ namespace BookingApp.View
 
         }
 
+        private void UpdateKeyPoints(List<int> touristIds)
+        {
+            Tour tour = _tourRepository.GetById(TourInstance.IdTour);
 
+            List<KeyPoint> keyPoints = _keyPointRepository.GetKeypointsByIds(tour.KeyPointIds);
+
+
+            foreach (KeyPoint keyPoint in keyPoints)
+            {
+
+                foreach (int id in touristIds)
+                {
+                    keyPoint.TouristsId.Add(id);
+                }
+
+                _keyPointRepository.Update(keyPoint);
+            }
+
+            
+
+        }
     }
 }

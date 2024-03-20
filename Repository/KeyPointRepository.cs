@@ -68,6 +68,13 @@ namespace BookingApp.Repository
         }
 
 
+        public List<KeyPoint> GetKeypointsByIds(List<int> keypointIds)
+        {
+            // Use LINQ to filter keypoints based on the provided IDs
+            return _keypoint.Where(keypoint => keypointIds.Contains(keypoint.Id)).ToList();
+        }
+
+
 
 
 
