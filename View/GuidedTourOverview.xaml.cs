@@ -122,7 +122,7 @@ namespace BookingApp.View
             if (TourInstance != null)
             {
                 TourInstance.Started = true;
-                MarkFirstPointActive(SelectedTour.KeyPointIds);
+                //MarkFirstPointActive(SelectedTour.KeyPointIds);
                 _tourInstanceRepository.Update(TourInstance);
                 InfoTextBlock.Text = "Tour started successfully.";
                 InfoTextBlock.Visibility = Visibility.Visible;
@@ -133,7 +133,7 @@ namespace BookingApp.View
                 InfoTextBlock.Visibility = Visibility.Visible;
             }
         }
-        private void MarkFirstPointActive(List<int> ids)
+        /*private void MarkFirstPointActive(List<int> ids)
         {
             List<KeyPoint> points = _keyPointRepository.GetByIdList(ids);
             foreach (KeyPoint point in points)
@@ -144,7 +144,7 @@ namespace BookingApp.View
                     _keyPointRepository.Update(point);
                 }
             }
-        }
+        }*/
 
         private void EndTour_Click(object sender, RoutedEventArgs e)
         {

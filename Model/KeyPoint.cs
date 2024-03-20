@@ -27,6 +27,16 @@ namespace BookingApp.Model
             TouristsId = new List<int>();
         
         }
+        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint, int tourId)
+        {
+            Name = name;
+            Description = description;
+            Active = false;
+            StartingPoint = startingPoint;
+            EndingPoint = endingPoint;
+            TouristsId = new List<int>();
+            TourId = tourId;
+        }
 
         public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> touristIds, int tourId)
         {
@@ -36,6 +46,7 @@ namespace BookingApp.Model
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
             TouristsId = touristIds;
+            //TouristsId = new List<int>();
             TourId = tourId;
         }
         public void FromCSV(string[] values)
@@ -46,7 +57,14 @@ namespace BookingApp.Model
             Active = bool.Parse(values[3]);
             StartingPoint = bool.Parse(values[4]);
             EndingPoint = bool.Parse(values[5]);
-            TouristsId = values[6].Split(',').Select(int.Parse).ToList();
+            if (!string.IsNullOrEmpty(values[6]))
+            {
+                TouristsId = values[6].Split(',').Select(int.Parse).ToList();
+            }
+            else
+            {
+                TouristsId = new List<int>();
+            }
             TourId = Convert.ToInt32(values[7]);
 
         }
