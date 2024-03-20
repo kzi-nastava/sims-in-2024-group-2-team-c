@@ -1,0 +1,75 @@
+﻿<Window x:Class="BookingApp.View.AccommodationOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View"
+        mc:Ignorable="d"
+        Title="Accommodation Overview" Height="450" Width="800"
+        ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+
+    <Grid Margin="0,0,10,325">
+         <TextBlock Text="Double click on accommodation you would like to check:" Margin="10,104,-4,-215" FontWeight="Bold" />
+        
+        <DataGrid x:Name="AccommodationListView" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False" Margin="10,136,-4,-276" CanUserAddRows="False" MouseDoubleClick="AccommodationListView_MouseDoubleClick"> <!--SelectionChanged="AccommodationListView_SelectionChanged"-->
+            <DataGrid.Columns>
+                <!-- Definicija kolona za prikaz podataka smeštaja -->
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" />
+
+                <!-- Dodajemo kolone za prikaz lokacije smeštaja -->
+                <DataGridTextColumn Header="Location" Binding="{Binding LocationDetails}" IsReadOnly="True" />
+
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Max Guests" Binding="{Binding MaxGuests}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Min Booking Days" Binding="{Binding MinBookingDays}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Min Cancellation Days" Binding="{Binding CancellationDays}" IsReadOnly="True" />
+
+                <!-- Dodajemo kolone za prikaz slika smeštaja -->
+                <DataGridTemplateColumn Header="Images">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding Images}" HorizontalAlignment="Left">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding}" Width="70" Height="70" Margin="0,0,10,0"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,0,10">
+            <StackPanel Orientation="Vertical" Margin="0,0,20,0" Height="60">
+                <TextBlock Text="Name:" Margin="5,5,5,0" />
+                <TextBox x:Name="NameText" Width="90" Margin="5,0,5,5" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,0" Height="60">
+                <TextBlock Text="Location:" Margin="5,5,5,0" />
+                <TextBox x:Name="LocationText" Width="90" Margin="5,0,5,5" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,0" Height="60">
+                <TextBlock Text="Type:" Margin="5,5,5,0" />
+                <TextBox x:Name="TypeText" Width="90" Margin="5,0,5,5" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,0" Height="60" Width="135">
+                <TextBlock Text="Number of guests:" Margin="5,5,5,0" />
+                <TextBox x:Name="NumberOfGuestsText" Width="90" Margin="5,0,5,5" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,0" Height="60">
+                <TextBlock Text="Booking days:" Margin="5,5,5,0" />
+                <TextBox x:Name="BookingDaysText" Width="90" Margin="5,0,5,5" />
+            </StackPanel>
+            <Button Content="Search" Click="SearchButton_Click" Height="29" RenderTransformOrigin="0.834,2.061" Width="78"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

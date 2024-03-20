@@ -18,10 +18,14 @@ namespace BookingApp.Model
         public int CancellationDays { get; set; }
         public List<string> Images { get; set; }
 
+        public string LocationDetails { get; set; }
+
         public Accommodation()
         {
             Images = new List<string>();
         }
+
+
 
 
         public string[] ToCSV()
