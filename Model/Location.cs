@@ -19,9 +19,8 @@ namespace BookingApp.Model
             Country = "";
         }
 
-        public Location(int Id, string City, string Country)
+        public Location(string City, string Country) 
         {
-            this.Id = Id;
             this.City = City;
             this.Country = Country;
         }

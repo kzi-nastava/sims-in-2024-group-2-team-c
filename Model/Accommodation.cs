@@ -16,6 +16,7 @@ namespace BookingApp.Model
         public int MaxGuests { get; set; }
         public int MinBookingDays { get; set; }
         public int CancellationDays { get; set; }
+        public Owner Owner { get; set; } 
         public List<string> Images { get; set; }
 
         public Accommodation()
@@ -26,7 +27,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type, MaxGuests.ToString(), MinBookingDays.ToString(), CancellationDays.ToString() };
+            string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type, MaxGuests.ToString(), MinBookingDays.ToString(), CancellationDays.ToString(),/*Owner.Id.ToString()*/ };
             foreach (string imagePath in Images)
             {
                 csvValues.Append($"{imagePath};");
@@ -44,10 +45,11 @@ namespace BookingApp.Model
             MaxGuests = Convert.ToInt32(values[4]);
             MinBookingDays = Convert.ToInt32(values[5]);
             CancellationDays = Convert.ToInt32(values[6]);
+            //Owner = new Owner() { Id = Convert.ToInt32(values[7]) };
             Images = new List<string>();
             for (int i = 7; i < values.Length; i++)
             {
-                Images.Add(values[i]); // Dodajemo svaku putanju slike u listu Images
+                Images.Add(values[i]); 
             }
         }
     }
