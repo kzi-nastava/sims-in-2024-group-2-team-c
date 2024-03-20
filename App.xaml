@@ -9,6 +9,7 @@
 
     <!--StartupUri="View/TourOverview.xaml"> -->
       
+              <!--StartupUri="View/RegisterAccommodationForm.xaml">-->
 
     <Application.Resources>
          

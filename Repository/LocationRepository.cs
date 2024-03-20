@@ -30,6 +30,22 @@ namespace BookingApp.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public Location GetById(int id)
+        {
+            return _locations.FirstOrDefault(location => location.Id == id);
+        }
+
+        public int GetIdByCityorCountry(string searchTerm)
+        {
+            // Pronalaženje ID-a lokacije na osnovu unetog pojma (grada ili države)
+            Location location = _locations.FirstOrDefault(loc =>
+                loc.City.Equals(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                loc.Country.Equals(searchTerm, StringComparison.OrdinalIgnoreCase));
+
+            return location?.Id ?? -1; // Vraćamo ID lokacije ili -1 ako nije pronađena
+        }
+
+
         public Location Save(Location location)
         {
             location.Id = NextId();
@@ -105,6 +121,12 @@ namespace BookingApp.Repository
             Location location = _locations.FirstOrDefault(l => l.City.ToLower() == searchString.ToLower().Trim() || l.Country.ToLower().Trim() == searchString.ToLower());
             return location != null ? location.Id : -1; // Return -1 if location not found
         }
+
+        public Location GetLocationByCity(string cityName)
+        {
+            return _locations.FirstOrDefault(l => l.City.Equals(cityName, StringComparison.OrdinalIgnoreCase));
+        }
+
 
 
     }

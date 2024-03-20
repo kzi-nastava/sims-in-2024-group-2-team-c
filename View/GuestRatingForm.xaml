@@ -1,0 +1,58 @@
+﻿<Window x:Class="BookingApp.View.GuestRatingForm"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:local="clr-namespace:BookingApp.View"
+         mc:Ignorable="d"
+        Title="Guest Rating" Height="450" Width="500">
+    <Grid Margin="0,0,0,86">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <!--dodato ovo SelectionChanged="ListView_SelectionChanged" -->
+        <ListView x:Name="guestListView" SelectionChanged="ListView_SelectionChanged" Grid.Row="0" IsEnabled="True">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Guest ID" DisplayMemberBinding="{Binding Guest.Id}" />
+                    <GridViewColumn Header="Accommodation ID" DisplayMemberBinding="{Binding Accommodation.Id}" />
+                    <GridViewColumn Header="Arrival Date" DisplayMemberBinding="{Binding ArrivalDate}"/>
+                    <GridViewColumn Header="Departure Date" DisplayMemberBinding="{Binding DepartureDate}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            
+            <Label Grid.Row="1" Grid.Column="0" Content="Cleanliness:"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="txtCleanliness" Text="{Binding Cleanliness}" Margin="5"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Rule Respecting:"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="txtRuleRespecting" Text="{Binding RuleRespecting}" Margin="5"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Comment:"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtComment" Text="{Binding Comment}" Margin="5"/>
+
+
+            <Button Grid.Row="4" Grid.Column="1"  Content="Save" Click="SaveGuestRating" Margin="5"/>
+
+        </Grid>
+    </Grid>
+</Window>

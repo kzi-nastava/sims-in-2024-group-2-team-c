@@ -25,12 +25,6 @@ namespace BookingApp.Model
             this.City = City;
             this.Country = Country;
         }
-        public Location(int Id, string City, string Country)
-        {
-            this.Id = Id;
-            this.City = City;
-            this.Country = Country;
-        }
 
         public void FromCSV(string[] values)
         {
