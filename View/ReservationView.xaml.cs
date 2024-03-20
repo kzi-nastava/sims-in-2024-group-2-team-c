@@ -96,24 +96,31 @@ namespace BookingApp.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void NUmberOfPeople_Click(object sender, RoutedEventArgs e) {
+        private void NUmberOfPeople_Click(object sender, RoutedEventArgs e)
+        {
 
             int turistNUmber = int.Parse(numberOfPeopleText.Text);
             int remainingSpots = TourInstance.MaxTourists - TourInstance.ReservedTourists;
 
-            if (turistNUmber > (TourInstance.MaxTourists - TourInstance.ReservedTourists)) {
-                remainingSpotsText.Text = $"Not enough available spots. Only {remainingSpots} spots left.";
-            }
-            else {
-                GenerateTouristForms(turistNUmber);
-                remainingSpotsText.Text = $"Remaining spots: {remainingSpots}";
-            }
-            
+            HandleRemainingSpots(turistNUmber, remainingSpots);
+
             numberOfPeopleText.Text = "";
 
 
         }
 
+        private void HandleRemainingSpots(int turistNUmber, int remainingSpots)
+        {
+            if (turistNUmber > (TourInstance.MaxTourists - TourInstance.ReservedTourists))
+            {
+                remainingSpotsText.Text = $"Not enough available spots. Only {remainingSpots} spots left.";
+            }
+            else
+            {
+                GenerateTouristForms(turistNUmber);
+                remainingSpotsText.Text = $"Remaining spots: {remainingSpots}";
+            }
+        }
 
         private void GenerateTouristForms(int numOfPeople)
         {
@@ -232,7 +239,7 @@ namespace BookingApp.View
 
             TourInstance.ReservedTourists += num;
             _tourInstanceRepository.Update(TourInstance);
-            this.Close();//--------------------------------------
+            this.Close();
 
         }
 

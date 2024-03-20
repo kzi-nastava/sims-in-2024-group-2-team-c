@@ -57,22 +57,12 @@ namespace BookingApp.View
 
         private void Alternatives_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if (tourListView.SelectedItem != null)
-            {
-               // Tour selectedTour = (Tour)tourListView.SelectedItem;
-                //List<TourInstance> tourInstances = _tourInstanceRepository.GetTourInstancesByTourId(selectedTour.Id);
-                // Display tour instances in your UI, e.g., populate another ListView
-                // Example:
-                //instancesListView.ItemsSource = tourInstances;
-            }*/
 
 
             if (AlternativesListView.SelectedItem != null)
             {
                 Tour selectedTour = (Tour)AlternativesListView.SelectedItem;
-                //int? numberOfPeople = string.IsNullOrEmpty(NumOfPeopleText.Text) ? null : int.Parse(NumOfPeopleText.Text);
                 List<TourInstance> tourInstances = _tourInstanceRepository.GetTourInstancesByTourId(selectedTour.Id);
-                // Display tour instances in your UI
                 AlternativeinstancesView.ItemsSource = tourInstances;
             }
         }
@@ -110,18 +100,7 @@ namespace BookingApp.View
             if (AlternativesListView.SelectedItem != null && !string.IsNullOrEmpty(NumberOfPeopleTextBox.Text))
             {
                 Tour selectedTour = (Tour)AlternativesListView.SelectedItem;
-                int numberOfPeople;
-
-                if (int.TryParse(NumberOfPeopleTextBox.Text, out numberOfPeople))
-                {
-                    List<TourInstance> tourInstances = _tourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(selectedTour.Id, numberOfPeople);
-                    AlternativeinstancesView.ItemsSource = tourInstances;
-                }
-                else
-                {
-                    // Handle invalid input
-                    MessageBox.Show("Please enter a valid number of people.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                int numberOfPeople = FilterByAvailableSpots(selectedTour);
             }
             else
             {
@@ -130,8 +109,21 @@ namespace BookingApp.View
             }
         }
 
+        private int FilterByAvailableSpots(Tour selectedTour)
+        {
+            int numberOfPeople;
+            if (int.TryParse(NumberOfPeopleTextBox.Text, out numberOfPeople))
+            {
+                List<TourInstance> tourInstances = _tourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(selectedTour.Id, numberOfPeople);
+                AlternativeinstancesView.ItemsSource = tourInstances;
+            }
+            else
+            {
+                // Handle invalid input
+                MessageBox.Show("Please enter a valid number of people.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
-
-
+            return numberOfPeople;
+        }
     }
 }

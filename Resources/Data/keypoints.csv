@@ -1,7 +1,7 @@
-0|Nis|des|False|True|False|1,2|0
+0|Nis|des|False|True|False|1,2,2,4,1|0
 1|Kragujevac|des2|False|False|False|1,2|0
-2|Beograd|des3|False|False|False|1,2|0
-3|Novi Sad|des4|False|False|True|1,2|0
+2|Beograd|des3|False|False|False|1,2,2|0
+3|Novi Sad|des4|False|False|True|1,2,2|0
 4|Beograd|des4|False|True|False|1,2|1
 5|Beograd|description|False|True|False|1|2
 6|Kragujevac||False|False|False|2|2
@@ -22,3 +22,5 @@
 21|Novi Sad||False|True|False|1|0
 22|Novi Sad||False|True|False|1|0
 23|Oslo||False|False|True||0
+24|Berlin||False|True|False||0
+25|Oslo||False|False|True||0
