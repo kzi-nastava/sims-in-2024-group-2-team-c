@@ -83,13 +83,27 @@ namespace BookingApp.View
 
 
             // Apply filters based on search criteria
-            if (!string.IsNullOrEmpty(location))
-            {
-               int locationId = _locationRepository.GetIdByCityorCoutry(location);
-               tours = _tourRepository.GetToursByLocationId(locationId);
+            tours = FilterByLocation(location, tours);
+            tours = FilterByDuration(duration, tours);
+            tours = FilterByLanguage(language, tours);
 
+            LoadLocations(tours);
+
+            return tours;
+        }
+
+        private static List<Tour> FilterByLanguage(string language, List<Tour> tours)
+        {
+            if (!string.IsNullOrEmpty(language))
+            {
+                tours = tours.Where(t => t.Language.ToLower().Contains(language.ToLower())).ToList();
             }
 
+            return tours;
+        }
+
+        private static List<Tour> FilterByDuration(string duration, List<Tour> tours)
+        {
             if (!string.IsNullOrEmpty(duration))
             {
                 int durationValue;
@@ -99,13 +113,17 @@ namespace BookingApp.View
                 }
             }
 
-            if (!string.IsNullOrEmpty(language))
+            return tours;
+        }
+
+        private List<Tour> FilterByLocation(string location, List<Tour> tours)
+        {
+            if (!string.IsNullOrEmpty(location))
             {
-                tours = tours.Where(t => t.Language.ToLower().Contains(language.ToLower())).ToList();
+                int locationId = _locationRepository.GetIdByCityorCoutry(location);
+                tours = _tourRepository.GetToursByLocationId(locationId);
+
             }
-
-
-            LoadLocations(tours);
 
             return tours;
         }
