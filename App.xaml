@@ -5,7 +5,7 @@
              StartupUri="View/ShowTours.xaml">
 
 
-    <!--StartupUri="View/TourOverview.xaml">-->
+    <!-- StartupUri="View/TourOverview.xaml">-->
       
 
     <Application.Resources>

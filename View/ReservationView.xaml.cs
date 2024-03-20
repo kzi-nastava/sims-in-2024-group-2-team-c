@@ -31,7 +31,7 @@ namespace BookingApp.View
         private Tour _tour;
         private LocationRepository _locationRepository = new LocationRepository();
         private TouristRepository _touristRepository = new TouristRepository();
-        private ReservationRepository _reservationRepository = new ReservationRepository();
+        private TourReservationRepository _reservationRepository = new TourReservationRepository();
         private TourInstanceRepository _tourInstanceRepository = new TourInstanceRepository();
         private TourRepository _tourRepository = new TourRepository();
         private KeyPointRepository _keyPointRepository = new KeyPointRepository();
@@ -233,7 +233,7 @@ namespace BookingApp.View
 
             UpdateKeyPoints(touristIds);
 
-            Reservation reservation = new Reservation(idInstance, num, touristIds);
+            TourReservation reservation = new TourReservation(idInstance, num, touristIds);
 
             _reservationRepository.Save(reservation);
 

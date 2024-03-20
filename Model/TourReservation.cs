@@ -7,7 +7,7 @@ using BookingApp.Serializer;
 
 namespace BookingApp.Model
 {
-    public class Reservation : ISerializable
+    public class TourReservation : ISerializable
     {
 
         public int Id { get; set; }
@@ -15,11 +15,11 @@ namespace BookingApp.Model
         public int TouristsCount; //when we cancel our reservation to make it easier for us to update the number of tourists in TourInstance
         public List<int> TouristIds;
 
-        public Reservation() { 
+        public TourReservation() { 
             TouristIds = new List<int>();
         }
 
-        public Reservation(int tourInstanceId, int touristsCount, List<int> otherTourists)
+        public TourReservation(int tourInstanceId, int touristsCount, List<int> otherTourists)
         {
             TourInstanceId = tourInstanceId;
             TouristsCount = touristsCount;

@@ -9,27 +9,27 @@ using System.Xml.Linq;
 
 namespace BookingApp.Repository
 {
-    public class ReservationRepository
+    public class TourReservationRepository
     {
 
-        private const string FilePath = "../../../Resources/Data/reservations.csv";
+        private const string FilePath = "../../../Resources/Data/tourreservations.csv";
 
-        private readonly Serializer<Reservation> _serializer;
+        private readonly Serializer<TourReservation> _serializer;
 
-        private List<Reservation> _reservations;
+        private List<TourReservation> _reservations;
 
-        public ReservationRepository()
+        public TourReservationRepository()
         {
-            _serializer = new Serializer<Reservation>();
+            _serializer = new Serializer<TourReservation>();
             _reservations = _serializer.FromCSV(FilePath);
         }
 
-        public List<Reservation> GetAll()
+        public List<TourReservation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Reservation Save(Reservation reservation)
+        public TourReservation Save(TourReservation reservation)
         {
             reservation.Id = NextId();
             _reservations = _serializer.FromCSV(FilePath);
@@ -48,18 +48,18 @@ namespace BookingApp.Repository
             return _reservations.Max(c => c.Id) + 1;
         }
 
-        public void Delete(Reservation reservation)
+        public void Delete(TourReservation reservation)
         {
             _reservations = _serializer.FromCSV(FilePath);
-            Reservation founded = _reservations.Find(c => c.Id == reservation.Id);
+            TourReservation founded = _reservations.Find(c => c.Id == reservation.Id);
             _reservations.Remove(founded);
             _serializer.ToCSV(FilePath, _reservations);
         }
 
-        public Reservation Update(Reservation reservation)
+        public TourReservation Update(TourReservation reservation)
         {
             _reservations = _serializer.FromCSV(FilePath);
-            Reservation current = _reservations.Find(c => c.Id == reservation.Id);
+            TourReservation current = _reservations.Find(c => c.Id == reservation.Id);
             int index = _reservations.IndexOf(current);
             _reservations.Remove(current);
             _reservations.Insert(index, reservation);       // keep ascending order of ids in file 
