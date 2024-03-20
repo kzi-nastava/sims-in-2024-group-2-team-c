@@ -84,6 +84,12 @@ namespace BookingApp.Repository
             return location;
         }
 
+        public Location GetLocationByCity(string cityName)
+        {
+            return _locations.FirstOrDefault(l => l.City.Equals(cityName, StringComparison.OrdinalIgnoreCase));
+        }
+
+
 
     }
 }

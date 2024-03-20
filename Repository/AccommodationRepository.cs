@@ -3,6 +3,7 @@ using BookingApp.Serializer;
 using BookingApp.View;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -14,6 +15,29 @@ namespace BookingApp.Repository
         private readonly Serializer<Accommodation> _serializer;
         private List<Accommodation> _accommodations;
         private readonly LocationRepository _locationRepository;
+
+
+        public void AddImagesToCSV(List<string> imagePaths, string accommodationName)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(FilePath, true))
+                {
+                    foreach (string imagePath in imagePaths)
+                    {
+                        string relativeImagePath = Path.GetRelativePath(Environment.CurrentDirectory, imagePath);
+                        writer.WriteLine($"{accommodationName},{relativeImagePath}");
+                    }
+                }
+
+                Console.WriteLine("Images added to accommodations.csv successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding images to accommodations.csv: {ex.Message}");
+            }
+        }
+
 
         public AccommodationRepository()
         {
@@ -126,12 +150,12 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _accommodations);
             return accommodation;
         }
+        public Accommodation GetAccommodationById(int id) //dodato
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(a => a.Id == id);
+        }
 
 
-        /*public List<Accommodation> GetByOwner(User owner)
-       {
-       _accommodations = _serializer.FromCSV(FilePath);
-       return _accommodations.FindAll(a => a.Owner.Id == owner.Id);
-        }*/
     }
 }
