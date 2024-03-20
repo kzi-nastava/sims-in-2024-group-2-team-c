@@ -18,6 +18,7 @@ namespace BookingApp.Model
         public bool EndingPoint {  get; set; }
 
         public List<int> TouristsId { get; set; }
+        
         public int TourId { get; set; }
 
         public KeyPoint() {
@@ -53,7 +54,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             
-            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", TouristsId) , TourId.ToString()};
+            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", TouristsId) , TourId.ToString() };
             return csvValues;
         }
     }

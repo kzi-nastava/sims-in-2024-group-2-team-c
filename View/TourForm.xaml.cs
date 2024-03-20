@@ -85,8 +85,8 @@ namespace BookingApp.View
             KeyPoint startedPoint = new KeyPoint();
             startedPoint.Name = keyPointsList[0];
             startedPoint.StartingPoint = true;
-            ids.Add(startedPoint.Id);
             _keyPointRepository.Save(startedPoint);
+            ids.Add(startedPoint.Id);
 
             for (int i = 1; i < keyPointsList.Count - 1; i++)
             {
@@ -94,15 +94,14 @@ namespace BookingApp.View
                 kp.Name = keyPointsList[i];
                 kp.StartingPoint = false;
                 kp.EndingPoint = false;
-                ids.Add(kp.Id);
                 _keyPointRepository.Save(kp);
+                ids.Add(kp.Id);
             }
             KeyPoint endedPoint = new KeyPoint();
             endedPoint.Name = keyPointsList[keyPointsList.Count - 1];
             endedPoint.EndingPoint = true;
-            ids.Add(endedPoint.Id);
             _keyPointRepository.Save(endedPoint);
-
+            ids.Add(endedPoint.Id);
             return ids;
         }
 

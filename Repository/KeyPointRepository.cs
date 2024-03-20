@@ -66,8 +66,26 @@ namespace BookingApp.Repository
             _serializer.ToCSV(FilePath, _keypoint);
             return keyPoint;
         }
+        public KeyPoint GetById(int id)
+        {
+            _keypoint = _serializer.FromCSV(FilePath);
+            return _keypoint.Find(c => c.Id == id);
 
-
+        }
+        public List<KeyPoint> GetByIdList(List<int> ids)
+        {
+            _keypoint = _serializer.FromCSV(FilePath);
+            List<KeyPoint> result = new List<KeyPoint>();
+            foreach(int id in ids)
+            {
+                KeyPoint kp = _keypoint.Find(c => c.Id == id);
+                if (kp != null)
+                {
+                    result.Add(kp);
+                }
+            }
+            return result;
+        }
 
 
 

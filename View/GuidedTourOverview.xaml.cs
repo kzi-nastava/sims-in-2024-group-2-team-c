@@ -27,7 +27,7 @@ namespace BookingApp.View
         private Tour _tour;
         private TourInstance _tourInstance;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -78,6 +78,7 @@ namespace BookingApp.View
         private readonly TourRepository _tourRepository;
         private readonly TourInstanceRepository _tourInstanceRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly KeyPointRepository _keyPointRepository;
 
         public GuidedTourOverview(Tour selectedTour)
         {
@@ -85,6 +86,7 @@ namespace BookingApp.View
             _tourRepository = new TourRepository();
             _tourInstanceRepository = new TourInstanceRepository();
             _locationRepository = new LocationRepository();
+            _keyPointRepository = new KeyPointRepository();
             DataContext = this;
             SelectedTour = selectedTour;
             Location = _locationRepository.GetById(SelectedTour.LocationId);
@@ -120,6 +122,7 @@ namespace BookingApp.View
             if (TourInstance != null)
             {
                 TourInstance.Started = true;
+                MarkFirstPointActive(SelectedTour.KeyPointIds);
                 _tourInstanceRepository.Update(TourInstance);
                 InfoTextBlock.Text = "Tour started successfully.";
                 InfoTextBlock.Visibility = Visibility.Visible;
@@ -128,6 +131,18 @@ namespace BookingApp.View
             {
                 InfoTextBlock.Text = "Tour instance is not available.";
                 InfoTextBlock.Visibility = Visibility.Visible;
+            }
+        }
+        private void MarkFirstPointActive(List<int> ids)
+        {
+            List<KeyPoint> points = _keyPointRepository.GetByIdList(ids);
+            foreach (KeyPoint point in points)
+            {
+                if (point.StartingPoint)
+                {
+                    point.Active = true;
+                    _keyPointRepository.Update(point);
+                }
             }
         }
 
@@ -156,8 +171,19 @@ namespace BookingApp.View
 
         private void ViewKeyPointsButton_Click(object sender, RoutedEventArgs e)
         {
-            // KeyPointsWindow keyPointsWindow = new KeyPointsWindow(_tour.KeyPoints);
-            // keyPointsWindow.ShowDialog();
+            /*KeyPointsOverview keyPointsOverview = new KeyPointsOverview(SelectedTour.KeyPointIds);
+            keyPointsOverview.Show();
+            this.Close();*/
+
+            List<KeyPoint> keyPoints = new List<KeyPoint>();
+            foreach(int id in SelectedTour.KeyPointIds)
+            {
+                KeyPoint kp = _keyPointRepository.GetById(id);
+                keyPoints.Add(kp);
+            }
+            KeyPointsOverview keyPointsOverview = new KeyPointsOverview(keyPoints);
+            keyPointsOverview.Show();
+            //Close();
         }
     }
 }
