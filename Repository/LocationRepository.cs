@@ -30,10 +30,10 @@ namespace BookingApp.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Location GetById(int id)
+       /* public Location GetById(int id)
         {
             return _locations.FirstOrDefault(location => location.Id == id);
-        }
+        }*/
 
         public int GetIdByCityorCountry(string searchTerm)
         {
