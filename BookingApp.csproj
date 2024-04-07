@@ -29,4 +29,12 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Service\" />
+    <Folder Include="WPF\ViewModel\GuestViewModel\" />
+    <Folder Include="WPF\ViewModel\GuideViewModel\" />
+    <Folder Include="WPF\ViewModel\TouristViewModel\" />
+    <Folder Include="WPF\ViewModel\OwnerViewModel\" />
+  </ItemGroup>
+
 </Project>
