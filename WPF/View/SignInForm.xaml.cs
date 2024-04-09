@@ -49,12 +49,17 @@ namespace BookingApp.View
             {
                 if(user.Password == txtPassword.Password)
                 {
-
                  
                     RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                     AccommodationOverview accommodationOverview = new AccommodationOverview();
                     TourOverview tourOverview = new TourOverview();
                     Window1 w1 = new Window1();
+
+
+                    LoggedInUser.Id = user.Id;
+                    LoggedInUser.Username = user.Username;
+                    LoggedInUser.Role = user.Role.ToString();
+
 
                     if (user.Role == UserRole.owner)
                     {

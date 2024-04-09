@@ -30,7 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\" />
+    <Folder Include="Service\AccommodationServices\" />
+    <Folder Include="Service\TourServices\" />
     <Folder Include="WPF\ViewModel\GuestViewModel\" />
     <Folder Include="WPF\ViewModel\GuideViewModel\" />
     <Folder Include="WPF\ViewModel\TouristViewModel\" />

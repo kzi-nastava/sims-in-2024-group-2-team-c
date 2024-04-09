@@ -1,4 +1,5 @@
-﻿using BookingApp.Repository;
+﻿using BookingApp.Interfaces;
+using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,19 @@ namespace BookingApp.Injector
     {
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
-        //{ typeof(IUserRepository), new UserFileRepository() },
-        //{ typeof(IUserService), new UserService() },
-        // Add more implementations here
-    };
+            { typeof(IUserRepository), new UserRepository() },
+            //{ typeof(IUserService), new UserService() },
+
+            { typeof(ITourRepository), new TourRepository() },
+            // { typeof(ITourService), new TourService() }
+
+            { typeof(IAccommodationRepository), new AccommodationRepository() },
+            // { typeof(IAccommodationService), new AccommodationService() }
+
+            { typeof(ITourRepository), new TourRepository() },
+            // { typeof(ITourService), new TourService() }
+
+        };
 
         public static T CreateInstance<T>()
         {
