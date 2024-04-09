@@ -49,9 +49,34 @@ namespace BookingApp.View
             {
                 if(user.Password == txtPassword.Password)
                 {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
+
+                 
+                    RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                    AccommodationOverview accommodationOverview = new AccommodationOverview();
+                    TourOverview tourOverview = new TourOverview();
+                    Window1 w1 = new Window1();
+
+                    if (user.Role == UserRole.owner)
+                    {
+                        registerAccommodationForm.Show();
+                    }
+                    else if (user.Role == UserRole.guest)
+                    {
+                        accommodationOverview.Show();
+                    }
+                    else if (user.Role == UserRole.guide)
+                    {
+                        tourOverview.Show();
+                    }
+                    else if (user.Role == UserRole.tourist)
+                    {
+                        w1.Show();
+                    }
                     Close();
+
+
+
+
                 } 
                 else
                 {

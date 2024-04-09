@@ -2,10 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BookingApp"
-             StartupUri="WPF/View/GuideView/TourOverview.xaml">
+             StartupUri="WPF/View/SignInForm.xaml">
 
 
-    <!-- StartupUri="View/SignIn.xaml">-->
+    <!-- StartupUri="WPF/View/GuideView/TourOverview.xaml">-->
 
 
     <!--StartupUri="View/AccommodationOverview.xaml">-->
