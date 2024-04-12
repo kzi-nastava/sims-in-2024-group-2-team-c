@@ -26,6 +26,7 @@ namespace BookingApp.View
     {
         private readonly KeyPointRepository _keyPointRepository;
         private readonly TouristRepository _touristRepository;
+        private readonly PeopleInfoRepository _peopleInfoRepository;
 
         private ObservableCollection<KeyPoint> _keyPoints;
         public ObservableCollection<KeyPoint> KeyPoints
@@ -52,6 +53,7 @@ namespace BookingApp.View
              DataContext = this;
              keyPointsListView.IsEnabled = true;
              _keyPointRepository = new KeyPointRepository();
+            _peopleInfoRepository = new PeopleInfoRepository();
             _touristRepository = new TouristRepository();
              KeyPoints = new ObservableCollection<KeyPoint>();
              LoadKeyPoints(toursKeyPoints);
@@ -110,15 +112,24 @@ namespace BookingApp.View
         private void TouristsOverviewButton_Click(object sender, RoutedEventArgs e)
         {
             KeyPoint selectedKeyPoint = (sender as FrameworkElement).DataContext as KeyPoint;
-            List<Tourist> turists = new List<Tourist>();
-            foreach (int id in selectedKeyPoint.TouristsId)
+
+            
+            //List<Tourist> turists = new List<Tourist>();
+            List<PeopleInfo> peopleInfo = new List<PeopleInfo>();
+            foreach (int id in selectedKeyPoint.PeopleIds)
             {
-                Tourist t = _touristRepository.GetById(id);
-                turists.Add(t);
+                //Tourist t = _touristRepository.GetById(id);
+               // turists.Add(t);
+
+                PeopleInfo p  = _peopleInfoRepository.GetById(id);
+                peopleInfo.Add(p);
             }
             
-            KeyPointsTuristsView touristsView = new KeyPointsTuristsView(turists);
+            KeyPointsTuristsView touristsView = new KeyPointsTuristsView(peopleInfo);
             touristsView.Show();
+
+
+
             /*if (keyPointsListView.SelectedItem != null)
             {
                 KeyPoint selectedKeyPoint = (KeyPoint)keyPointsListView.SelectedItem;
