@@ -6,9 +6,6 @@ using System.Windows;
 
 namespace BookingApp.View
 {
-    /// <summary>
-    /// Interaction logic for SignInForm.xaml
-    /// </summary>
     public partial class SignInForm : Window
     {
 

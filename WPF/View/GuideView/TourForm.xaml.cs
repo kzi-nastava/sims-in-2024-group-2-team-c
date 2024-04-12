@@ -72,7 +72,6 @@ namespace BookingApp.View
                 MessageBox.Show($"Greška pri kreiranju ture: {ex.Message}");
             }*/
         }
-
         private void BackToTourOverviewButton_Click(object sender, RoutedEventArgs e)
         {
             TourOverview tourOverviewWindow = new TourOverview();
@@ -155,7 +154,17 @@ namespace BookingApp.View
                 int tourInstanceid = tourInstance.Id;
                 tourInstancesids.Add(tourInstanceid);
             }
+            SetKeyPointTourId(keyPointIds, newTour.Id);
+        }
 
+        private void SetKeyPointTourId(List<int> keyPointIds, int tourId)
+        {
+            foreach (int id in keyPointIds)
+            {
+                KeyPoint kp = _keyPointRepository.GetById(id);
+                kp.TourId = tourId;
+                _keyPointRepository.Update(kp);
+            }
         }
     }
 }
