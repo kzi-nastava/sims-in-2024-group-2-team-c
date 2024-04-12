@@ -42,35 +42,45 @@ namespace BookingApp.View
         {
             /*try
             {*/
-                string name = NameTextBox.Text;
-                string[] locationData = LocationTextBox.Text.Split(',');
-                /*if (locationData.Length != 2)
-                {
-                    MessageBox.Show("Unesite lokaciju u formatu 'grad,drzava'.");
-                    return;
-                }*/
-                string city = locationData[0].Trim();
-                string country = locationData[1].Trim();
-                string description = DescriptionTextBox.Text;
-                string language = LanguageTextBox.Text;
-                //int maxTourists = int.Parse(MaxTouristsTextBox.Text);
-                int maxTourists = Convert.ToInt32(MaxTouristsTextBox.Text);
-                List<string> keyPointsList = KeyPointsTextBox.Text.Split(',').Select(s => s.Trim()).ToList();
-                List<int> keyPointIds = ParseKeyPointIds(keyPointsList);
-                List<DateTime> tourDates = ParseTourDates(DatesTextBox.Text);
-                //int duration = int.Parse(DurationTextBox.Text);
-                int duration = Convert.ToInt32(DurationTextBox.Text);
-                List<string> imagePaths = ImagesTextBox.Text.Split(',').Select(s => s.Trim()).ToList();
 
-                // Kreiranje nove ture
-                CreateTour(name, city, country, description, language, maxTourists, keyPointIds, tourDates, duration, imagePaths);
-                infoTextBlock.Visibility = Visibility.Visible;
-            //MessageBox.Show("Nova tura je uspešno kreirana.");
-            /*}
-            catch (Exception ex)
+            //infoTextBlock.Visibility = Visibility.Visible;
+            if (AreAllFieldsFilled())
             {
-                MessageBox.Show($"Greška pri kreiranju ture: {ex.Message}");
-            }*/
+                try
+                {
+                    string name = NameTextBox.Text;
+                    string[] locationData = LocationTextBox.Text.Split(',');
+                    /*if (locationData.Length != 2)
+                    {
+                        MessageBox.Show("Unesite lokaciju u formatu 'grad,drzava'.");
+                        return;
+                    }*/
+                    string city = locationData[0].Trim();
+                    string country = locationData[1].Trim();
+                    string description = DescriptionTextBox.Text;
+                    string language = LanguageTextBox.Text;
+                    //int maxTourists = int.Parse(MaxTouristsTextBox.Text);
+                    int maxTourists = Convert.ToInt32(MaxTouristsTextBox.Text);
+                    List<string> keyPointsList = KeyPointsTextBox.Text.Split(',').Select(s => s.Trim()).ToList();
+                    List<int> keyPointIds = ParseKeyPointIds(keyPointsList);
+                    List<DateTime> tourDates = ParseTourDates(DatesTextBox.Text);
+                    //int duration = int.Parse(DurationTextBox.Text);
+                    int duration = Convert.ToInt32(DurationTextBox.Text);
+                    List<string> imagePaths = ImagesTextBox.Text.Split(',').Select(s => s.Trim()).ToList();
+                    CreateTour(name, city, country, description, language, maxTourists, keyPointIds, tourDates, duration, imagePaths);
+                    infoTextBlock.Visibility = Visibility.Visible;
+                    validationTextBlock.Visibility = Visibility.Hidden;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error creating tour: {ex.Message}");
+                }
+            }
+            else
+            {
+                validationTextBlock.Visibility = Visibility.Visible;
+                infoTextBlock.Visibility = Visibility.Hidden;
+            }
         }
         private void BackToTourOverviewButton_Click(object sender, RoutedEventArgs e)
         {
@@ -156,6 +166,23 @@ namespace BookingApp.View
             }
             SetKeyPointTourId(keyPointIds, newTour.Id);
         }
+        private bool AreAllFieldsFilled()
+        {
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(LocationTextBox.Text) ||
+                string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
+                /*string.IsNullOrWhiteSpace(LanguageTextBox.Text) ||*/
+                string.IsNullOrWhiteSpace(MaxTouristsTextBox.Text) ||
+                string.IsNullOrWhiteSpace(KeyPointsTextBox.Text) ||
+                string.IsNullOrWhiteSpace(DatesTextBox.Text) ||
+                string.IsNullOrWhiteSpace(DurationTextBox.Text)/* ||
+                string.IsNullOrWhiteSpace(ImagesTextBox.Text)*/)
+            {
+                return false; 
+            }
+            return true;
+        }
+
 
         private void SetKeyPointTourId(List<int> keyPointIds, int tourId)
         {

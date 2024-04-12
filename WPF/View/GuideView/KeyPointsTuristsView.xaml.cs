@@ -27,9 +27,19 @@ namespace BookingApp.View
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<Tourist> _tourists;
-        private readonly PeopleInfoRepository _peopleInfoRepository;
+        /*private ObservableCollection<Tourist> _tourists;
         public ObservableCollection<Tourist> Tourists
+        {
+            get { return _tourists; }
+            set
+            {
+                _tourists = value;
+                OnPropertyChanged();
+            }
+        }*/
+        private KeyPoint SelectedKeyPoint;
+        private ObservableCollection<PeopleInfo> _tourists;
+        public ObservableCollection<PeopleInfo> Tourists
         {
             get { return _tourists; }
             set
@@ -40,8 +50,8 @@ namespace BookingApp.View
         }
         private readonly KeyPointRepository _keyPointRepository;
         private readonly TouristRepository _touristRepository;
-
-        public KeyPointsTuristsView(List<PeopleInfo> touristsList)
+        private readonly PeopleInfoRepository _peopleInfoRepository;
+        public KeyPointsTuristsView(List<PeopleInfo> touristsList, KeyPoint selectedKeyPoint)
         {
             InitializeComponent();
             DataContext = this;
@@ -49,8 +59,9 @@ namespace BookingApp.View
             _keyPointRepository = new KeyPointRepository();
             _peopleInfoRepository = new PeopleInfoRepository();
             _touristRepository = new TouristRepository();
-            Tourists = new ObservableCollection<Tourist>();
+            Tourists = new ObservableCollection<PeopleInfo>();
             touristsListBox.ItemsSource = touristsList;
+            SelectedKeyPoint = selectedKeyPoint;
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -63,6 +74,8 @@ namespace BookingApp.View
             CheckBox checkBox = (CheckBox)sender;
             //Tourist tourist = (Tourist)checkBox.DataContext;
             PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
+            SelectedKeyPoint.PresentPeopleIds.Add(peopleInfo.Id);
+            _keyPointRepository.Update(SelectedKeyPoint);
             //tourist.Active = true;
             peopleInfo.Active = true;
             _peopleInfoRepository.Update(peopleInfo);
@@ -74,6 +87,8 @@ namespace BookingApp.View
             CheckBox checkBox = (CheckBox)sender;
             // Tourist tourist = (Tourist)checkBox.DataContext;
             PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
+            SelectedKeyPoint.PresentPeopleIds.Remove(peopleInfo.Id);
+            _keyPointRepository.Update(SelectedKeyPoint);
             peopleInfo.Active = false;
             _peopleInfoRepository.Update(peopleInfo);
 

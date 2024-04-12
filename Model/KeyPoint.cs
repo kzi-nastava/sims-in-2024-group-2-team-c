@@ -16,16 +16,15 @@ namespace BookingApp.Model
         public bool Active {  get; set; }
         public bool StartingPoint { get; set; }
         public bool EndingPoint {  get; set; }
-
         public List<int> PeopleIds { get; set; }
-        
+        public List<int> PresentPeopleIds { get; set; }
         public int TourId { get; set; }
 
         public KeyPoint() {
             Name = string.Empty;
             Description = string.Empty;
             PeopleIds = new List<int>();
-        
+            PresentPeopleIds = new List<int>();
         }
         public KeyPoint(string name, string description, bool startingPoint, bool endingPoint, int tourId)
         {
@@ -35,10 +34,11 @@ namespace BookingApp.Model
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
             PeopleIds = new List<int>();
+            PresentPeopleIds = new List<int>();
             TourId = tourId;
         }
 
-        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> peopleIds, int tourId)
+        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> peopleIds, List<int> presentPeopleIds, int tourId)
         {
             Name = name;
             Description = description;
@@ -46,6 +46,7 @@ namespace BookingApp.Model
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
             PeopleIds = peopleIds;
+            PresentPeopleIds = presentPeopleIds;
             //TouristsId = new List<int>();
             TourId = tourId;
         }
@@ -65,14 +66,22 @@ namespace BookingApp.Model
             {
                 PeopleIds = new List<int>();
             }
-            TourId = Convert.ToInt32(values[7]);
+            if (!string.IsNullOrEmpty(values[7]))
+            {
+                PresentPeopleIds = values[7].Split(',').Select(int.Parse).ToList();
+            }
+            else
+            {
+                PresentPeopleIds = new List<int>();
+            }
+            TourId = Convert.ToInt32(values[8]);
 
         }
 
         public string[] ToCSV()
         {
             
-            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", PeopleIds) , TourId.ToString() };
+            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", PeopleIds) , string.Join(",",PresentPeopleIds),TourId.ToString() };
             return csvValues;
         }
     }

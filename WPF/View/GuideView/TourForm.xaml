@@ -55,6 +55,7 @@
 
         <Button Grid.Row="9" Grid.ColumnSpan="2" Click="SaveTour_Click" Content="Save" HorizontalAlignment="Center" Margin="5,0,0,0"/>
         <TextBlock x:Name="infoTextBlock" Grid.Row ="10" Grid.ColumnSpan="2" Text="Tour is created." Foreground="Red" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/>
+        <TextBlock x:Name="validationTextBlock" Grid.Row ="11" Grid.ColumnSpan="2" Text="Fill all fields." Foreground="Red" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="Collapsed"/>
         <Button Grid.Row="9" Grid.ColumnSpan="2" Grid.Column="1" Content="Back to Tour Overview" Click="BackToTourOverviewButton_Click" HorizontalAlignment="Center" Margin="20,0,0,0" />
     </Grid>
 </Window>

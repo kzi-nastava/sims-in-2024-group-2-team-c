@@ -125,7 +125,7 @@ namespace BookingApp.View
                 peopleInfo.Add(p);
             }
             
-            KeyPointsTuristsView touristsView = new KeyPointsTuristsView(peopleInfo);
+            KeyPointsTuristsView touristsView = new KeyPointsTuristsView(peopleInfo, selectedKeyPoint);
             touristsView.Show();
 
 
