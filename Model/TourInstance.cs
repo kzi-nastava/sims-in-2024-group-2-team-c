@@ -52,8 +52,8 @@ namespace BookingApp.Model
             ReservedTourists = Convert.ToInt32(values[3]);
             Started = Convert.ToBoolean(values[4]);
             Ended = Convert.ToBoolean(values[5]);
-            Date = DateTime.Parse(values[6]);
-            //Date = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+           // Date = DateTime.Parse(values[6]);
+            Date = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
           
         }
 

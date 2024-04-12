@@ -35,6 +35,7 @@ namespace BookingApp.View
         private TourInstanceRepository _tourInstanceRepository = new TourInstanceRepository();
         private TourRepository _tourRepository = new TourRepository();
         private KeyPointRepository _keyPointRepository = new KeyPointRepository();
+        private PeopleInfoRepository _peopleRepository = new PeopleInfoRepository();
 
         public TourInstance TourInstance
         {
@@ -76,7 +77,7 @@ namespace BookingApp.View
                 }
             }
         }
-
+        private List<TextBox[]> touristTextBoxes = new List<TextBox[]>();
 
         public ReservationView(TourInstance tourInstance, Tour tour)
         {
@@ -85,6 +86,7 @@ namespace BookingApp.View
             TourInstance = tourInstance;
             Tour = tour;
             Location = _locationRepository.Get(tour.LocationId);
+            
             DataContext = this;
 
         }
@@ -137,47 +139,80 @@ namespace BookingApp.View
             SaveButton.Visibility = Visibility.Visible;
         }
 
+        /* private StackPanel CreateTouristForm(int index)
+         {
+             var stackPanel = new StackPanel();
+             stackPanel.Orientation = Orientation.Horizontal;
+
+
+
+
+             var usernameLabel = new Label();
+             usernameLabel.Content = $"Tourist {index} Username:";
+             var usernameTextBox = new TextBox();
+             usernameTextBox.Width = 60;
+
+
+             var nameLabel = new Label();
+             nameLabel.Content = $"Tourist {index} First Name:";
+             var nameTextBox = new TextBox();
+             nameTextBox.Width = 60;
+
+             var lastNameLabel = new Label();
+             lastNameLabel.Content = $"Tourist {index} Last Name:";
+             var lastNameTextBox = new TextBox();
+             lastNameTextBox.Width = 60;
+
+             var ageLabel = new Label();
+             ageLabel.Content = $"Tourist {index} Age:";
+             var ageTextBox = new TextBox();
+             ageTextBox.Width = 60;
+
+             // Add more fields as needed (e.g., Age, Username)
+             stackPanel.Children.Add(usernameLabel);
+             stackPanel.Children.Add(usernameTextBox);
+             stackPanel.Children.Add(nameLabel);
+             stackPanel.Children.Add(nameTextBox);
+             stackPanel.Children.Add(lastNameLabel);
+             stackPanel.Children.Add(lastNameTextBox);
+             stackPanel.Children.Add(ageLabel);
+             stackPanel.Children.Add(ageTextBox);
+
+             return stackPanel;
+         }*/
+
         private StackPanel CreateTouristForm(int index)
         {
             var stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
+
             
-
-          
-
-            var usernameLabel = new Label();
-            usernameLabel.Content = $"Tourist {index} Username:";
-            var usernameTextBox = new TextBox();
-            usernameTextBox.Width = 60;
-            
-
-            var nameLabel = new Label();
-            nameLabel.Content = $"Tourist {index} First Name:";
             var nameTextBox = new TextBox();
-            nameTextBox.Width = 60;
-
-            var lastNameLabel = new Label();
-            lastNameLabel.Content = $"Tourist {index} Last Name:";
             var lastNameTextBox = new TextBox();
-            lastNameTextBox.Width = 60;
-
-            var ageLabel = new Label();
-            ageLabel.Content = $"Tourist {index} Age:";
             var ageTextBox = new TextBox();
+
+            // Set width for each TextBox
+           
+            nameTextBox.Width = 60;
+            lastNameTextBox.Width = 60;
             ageTextBox.Width = 60;
 
-            // Add more fields as needed (e.g., Age, Username)
-            stackPanel.Children.Add(usernameLabel);
-            stackPanel.Children.Add(usernameTextBox);
-            stackPanel.Children.Add(nameLabel);
+            // Create labels and add TextBox controls to StackPanel
+            
+            stackPanel.Children.Add(new Label { Content = $"Tourist {index} First Name:" });
             stackPanel.Children.Add(nameTextBox);
-            stackPanel.Children.Add(lastNameLabel);
+            stackPanel.Children.Add(new Label { Content = $"Tourist {index} Last Name:" });
             stackPanel.Children.Add(lastNameTextBox);
-            stackPanel.Children.Add(ageLabel);
+            stackPanel.Children.Add(new Label { Content = $"Tourist {index} Age:" });
             stackPanel.Children.Add(ageTextBox);
+
+            // Store the TextBox controls in an array and add the array to the list
+            TextBox[] textBoxes = new TextBox[] { nameTextBox, lastNameTextBox, ageTextBox };
+            touristTextBoxes.Add(textBoxes);
 
             return stackPanel;
         }
+
 
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -187,7 +222,7 @@ namespace BookingApp.View
         }
 
 
-
+        /*
         private List<String> ReadingUsernames() {
 
             List<string> usernames = new List<string>();
@@ -219,21 +254,53 @@ namespace BookingApp.View
             return usernames;
 
 
+        }*/
+
+
+        public List<int> RetrievePeoplesIds()
+        {
+
+            List<int> ids = new List<int>();
+
+            for (int i = 0; i < touristTextBoxes.Count; i++)
+            {
+                TextBox[] textBoxes = touristTextBoxes[i];
+
+                // Retrieve values from TextBox controls
+               
+                string firstName = textBoxes[0].Text;
+                string lastName = textBoxes[1].Text;
+                string ageText = textBoxes[2].Text;
+
+                
+                int age = int.TryParse(ageText, out int parsedAge) ? parsedAge : 0;
+
+                PeopleInfo onePerson = new PeopleInfo(firstName,lastName,age,false);
+                _peopleRepository.Save(onePerson);
+                ids.Add(onePerson.Id);
+
+            }
+
+            return ids;
         }
+
 
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
 
+            List<int> peopleIds = RetrievePeoplesIds();
+            //List<string> usernames = ReadingUsernames();
+            int num = peopleIds.Count();
+            //List<int> touristIds = _touristRepository.GetTouristIdsByUsernames(usernames);
+            
 
-            List<string> usernames = ReadingUsernames();
-            int num = usernames.Count();
-            List<int> touristIds = _touristRepository.GetTouristIdsByUsernames(usernames);
+
             int idInstance = TourInstance.Id;
 
-            UpdateKeyPoints(touristIds);
+            UpdateKeyPoints(peopleIds);
 
-            TourReservation reservation = new TourReservation(idInstance, num, touristIds);
+            TourReservation reservation = new TourReservation(idInstance, num, LoggedInUser.Id,peopleIds);
 
             _reservationRepository.Save(reservation);
 
@@ -243,7 +310,7 @@ namespace BookingApp.View
 
         }
 
-        private void UpdateKeyPoints(List<int> touristIds)
+        private void UpdateKeyPoints(List<int> peopleIds)
         {
             Tour tour = _tourRepository.GetById(TourInstance.IdTour);
 
@@ -253,9 +320,9 @@ namespace BookingApp.View
             foreach (KeyPoint keyPoint in keyPoints)
             {
 
-                foreach (int id in touristIds)
+                foreach (int id in peopleIds)
                 {
-                    keyPoint.TouristsId.Add(id);
+                    keyPoint.PeopleIds.Add(id);
                 }
 
                 _keyPointRepository.Update(keyPoint);

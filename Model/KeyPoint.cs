@@ -17,14 +17,14 @@ namespace BookingApp.Model
         public bool StartingPoint { get; set; }
         public bool EndingPoint {  get; set; }
 
-        public List<int> TouristsId { get; set; }
+        public List<int> PeopleIds { get; set; }
         
         public int TourId { get; set; }
 
         public KeyPoint() {
             Name = string.Empty;
             Description = string.Empty;
-            TouristsId = new List<int>();
+            PeopleIds = new List<int>();
         
         }
         public KeyPoint(string name, string description, bool startingPoint, bool endingPoint, int tourId)
@@ -34,18 +34,18 @@ namespace BookingApp.Model
             Active = false;
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
-            TouristsId = new List<int>();
+            PeopleIds = new List<int>();
             TourId = tourId;
         }
 
-        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> touristIds, int tourId)
+        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> peopleIds, int tourId)
         {
             Name = name;
             Description = description;
             Active = false;
             StartingPoint = startingPoint;
             EndingPoint = endingPoint;
-            TouristsId = touristIds;
+            PeopleIds = peopleIds;
             //TouristsId = new List<int>();
             TourId = tourId;
         }
@@ -59,11 +59,11 @@ namespace BookingApp.Model
             EndingPoint = bool.Parse(values[5]);
             if (!string.IsNullOrEmpty(values[6]))
             {
-                TouristsId = values[6].Split(',').Select(int.Parse).ToList();
+                PeopleIds = values[6].Split(',').Select(int.Parse).ToList();
             }
             else
             {
-                TouristsId = new List<int>();
+                PeopleIds = new List<int>();
             }
             TourId = Convert.ToInt32(values[7]);
 
@@ -72,7 +72,7 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             
-            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", TouristsId) , TourId.ToString() };
+            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", PeopleIds) , TourId.ToString() };
             return csvValues;
         }
     }

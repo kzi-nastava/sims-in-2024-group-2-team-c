@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.PeerToPeer.Collaboration;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace BookingApp.View
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ObservableCollection<Tourist> _tourists;
+        private readonly PeopleInfoRepository _peopleInfoRepository;
         public ObservableCollection<Tourist> Tourists
         {
             get { return _tourists; }
@@ -39,12 +41,13 @@ namespace BookingApp.View
         private readonly KeyPointRepository _keyPointRepository;
         private readonly TouristRepository _touristRepository;
 
-        public KeyPointsTuristsView(List<Tourist> touristsList)
+        public KeyPointsTuristsView(List<PeopleInfo> touristsList)
         {
             InitializeComponent();
             DataContext = this;
             touristsListBox.IsEnabled = true;
             _keyPointRepository = new KeyPointRepository();
+            _peopleInfoRepository = new PeopleInfoRepository();
             _touristRepository = new TouristRepository();
             Tourists = new ObservableCollection<Tourist>();
             touristsListBox.ItemsSource = touristsList;
@@ -58,17 +61,21 @@ namespace BookingApp.View
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            Tourist tourist = (Tourist)checkBox.DataContext;
-            tourist.Active = true;
-            _touristRepository.Update(tourist);
+            //Tourist tourist = (Tourist)checkBox.DataContext;
+            PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
+            //tourist.Active = true;
+            peopleInfo.Active = true;
+            _peopleInfoRepository.Update(peopleInfo);
+            //_touristRepository.Update(tourist);
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            Tourist tourist = (Tourist)checkBox.DataContext;
-            tourist.Active = false;
-            _touristRepository.Update(tourist);
+            // Tourist tourist = (Tourist)checkBox.DataContext;
+            PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
+            peopleInfo.Active = false;
+            _peopleInfoRepository.Update(peopleInfo);
 
         }
 
