@@ -72,6 +72,15 @@ namespace BookingApp.View
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
+            PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
+            if (SelectedKeyPoint != null)
+            {
+                SelectedKeyPoint.PresentPeopleIds.Add(peopleInfo.Id);
+                _keyPointRepository.Update(SelectedKeyPoint);
+            }
+            peopleInfo.Active = true;
+            _peopleInfoRepository.Update(peopleInfo);
+            /*CheckBox checkBox = (CheckBox)sender;
             //Tourist tourist = (Tourist)checkBox.DataContext;
             PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
             SelectedKeyPoint.PresentPeopleIds.Add(peopleInfo.Id);
@@ -79,18 +88,29 @@ namespace BookingApp.View
             //tourist.Active = true;
             peopleInfo.Active = true;
             _peopleInfoRepository.Update(peopleInfo);
-            //_touristRepository.Update(tourist);
+            //_touristRepository.Update(tourist);*/
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
+            PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
+
+            if (SelectedKeyPoint != null)
+            {
+                SelectedKeyPoint.PresentPeopleIds.Remove(peopleInfo.Id);
+                _keyPointRepository.Update(SelectedKeyPoint);
+            }
+            peopleInfo.Active = false;
+            _peopleInfoRepository.Update(peopleInfo);
+
+            /*CheckBox checkBox = (CheckBox)sender;
             // Tourist tourist = (Tourist)checkBox.DataContext;
             PeopleInfo peopleInfo = (PeopleInfo)checkBox.DataContext;
             SelectedKeyPoint.PresentPeopleIds.Remove(peopleInfo.Id);
             _keyPointRepository.Update(SelectedKeyPoint);
             peopleInfo.Active = false;
-            _peopleInfoRepository.Update(peopleInfo);
+            _peopleInfoRepository.Update(peopleInfo);*/
 
         }
 
