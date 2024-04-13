@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.WPF.View.GuideView;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -49,7 +50,8 @@ namespace BookingApp.View
                  
                     RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                     AccommodationOverview accommodationOverview = new AccommodationOverview();
-                    TourOverview tourOverview = new TourOverview();
+                    //TourOverview tourOverview = new TourOverview();
+                    HomePage homePage = new HomePage();
                     Window1 w1 = new Window1();
 
 
@@ -68,7 +70,8 @@ namespace BookingApp.View
                     }
                     else if (user.Role == UserRole.guide)
                     {
-                        tourOverview.Show();
+                        homePage.Show();
+                        //tourOverview.Show();
                     }
                     else if (user.Role == UserRole.tourist)
                     {
