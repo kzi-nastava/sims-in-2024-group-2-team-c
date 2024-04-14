@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.WPF.View.TouristView;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -50,7 +51,8 @@ namespace BookingApp.View
                     RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                     AccommodationOverview accommodationOverview = new AccommodationOverview();
                     TourOverview tourOverview = new TourOverview();
-                    Window1 w1 = new Window1();
+                   // Window1 w1 = new Window1();
+                   MainTouristView mainTouristView = new MainTouristView();
 
 
                     LoggedInUser.Id = user.Id;
@@ -72,7 +74,7 @@ namespace BookingApp.View
                     }
                     else if (user.Role == UserRole.tourist)
                     {
-                        w1.Show();
+                        mainTouristView.Show();
                     }
                     Close();
 

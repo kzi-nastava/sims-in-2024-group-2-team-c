@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,14 @@ namespace BookingApp.Interfaces
 {
     public interface ITourReviewsRepository
     {
-       /* List<TourReview> GetAll();
-        TourReview Save(TourReview tourReview);
-        int NextId();
-        void Delete(TourReview tourReview);
-        TourReview Update(TourReview tourReview);
-        TourReview GetById(int id);*/
+
+        public List<TourReview> GetAll();
+        public TourReview Save(TourReview tourReview);
+
+        public int NextId();
+
+        public void Delete(TourReview tourReview);
+
+        public TourReview Update(TourReview tourReview);
     }
 }

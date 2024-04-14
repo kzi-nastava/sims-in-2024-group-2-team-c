@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BookingApp.Model
 {
-    class TourReview : ISerializable
+    public class TourReview : ISerializable
     {
         public int Id { get; set; }
         public int TourInstanceId { get; set; }

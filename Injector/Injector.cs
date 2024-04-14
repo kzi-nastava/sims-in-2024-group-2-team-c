@@ -1,5 +1,6 @@
 ﻿using BookingApp.Interfaces;
 using BookingApp.Repository;
+using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace BookingApp.Injector
 
             { typeof(ITourRepository), new TourRepository() },
             // { typeof(ITourService), new TourService() }
+
+            {typeof(ITourInstanceRepository), new TourInstanceRepository() },
+           // {typeof(FollowTourService), new FollowTourService() },
+
+            
 
         };
 

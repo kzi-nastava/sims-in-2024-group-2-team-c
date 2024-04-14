@@ -67,6 +67,11 @@ namespace BookingApp.Repository
             return reservation;
         }
 
+        public List<TourReservation> GetByMainTouristId(int mainTouristId)
+        {
+            return _reservations.Where(r => r.MainTouristId == mainTouristId).ToList();
+        }
+
 
 
     }
