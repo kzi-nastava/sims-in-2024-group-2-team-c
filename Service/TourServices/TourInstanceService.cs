@@ -16,7 +16,9 @@ namespace BookingApp.Service.TourServices
         {
             this.iTourInstanceRepository = iTourInstanceRepository;
         }
+        public TourInstance GetById(int id) { return iTourInstanceRepository.GetById(id); }
         public List<TourInstance> GetAll() { return iTourInstanceRepository.GetAll(); }
+        public void Delete(TourInstance tourInstance) { iTourInstanceRepository.Delete(tourInstance); }
         public List<TourInstance> GetFutureInstance()
         {
             List<TourInstance> instances = iTourInstanceRepository.GetAll();

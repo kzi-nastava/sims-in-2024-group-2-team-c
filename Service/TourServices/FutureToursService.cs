@@ -29,9 +29,10 @@ namespace BookingApp.Service.TourServices
             List<TourInstance> instances = tourInstanceService.GetFutureInstance();
             foreach(TourInstance instance in instances)
             {
-                Tour tour = tourService.GetById(instance.Id);
+                Tour tour = tourService.GetById(instance.IdTour);
                 FutureTourDTO futureTour = new FutureTourDTO
                 {
+                    Id = instance.Id,
                     Name = tour.Name,
                     Language = tour.Language,
                     Location = tour.ViewLocation,
@@ -42,6 +43,12 @@ namespace BookingApp.Service.TourServices
                 founded.Add(futureTour);
             }
             return founded;
+        }
+        public void CancelTour(int TourId)
+        {
+            TourInstance instance = tourInstanceService.GetById(TourId);
+            //Za sve prijavljene turiste se salju vauceri!
+            tourInstanceService.Delete(instance);
         }
     }
 }

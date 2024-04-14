@@ -14,7 +14,7 @@ namespace BookingApp.Interfaces
         int NextId();
         void Delete(TourInstance tour);
         TourInstance Update(TourInstance tour);
-        //TourInstance GetById(int id);
+        TourInstance GetById(int id);
         //List<TourInstance> GetToursByLocationId(int locationId);
     }
 }

@@ -9,28 +9,32 @@ using System.Threading.Tasks;
 
 namespace BookingApp.DTO
 {
-    internal class FutureTourDTO : INotifyPropertyChanged
+    public class FutureTourDTO : INotifyPropertyChanged
     {
         private Tour _tour;
         private TourInstance _tourInstance;
-        public FutureTourDTO() { }
+        public FutureTourDTO() 
+        {
+            _tour = new Tour();
+            _tourInstance = new TourInstance();
+        }
         public FutureTourDTO(Tour tour, TourInstance tourInstance)
         {
             _tour = tour;
             _tourInstance = tourInstance;
         }
-       /* public int Id 
+        public int Id 
         {
-            get => _tour.Id;
+            get => _tourInstance.Id;
             set
             {
-                if(value != _tour.Id)
+                if(value != _tourInstance.Id)
                 {
-                    _tour.Id = value;
+                    _tourInstance.Id = value;
                     OnPropertyChanged();
                 }
             } 
-        }*/
+        }
         public string Name 
         {
             
