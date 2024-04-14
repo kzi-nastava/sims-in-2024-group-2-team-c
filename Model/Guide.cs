@@ -13,7 +13,9 @@ namespace BookingApp.Model
     class Guide : User, ISerializable
     {
        // public int Id { get; set; }
+        //public List<int> TourInstancesIds { get; set; }
         public List<int> ToursIds { get; set; }
+        //public bool resigned { get; set; }
 
         public Guide() : base()
         {
