@@ -1,6 +1,7 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.WPF.View.TouristView;
+using BookingApp.WPF.View.GuideView;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -54,6 +55,9 @@ namespace BookingApp.View
                    // Window1 w1 = new Window1();
                    MainTouristView mainTouristView = new MainTouristView();
 
+                    //HomePage homePage = new HomePage();
+                    //FutureToursOverview futureToursOverview = new FutureToursOverview();
+                    //TourStatisticView tourStatisticView = new TourStatisticView();
 
                     LoggedInUser.Id = user.Id;
                     LoggedInUser.Username = user.Username;
@@ -70,7 +74,10 @@ namespace BookingApp.View
                     }
                     else if (user.Role == UserRole.guide)
                     {
+                        //homePage.Show();
                         tourOverview.Show();
+                        //futureToursOverview.Show();
+                        //tourStatisticView.Show();
                     }
                     else if (user.Role == UserRole.tourist)
                     {

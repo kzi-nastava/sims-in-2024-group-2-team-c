@@ -1,0 +1,47 @@
+﻿<Window x:Class="BookingApp.WPF.View.GuideView.FutureToursOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.GuideView"
+        mc:Ignorable="d"
+        Title="FutureToursOverview" Height="450" Width="800">
+    <!--:viewModels="clr-namespace:BookingApp.WPF.ViewModel.GuideViewModel"-->
+    <!-- <Window.DataContext>-->
+    <!--<viewModels:FutureTours_ViewModel/>-->
+    <!--</Window.DataContext>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Future Tours Title -->
+        <TextBlock Text="FUTURE TOURS" FontWeight="Bold" FontSize="16" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="1"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Click="BackButton_Click" Height="30">
+                <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
+            </Button>
+            <Button Click="CancelTourButton_Click" Margin="10 0 0 0">
+                <TextBlock Text="CANCEL TOUR" FontSize="14"/>
+            </Button>
+
+            <!-- <DatePicker SelectedDate="{Binding FilterDate, Mode=TwoWay}" DisplayDateEnd="{x:Static sys:DateTime.Now}" Margin="5,0,0,0" FontSize="14" HorizontalAlignment="Center"/> -->
+        </StackPanel>
+        <!-- Future Tours DataGrid -->
+        <ListView x:Name="tourView" ItemsSource="{Binding futureTours}" SelectedItem="{Binding Path=SelectedTour}" SelectionChanged="FutureToursView_SelectionChanged" IsEnabled="True" IsSynchronizedWithCurrentItem="True" Grid.Row="1" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="80" />
+                    <GridViewColumn Header="Location" DisplayMemberBinding="{Binding Location}" Width="80" />
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="80" />
+                    <GridViewColumn Header="Language" DisplayMemberBinding="{Binding Language}" Width="80" />
+                    <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}" Width="80" />
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="80" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

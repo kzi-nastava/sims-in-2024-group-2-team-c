@@ -20,7 +20,5 @@ namespace BookingApp.Interfaces
         public List<TourInstance> GetTourInstancesByTourId(int tourId);
         public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople);
 
-
-
     }
 }
