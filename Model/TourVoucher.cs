@@ -40,7 +40,7 @@ namespace BookingApp.Model
             Id = Convert.ToInt32(values[0]);
             TourId = Convert.ToInt32(values[1]);
             TouristId = Convert.ToInt32(values[2]);
-            // Date = DateTime.Parse(values[6]);
+            // ExpirationDate = DateTime.Parse(values[6]);
             ExpirationDate = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
         }
     }

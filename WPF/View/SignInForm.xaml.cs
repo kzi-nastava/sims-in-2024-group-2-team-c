@@ -56,7 +56,7 @@ namespace BookingApp.View
                    MainTouristView mainTouristView = new MainTouristView();
 
                     //HomePage homePage = new HomePage();
-                    //FutureToursOverview futureToursOverview = new FutureToursOverview();
+                    FutureToursOverview futureToursOverview = new FutureToursOverview();
                     //TourStatisticView tourStatisticView = new TourStatisticView();
 
                     LoggedInUser.Id = user.Id;
@@ -75,8 +75,8 @@ namespace BookingApp.View
                     else if (user.Role == UserRole.guide)
                     {
                         //homePage.Show();
-                        tourOverview.Show();
-                        //futureToursOverview.Show();
+                        //tourOverview.Show();
+                        futureToursOverview.Show();
                         //tourStatisticView.Show();
                     }
                     else if (user.Role == UserRole.tourist)

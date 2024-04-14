@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Service.TourServices
 {
-    internal class TourInstanceService
+    public class TourInstanceService
     {
         private readonly ITourInstanceRepository iTourInstanceRepository;
         public TourInstanceService(ITourInstanceRepository iTourInstanceRepository)
