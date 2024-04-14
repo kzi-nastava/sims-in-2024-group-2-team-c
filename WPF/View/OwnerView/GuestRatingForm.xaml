@@ -18,8 +18,8 @@
         <ListView x:Name="guestListView" SelectionChanged="ListView_SelectionChanged" Grid.Row="0" IsEnabled="True">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Guest ID" DisplayMemberBinding="{Binding Guest.Id}" />
-                    <GridViewColumn Header="Accommodation ID" DisplayMemberBinding="{Binding Accommodation.Id}" />
+                    <GridViewColumn Header="Guest" DisplayMemberBinding="{Binding Guest.Username}" />
+                    <GridViewColumn Header="Accommodation" DisplayMemberBinding="{Binding Accommodation.Name}" />
                     <GridViewColumn Header="Arrival Date" DisplayMemberBinding="{Binding ArrivalDate}"/>
                     <GridViewColumn Header="Departure Date" DisplayMemberBinding="{Binding DepartureDate}"/>
                 </GridView>

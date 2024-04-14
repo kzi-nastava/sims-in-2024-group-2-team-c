@@ -106,5 +106,10 @@ namespace BookingApp.Repository
                 return DateTime.MinValue; // Vraćanje DateTime.MinValue kao podrazumevane vrednosti
             }
         }
+
+        public List<Reservation> GetReservationsByAccommodationId(int accommodationId)
+        {
+            return _reservations.Where(r => r.Accommodation.Id == accommodationId).ToList();
+        }
     }
 }

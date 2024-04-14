@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 
 namespace BookingApp.View
@@ -27,9 +28,9 @@ namespace BookingApp.View
     public partial class GuestRatingForm : Window
     {
 
-        private ReservationRepository reservationRepository; //mislim da mi samo guest rep treba
+        private ReservationRepository reservationRepository; 
         private GuestRatingRepository guestRatingRepository;
-        private GuestRepository guestRepository; //mozda readonly
+        private GuestRepository guestRepository; 
         private AccommodationRepository accommodationRepository;
         private Owner owner;
         private Reservation selectedReservation;
@@ -50,7 +51,7 @@ namespace BookingApp.View
         {
             if (guestListView.SelectedItem != null)
             {
-               selectedReservation = (Reservation)guestListView.SelectedItem;
+                selectedReservation = (Reservation)guestListView.SelectedItem;
             }
         }
 
@@ -64,36 +65,40 @@ namespace BookingApp.View
                 return;
             }
 
+            if (!ValidateCleanlinessAndRuleRespecting())
+                return;
+
             Guest guest = guestRepository.GetGuestById(selectedReservation.Guest.Id);
             int cleanliness = int.Parse(txtCleanliness.Text);
-            if (cleanliness<1 || cleanliness > 5)
+            if (cleanliness < 1 || cleanliness > 5)
             {
                 MessageBox.Show("Please, enter a number between 1 and 5 for Cleanliness");
                 return;
             }
             int ruleRespecting = int.Parse(txtRuleRespecting.Text);
-            if(ruleRespecting<1 || ruleRespecting > 5)
+            if (ruleRespecting < 1 || ruleRespecting > 5)
             {
                 MessageBox.Show("Please, enter a number between 1 and 5 for Rule Respecting");
                 return;
             }
             string comment = txtComment.Text.Trim().ToLower();
             DateTime ratingDate = DateTime.Now;
-            if(ratingDate < selectedReservation.DepartureDate)
+            if (ratingDate < selectedReservation.DepartureDate)
             {
                 MessageBox.Show("Guest didn't leave the accommodation. You can not give a feedback!");
                 return;
-            } else if (ratingDate > selectedReservation.DepartureDate.AddDays(5))
+            }
+            else if (ratingDate > selectedReservation.DepartureDate.AddDays(5))
             {
                 MessageBox.Show("More than 5 days passed. You can not rate this guest!");
                 return;
             }
-           
+
 
 
             GuestRating newGuestRating = new GuestRating()
             {
-                Guest = guest, 
+                Guest = guest,
                 Cleanliness = cleanliness,
                 RuleRespecting = ruleRespecting,
                 Comment = comment,
@@ -101,23 +106,7 @@ namespace BookingApp.View
 
             };
 
-         
 
-
-           /* TimeSpan timeSinceDeparture = todaysDate - selectedReservation.DepartureDate;
-            if (timeSinceDeparture.Days < 5) 
-            {
-                // Slanje e-pošte vlasniku smeštaja
-                string ownerEmail = GetOwnerEmail(selectedReservation.Accommodation.Id); // Pretpostavljamo da imamo metodu za dobavljanje e-pošte vlasnika smeštaja
-                if (!string.IsNullOrEmpty(ownerEmail))
-                {
-                    SendEmail(ownerEmail, "Podsetnik za ocenjivanje gosta", "Molimo vas da ocenite gosta koji je nedavno boravio u vašem smeštaju.");
-                }
-                else
-                {
-                    MessageBox.Show("E-mail adresa vlasnika smeštaja nije pronađena.");
-                }
-            }*/
 
 
             guestRatingRepository.Save(newGuestRating);
@@ -127,61 +116,36 @@ namespace BookingApp.View
 
             Close();
         }
-
-     
-        // Metoda za dobavljanje emaila vlasnika smeštaja na osnovu ID smeštaja
-       /* public string GetOwnerEmail(int accommodationId)
+        private bool ValidateCleanlinessAndRuleRespecting()
         {
-            // Pronalaženje smeštaja na osnovu ID-a
-            Accommodation accommodation = accommodationRepository.GetAccommodationById(accommodationId);
-
-            // Provera da li je smeštaj pronađen
-            if (accommodation != null)
+            if (string.IsNullOrEmpty(txtCleanliness.Text))
             {
-                // Vraćanje emaila vlasnika smeštaja
-                return accommodation.Owner.Email;
+                MessageBox.Show("Please enter a value for Cleanliness.");
+                return false;
             }
 
-            // Ako smeštaj nije pronađen, možete postaviti neku podrazumevanu vrednost ili baciti izuzetak
-            return "DefaultOwnerEmail@example.com";
+            if (string.IsNullOrEmpty(txtRuleRespecting.Text))
+            {
+                MessageBox.Show("Please enter a value for Rule Respecting.");
+                return false;
+            }
+
+            int cleanliness, ruleRespecting;
+
+            if (!int.TryParse(txtCleanliness.Text, out cleanliness) || cleanliness < 1 || cleanliness > 5)
+            {
+                MessageBox.Show("Please enter a valid number between 1 and 5 for Cleanliness.");
+                return false;
+            }
+
+            if (!int.TryParse(txtRuleRespecting.Text, out ruleRespecting) || ruleRespecting < 1 || ruleRespecting > 5)
+            {
+                MessageBox.Show("Please enter a valid number between 1 and 5 for Rule Respecting.");
+                return false;
+            }
+
+            return true;
         }
 
-
-
-        private void SendEmail(string recipient, string subject, string body)
-    {
-        try
-        {
-            // Postavke SMTP servera za slanje e-pošte
-            string smtpHost = "smtp.example.com"; // Postavite SMTP server
-            int smtpPort = 587; // Postavite SMTP port
-            string smtpUsername = "your_username"; // Postavite korisničko ime za SMTP autentifikaciju
-            string smtpPassword = "your_password"; // Postavite lozinku za SMTP autentifikaciju
-
-            // Kreiranje klijentskog objekta za slanje e-pošte
-            SmtpClient smtpClient = new SmtpClient(smtpHost, smtpPort);
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-            smtpClient.EnableSsl = true; 
-
-            // Kreiranje e-pošte
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(smtpUsername);
-            mailMessage.To.Add(new MailAddress(recipient));
-            mailMessage.Subject = subject;
-            mailMessage.Body = body;
-
-            // Slanje e-pošte
-            smtpClient.Send(mailMessage);
-
-            MessageBox.Show("E-mail successfully sent.");
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Failed to send e-mail: {ex.Message}");
-        }
     }
-       */
-
-}
 }
