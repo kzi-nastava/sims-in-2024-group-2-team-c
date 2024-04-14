@@ -12,15 +12,16 @@ namespace BookingApp.Model
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description {  get; set; }
-        public bool Active {  get; set; }
+        public string Description { get; set; }
+        public bool Active { get; set; }
         public bool StartingPoint { get; set; }
-        public bool EndingPoint {  get; set; }
+        public bool EndingPoint { get; set; }
         public List<int> PeopleIds { get; set; }
         public List<int> PresentPeopleIds { get; set; }
         public int TourId { get; set; }
 
-        public KeyPoint() {
+        public KeyPoint()
+        {
             Name = string.Empty;
             Description = string.Empty;
             PeopleIds = new List<int>();
@@ -38,7 +39,7 @@ namespace BookingApp.Model
             TourId = tourId;
         }
 
-        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint,List<int> peopleIds, List<int> presentPeopleIds, int tourId)
+        public KeyPoint(string name, string description, bool startingPoint, bool endingPoint, List<int> peopleIds, List<int> presentPeopleIds, int tourId)
         {
             Name = name;
             Description = description;
@@ -80,8 +81,8 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            
-            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", PeopleIds) , string.Join(",",PresentPeopleIds),TourId.ToString() };
+
+            string[] csvValues = { Id.ToString(), Name, Description, Active.ToString(), StartingPoint.ToString(), EndingPoint.ToString(), string.Join(",", PeopleIds), string.Join(",", PresentPeopleIds), TourId.ToString() };
             return csvValues;
         }
     }
