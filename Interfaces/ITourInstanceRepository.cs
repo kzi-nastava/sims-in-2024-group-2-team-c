@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,6 @@ namespace BookingApp.Interfaces
         public List<TourInstance> GetTourInstancesByTourId(int tourId);
         public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople);
 
+        public TourInstance GetById(int id);
     }
 }
