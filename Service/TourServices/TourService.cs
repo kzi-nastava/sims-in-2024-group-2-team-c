@@ -14,6 +14,7 @@ namespace BookingApp.Service.TourServices
     internal class TourService
     {
         private readonly ITourRepository iTourRepository;
+        private readonly KeyPointRepository KeyPointRepository; //SERVICEEEE
         private readonly ITourInstanceRepository iTourInstanceRepository;
         private TourInstanceService tourInstanceService;
         //private LocationService LocationService;
@@ -65,7 +66,25 @@ namespace BookingApp.Service.TourServices
             }
             return null;
         }
-
+        /*public int FindPresentTouristsCount(int TourId)
+        {
+            Tour t = GetById(TourId);
+            List<int> people = new List<int>();
+            int count = 0;
+            foreach (int id in t.KeyPointIds)
+            {
+                //KeyPoint kp = KeyPointService.GetById(id); i funkcija za prebrojavanje u servisu posebna.
+                KeyPoint kp = KeyPointRepository.GetById(id);
+                if (kp == null) return 0;
+                foreach (int tourist in kp.PresentPeopleIds)
+                {
+                    if (!people.Contains(tourist))
+                        people.Add(tourist);
+                }
+            }
+            count = people.Count();
+            return count;
+        }*/
         /*public void SaveKeyPoint(KeyPoint kp)
         {
             KeyPointService.Save(kp);

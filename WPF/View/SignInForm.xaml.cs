@@ -50,9 +50,10 @@ namespace BookingApp.View
                  
                     RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
                     AccommodationOverview accommodationOverview = new AccommodationOverview();
-                    //TourOverview tourOverview = new TourOverview();
+                    TourOverview tourOverview = new TourOverview();
                     //HomePage homePage = new HomePage();
-                    FutureToursOverview futureToursOverview = new FutureToursOverview();
+                    //FutureToursOverview futureToursOverview = new FutureToursOverview();
+                    TourStatisticView tourStatisticView = new TourStatisticView();
                     Window1 w1 = new Window1();
 
 
@@ -72,8 +73,9 @@ namespace BookingApp.View
                     else if (user.Role == UserRole.guide)
                     {
                         //homePage.Show();
-                        //tourOverview.Show();
-                        futureToursOverview.Show();
+                        tourOverview.Show();
+                        //futureToursOverview.Show();
+                        //tourStatisticView.Show();
                     }
                     else if (user.Role == UserRole.tourist)
                     {

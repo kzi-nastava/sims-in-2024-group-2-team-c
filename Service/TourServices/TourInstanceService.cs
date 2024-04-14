@@ -1,4 +1,5 @@
-﻿using BookingApp.Interfaces;
+﻿using BookingApp.DTO;
+using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -26,6 +27,19 @@ namespace BookingApp.Service.TourServices
             foreach (TourInstance instance in instances)
             {
                 if(instance.Date > DateTime.Now.AddHours(48))
+                {
+                    founded.Add(instance);
+                }
+            }
+            return founded;
+        }
+        public List<TourInstance> GetEndedInstances()
+        {
+            List<TourInstance> instances = iTourInstanceRepository.GetAll();
+            List<TourInstance> founded = new List<TourInstance>();
+            foreach (TourInstance instance in instances)
+            {
+                if (instance.Ended == true)
                 {
                     founded.Add(instance);
                 }
