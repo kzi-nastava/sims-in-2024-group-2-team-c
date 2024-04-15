@@ -24,7 +24,6 @@ namespace BookingApp.WPF.View.TouristView
         public FollowKeyPointsView()
         {
             InitializeComponent();
-            //DataContext = new FollowKeyPointsViewModel();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
@@ -34,7 +33,12 @@ namespace BookingApp.WPF.View.TouristView
 
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
+            var viewModel = (FollowKeyPointsViewModel)DataContext;
 
+            // Access the SelectedTour property from the ViewModel
+            var selectedTour = viewModel.SelectedTour;
+            RateTourView rateTourView = new RateTourView(selectedTour);
+            this.NavigationService.Navigate(rateTourView);
         }
     }
 }

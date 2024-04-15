@@ -42,7 +42,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _followTourService = new(new TourRepository(),new TourInstanceRepository());
             _mainViewModel = LoggedInUser.mainViewModel;
             FollowingTours = new ObservableCollection<FollowingTourDTO>();
-            ViewCommand = new ViewModelCommand(ShowKeyPoints);
+           // ViewCommand = new ViewModelCommand(ShowKeyPoints);
             LoadAciveTours();
         }
 

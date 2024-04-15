@@ -17,6 +17,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         
         private readonly MainViewModel _mainViewModel;
         private FollowingTourDTO _selectedTour;
+        private readonly TourInstanceService _tourInstanceService;
 
         public FollowingTourDTO SelectedTour
         {
@@ -28,9 +29,18 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        
-      
-        
+        private bool _isTourInstanceEnded;
+        public bool IsTourInstanceEnded
+        {
+            get { return _isTourInstanceEnded; }
+            set
+            {
+                _isTourInstanceEnded = value;
+                OnPropertyChanged(nameof(IsTourInstanceEnded));
+            }
+        }
+
+
 
         private ObservableCollection<ActiveTourKeyPointDTO> _activeTourKeyPoints;
 
@@ -50,9 +60,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             SelectedTour = selectedTour;
             _followingService = new(new TourRepository(), new TourInstanceRepository());
+            _tourInstanceService = new(new TourInstanceRepository());
+            IsTourInstanceEnded = false;
 
             // Use the selected tour data as needed
             LoadKeyPointsForTour(SelectedTour);
+            CheckTourInstanceEnded(selectedTour.TourInstanceId);
         }
 
         private void LoadKeyPointsForTour(FollowingTourDTO SelectedTour)
@@ -61,14 +74,22 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             ActiveTourKeyPoints = new ObservableCollection<ActiveTourKeyPointDTO>(_followingService.GetKeyPoints(SelectedTour));
 
-
-
-
-
-
+            
 
         }
 
+
+        private void CheckTourInstanceEnded(int tourInstanceId)
+        {
+            // Fetch tour instance data from the data source
+            var tourInstance = _tourInstanceService.GetById(tourInstanceId);
+
+            // Update IsTourInstanceEnded based on tour instance data
+            if (tourInstance != null)
+            {
+                IsTourInstanceEnded = tourInstance.Ended;
+            }
+        }
 
 
     }

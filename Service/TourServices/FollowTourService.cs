@@ -19,6 +19,7 @@ namespace BookingApp.Service.TourServices
         private readonly ITourInstanceRepository _tourInstanceRepository;
         private readonly TourReservationRepository _tourReservationRepository;
         private KeyPointService _keyPointService;
+        private readonly TourReviewService _tourReviewService;
 
 
         public FollowTourService(ITourRepository tourRepository, ITourInstanceRepository tourInstanceRepository)
@@ -27,6 +28,7 @@ namespace BookingApp.Service.TourServices
             _tourInstanceRepository = tourInstanceRepository;
            _tourReservationRepository = new TourReservationRepository();
             _keyPointService = new KeyPointService();
+            _tourReviewService = new TourReviewService();
         }
 
         public List<FollowingTourDTO> GetActiveTourInstances()
@@ -37,8 +39,10 @@ namespace BookingApp.Service.TourServices
             var reservations = _tourReservationRepository.GetByMainTouristId(LoggedInUser.Id);
             var reservedTourInstanceIds = reservations.Select(reservation => reservation.TourInstanceId).ToHashSet();
 
+            var tourReviews = _tourReviewService.GetAll();
+
             // Filter only active instances (started but not ended)
-            var activeTourInstances = tourInstances.Where(instance => instance.Started && !instance.Ended && reservedTourInstanceIds.Contains(instance.Id)).ToList();
+            var activeTourInstances = tourInstances.Where(instance => instance.Started && reservedTourInstanceIds.Contains(instance.Id) && !tourReviews.Any(review => review.TourInstanceId == instance.Id)).ToList();
 
             // Create a list of FollowingTourDTOs based on the active tour instances
             List<FollowingTourDTO> activeTourDTOs = new List<FollowingTourDTO>();

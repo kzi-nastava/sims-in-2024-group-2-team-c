@@ -81,7 +81,7 @@
             </Grid>
 
             <Button Content="Rate the Tour" Grid.Row="4"
-        Command="{Binding RateCommand}" Click="Rate_Click"
+        Command="{Binding RateCommand}"   IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"
             VerticalAlignment="Center" 
             Padding="5" Width="100"/>
 

@@ -1,6 +1,6 @@
 0|Tura1|1|obilazak|srpski|0,1|3|"./images.png"
 1|Tura2|1|obilazak3|en|0,2,3|3|"./images.jpg"
-2|tura3|21|opis|en-us|0,0,0|2|./slika.jpg
+2|tura3|21|opis|en-us|5,6|2|./slika.jpg
 3|tura4|22|tour|en-us|0,0|3|
 4|tura5|2|obilazak |en-us|0,0,0|4|
 5|tura6|10|desc|en|0,0,0|2|
@@ -8,3 +8,4 @@
 7|tura8|21|desc|srpski|0,0|2|./slika.jpg
 8|tura10|25|desc|en-us|23,24|2|
 9|tura11|23|desc|en-us|21,22|3|
+10|mtURA|15|OPIS12|en-us|23,24|2|
