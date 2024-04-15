@@ -59,7 +59,7 @@ namespace BookingApp.Service.TourServices
         }
         public float CalculateAttendancePercentage(TourStatisticDTO tour)
         {
-            return tour.PresentTourists / tour.MaxTourists;
+            return (float)tour.PresentTourists / tour.MaxTourists;
 
         }
         public List<float> FindAttendencePercentagesForTours()

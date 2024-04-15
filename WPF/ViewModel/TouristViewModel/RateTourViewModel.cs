@@ -1,5 +1,6 @@
 ﻿using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Repository;
 using BookingApp.Service.TourServices;
 using Microsoft.Win32;
 using System;
@@ -44,7 +45,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             //_selectedTour = selectedTour;
             
             _selectedTour = selectedTour; // Save the selected tour for future use
-            _tourReviewService = new TourReviewService();
+            _tourReviewService = new TourReviewService(new TourReviewsRepository());
             RateCommand = new ViewModelCommand(saveTheReview);
             AddPictureCommand = new ViewModelCommand(OpenFileExplorer);
 

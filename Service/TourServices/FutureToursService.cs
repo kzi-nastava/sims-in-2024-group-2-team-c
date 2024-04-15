@@ -14,13 +14,13 @@ namespace BookingApp.Service.TourServices
     {
         private TourInstanceService tourInstanceService;
         private TourService tourService;
-        //private TourVoucherService tourVoucherService;
+        private TourVoucherService tourVoucherService;
 
         public FutureToursService()
         {
             tourInstanceService = new(new TourInstanceRepository());
             tourService = new(new TourRepository());
-            //tourVoucherService = new(new TourVoucherRepository());
+            tourVoucherService = new(new TourVoucherRepository());
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }

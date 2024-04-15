@@ -28,7 +28,7 @@ namespace BookingApp.Service.TourServices
             _tourInstanceRepository = tourInstanceRepository;
            _tourReservationRepository = new TourReservationRepository();
             _keyPointService = new KeyPointService();
-            _tourReviewService = new TourReviewService();
+            _tourReviewService = new TourReviewService(new TourReviewsRepository());
         }
 
         public List<FollowingTourDTO> GetActiveTourInstances()
