@@ -50,9 +50,9 @@
                             <TextBlock Text="NUMBER OF PRESENT TOURISTS:"/>
                         </StackPanel>
                         <StackPanel Margin="10 0 0 0">
-                            <TextBlock Text="{Binding SelectedTour.MaxTourists}"/>
-                            <TextBlock Text="{Binding SelectedTour.ReservedTourists}"/>
-                            <!--<TextBlock Text="{Binding SelectedTour.PresentTourists}"/>-->
+                            <TextBlock x:Name="MaxTouristsBlock" Text="{Binding MaxTourists}"/>
+                            <TextBlock x:Name="ReservedTouristsBlock" Text="{Binding ReservedTourists}"/>
+                            <TextBlock x:Name="PresentTouristsBlock" Text="{Binding PresentTourists}"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -73,9 +73,9 @@
                                 <TextBlock Text="MORE THAN 50 YEARS: "/>
                             </StackPanel>
                             <StackPanel Margin="10 0 0 0">
-                                <TextBlock Text="{Binding SelectedTour.MaxTourists}"/>
-                                <TextBlock Text="{Binding SelectedTour.ReservedTourists}"/>
-                                <!--<TextBlock Text="{Binding SelectedTour.PresentTourists}"/>-->
+                                <TextBlock x:Name="LessBlock" Text="{Binding LessThan18}"/>
+                                <TextBlock x:Name="BetweenBlock" Text="{Binding Between18And50}"/>
+                                <TextBlock x:Name="MoreBlock" Text="{Binding MoreThan50}"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

@@ -70,10 +70,18 @@ namespace BookingApp.WPF.View.GuideView
         {
             if (SelectedTour != null)
             {
-                MessageBox.Show($"Max Tourists: {SelectedTour.MaxTourists}\n" +
-                                $"Reserved Tourists: {SelectedTour.ReservedTourists}\n" 
-                               /* $"Present Tourists: {SelectedTour.PresentTourists}"*/,
-                                "Tour Statistics", MessageBoxButton.OK, MessageBoxImage.Information);
+                MaxTouristsBlock.DataContext = SelectedTour;
+                ReservedTouristsBlock.DataContext = SelectedTour;
+                PresentTouristsBlock.DataContext = SelectedTour;
+
+                LessBlock.DataContext = SelectedTour;
+                BetweenBlock.DataContext = SelectedTour;
+                MoreBlock.DataContext = SelectedTour;
+
+                /*MessageBox.Show($"Max Tourists: {SelectedTour.MaxTourists}\n" +
+                                $"Reserved Tourists: {SelectedTour.ReservedTourists}\n" +
+                                $"Present Tourists: {SelectedTour.PresentTourists}",
+                                "Tour Statistics", MessageBoxButton.OK, MessageBoxImage.Information);*/
             }
             else
             {

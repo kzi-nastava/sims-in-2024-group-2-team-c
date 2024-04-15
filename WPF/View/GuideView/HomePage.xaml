@@ -78,7 +78,18 @@
                 <!-- Most Visited GroupBox -->
                 <GroupBox Header="THE MOST VISITED" FontWeight="Bold" BorderBrush="#E0E0E0" BorderThickness="1" Background="#FFFFFF" Margin="20,20,20,20">
                     <StackPanel Margin="20">
-                        <!-- Add most visited tour details here -->
+                        <StackPanel x:Name="VisitedTourName" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
+                            <TextBlock Text="Name: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding StatisticTour.Name}" Margin="5"/>
+                        </StackPanel>
+                        <StackPanel x:Name="VisitedTourLocation" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
+                            <TextBlock Text="Location: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding StatisticTour.ViewLocation}" Margin="5"/>
+                        </StackPanel>
+                        <StackPanel x:Name="VisitedTourDescription" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
+                            <TextBlock Text="Location: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding StatisticTour.Description}" Margin="5"/>
+                        </StackPanel>
                         <Button Content="See More" Margin="0,20,0,0" Width="272"/>
                     </StackPanel>
                 </GroupBox>

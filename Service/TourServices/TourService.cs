@@ -11,18 +11,21 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Service.TourServices
 {
-    internal class TourService
+    public class TourService
     {
         private readonly ITourRepository iTourRepository;
-        private readonly KeyPointRepository KeyPointRepository; //SERVICEEEE
+       // private readonly KeyPointRepository KeyPointRepository; //SERVICEEEE
         private readonly ITourInstanceRepository iTourInstanceRepository;
         private TourInstanceService tourInstanceService;
+        private PeopleInfoService peopleInfoService;
         //private LocationService LocationService;
-        //private KeyPointService keyPointService;
+        private KeyPointService keyPointService;
         public TourService(ITourRepository iTourRepository)
         {
             this.iTourRepository = iTourRepository;
             tourInstanceService = new(new TourInstanceRepository());
+            keyPointService = new KeyPointService();
+            peopleInfoService = new PeopleInfoService();
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
@@ -65,6 +68,72 @@ namespace BookingApp.Service.TourServices
                 }
             }
             return null;
+        }
+        public int FindPresentTouristsCount(int TourId)
+        {
+            Tour t = GetById(TourId);
+            if (t == null)
+                return 0;
+            List<int> people = FindPresentTourists(t);
+            int count = people.Count();
+            return count;
+        }
+
+        public List<int> FindPresentTourists(Tour t)
+        {
+            List<int> people = new List<int>();
+            foreach (int id in t.KeyPointIds)
+            {
+                KeyPoint kp = keyPointService.GetById(id); //i funkcija za prebrojavanje u servisu posebna.
+                                                           //KeyPoint kp = KeyPointRepository.GetById(id);
+                if (kp != null)
+                {
+                    foreach (int tourist in kp.PresentPeopleIds)
+                    {
+                        if (!people.Contains(tourist))
+                            people.Add(tourist);
+                    }
+                }
+            }
+            return people;
+
+        }
+        public int CalculateNumberOfTouristsUnder18(Tour tour)
+        {
+            List<int> tourists = FindPresentTourists(tour);
+            int count = 0;
+            foreach (int id in tourists)
+            {
+                PeopleInfo tourist = peopleInfoService.GetById(id);
+                if (tourist.Age < 18)
+                    count++;
+            }
+            return count;
+        }
+
+        public int CalculateNumberOfTouristsMore50(Tour tour)
+        {
+            List<int> tourists = FindPresentTourists(tour);
+            int count = 0;
+            foreach (int id in tourists)
+            {
+                PeopleInfo tourist = peopleInfoService.GetById(id);
+                if (tourist.Age > 50)
+                    count++;
+            }
+            return count;
+        }
+        public int CalculateNumberOfTourists18And50(Tour tour)
+        {
+            List<int> tourists = FindPresentTourists(tour);
+            int count = 0;
+            foreach (int id in tourists)
+            {
+                PeopleInfo tourist = peopleInfoService.GetById(id);
+                if (tourist.Age >= 18 && tourist.Age <= 50)
+                    count++;
+            }
+            return count;
         }
         /*public int FindPresentTouristsCount(int TourId)
         {

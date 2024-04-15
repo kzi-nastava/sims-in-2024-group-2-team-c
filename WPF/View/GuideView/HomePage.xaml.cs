@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service.TourServices;
 using BookingApp.View;
@@ -36,6 +37,16 @@ namespace BookingApp.WPF.View.GuideView
                 OnPropertyChanged();
             }
         }
+        private TourStatisticDTO _statisticTour;
+        public TourStatisticDTO StatisticTour
+        {
+            get { return _statisticTour; }
+            set
+            {
+                _statisticTour = value;
+                OnPropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,7 +76,7 @@ namespace BookingApp.WPF.View.GuideView
                 NoActiveTourBlock.Visibility = Visibility.Hidden;
                 NoActiveTourButton.Visibility = Visibility.Hidden;
             }
-
+            //StatisticTour = ; 
         }
         private void TodaysTour_Click(object sender, RoutedEventArgs e)
         {

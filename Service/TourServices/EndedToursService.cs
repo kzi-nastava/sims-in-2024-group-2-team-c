@@ -40,8 +40,11 @@ namespace BookingApp.Service.TourServices
                     Date = instance.Date,
                     MaxTourists = instance.MaxTourists,
                     ReservedTourists = instance.ReservedTourists,
-                    //PresentTourists = tourService.FindPresentTouristsCount(instance.IdTour)
-            };
+                    PresentTourists = tourService.FindPresentTouristsCount(instance.IdTour),
+                    LessThan18 = tourService.CalculateNumberOfTouristsUnder18(tour),
+                    Between18And50 = tourService.CalculateNumberOfTourists18And50(tour),
+                    MoreThan50 = tourService.CalculateNumberOfTouristsMore50(tour)
+                };
                 founded.Add(dto);
             }
             return founded;
