@@ -18,14 +18,14 @@
                 <TextBlock Grid.Row="0"  Text="REVIEWS" FontWeight="Bold" FontSize="20" Margin="0 0 0 10"/>
 
                 <!-- TextBlock za prikaz poruke o reportovanju -->
-                <TextBlock Grid.Row="1" x:Name="ReportMessageTextBlock" Text="The review was reported." FontWeight="Bold" FontSize="16" Margin="0 10" Visibility="Collapsed"/>
+            <TextBlock Grid.Row="1" x:Name="ReportMessageTextBlock" Text="The review was reported." Foreground="Red"  FontWeight="Bold" FontSize="16" Margin="0 10" Visibility="Collapsed"/>
 
                 <!-- TextBox za poruku o nemogućnosti reportovanja -->
-                <TextBox Grid.Row="1" x:Name="UnableToReportTextBox" Text="You can't report this tourist. Tourist was present on tour." FontWeight="Bold" FontSize="16" Margin="0 10" Visibility="Collapsed"/>
+            <TextBox Grid.Row="1" x:Name="UnableToReportTextBox" Text="You can't report this tourist. Tourist was present on tour." Foreground="Red"  FontWeight="Bold" FontSize="16" Margin="0 10" Visibility="Collapsed"/>
 
 
                 <!-- Tabela sa recenzijama -->
-            <ListView Grid.Row="2" ItemsSource="{Binding Reviews}" SelectionMode="Single" Margin="0 0 10 0">
+            <ListView x:Name="reviewsList" Grid.Row="2" ItemsSource="{Binding Reviews}" SelectionMode="Single" Margin="0 0 10 0">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="TOUR NAME" DisplayMemberBinding="{Binding TourName}" Width="Auto"/>

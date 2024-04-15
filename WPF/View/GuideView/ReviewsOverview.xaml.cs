@@ -67,6 +67,7 @@ namespace BookingApp.WPF.View.GuideView
 
             if (canReport)
             {
+                selectedReview.Reported = true;
                 ReportMessageTextBlock.Visibility = Visibility.Visible;
                 UnableToReportTextBox.Visibility = Visibility.Hidden;
             }
@@ -75,6 +76,8 @@ namespace BookingApp.WPF.View.GuideView
                 ReportMessageTextBlock.Visibility = Visibility.Hidden;
                 UnableToReportTextBox.Visibility = Visibility.Visible;
             }
+            //Reviews.Refresh();
+            reviewsList.Items.Refresh();
         }
     }
 }

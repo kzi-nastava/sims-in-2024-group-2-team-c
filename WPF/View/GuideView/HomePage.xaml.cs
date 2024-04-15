@@ -1,6 +1,7 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service.TourServices;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,21 +78,29 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void CreateNewTourButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("ALL TOURS VIEW button clicked.");
+            TourForm tourForm = new TourForm();
+            tourForm.Show();
+            //MessageBox.Show("ALL TOURS VIEW button clicked.");
         }
         private void AllToursViewButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("ALL TOURS VIEW button clicked.");
+            TourOverview tourOverview = new TourOverview();
+            tourOverview.Show();
+            //MessageBox.Show("ALL TOURS VIEW button clicked.");
         }
 
         private void FutureToursButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("FUTURE TOURS button clicked.");
+            FutureToursOverview futureTourOverview = new FutureToursOverview();
+            futureTourOverview.Show();
+            //MessageBox.Show("FUTURE TOURS button clicked.");
         }
 
         private void SeeTourStatisticButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("SEE TOUR STATISTIC button clicked.");
+            TourStatisticView tourStatisticView = new TourStatisticView();
+            tourStatisticView.Show();
+            //MessageBox.Show("SEE TOUR STATISTIC button clicked.");
         }
         private void SeeStatus_Click(object sender, RoutedEventArgs e) 
         {
@@ -99,7 +108,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void Reviews_Click(object sender, RoutedEventArgs e) 
         { 
-            //
+            ReviewsOverview reviewsOverview = new ReviewsOverview();
+            reviewsOverview.Show();
         }
         private void TourRequests_Click(object sender, RoutedEventArgs e)
         {
