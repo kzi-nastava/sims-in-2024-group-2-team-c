@@ -24,7 +24,7 @@ namespace BookingApp.WPF.View.GuideView
     /// <summary>
     /// Interaction logic for ReviewsOverview.xaml
     /// </summary>
-    public partial class ReviewsOverview : Window
+    public partial class ReviewsOverview : Window, INotifyPropertyChanged
     {
         private readonly TourReviewService _tourReviewService;
         private ObservableCollection<TourReviewDTO> _reviews;

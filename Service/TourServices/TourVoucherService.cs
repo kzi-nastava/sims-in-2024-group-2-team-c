@@ -12,9 +12,9 @@ namespace BookingApp.Service.TourServices
 
         private readonly ITourVoucherRepository _tourVoucherRepository;
             
-        public TourVoucherService()
+        public TourVoucherService(ITourVoucherRepository tourVoucherRepository)
         {
-
+            _tourVoucherRepository = tourVoucherRepository;
         }
 
     }

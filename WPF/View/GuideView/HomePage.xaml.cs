@@ -85,7 +85,7 @@ namespace BookingApp.WPF.View.GuideView
         {
             Location = location;
             LocationTextBlock.Text = $"{location.City}, {location.Country}";
-        }*/
+        }*/ 
         private void TodaysTour_Click(object sender, RoutedEventArgs e)
         {
             // Implementacija logike za klik na dugme "TODAY'S TOUR"
