@@ -55,10 +55,11 @@ namespace BookingApp.View
                    // Window1 w1 = new Window1();
                    MainTouristView mainTouristView = new MainTouristView();
 
-                    HomePage homePage = new HomePage();
+                    //HomePage homePage = new HomePage();
                     //FutureToursOverview futureToursOverview = new FutureToursOverview();
                     //TourStatisticView tourStatisticView = new TourStatisticView();
                     //ReviewsOverview reviewsOverview = new ReviewsOverview();
+                    TourGuide_MainWindow mainGuideWindow = new TourGuide_MainWindow();
 
                     LoggedInUser.Id = user.Id;
                     LoggedInUser.Username = user.Username;
@@ -75,11 +76,12 @@ namespace BookingApp.View
                     }
                     else if (user.Role == UserRole.guide)
                     {
-                        homePage.Show();
+                        //homePage.Show();
                         //tourOverview.Show();
                         //futureToursOverview.Show();
                         //tourStatisticView.Show();
                         //reviewsOverview.Show();
+                        mainGuideWindow.Show();
                     }
                     else if (user.Role == UserRole.tourist)
                     {
