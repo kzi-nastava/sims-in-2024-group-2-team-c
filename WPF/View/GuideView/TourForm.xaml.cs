@@ -91,29 +91,29 @@ namespace BookingApp.View
         private List<int> ParseKeyPointIds(List<string> keyPointsList)
         {
             List<int> ids = new List<int>();
-            KeyPoint startedPoint = new KeyPoint();
-            startedPoint.Name = keyPointsList[0];
-            startedPoint.StartingPoint = true;
-            _keyPointRepository.Save(startedPoint);
+            KeyPoint startedPoint = SaveKeyPoint(keyPointsList[0], true, false);
             ids.Add(startedPoint.Id);
 
             for (int i = 1; i < keyPointsList.Count - 1; i++)
             {
-                KeyPoint kp = new KeyPoint();
-                kp.Name = keyPointsList[i];
-                kp.StartingPoint = false;
-                kp.EndingPoint = false;
-                _keyPointRepository.Save(kp);
+                KeyPoint kp = SaveKeyPoint(keyPointsList[i], false, false);
                 ids.Add(kp.Id);
             }
-            KeyPoint endedPoint = new KeyPoint();
-            endedPoint.Name = keyPointsList[keyPointsList.Count - 1];
-            endedPoint.EndingPoint = true;
-            _keyPointRepository.Save(endedPoint);
+            KeyPoint endedPoint = SaveKeyPoint(keyPointsList[keyPointsList.Count - 1], false, true);
             ids.Add(endedPoint.Id);
             return ids;
         }
-
+        public KeyPoint SaveKeyPoint(string Name, bool startPoint, bool endPoint)
+        {
+            KeyPoint kp = new KeyPoint 
+            {
+                Name = Name,
+                StartingPoint = startPoint,
+                EndingPoint = endPoint
+            };
+            _keyPointRepository.Save(kp);
+            return kp;
+        }
         private List<DateTime> ParseTourDates(string tourDatesString)
         {
             //List<DateTime> tourDates = tourDatesString.Split(',').Select(s => DateTime.Parse(s.Trim())).ToList();
