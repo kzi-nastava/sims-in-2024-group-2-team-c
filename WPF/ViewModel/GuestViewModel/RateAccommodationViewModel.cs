@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModel.GuestViewModel
@@ -25,10 +26,17 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             get { return _cleanlinessRating; }
             set
             {
-                if (_cleanlinessRating != value)
+                if (value >= 1 && value <= 5)
                 {
-                    _cleanlinessRating = value;
-                    OnPropertyChanged(nameof(Cleanliness));
+                    if (_cleanlinessRating != value)
+                    {
+                        _cleanlinessRating = value;
+                        OnPropertyChanged(nameof(Cleanliness));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Values can only be between 1 and 5.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
@@ -38,13 +46,21 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             get { return _correctnessOfTheOwnerRating; }
             set
             {
-                if (_correctnessOfTheOwnerRating != value)
+                if (value >= 1 && value <= 5)
                 {
-                    _correctnessOfTheOwnerRating = value;
-                    OnPropertyChanged(nameof(CorrectnessOfTheOwner));
+                    if (_correctnessOfTheOwnerRating != value)
+                    {
+                        _correctnessOfTheOwnerRating = value;
+                        OnPropertyChanged(nameof(CorrectnessOfTheOwner));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Values can only be between 1 and 5.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
+
 
         public string Comment
         {
@@ -103,7 +119,12 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
 
         private void RateAccommodation(GuestReservationDTO selectedReservation)
         {
-             _service.RateAccommodation(Cleanliness, CorrectnessOfTheOwner, Comment);
+            if (Cleanliness == 0 || CorrectnessOfTheOwner == 0)
+            {
+                MessageBox.Show("Please fill in Cleanliness and Correctness of the owner fields to rate the accommodation.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            _service.RateAccommodation(Cleanliness, CorrectnessOfTheOwner, Comment);
         }
 
         public RateAccommodationViewModel(GuestReservationDTO selectedReservation)

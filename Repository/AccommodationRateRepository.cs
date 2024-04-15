@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Repository;
 
 namespace BookingApp.Repository
 {
@@ -16,11 +17,13 @@ namespace BookingApp.Repository
         private const string FilePath = "../../../Resources/Data/accommodationRate.csv";
         private readonly Serializer<AccommodationRate> _serializer;
         private List<AccommodationRate> _accommodationRates;
+        private GuestReservationRepository guestReservationRepository;
 
         public AccommodationRateRepository()
         {
             _serializer = new Serializer<AccommodationRate>();
             _accommodationRates = _serializer.FromCSV(FilePath);
+            guestReservationRepository = new GuestReservationRepository();
         }
 
         
@@ -40,6 +43,23 @@ namespace BookingApp.Repository
                 return 1;
             }
             return _accommodationRates.Max(a => a.Id) + 1;
+        }
+
+        public bool HasUserRatedAccommodation(int userId, string name)
+        {
+            List<AccommodationRate> rates = _serializer.FromCSV(FilePath);
+            List<GuestReservation> reservations = guestReservationRepository.GetAll();
+
+            var reservation = reservations.FirstOrDefault(r => r.GuestId == userId && r.Accommodation.Name == name);
+
+            if (reservation != null)
+            {
+                return rates.Any(rate => rate.ReservationId == reservation.ReservationId);
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

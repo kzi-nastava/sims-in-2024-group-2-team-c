@@ -15,7 +15,6 @@ namespace BookingApp.Repository
         private string filePath = "../../../Resources/Data/guestReservations.csv";
         private Serializer<GuestReservation> serializer = new Serializer<GuestReservation>();
 
-
         // prikazuje alternativne datume dva dana nakon poslednjeg zauzetog -- to ne valja
         public List<AvailableDateDisplay> FindAvailableReservations(Accommodation selectedAccommodation, DateTime startDate, DateTime endDate, int stayDuration)
         {
@@ -78,9 +77,11 @@ namespace BookingApp.Repository
             return availableDates;
         }
 
+
         public List<GuestReservation> GetAll()
         {
-            return serializer.FromCSV(filePath);
+            List<GuestReservation> reservations = serializer.FromCSV(filePath);
+            return reservations;
         }
 
 
@@ -304,7 +305,28 @@ namespace BookingApp.Repository
             return accommodationRepository.GetAccommodationById(accommodationId);
         }
 
+        public bool GetReservationStatus(int reservationId)
+        {
+            try
+            {
+                var reservation = GetReservationById(reservationId);
 
+                if (reservation != null)
+                {
+                    return reservation.IsReserved;
+                }
+                else
+                {
+                    MessageBox.Show("Reservation not found!");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting reservation status: {ex.Message}");
+                return false;
+            }
+        }
 
     }
 

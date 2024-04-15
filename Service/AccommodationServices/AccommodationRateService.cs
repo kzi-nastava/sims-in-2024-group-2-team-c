@@ -18,6 +18,12 @@ namespace BookingApp.Service.AccommodationServices
         private readonly IAccommodationRateRepository _repository;
         private readonly GuestReservationDTO _selectedReservation;
 
+        public AccommodationRateService(IAccommodationRateRepository repository)
+        {
+            _repository = repository;
+
+        }
+
         public AccommodationRateService(GuestReservationDTO selectedReservation, IAccommodationRateRepository repository)
         {
             _selectedReservation = selectedReservation;
@@ -41,7 +47,7 @@ namespace BookingApp.Service.AccommodationServices
                 _repository.Save(data);
 
 
-                MessageBox.Show("Guest rating saved successfully.");
+                MessageBox.Show("Accommodaiton and owner successfully rated.");
 
             }
             catch (IOException ex)
@@ -49,6 +55,11 @@ namespace BookingApp.Service.AccommodationServices
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 throw;
             }
+        }
+
+        public bool HasUserRatedAccommodation(int userId, String name)
+        {
+            return _repository.HasUserRatedAccommodation(userId, name);
         }
 
     }

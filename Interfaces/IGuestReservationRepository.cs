@@ -15,6 +15,9 @@ namespace BookingApp.Interfaces
         List<GuestReservationDTO> GetAllGuestReservations(int guestId);
 
         string CancelReservation(int reservationId);
+        bool GetReservationStatus(int reservationId);
+
+        //List<GuestReservation> GetAll();
 
         //public GuestReservation GetReservationById(int reservationId);
 

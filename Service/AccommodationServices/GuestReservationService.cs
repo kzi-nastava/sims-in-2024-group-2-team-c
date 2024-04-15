@@ -37,6 +37,18 @@ namespace BookingApp.Service.AccommodationServices
             }
         }
 
+        public bool GetIsReservedStatus(int reservationId)
+        {
+            try
+            {
+                return _guestReservationRepository.GetReservationStatus(reservationId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting reservation status: {ex.Message}");
+                return false; // Ako se desi greška, vraćamo false
+            }
+        }
 
     }
 }

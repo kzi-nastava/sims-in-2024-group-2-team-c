@@ -8,7 +8,13 @@
         Title="GuestReservationDetails" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:GuestReservationDetails}}}"
         ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+
     <!-- DataContext se postavlja na samu sebe kako bi se bindovao na svoj ViewModel -->
+
+    <!-- Definisanje resursa -->
+    <Window.Resources>
+        <local:CheckOutDateToColorConverter x:Key="CheckOutDateToColorConverter"/>
+    </Window.Resources>
 
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
@@ -48,6 +54,12 @@
                 <DataGridTextColumn Header="CheckIn" Binding="{Binding CheckIn}"/>
                 <DataGridTextColumn Header="CheckOut" Binding="{Binding CheckOut}"/>
             </DataGrid.Columns>
+            <!-- Stil za bojenje redova u DataGrid-u -->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{Binding CheckOut, Converter={StaticResource CheckOutDateToColorConverter}}"/>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
         <Button Grid.Row="4" Content="Cancel Reservation" Command="{Binding CancelReservationCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" HorizontalAlignment="Left" Margin="230,199,0,0" VerticalAlignment="Top" Width="150" Height="20"/>

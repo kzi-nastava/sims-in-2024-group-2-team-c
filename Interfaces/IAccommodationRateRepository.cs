@@ -9,7 +9,7 @@ namespace BookingApp.Interfaces
 {
     public interface IAccommodationRateRepository
     {
-
+        bool HasUserRatedAccommodation(int userId, string name);
         public void Save(AccommodationRate accommodationRate);
 
     }
