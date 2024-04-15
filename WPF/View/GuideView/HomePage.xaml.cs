@@ -27,6 +27,7 @@ namespace BookingApp.WPF.View.GuideView
     public partial class HomePage : Window
     {
         private readonly TourService _tourService;
+        private readonly EndedToursService _endedToursService;
         private Tour _activeTour;
         public Tour ActiveTour
         {
@@ -57,8 +58,8 @@ namespace BookingApp.WPF.View.GuideView
         public HomePage()
         {
             InitializeComponent();
-            this.DataContext = this;
             _tourService = new(new TourRepository());
+            _endedToursService = new EndedToursService();
             ActiveTour = _tourService.GetByActivity();
             if (ActiveTour == null)
             {
@@ -76,8 +77,15 @@ namespace BookingApp.WPF.View.GuideView
                 NoActiveTourBlock.Visibility = Visibility.Hidden;
                 NoActiveTourButton.Visibility = Visibility.Hidden;
             }
-            //StatisticTour = ; 
+            StatisticTour = _endedToursService.FindMostVisitedTour();
+
+            DataContext = this;
         }
+        /*private void LoadLocation(Location location)
+        {
+            Location = location;
+            LocationTextBlock.Text = $"{location.City}, {location.Country}";
+        }*/
         private void TodaysTour_Click(object sender, RoutedEventArgs e)
         {
             // Implementacija logike za klik na dugme "TODAY'S TOUR"
