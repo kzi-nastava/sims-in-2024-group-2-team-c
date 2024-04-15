@@ -48,7 +48,10 @@ namespace BookingApp.Service.TourServices
             return keyPointsForTour;
 
         }
-
+        public KeyPoint GetById(int id)
+        {
+            return _keyPointRepository.GetById(id);
+        }
 
 
     }

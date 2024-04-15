@@ -15,11 +15,13 @@ namespace BookingApp.Service.TourServices
     {
         private TourInstanceService tourInstanceService;
         private TourService tourService;
+        private LocationService locationService;
 
         public EndedToursService()
         {
             tourInstanceService = new(new TourInstanceRepository());
             tourService = new(new TourRepository());
+            locationService = new(new LocationRepository());
         }
 
         public List<TourStatisticDTO> GetEndedTours()
@@ -34,15 +36,54 @@ namespace BookingApp.Service.TourServices
                     TourInstanceId = instance.IdTour,
                     Name = tour.Name,
                     Description = tour.Description,
-                    Location = tour.ViewLocation,
+                    Location = LoadLocation(tour.LocationId),
                     Language = tour.Language,
                     Duration = tour.Duration,
                     Date = instance.Date,
                     MaxTourists = instance.MaxTourists,
                     ReservedTourists = instance.ReservedTourists,
-                    //PresentTourists = tourService.FindPresentTouristsCount(instance.IdTour)
-            };
+                    PresentTourists = tourService.FindPresentTouristsCount(instance.IdTour),
+                    LessThan18 = tourService.CalculateNumberOfTouristsUnder18(tour),
+                    Between18And50 = tourService.CalculateNumberOfTourists18And50(tour),
+                    MoreThan50 = tourService.CalculateNumberOfTouristsMore50(tour)
+                };
                 founded.Add(dto);
+            }
+            return founded;
+        }
+        private string LoadLocation(int locationId)
+        {
+            Location location = locationService.GetById(locationId);
+            string ViewLocation = $"{location.City}, {location.Country}";
+            return ViewLocation;
+        }
+        public float CalculateAttendancePercentage(TourStatisticDTO tour)
+        {
+            return tour.PresentTourists / tour.MaxTourists;
+
+        }
+        public List<float> FindAttendencePercentagesForTours()
+        {
+            List<TourStatisticDTO> endedTours = GetEndedTours();
+            List<float> percentages = new List<float>();
+            foreach (TourStatisticDTO tour in endedTours)
+            {
+                percentages.Add(CalculateAttendancePercentage(tour));
+            }
+            return percentages;
+        }
+        public TourStatisticDTO FindMostVisitedTour()
+        {
+            List<TourStatisticDTO> endedTours = GetEndedTours();
+            List<float> percentages = FindAttendencePercentagesForTours();
+            TourStatisticDTO founded = new TourStatisticDTO();
+            foreach (TourStatisticDTO tour in endedTours)
+            {
+                if (percentages.Max() == CalculateAttendancePercentage(tour))
+                {
+                    founded = tour;
+                }
+                    
             }
             return founded;
         }

@@ -23,6 +23,7 @@ namespace BookingApp.Model
         public List<string> Images { get; set; }
 
         public TourReview() { }
+
         public TourReview( int tourInstanceId, int keyPointID, int guideId, int touristId, int knowledgeGrade, int languageGrade, int interestingGrade, string comment, bool reported, List<string> images)
         {
            
@@ -57,7 +58,6 @@ namespace BookingApp.Model
             InterestingGrade = Convert.ToInt32(values[7]);
             Comment = values[8];
             Reported = Convert.ToBoolean(values[9]);
-
             if (!string.IsNullOrEmpty(values[10]))
             {
                 Images = values[10].Split(',').ToList();

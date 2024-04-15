@@ -1,6 +1,8 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service.TourServices;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +27,7 @@ namespace BookingApp.WPF.View.GuideView
     public partial class HomePage : Window
     {
         private readonly TourService _tourService;
+        private readonly EndedToursService _endedToursService;
         private Tour _activeTour;
         public Tour ActiveTour
         {
@@ -32,6 +35,16 @@ namespace BookingApp.WPF.View.GuideView
             set
             {
                 _activeTour = value;
+                OnPropertyChanged();
+            }
+        }
+        private TourStatisticDTO _statisticTour;
+        public TourStatisticDTO StatisticTour
+        {
+            get { return _statisticTour; }
+            set
+            {
+                _statisticTour = value;
                 OnPropertyChanged();
             }
         }
@@ -45,8 +58,8 @@ namespace BookingApp.WPF.View.GuideView
         public HomePage()
         {
             InitializeComponent();
-            this.DataContext = this;
             _tourService = new(new TourRepository());
+            _endedToursService = new EndedToursService();
             ActiveTour = _tourService.GetByActivity();
             if (ActiveTour == null)
             {
@@ -64,8 +77,15 @@ namespace BookingApp.WPF.View.GuideView
                 NoActiveTourBlock.Visibility = Visibility.Hidden;
                 NoActiveTourButton.Visibility = Visibility.Hidden;
             }
+            StatisticTour = _endedToursService.FindMostVisitedTour();
 
+            DataContext = this;
         }
+        /*private void LoadLocation(Location location)
+        {
+            Location = location;
+            LocationTextBlock.Text = $"{location.City}, {location.Country}";
+        }*/ 
         private void TodaysTour_Click(object sender, RoutedEventArgs e)
         {
             // Implementacija logike za klik na dugme "TODAY'S TOUR"
@@ -77,21 +97,29 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void CreateNewTourButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("ALL TOURS VIEW button clicked.");
+            TourForm tourForm = new TourForm();
+            tourForm.Show();
+            //MessageBox.Show("ALL TOURS VIEW button clicked.");
         }
         private void AllToursViewButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("ALL TOURS VIEW button clicked.");
+            TourOverview tourOverview = new TourOverview();
+            tourOverview.Show();
+            //MessageBox.Show("ALL TOURS VIEW button clicked.");
         }
 
         private void FutureToursButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("FUTURE TOURS button clicked.");
+            FutureToursOverview futureTourOverview = new FutureToursOverview();
+            futureTourOverview.Show();
+            //MessageBox.Show("FUTURE TOURS button clicked.");
         }
 
         private void SeeTourStatisticButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("SEE TOUR STATISTIC button clicked.");
+            TourStatisticView tourStatisticView = new TourStatisticView();
+            tourStatisticView.Show();
+            //MessageBox.Show("SEE TOUR STATISTIC button clicked.");
         }
         private void SeeStatus_Click(object sender, RoutedEventArgs e) 
         {
@@ -99,7 +127,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void Reviews_Click(object sender, RoutedEventArgs e) 
         { 
-            //
+            ReviewsOverview reviewsOverview = new ReviewsOverview();
+            reviewsOverview.Show();
         }
         private void TourRequests_Click(object sender, RoutedEventArgs e)
         {

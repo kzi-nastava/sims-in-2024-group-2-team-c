@@ -4,7 +4,9 @@ using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +23,7 @@ namespace BookingApp.WPF.View.GuideView
     /// <summary>
     /// Interaction logic for TourStatisticView.xaml
     /// </summary>
-    public partial class TourStatisticView : Window
+    public partial class TourStatisticView : Window, INotifyPropertyChanged
     {
         private ObservableCollection<TourStatisticDTO> _endedTours;
         public ObservableCollection<TourStatisticDTO> EndedTours
@@ -32,6 +34,7 @@ namespace BookingApp.WPF.View.GuideView
                 if (_endedTours != value)
                 {
                     _endedTours = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -44,12 +47,18 @@ namespace BookingApp.WPF.View.GuideView
                 if (_tour != value)
                 {
                     _tour = value;
+                    OnPropertyChanged();
                 }
             }
         }
         private readonly TourService _tourService;
         private readonly EndedToursService _endedToursService;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public TourStatisticView()
         {
             InitializeComponent();
@@ -70,10 +79,18 @@ namespace BookingApp.WPF.View.GuideView
         {
             if (SelectedTour != null)
             {
-                MessageBox.Show($"Max Tourists: {SelectedTour.MaxTourists}\n" +
-                                $"Reserved Tourists: {SelectedTour.ReservedTourists}\n" 
-                               /* $"Present Tourists: {SelectedTour.PresentTourists}"*/,
-                                "Tour Statistics", MessageBoxButton.OK, MessageBoxImage.Information);
+                MaxTouristsBlock.DataContext = SelectedTour;
+                ReservedTouristsBlock.DataContext = SelectedTour;
+                PresentTouristsBlock.DataContext = SelectedTour;
+
+                LessBlock.DataContext = SelectedTour;
+                BetweenBlock.DataContext = SelectedTour;
+                MoreBlock.DataContext = SelectedTour;
+
+                /*MessageBox.Show($"Max Tourists: {SelectedTour.MaxTourists}\n" +
+                                $"Reserved Tourists: {SelectedTour.ReservedTourists}\n" +
+                                $"Present Tourists: {SelectedTour.PresentTourists}",
+                                "Tour Statistics", MessageBoxButton.OK, MessageBoxImage.Information);*/
             }
             else
             {

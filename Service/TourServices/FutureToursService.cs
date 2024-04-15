@@ -14,11 +14,13 @@ namespace BookingApp.Service.TourServices
     {
         private TourInstanceService tourInstanceService;
         private TourService tourService;
+        //private TourVoucherService tourVoucherService;
 
         public FutureToursService()
         {
             tourInstanceService = new(new TourInstanceRepository());
             tourService = new(new TourRepository());
+            //tourVoucherService = new(new TourVoucherRepository());
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
@@ -50,5 +52,9 @@ namespace BookingApp.Service.TourServices
             //Za sve prijavljene turiste se salju vauceri!
             tourInstanceService.Delete(instance);
         }
+        /*public void DeliverVoucherToTourists(SelectedTour.Id)
+        {
+
+        }*/
     }
 }

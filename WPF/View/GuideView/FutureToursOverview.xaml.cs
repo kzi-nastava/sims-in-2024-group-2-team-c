@@ -74,7 +74,6 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implementirajte logiku za povratak na prethodni prozor
             this.Close();
         }
 
@@ -84,7 +83,7 @@ namespace BookingApp.WPF.View.GuideView
             _futureToursService.CancelTour(SelectedTour.Id);
 
             // Pozivanje servisa za izdavanje vaučera turistima
-            //_futureToursService.IssueVoucherToTourists(SelectedTour.Id);
+            //_futureToursService.DeliverVoucherToTourists(SelectedTour.Id);
 
             // Uklanjanje otkazane ture iz kolekcije futureTours
             futureTours.Remove(SelectedTour);
