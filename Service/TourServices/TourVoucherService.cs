@@ -1,4 +1,5 @@
 ﻿using BookingApp.Interfaces;
+using BookingApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace BookingApp.Service.TourServices
         public TourVoucherService(ITourVoucherRepository tourVoucherRepository)
         {
             _tourVoucherRepository = tourVoucherRepository;
+        }
+
+        public void Send(TourVoucher tourVoucher)
+        {
+           _tourVoucherRepository.Save(tourVoucher);
         }
 
     }

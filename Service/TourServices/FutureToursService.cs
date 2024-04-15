@@ -46,15 +46,27 @@ namespace BookingApp.Service.TourServices
             }
             return founded;
         }
-        public void CancelTour(int TourId)
+        public void CancelTour(int TourInstanceId) //id od klase FutureDTO je tour instance id 
         {
-            TourInstance instance = tourInstanceService.GetById(TourId);
+            TourInstance instance = tourInstanceService.GetById(TourInstanceId);
             //Za sve prijavljene turiste se salju vauceri!
             tourInstanceService.Delete(instance);
         }
-        /*public void DeliverVoucherToTourists(SelectedTour.Id)
+        public void DeliverVoucherToTourists(int TourInstanceId)
         {
-
-        }*/
+            TourInstance instance = tourInstanceService.GetById(TourInstanceId);
+            Tour tour = tourService.GetById(instance.IdTour);
+            List<int> tourists = tourService.FindPresentTourists(tour);
+            foreach(int id in tourists)
+            {
+                TourVoucher voucher = new TourVoucher
+                {
+                    TourId = tour.Id,
+                    TouristId = id,
+                    ExpirationDate = DateTime.Today.AddYears(1)
+                };
+                tourVoucherService.Send(voucher);
+            }
+        }
     }
 }

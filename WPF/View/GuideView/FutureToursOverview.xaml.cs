@@ -80,12 +80,8 @@ namespace BookingApp.WPF.View.GuideView
         // Event handler za klik na dugme "CANCEL TOUR"
         private void CancelTourButton_Click(object sender, RoutedEventArgs e)
         {
+            _futureToursService.DeliverVoucherToTourists(SelectedTour.Id);
             _futureToursService.CancelTour(SelectedTour.Id);
-
-            // Pozivanje servisa za izdavanje vaučera turistima
-            //_futureToursService.DeliverVoucherToTourists(SelectedTour.Id);
-
-            // Uklanjanje otkazane ture iz kolekcije futureTours
             futureTours.Remove(SelectedTour);
         }
     }
