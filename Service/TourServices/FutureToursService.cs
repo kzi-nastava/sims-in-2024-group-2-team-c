@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace BookingApp.Service.TourServices
 {
@@ -57,16 +58,20 @@ namespace BookingApp.Service.TourServices
             TourInstance instance = tourInstanceService.GetById(TourInstanceId);
             Tour tour = tourService.GetById(instance.IdTour);
             List<int> tourists = tourService.FindPresentTourists(tour);
-            foreach(int id in tourists)
+            if (tourists != null)
             {
-                TourVoucher voucher = new TourVoucher
+                foreach(int id in tourists)
                 {
-                    TourId = tour.Id,
-                    TouristId = id,
-                    ExpirationDate = DateTime.Today.AddYears(1)
-                };
-                tourVoucherService.Send(voucher);
+                    TourVoucher voucher = new TourVoucher
+                    {
+                        TourId = tour.Id,
+                        TouristId = id,
+                        ExpirationDate = DateTime.Today.AddYears(1)
+                    };
+                    tourVoucherService.Send(voucher);
+                }
             }
+            
         }
     }
 }
