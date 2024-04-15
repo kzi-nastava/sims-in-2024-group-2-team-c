@@ -19,7 +19,7 @@ namespace BookingApp.DTO
         public int InterestingGrade { get; set; }
         public string StartKeyPoint { get; set; }
         public bool Reported { get; set; }
-        
+        public DateTime Date {  get; set; }
         public List<string> Images { get; set; }
         public TourReviewDTO() { }
     }

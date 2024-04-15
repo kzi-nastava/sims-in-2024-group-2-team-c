@@ -66,6 +66,7 @@ namespace BookingApp.Service.TourServices
                     InterestingGrade = review.InterestingGrade,
                     StartKeyPoint = kp.Name,
                     Reported = false,
+                    Date = instance.Date,
                     Images = review.Images
                 };
                 founded.Add(dto);
