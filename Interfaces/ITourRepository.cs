@@ -17,5 +17,7 @@ namespace BookingApp.Interfaces
             Tour Update(Tour tour);
             Tour GetById(int id);
             List<Tour> GetToursByLocationId(int locationId);
-        }
+
+        public string GetTourNameById(int tourId);
+    }
 }

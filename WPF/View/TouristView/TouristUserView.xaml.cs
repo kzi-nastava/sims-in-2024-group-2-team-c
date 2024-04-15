@@ -1,5 +1,4 @@
-﻿using BookingApp.View;
-using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +11,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for MainTouristView.xaml
+    /// Interaction logic for TouristUserView.xaml
     /// </summary>
-    public partial class MainTouristView : Window
+    public partial class TouristUserView : Page
     {
-        public MainTouristView()
+        public TouristUserView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new TouristUserViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void View_Click(object sender, RoutedEventArgs e)
         {
-            Window1 w1 = new Window1();
-            w1.Show();
+            this.NavigationService.Navigate(new TouristVouchersView());
         }
     }
 }
