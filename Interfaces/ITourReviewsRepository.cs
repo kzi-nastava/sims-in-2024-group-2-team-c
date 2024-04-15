@@ -19,5 +19,6 @@ namespace BookingApp.Interfaces
         public void Delete(TourReview tourReview);
 
         public TourReview Update(TourReview tourReview);
+        public TourReview GetById(int id);
     }
 }

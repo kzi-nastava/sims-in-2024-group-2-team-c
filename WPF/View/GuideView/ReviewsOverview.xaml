@@ -1,0 +1,56 @@
+﻿<Window x:Class="BookingApp.WPF.View.GuideView.ReviewsOverview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.GuideView"
+        mc:Ignorable="d"
+        Title="ReviewsOverview" Height="450" Width="800">
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="10,10,10,10">
+                <!-- Naslov -->
+                <TextBlock Grid.Row="0"  Text="REVIEWS" FontWeight="Bold" FontSize="20" Margin="0 0 0 10"/>
+
+                <!-- TextBlock za prikaz poruke o reportovanju -->
+                <TextBlock Grid.Row="1" x:Name="ReportMessageTextBlock" Text="The review was reported." FontWeight="Bold" FontSize="16" Margin="0 10" Visibility="Collapsed"/>
+
+                <!-- TextBox za poruku o nemogućnosti reportovanja -->
+                <TextBox Grid.Row="1" x:Name="UnableToReportTextBox" Text="You can't report this tourist. Tourist was present on tour." FontWeight="Bold" FontSize="16" Margin="0 10" Visibility="Collapsed"/>
+
+
+                <!-- Tabela sa recenzijama -->
+            <ListView Grid.Row="2" ItemsSource="{Binding Reviews}" SelectionMode="Single" Margin="0 0 10 0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="TOUR NAME" DisplayMemberBinding="{Binding TourName}" Width="Auto"/>
+                        <GridViewColumn Header="TOURIST" DisplayMemberBinding="{Binding Tourist}" Width="Auto"/>
+                        <GridViewColumn Header="COMMENT" DisplayMemberBinding="{Binding Comment}" Width="Auto"/>
+                        <GridViewColumn Header="GRADE" DisplayMemberBinding="{Binding KnowledgeGrade}" Width="Auto"/>
+                        <GridViewColumn Header="GRADE" DisplayMemberBinding="{Binding LanguageGrade}" Width="Auto"/>
+                        <GridViewColumn Header="GRADE" DisplayMemberBinding="{Binding InterestingGrade}" Width="Auto"/>
+                        <GridViewColumn Header="START KEY POINT" DisplayMemberBinding="{Binding StartKeyPoint}" Width="Auto"/>
+                        <GridViewColumn Header="DATE" DisplayMemberBinding="{Binding Date}" Width="Auto"/>
+                        <GridViewColumn Header="VALID" DisplayMemberBinding="{Binding Reported}" Width="Auto"/>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Report" Click="ReportButton_Click"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </StackPanel>
+
+        </Grid>
+</Window>
