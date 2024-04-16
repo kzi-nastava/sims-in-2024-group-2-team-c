@@ -30,6 +30,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             _futureToursService = new FutureToursService();
             FutureTours = new ObservableCollection<FutureTourDTO>(_futureToursService.GetFutureTourDTOs());
             CancelTourCommand = new Commands.RelayCommand(CancelTour);
+            //CancelTourCommand = new ViewModelCommand(CancelTour);
         }
 
         private void CancelTour()

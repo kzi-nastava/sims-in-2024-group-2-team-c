@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:BookingApp.WPF.View.GuideView"
       xmlns:viewModel="clr-namespace:BookingApp.WPF.ViewModel.GuideViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Guide_HomePage">
-    <!--d:DesignHeight="768" d:DesignWidth="1024"-->
+      Title="Guide_HomePage"
+      Height="768" 
+      Width="1024" >
+    <!--d:DesignHeight="450" d:DesignWidth="800"-->
    <!-- <Page.DataContext>-->
    <!--<viewModel:GuideHomePage_ViewModel/>-->     
     <!--</Page.DataContext>-->

@@ -62,8 +62,10 @@ namespace BookingApp.WPF.View.GuideView
 
         private void SeeTourStatisticButton_Click(object sender, RoutedEventArgs e)
         {
-            TourStatisticView tourStatisticView = new TourStatisticView();
-            tourStatisticView.Show();
+            //TourStatisticView tourStatisticView = new TourStatisticView();
+            Guide_TourStatistic tourStatisticPage = new Guide_TourStatistic();
+            this.NavigationService.Navigate(tourStatisticPage);
+            // tourStatisticView.Show();
             //MessageBox.Show("SEE TOUR STATISTIC button clicked.");
         }
         private void SeeStatus_Click(object sender, RoutedEventArgs e)
