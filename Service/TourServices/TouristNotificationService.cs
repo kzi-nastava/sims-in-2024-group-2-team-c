@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Injector;
 
 namespace BookingApp.Service.TourServices
 {
@@ -17,10 +18,10 @@ namespace BookingApp.Service.TourServices
         private readonly TouristService _touristService;
 
         public TouristNotificationService(ITouristNotificationRepository touristNotificationRepository)
-        {
-            _touristNotificationRepository = touristNotificationRepository;
-            _touristService = new TouristService(new TouristRepository());
-        }
+         {
+             _touristNotificationRepository = touristNotificationRepository;
+             _touristService = new TouristService(new TouristRepository());
+         }
 
 
         public void Save(TouristNotification touristNotification)
