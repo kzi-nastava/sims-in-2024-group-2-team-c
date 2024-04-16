@@ -60,22 +60,13 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public void ExecuteFollowTourCommand(object obj)
         {
-            /* if (obj is MainTouristView mainTouristView)
-             {
-                 mainTouristView.MainFrame.Navigate(new FollowTourView());
-             }*/
-
+         
             CurrentChildView = new FollowTourViewModel();
             
         }
 
         public void ExecuteUserCommand(object obj)
         {
-            /* if (obj is MainTouristView mainTouristView)
-             {
-                 mainTouristView.MainFrame.Navigate(new FollowTourView());
-             }*/
-
             CurrentChildView = new TouristUserViewModel();
 
         }

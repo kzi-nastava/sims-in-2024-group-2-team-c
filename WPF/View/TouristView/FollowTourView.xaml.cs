@@ -38,25 +38,21 @@ namespace BookingApp.WPF.View.TouristView
 
         private void View_Click(object sender, RoutedEventArgs e)
         {
-            
-            Button button = sender as Button;
 
+            Button button = sender as Button;
+            NavigateToNewPage(button);
+        }
+
+        private void NavigateToNewPage(Button button)
+        {
             if (button?.DataContext is FollowingTourDTO selectedTour)
             {
-                
+
                 FollowKeyPointsViewModel followKeyPointsViewModel = new FollowKeyPointsViewModel(selectedTour);
-
-
-                
                 FollowKeyPointsView followKeyPointsView = new FollowKeyPointsView();
-
-               
                 followKeyPointsView.DataContext = followKeyPointsViewModel;
-
-                
                 this.NavigationService.Navigate(followKeyPointsView);
             }
         }
-
     }
 }

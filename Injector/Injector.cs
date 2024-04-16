@@ -9,30 +9,34 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Injector
 {
-    public class Injector
+    public class Injectorr
     {
 
 
         
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
-            { typeof(IUserRepository), new UserRepository() },
+            //{ typeof(IUserRepository), new UserRepository() },
             //{ typeof(IUserService), new UserService() },
 
             { typeof(ITourRepository), new TourRepository() },
             // { typeof(ITourService), new TourService() }
 
-            { typeof(IAccommodationRepository), new AccommodationRepository() },
+            //{ typeof(IAccommodationRepository), new AccommodationRepository() },
             // { typeof(IAccommodationService), new AccommodationService() }
 
-            { typeof(ITourRepository), new TourRepository() },
+           // { typeof(ITourRepository), new TourRepository() },
             // { typeof(ITourService), new TourService() }
 
             {typeof(ITourInstanceRepository), new TourInstanceRepository() },
             // {typeof(FollowTourService), new FollowTourService() },
 
-            {typeof(ITourReviewsRepository), new TourReviewsRepository() },
+           // {typeof(ITourReviewsRepository), new TourReviewsRepository() },
             {typeof(ITouristNotificationRepository), new TouristNotificationRepository() },
+            //{typeof(ITourRepository), new TourRepository() },
+            //{typeof(ITourInstanceRepository), new TourInstanceRepository() },
+            {typeof(ITouristsRepository), new TouristRepository() },
+            {typeof(IPeopleInfoRepository),new PeopleInfoRepository()}
 
         };
 

@@ -1,4 +1,5 @@
-﻿using BookingApp.Interfaces;
+﻿using BookingApp.Injector;
+using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -11,12 +12,12 @@ namespace BookingApp.Service.TourServices
 {
     public class PeopleInfoService
     {
-        public PeopleInfoRepository _peopleInfoRepository { get; set; }
+        public IPeopleInfoRepository _peopleInfoRepository;
 
 
         public PeopleInfoService()
         {
-            _peopleInfoRepository = new PeopleInfoRepository();
+            _peopleInfoRepository = Injectorr.CreateInstance<IPeopleInfoRepository>();
         }
         public PeopleInfo GetById(int id)
         {

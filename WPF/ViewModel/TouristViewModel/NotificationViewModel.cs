@@ -28,14 +28,13 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public NotificationViewModel() {
         
-            _notificationService = new TouristNotificationService(new TouristNotificationRepository());
+            _notificationService = new TouristNotificationService();
             LoadNotifications();
         
         }
 
         public void LoadNotifications()
         {
-
             Notifications = new ObservableCollection<TouristNotification>(_notificationService.GetAllNotificationsForUser(LoggedInUser.Id));
 
         }

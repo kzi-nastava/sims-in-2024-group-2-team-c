@@ -20,6 +20,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
 
         private ObservableCollection<FollowingTourDTO> _followingTours;
+        private readonly FollowTourService _followTourService;
+        private readonly MainViewModel _mainViewModel;
 
         public ObservableCollection<FollowingTourDTO> FollowingTours
         {
@@ -31,15 +33,14 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private readonly FollowTourService _followTourService;
-
+        
         public ICommand ViewCommand { get;}
 
+
         
-        private readonly MainViewModel _mainViewModel;
         public FollowTourViewModel() {
 
-            _followTourService = new(new TourRepository(),new TourInstanceRepository());
+            _followTourService = new FollowTourService();
             _mainViewModel = LoggedInUser.mainViewModel;
             FollowingTours = new ObservableCollection<FollowingTourDTO>();
            // ViewCommand = new ViewModelCommand(ShowKeyPoints);
@@ -51,22 +52,25 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             try
             {
-                
-                var activeFollowingTours = _followTourService.GetActiveTourInstances();
-                // Update the ObservableCollection with the active tours
-               FollowingTours.Clear();
-                foreach (var tour in activeFollowingTours)
-                {
-                    FollowingTours.Add(tour);
-                }
+                GetActiveTours();
             }
             catch (Exception ex)
             {
-                // Handle any exceptions (e.g., log error, show message to the user, etc.)
+                
                 Console.WriteLine($"Error loading tours: {ex.Message}");
             }
         }
 
+        private void GetActiveTours()
+        {
+            var activeFollowingTours = _followTourService.GetActiveTourInstances();
+            
+            FollowingTours.Clear();
+            foreach (var tour in activeFollowingTours)
+            {
+                FollowingTours.Add(tour);
+            }
+        }
 
         private void ShowKeyPoints(object obj)
         {

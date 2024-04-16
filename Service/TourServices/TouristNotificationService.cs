@@ -1,4 +1,5 @@
-﻿using BookingApp.Interfaces;
+﻿using BookingApp.Injector;
+using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookingApp.Injector;
+
 
 namespace BookingApp.Service.TourServices
 {
@@ -17,11 +18,13 @@ namespace BookingApp.Service.TourServices
         private readonly ITouristNotificationRepository _touristNotificationRepository;
         private readonly TouristService _touristService;
 
-        public TouristNotificationService(ITouristNotificationRepository touristNotificationRepository)
-         {
-             _touristNotificationRepository = touristNotificationRepository;
-             _touristService = new TouristService(new TouristRepository());
-         }
+
+        public TouristNotificationService() {
+            _touristService = new TouristService(new TouristRepository());
+            _touristNotificationRepository = Injectorr.CreateInstance<ITouristNotificationRepository>();
+        }
+
+        
 
 
         public void Save(TouristNotification touristNotification)

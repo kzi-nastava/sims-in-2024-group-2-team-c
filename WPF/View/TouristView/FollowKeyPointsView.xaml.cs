@@ -35,7 +35,6 @@ namespace BookingApp.WPF.View.TouristView
         {
             var viewModel = (FollowKeyPointsViewModel)DataContext;
 
-            // Access the SelectedTour property from the ViewModel
             var selectedTour = viewModel.SelectedTour;
             RateTourView rateTourView = new RateTourView(selectedTour);
             this.NavigationService.Navigate(rateTourView);
