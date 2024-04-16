@@ -161,15 +161,24 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             {
                 var selectedReservation = parameter as GuestReservationDTO;
 
-                // Ovde dodajte logiku za otvaranje novog prozora za reschedule rezervacije
-                ReservationDelayWindow rescheduleWindow = new ReservationDelayWindow(selectedReservation);
-                rescheduleWindow.ShowDialog();
+                // Provera da li je odabrana rezervacija prošla ili trenutno traje
+                if (selectedReservation.CheckIn < DateTime.Today || selectedReservation.CheckOut <= DateTime.Today)
+                {
+                    MessageBox.Show("You cannot reschedule past or ongoing reservations.");
+                }
+                else
+                {
+                    // Otvori prozor za reschedule rezervacije
+                    ReservationDelayWindow rescheduleWindow = new ReservationDelayWindow(selectedReservation);
+                    rescheduleWindow.ShowDialog();
+                }
             }
             else
             {
                 MessageBox.Show("Please select a reservation to reschedule.");
             }
         }
+
 
 
     }

@@ -76,8 +76,8 @@ namespace BookingApp.Service
             return new ReservationDelay
             {
                 ReservationDelayId = reservationDelayDTO.ReservationDelayId,
-                Guest = new Guest { Id = reservationDelayDTO.Guest.Id },
-                Accommodation = new Accommodation { Id = reservationDelayDTO.Accommodation.Id },
+                Guest = reservationDelayDTO.Guest, //new Guest { Id = reservationDelayDTO.Guest.Id },
+                Accommodation = reservationDelayDTO.Accommodation, //new Accommodation { Id = reservationDelayDTO.Accommodation.Id },
                 NewCheckInDate = reservationDelayDTO.NewCheckInDate,
                 NewCheckOutDate = reservationDelayDTO.NewCheckOutDate,
                 Status = reservationDelayDTO.Status
@@ -129,5 +129,7 @@ namespace BookingApp.Service
             int id = selectedReservation.Id;
             return _reservationRepository.getAccommodationByReservation(id);
         }
+
+
     }
 }

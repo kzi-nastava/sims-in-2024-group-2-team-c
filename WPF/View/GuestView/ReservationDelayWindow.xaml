@@ -30,17 +30,17 @@
         <!-- Tekst ispod headera -->
         <TextBlock Grid.Row="1" Margin="10,0,10,17" Text="List of all your requests:" FontWeight="Bold"/>
 
-        <!-- DataGrid za prikaz rezervacija -->
-        <!--DataGrid Grid.Row="1" ItemsSource="{Binding ReservationDelayRequests}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True" Margin="10,21,10,0" Height="146" VerticalAlignment="Top" Grid.RowSpan="4"-->
-        <!--DataGrid.Columns-->
-                <!--DataGridTextColumn Header="Name" Binding="{Binding Name}"/-->
-                <!--DataGridTextColumn Header="Location" Binding="{Binding Location}"/-->
-                <!--DataGridTextColumn Header="Type" Binding="{Binding Type}"/-->
-                <!--DataGridTextColumn Header="New Check In" Binding="{Binding NewCheckInDate}"/-->
-                <!--DataGridTextColumn Header="New Check Out" Binding="{Binding NewCheckOutDate}"/-->
-                <!--DataGridTextColumn Header="Status" Binding="{Binding Status}"/-->
-            <!--/DataGrid.Columns-->
-        <!--/DataGrid-->
+        <!-- DataGrid za prikaz zahteva -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ReservationDelayRequests}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True" Margin="10,21,10,0" Height="146" VerticalAlignment="Top" Grid.RowSpan="4">
+        <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Accommodation.Name}"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Accommodation.Location}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Accommodation.Type}"/>
+                <DataGridTextColumn Header="New Check In" Binding="{Binding NewCheckInDate}"/>
+                <DataGridTextColumn Header="New Check Out" Binding="{Binding NewCheckOutDate}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+        </DataGrid>
 
         <TextBlock Grid.Row="4" Margin="10,124,328,162" Text="Make a request to reschedule your reservation:" FontWeight="Bold"/>
 

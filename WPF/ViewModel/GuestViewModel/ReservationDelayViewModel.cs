@@ -8,6 +8,8 @@ using System.Windows.Input;
 using System.Windows;
 using BookingApp.Service;
 using BookingApp.Model;
+using System.Collections.ObjectModel;
+using BookingApp.Service.AccommodationServices;
 
 namespace BookingApp.WPF.ViewModel.GuestViewModel
 {
@@ -51,14 +53,46 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             }
         }
 
+        private ObservableCollection<ReservationDelayDTO> _reservationDelays;
+
+        public ObservableCollection<ReservationDelayDTO> ReservationDelayRequests
+        {
+            get { return _reservationDelays; }
+            set
+            {
+                _reservationDelays = value;
+                OnPropertyChanged(nameof(ReservationDelay));
+            }
+        }
+
         public ReservationDelayViewModel(GuestReservationDTO selectedReservation)
         {
             _reservationDelayService = new ReservationDelayService();
             SelectedReservation = selectedReservation;
             SendRequestCommand = new ViewModelCommand<object>(SendRequest);
 
-            NewArrivalDate = DateTime.Today; // Postavi na trenutni datum
-            NewDepartureDate = DateTime.Today.AddDays(1); // Postavi na sutrašnji datum
+            NewArrivalDate = DateTime.Today.AddDays(1); // Postavi na trenutni datum
+            NewDepartureDate = DateTime.Today.AddDays(2); // Postavi na sutrašnji datum
+            ReservationDelayRequests = new ObservableCollection<ReservationDelayDTO>();
+            LoadReservationDelayRequests();
+        }
+
+        private void LoadReservationDelayRequests()
+        {
+            try
+            {
+                var requests = _reservationDelayService.GetAllReservationDelays();
+                ReservationDelayRequests.Clear();
+                foreach (var request in requests)
+                {
+                    ReservationDelayRequests.Add(request);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading requests: {ex.Message}");
+            }
+            
         }
 
         public Guest getGuestByReservation(GuestReservationDTO _selectedReservation)
@@ -88,8 +122,8 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
 
             var reservationDelayDTO = new ReservationDelayDTO
             {
-                Guest = new Guest() { Username = getGuestByReservation(_selectedReservation).Username },
-                Accommodation = new Accommodation() { Name = getAccommodationByReservation(_selectedReservation).Name },
+                Guest = new Guest() { Username = LoggedInUser.Username },
+                Accommodation = new Accommodation() { Name = _selectedReservation.Name , Type = _selectedReservation.Type},
                 NewCheckInDate = NewArrivalDate,
                 NewCheckOutDate = NewDepartureDate,
                 Status = ReservationDelayStatus.Pending // Set status to pending initially
