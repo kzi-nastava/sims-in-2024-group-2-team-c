@@ -1,4 +1,5 @@
 ﻿using BookingApp.View;
+using BookingApp.WPF.View.TouristView;
 using BookingApp.WPF.ViewModel.GuideViewModel;
 using System;
 using System.Collections.Generic;
@@ -51,8 +52,11 @@ namespace BookingApp.WPF.View.GuideView
 
         private void FutureToursButton_Click(object sender, RoutedEventArgs e)
         {
-            FutureToursOverview futureTourOverview = new FutureToursOverview();
-            futureTourOverview.Show();
+            //FutureToursOverview futureTourOverview = new FutureToursOverview();
+            //futureTourOverview.Show();
+            Guide_CancelTour cancelTourPage = new Guide_CancelTour();
+            this.NavigationService.Navigate(cancelTourPage);
+            //mainFrame.Navigate(cancelTourPage);
             //MessageBox.Show("FUTURE TOURS button clicked.");
         }
 

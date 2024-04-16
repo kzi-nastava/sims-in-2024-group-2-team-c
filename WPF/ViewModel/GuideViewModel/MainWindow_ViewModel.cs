@@ -27,7 +27,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         public MainWindow_ViewModel() 
         {
             //
-            //LoggedInUser.mainViewModel = this;
+            LoggedInUser.mainGuideViewModel = this;
             NavigateToHomePageCommand = new RelayCommand(NavigateToHomePage);
             // Set default page
             CurrentPage = "Guide_HomePage.xaml";

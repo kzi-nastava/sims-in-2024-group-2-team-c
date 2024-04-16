@@ -1,4 +1,5 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.WPF.ViewModel.GuideViewModel;
+using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace BookingApp.Model
         public static string Role { get; set; }
 
         public static MainViewModel mainViewModel { get; set; }
+        public static MainWindow_ViewModel mainGuideViewModel { get; set; }
         public static void Reset()
         {
             Id = 0;

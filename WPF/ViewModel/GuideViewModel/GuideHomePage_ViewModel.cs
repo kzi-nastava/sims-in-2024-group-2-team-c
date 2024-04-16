@@ -19,7 +19,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
     {
         private readonly TourService _tourService;
         private readonly EndedToursService _endedToursService;
-        private Tour _activeTour;
+       /* private Tour _activeTour;
         public Tour ActiveTour
         {
             get { return _activeTour; }
@@ -30,17 +30,8 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 OnPropertyChanged(nameof(IsNoActiveTourVisible));
                 OnPropertyChanged(nameof(IsActiveTourVisible));
             }
-        }
-        private bool _isActiveTourVisible;
-        public bool IsActiveTourVisible
-        {
-            get { return _isActiveTourVisible; }
-            set
-            {
-                _isActiveTourVisible = value;
-                OnPropertyChanged(nameof(IsActiveTourVisible));
-            }
-        }
+        }*/
+        
         private TourStatisticDTO _statisticTour;
         public TourStatisticDTO StatisticTour
         {
@@ -64,7 +55,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 }
             }
         }
-        public bool IsNoActiveTourVisible => ActiveTour == null;
+       // public bool IsNoActiveTourVisible => ActiveTour == null;
        // public bool IsActiveTourVisible => ActiveTour != null;
         /*public ICommand SeeStatusCommand { get; } // Implementirajte svoju logiku za komandu "SeeStatus"
         public ICommand SeeMoreCommand { get; } // Implementirajte svoju logiku za komandu "SeeStatus"
@@ -97,7 +88,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             Username = LoggedInUser.Username;
             _tourService = new(new TourRepository());
             _endedToursService = new EndedToursService();
-            ActiveTour = _tourService.GetByActivity();
+            /*ActiveTour = _tourService.GetByActivity();
             if (ActiveTour == null)
             {
                 IsActiveTourVisible = false;
@@ -105,7 +96,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             else
             {
                 IsActiveTourVisible = true;
-            }
+            }*/
             StatisticTour = _endedToursService.FindMostVisitedTour();
 
            /* TodaysTourCommand = new RelayCommand(parameter => TodaysTour_Click(parameter));
