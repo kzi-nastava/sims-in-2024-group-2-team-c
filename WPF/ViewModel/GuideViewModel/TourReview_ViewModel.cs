@@ -62,7 +62,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         {
            // ReportReviewCommand = new Commands.RelayCommand(ReportReview);
             ReportReviewCommand = new ViewModelCommand(ReportReview);
-            _tourReviewService = new TourReviewService(new TourReviewsRepository());
+            _tourReviewService = new TourReviewService();
             Reviews = new ObservableCollection<TourReviewDTO>();
             LoadReviews();
         }

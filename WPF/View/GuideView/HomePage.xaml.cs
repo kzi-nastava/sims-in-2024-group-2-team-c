@@ -58,7 +58,7 @@ namespace BookingApp.WPF.View.GuideView
         public HomePage()
         {
             InitializeComponent();
-            _tourService = new(new TourRepository());
+            _tourService = new TourService();
             _endedToursService = new EndedToursService();
             ActiveTour = _tourService.GetByActivity();
             if (ActiveTour == null)

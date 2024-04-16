@@ -1,4 +1,5 @@
-﻿using BookingApp.Interfaces;
+﻿using BookingApp.Injector;
+using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -18,7 +19,7 @@ namespace BookingApp.Service.TourServices
         
 
         public KeyPointService() {
-            _keyPointRepository = new KeyPointRepository();
+            _keyPointRepository = Injectorr.CreateInstance<IKeyPointRepository>();
             _tourRepository = new TourRepository();  
         }
 

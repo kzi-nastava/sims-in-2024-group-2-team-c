@@ -63,7 +63,7 @@ namespace BookingApp.WPF.View.GuideView
         {
             InitializeComponent();
             DataContext = this;
-            _tourService = new(new TourRepository());
+            _tourService = new TourService();
             _endedToursService = new();
             EndedTours = new ObservableCollection<TourStatisticDTO>();
             tourView.IsEnabled = true;

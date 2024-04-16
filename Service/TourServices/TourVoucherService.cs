@@ -1,4 +1,5 @@
 ﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -15,11 +16,13 @@ namespace BookingApp.Service.TourServices
 
         private readonly ITourVoucherRepository _tourVoucherRepository;
         private readonly ITourRepository _tourRepository;
-            
-        public TourVoucherService(ITourVoucherRepository tourVoucherRepository)
+        private readonly TourService tourService;
+
+        public TourVoucherService()
         {
-            _tourVoucherRepository = tourVoucherRepository;
+            _tourVoucherRepository = Injectorr.CreateInstance<ITourVoucherRepository>();
             _tourRepository = new TourRepository();
+            tourService = new TourService();
         }
 
         public void Send(TourVoucher tourVoucher)

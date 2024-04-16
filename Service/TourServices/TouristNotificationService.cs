@@ -20,7 +20,7 @@ namespace BookingApp.Service.TourServices
 
 
         public TouristNotificationService() {
-            _touristService = new TouristService(new TouristRepository());
+            _touristService = new TouristService();
             _touristNotificationRepository = Injectorr.CreateInstance<ITouristNotificationRepository>();
         }
 

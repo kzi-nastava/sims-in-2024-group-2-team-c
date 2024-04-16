@@ -1,4 +1,5 @@
 ﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -13,9 +14,9 @@ namespace BookingApp.Service.TourServices
     public class TourInstanceService
     {
         private readonly ITourInstanceRepository iTourInstanceRepository;
-        public TourInstanceService(ITourInstanceRepository iTourInstanceRepository)
+        public TourInstanceService()
         {
-            this.iTourInstanceRepository = iTourInstanceRepository;
+            iTourInstanceRepository = Injectorr.CreateInstance<ITourInstanceRepository>();
         }
         public TourInstance GetById(int id) { return iTourInstanceRepository.GetById(id); }
         public List<TourInstance> GetAll() { return iTourInstanceRepository.GetAll(); }

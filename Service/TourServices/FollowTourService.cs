@@ -37,7 +37,7 @@ namespace BookingApp.Service.TourServices
             _tourInstanceRepository = Injectorr.CreateInstance<ITourInstanceRepository>();
             _tourReservationRepository = new TourReservationRepository();
             _keyPointService = new KeyPointService();
-            _tourReviewService = new TourReviewService(new TourReviewsRepository());
+            _tourReviewService = new TourReviewService();
         }
 
 

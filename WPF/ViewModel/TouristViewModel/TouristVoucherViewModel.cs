@@ -30,7 +30,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public TouristVoucherViewModel() {
 
-            _voucherService = new TourVoucherService(new TourVoucherRepository());
+            _voucherService = new TourVoucherService();
             CheckExpirationDate();
             LoadVouchers();
         }

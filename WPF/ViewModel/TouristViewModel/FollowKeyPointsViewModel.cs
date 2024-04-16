@@ -62,9 +62,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             SelectedTour = selectedTour;
             _followingService = new FollowTourService();
-            _tourInstanceService = new(new TourInstanceRepository());
+            _tourInstanceService = new TourInstanceService();
             IsTourInstanceEnded = false;
-            _touristService = new TouristService(new TouristRepository());
+            _touristService = new TouristService();
             _touristService.Activate(LoggedInUser.Id);
 
 

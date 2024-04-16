@@ -1,4 +1,5 @@
-﻿using BookingApp.Interfaces;
+﻿using BookingApp.Injector;
+using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -16,11 +17,11 @@ namespace BookingApp.Service.TourServices
         private TourService tourService;
         
 
-        public TouristService(ITouristsRepository itouristRepository)
+        public TouristService()
         {
-            iTouristRepository = itouristRepository;
-            tourInstanceService = new(new TourInstanceRepository());
-            tourService = new(new TourRepository());
+            iTouristRepository = Injectorr.CreateInstance<ITouristsRepository>();
+            tourInstanceService = new TourInstanceService();
+            tourService = new TourService();
             //tourInstanceService = new(new TourInstanceRepository());
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());

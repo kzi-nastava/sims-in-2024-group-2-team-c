@@ -19,9 +19,9 @@ namespace BookingApp.Service.TourServices
 
         public FutureToursService()
         {
-            tourInstanceService = new(new TourInstanceRepository());
-            tourService = new(new TourRepository());
-            tourVoucherService = new(new TourVoucherRepository());
+            tourInstanceService = new TourInstanceService();
+            tourService = new TourService();
+            tourVoucherService = new TourVoucherService();
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }

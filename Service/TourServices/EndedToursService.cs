@@ -19,9 +19,9 @@ namespace BookingApp.Service.TourServices
 
         public EndedToursService()
         {
-            tourInstanceService = new(new TourInstanceRepository());
-            tourService = new(new TourRepository());
-            locationService = new(new LocationRepository());
+            tourInstanceService = new TourInstanceService();
+            tourService = new();
+            locationService = new LocationService();
         }
 
         public List<TourStatisticDTO> GetEndedTours()

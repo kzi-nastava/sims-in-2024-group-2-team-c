@@ -102,7 +102,7 @@ namespace BookingApp.View
         public ReservationView(TourInstance tourInstance, Tour tour)
         {
             InitializeComponent();
-            tourVoucherService = new TourVoucherService(new TourVoucherRepository());
+            tourVoucherService = new TourVoucherService();
             TourInstance = tourInstance;
             Tour = tour;
             Location = _locationRepository.Get(tour.LocationId);

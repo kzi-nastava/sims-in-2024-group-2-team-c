@@ -111,7 +111,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             
             _selectedTour = selectedTour; 
-            _tourReviewService = new TourReviewService(new TourReviewsRepository());
+            _tourReviewService = new TourReviewService();
             RateCommand = new ViewModelCommand(saveTheReview);
             AddPictureCommand = new ViewModelCommand(OpenFileExplorer);
 

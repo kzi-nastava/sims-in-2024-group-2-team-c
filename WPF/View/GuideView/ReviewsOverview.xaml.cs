@@ -50,7 +50,7 @@ namespace BookingApp.WPF.View.GuideView
         {
             InitializeComponent();
             DataContext = this;
-            _tourReviewService = new TourReviewService(new TourReviewsRepository());
+            _tourReviewService = new TourReviewService();
             Reviews = new ObservableCollection<TourReviewDTO>();
             LoadReviews();
         }

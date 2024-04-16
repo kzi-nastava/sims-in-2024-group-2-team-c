@@ -52,7 +52,7 @@ namespace BookingApp.WPF.View.GuideView
         {
             InitializeComponent();
             DataContext = this;
-            _tourService = new(new TourRepository());
+            _tourService = new TourService();
             _futureToursService = new();
             //tourView.IsEnabled = true;
             LoadFutureTours();
