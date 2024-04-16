@@ -22,14 +22,24 @@ namespace BookingApp.Service.TourServices
         private readonly TourReviewService _tourReviewService;
 
 
-        public FollowTourService(ITourRepository tourRepository, ITourInstanceRepository tourInstanceRepository)
+        /* public FollowTourService(ITourRepository tourRepository, ITourInstanceRepository tourInstanceRepository)
+         {
+             _tourRepository = tourRepository;
+             _tourInstanceRepository = tourInstanceRepository;
+            _tourReservationRepository = new TourReservationRepository();
+             _keyPointService = new KeyPointService();
+             _tourReviewService = new TourReviewService(new TourReviewsRepository());
+         }*/
+
+        public FollowTourService()
         {
-            _tourRepository = tourRepository;
-            _tourInstanceRepository = tourInstanceRepository;
-           _tourReservationRepository = new TourReservationRepository();
+            _tourRepository = Injectorr.CreateInstance<ITourRepository>();
+            _tourInstanceRepository = Injectorr.CreateInstance<ITourInstanceRepository>();
+            _tourReservationRepository = new TourReservationRepository();
             _keyPointService = new KeyPointService();
             _tourReviewService = new TourReviewService(new TourReviewsRepository());
         }
+
 
         public List<FollowingTourDTO> GetActiveTourInstances()
         {

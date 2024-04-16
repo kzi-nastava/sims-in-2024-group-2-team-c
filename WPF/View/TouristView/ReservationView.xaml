@@ -10,7 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height=" 150"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height=" 50"></RowDefinition>
+            <RowDefinition Height=" 100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="250"></RowDefinition>
             <RowDefinition Height=" 40"></RowDefinition>
             <RowDefinition ></RowDefinition>
@@ -104,7 +105,7 @@
            <!-- </ListView.ItemTemplate>-->
        <!-- </ListView>-->
          <!--   -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
 
                 <ColumnDefinition></ColumnDefinition>
@@ -128,12 +129,12 @@
 
 
        
-        <GroupBox Grid.Row="3" Grid.Column="0" Header="Tourist Registration" Margin="10">
+        <GroupBox Grid.Row="4" Grid.Column="0" Header="Tourist Registration" Margin="10">
             <StackPanel x:Name="TouristFormsPanel" Margin="10">
                 <!-- Tourist forms will be dynamically added here -->
             </StackPanel>
         </GroupBox>
-        <Grid Grid.Row="4" Grid.Column="0">
+        <Grid Grid.Row="5" Grid.Column="0">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -144,8 +145,30 @@
             <Button Grid.Column="0"  Content="Close Reservation" Click="CloseButton_Click" Margin="15,5,15,5" Background="Red"/>
             <Button Grid.Column="1" x:Name="SaveButton" Content="Save Reservation" Click="SaveButton_Click" Margin="15,5,15,5" Background="ForestGreen" Visibility="Collapsed"/>
         </Grid>
-        
 
+
+        <Grid Grid.Row="2" Margin="10">
+            <GroupBox Header="Vouchers">
+                <StackPanel>
+                    <TextBlock Text="Select a Voucher:" FontWeight="Bold" Foreground="Purple" Margin="0,0,0,5" />
+                    <ComboBox x:Name="VoucherComboBox" Width="300" 
+                      ItemsSource="{Binding Vouchers}" 
+                     
+                      Margin="0,0,0,10">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TourName}" Margin="0,5,10,0" />
+                                    <TextBlock Text="(Expires: " Foreground="Gray"/>
+                                    <TextBlock Text="{Binding ExpirationDate, StringFormat={}{0:MM/dd/yyyy}}" Foreground="Gray" />
+                                    <TextBlock Text=")" Foreground="Gray"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
 
 
     </Grid>

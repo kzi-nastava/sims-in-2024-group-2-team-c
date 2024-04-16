@@ -85,5 +85,14 @@ namespace BookingApp.Repository
             return _tours.FirstOrDefault(t => t.Id == id);
         }*/
 
+        public string GetTourNameById(int tourId)
+        {
+            // Find the tour in the list based on the tour ID
+            Tour tour = _tours.FirstOrDefault(t => t.Id == tourId);
+
+            // Return the tour name if the tour is found, otherwise return a default value
+            return tour?.Name ?? "Unknown Tour";
+        }
+
     }
 }

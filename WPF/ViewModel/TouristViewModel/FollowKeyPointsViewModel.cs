@@ -18,6 +18,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private readonly MainViewModel _mainViewModel;
         private FollowingTourDTO _selectedTour;
         private readonly TourInstanceService _tourInstanceService;
+        private readonly TouristService _touristService;
+        private readonly FollowTourService _followingService;
 
         public FollowingTourDTO SelectedTour
         {
@@ -54,34 +56,34 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private readonly FollowTourService _followingService;
+        
 
         public FollowKeyPointsViewModel(FollowingTourDTO selectedTour)
         {
             SelectedTour = selectedTour;
-            _followingService = new(new TourRepository(), new TourInstanceRepository());
+            _followingService = new FollowTourService();
             _tourInstanceService = new(new TourInstanceRepository());
             IsTourInstanceEnded = false;
+            _touristService = new TouristService(new TouristRepository());
+            _touristService.Activate(LoggedInUser.Id);
 
-            // Use the selected tour data as needed
+
+            
             LoadKeyPointsForTour(SelectedTour);
             CheckTourInstanceEnded(selectedTour.TourInstanceId);
         }
 
         private void LoadKeyPointsForTour(FollowingTourDTO SelectedTour)
         {
-            // Your implementation for loading key points for the selected tour
-
-            ActiveTourKeyPoints = new ObservableCollection<ActiveTourKeyPointDTO>(_followingService.GetKeyPoints(SelectedTour));
-
             
-
+            ActiveTourKeyPoints = new ObservableCollection<ActiveTourKeyPointDTO>(_followingService.GetKeyPoints(SelectedTour));
+ 
         }
 
 
         private void CheckTourInstanceEnded(int tourInstanceId)
         {
-            // Fetch tour instance data from the data source
+           
             var tourInstance = _tourInstanceService.GetById(tourInstanceId);
 
             // Update IsTourInstanceEnded based on tour instance data

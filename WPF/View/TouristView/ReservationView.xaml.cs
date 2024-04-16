@@ -1,5 +1,7 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,6 +38,7 @@ namespace BookingApp.View
         private TourRepository _tourRepository = new TourRepository();
         private KeyPointRepository _keyPointRepository = new KeyPointRepository();
         private PeopleInfoRepository _peopleRepository = new PeopleInfoRepository();
+        private readonly TourVoucherService tourVoucherService;
 
         public TourInstance TourInstance
         {
@@ -77,15 +80,33 @@ namespace BookingApp.View
                 }
             }
         }
+
+        private ObservableCollection<TouristVoucherDTO> _vouchers;
+        public ObservableCollection<TouristVoucherDTO> Vouchers
+        {
+            get { return _vouchers; }
+            set
+            {
+
+                _vouchers = value;
+                OnPropertyChanged();
+                
+            }
+
+        }
+
+
+
         private List<TextBox[]> touristTextBoxes = new List<TextBox[]>();
 
         public ReservationView(TourInstance tourInstance, Tour tour)
         {
             InitializeComponent();
-            
+            tourVoucherService = new TourVoucherService(new TourVoucherRepository());
             TourInstance = tourInstance;
             Tour = tour;
             Location = _locationRepository.Get(tour.LocationId);
+            Vouchers = new ObservableCollection<TouristVoucherDTO>(tourVoucherService.GetVouchersByTourId(tour.Id));
             
             DataContext = this;
 

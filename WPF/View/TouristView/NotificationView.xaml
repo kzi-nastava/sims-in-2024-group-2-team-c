@@ -1,0 +1,60 @@
+﻿<Page x:Class="BookingApp.WPF.View.TouristView.NotificationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430"
+      Title="NotificationView" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock  Grid.Row="1"   Text="NOTIFICATIONS" Margin="10,10,10,10" HorizontalAlignment="Center" 
+             Foreground="#40613c"
+                FontWeight="Medium"
+                FontSize="25" />
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"  Content="Reccommendations" Background="White"></Button>
+            <Button Grid.Column="1"  Content="Accepted Requests" Background="White"></Button>
+            <Button Grid.Column="2"  Content="Tourists added" Background="White"></Button>
+
+        </Grid>
+
+        <ListView Grid.Row="3" ItemsSource="{Binding Notifications}" Margin="10">
+            <!-- Define a DataTemplate to format each item -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Display TourName -->
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <TextBlock Text="is present on  "></TextBlock>
+                        <TextBlock Text="{Binding TourName}" Margin="10,0" />
+
+                        <!-- Display ExpirationDate with custom formatting -->
+                       
+
+                        <!-- Add more TextBlocks as needed for other properties -->
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </Grid>
+</Page>

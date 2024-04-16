@@ -1,5 +1,4 @@
-﻿using BookingApp.DTO;
-using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,27 +17,19 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for RateTourView.xaml
+    /// Interaction logic for TouristVouchersView.xaml
     /// </summary>
-    public partial class RateTourView : Page
+    public partial class TouristVouchersView : Page
     {
-        public RateTourView(FollowingTourDTO selectedTour)
+        public TouristVouchersView()
         {
             InitializeComponent();
-            DataContext = new RateTourViewModel(selectedTour);
+            DataContext = new TouristVoucherViewModel();
         }
-
-
-        
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
-        }
-
-        private void Rate_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new FollowTourView());
         }
     }
 }
