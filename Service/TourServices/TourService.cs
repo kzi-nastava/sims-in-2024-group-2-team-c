@@ -43,6 +43,14 @@ namespace BookingApp.Service.TourServices
         public List<Tour> GetAll() {  return iTourRepository.GetAll(); }
         public Tour GetById(int id) { return iTourRepository.GetById(id); }
 
+        public string GetTourNameById(int tourId)
+        {
+            return iTourRepository.GetTourNameById(tourId);
+        }
+
+
+
+
         public List<Tour> GetFutureTours()
         {
             List<TourInstance> instances = tourInstanceService.GetFutureInstance();
@@ -70,6 +78,10 @@ namespace BookingApp.Service.TourServices
             }
             return null;
         }
+
+
+
+
         public int FindPresentTouristsCount(int TourId)
         {
             Tour t = GetById(TourId);

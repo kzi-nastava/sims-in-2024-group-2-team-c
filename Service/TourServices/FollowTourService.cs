@@ -14,69 +14,69 @@ namespace BookingApp.Service.TourServices
     public class FollowTourService
     {
 
-        //ITourInstanceRepository tourInstanceRepository = Injector.CreateInstance<ITourInstanceRepository>();
-        private readonly ITourRepository _tourRepository;
-        private readonly ITourInstanceRepository _tourInstanceRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        private KeyPointService _keyPointService;
+
+        private readonly TourReservationService _tourReservationService;
+        private readonly TourService _tourService;
+        private readonly TourInstanceService _tourInstanceService;
+        private readonly KeyPointService _keyPointService;
         private readonly TourReviewService _tourReviewService;
 
 
-        /* public FollowTourService(ITourRepository tourRepository, ITourInstanceRepository tourInstanceRepository)
-         {
-             _tourRepository = tourRepository;
-             _tourInstanceRepository = tourInstanceRepository;
-            _tourReservationRepository = new TourReservationRepository();
-             _keyPointService = new KeyPointService();
-             _tourReviewService = new TourReviewService(new TourReviewsRepository());
-         }*/
-
         public FollowTourService()
         {
-            _tourRepository = Injectorr.CreateInstance<ITourRepository>();
-            _tourInstanceRepository = Injectorr.CreateInstance<ITourInstanceRepository>();
-            _tourReservationRepository = new TourReservationRepository();
+            _tourReservationService = new TourReservationService();
+            _tourService = new TourService();
+            _tourInstanceService = new TourInstanceService();
             _keyPointService = new KeyPointService();
             _tourReviewService = new TourReviewService();
+
         }
+
+
 
 
         public List<FollowingTourDTO> GetActiveTourInstances()
         {
-            // Fetch all tour instances
-            var tourInstances = _tourInstanceRepository.GetAll();
 
-            var reservations = _tourReservationRepository.GetByMainTouristId(LoggedInUser.Id);
+            var tourInstances = _tourInstanceService.GetAll();
+            var reservations = _tourReservationService.GetByMainTouristId(LoggedInUser.Id);
             var reservedTourInstanceIds = reservations.Select(reservation => reservation.TourInstanceId).ToHashSet();
-
             var tourReviews = _tourReviewService.GetAll();
 
-            // Filter only active instances (started but not ended)
+            // Filter active instances 
             var activeTourInstances = tourInstances.Where(instance => instance.Started && reservedTourInstanceIds.Contains(instance.Id) && !tourReviews.Any(review => review.TourInstanceId == instance.Id)).ToList();
 
-            // Create a list of FollowingTourDTOs based on the active tour instances
             List<FollowingTourDTO> activeTourDTOs = new List<FollowingTourDTO>();
 
+            AddActiveDTOsToList(activeTourInstances, activeTourDTOs);
+
+            
+            return activeTourDTOs;
+        }
+
+
+
+
+
+        private void AddActiveDTOsToList(List<TourInstance> activeTourInstances, List<FollowingTourDTO> activeTourDTOs)
+        {
             foreach (var instance in activeTourInstances)
             {
-                // Fetch the tour associated with the instance
-                var tour = _tourRepository.GetById(instance.IdTour);
+                
+                var tour = _tourService.GetById(instance.IdTour);
 
-                // Create a DTO object and add it to the list
                 FollowingTourDTO dto = new FollowingTourDTO
-                { 
+                {
                     Name = tour.Name,
-                    Active = true, // Since we're only including active instances
+                    Active = true, 
                     TourId = tour.Id,
                     TourInstanceId = instance.Id
                 };
 
                 activeTourDTOs.Add(dto);
             }
-
-            // Return the list of active tour DTOs
-            return activeTourDTOs;
         }
+
 
 
 
@@ -88,24 +88,14 @@ namespace BookingApp.Service.TourServices
 
             foreach (var instance in keyPoints)
             {
-                // Fetch the tour associated with the instance
-                string activity;
-                if (instance.Active)
-                {
-                     activity = "ACTIVE";
-                }
-                else
-                {
-                    activity = "NOT ACTIVE";
-                }
+                
+                string activity = CheckActivity(instance);
 
+                ActiveTourKeyPointDTO keyPoint = new ActiveTourKeyPointDTO(instance.Name, instance.Description, activity);
 
-                ActiveTourKeyPointDTO keyPoint = new ActiveTourKeyPointDTO(instance.Name,instance.Description, activity);
-
-                // Create a DTO object and add it to the list
                 keyPointDTOs.Add(keyPoint);
 
-                
+
             }
 
 
@@ -115,5 +105,19 @@ namespace BookingApp.Service.TourServices
 
 
 
+        private static string CheckActivity(KeyPoint instance)
+        {
+            string activity;
+            if (instance.Active)
+            {
+                activity = "ACTIVE";
+            }
+            else
+            {
+                activity = "NOT ACTIVE";
+            }
+
+            return activity;
+        }
     }
 }
