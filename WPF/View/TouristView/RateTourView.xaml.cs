@@ -36,6 +36,9 @@ namespace BookingApp.WPF.View.TouristView
             this.NavigationService.GoBack();
         }
 
-    
+        private void Rate_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new FollowTourView());
+        }
     }
 }

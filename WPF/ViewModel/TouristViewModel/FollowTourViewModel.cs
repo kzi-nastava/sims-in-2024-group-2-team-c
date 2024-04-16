@@ -71,6 +71,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private void ShowKeyPoints(object obj)
         {
            
+
                 
            
         }

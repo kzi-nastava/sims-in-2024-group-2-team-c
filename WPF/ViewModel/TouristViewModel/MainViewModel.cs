@@ -34,14 +34,27 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public ViewModelCommand UserCommand {  get; }
 
+        public ViewModelCommand NotificationCommand { get; }
+
         public MainViewModel() {
 
             LoggedInUser.mainViewModel = this;
             FollowTourCommand = new ViewModelCommand(ExecuteFollowTourCommand);
             //ShowKeyPointsCommand = new ViewModelCommand(ExecuteShowKeyPointsCommand);
             UserCommand = new ViewModelCommand(ExecuteUserCommand);
+            NotificationCommand = new ViewModelCommand(ExecuteNotificationCommand);
 
 
+        }
+
+        public void ExecuteNotificationCommand(object obj)
+        {
+            /* if (obj is MainTouristView mainTouristView)
+             {
+                 mainTouristView.MainFrame.Navigate(new FollowTourView());
+             }*/
+
+            CurrentChildView = new NotificationViewModel();
 
         }
 

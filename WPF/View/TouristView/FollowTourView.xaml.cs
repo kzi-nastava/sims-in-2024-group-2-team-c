@@ -46,6 +46,7 @@ namespace BookingApp.WPF.View.TouristView
                 
                 FollowKeyPointsViewModel followKeyPointsViewModel = new FollowKeyPointsViewModel(selectedTour);
 
+
                 
                 FollowKeyPointsView followKeyPointsView = new FollowKeyPointsView();
 

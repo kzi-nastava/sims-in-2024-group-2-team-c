@@ -18,6 +18,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private readonly MainViewModel _mainViewModel;
         private FollowingTourDTO _selectedTour;
         private readonly TourInstanceService _tourInstanceService;
+        private readonly TouristService _touristService;
 
         public FollowingTourDTO SelectedTour
         {
@@ -62,6 +63,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _followingService = new(new TourRepository(), new TourInstanceRepository());
             _tourInstanceService = new(new TourInstanceRepository());
             IsTourInstanceEnded = false;
+            _touristService = new TouristService(new TouristRepository());
+            _touristService.Activate(LoggedInUser.Id);
+
 
             // Use the selected tour data as needed
             LoadKeyPointsForTour(SelectedTour);

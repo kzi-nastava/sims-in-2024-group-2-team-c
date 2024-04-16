@@ -58,7 +58,7 @@
                 <Button  Width="50" Margin="5" Content="Add" Command="{Binding AddPictureCommand}"></Button>
             </StackPanel>
 
-            <Button Grid.Row="7" IsEnabled="{Binding CanRate}" Command="{Binding RateCommand}"  Width="70" Height="30" Content="RATE" Margin="10"></Button>
+            <Button Grid.Row="7" IsEnabled="{Binding CanRate}" Command="{Binding RateCommand}"  Click="Rate_Click" Width="70" Height="30" Content="RATE" Margin="10"></Button>
 
         </Grid>
     </ScrollViewer>

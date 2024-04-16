@@ -30,5 +30,20 @@ namespace BookingApp.Service.TourServices
             return iTouristRepository.GetById(id);
         }
 
+        public bool GetActivity(int id) {
+            Tourist tourist = iTouristRepository.GetById(id);
+            return tourist.Active;
+        
+        }
+
+        public void Activate(int id)
+        {
+            Tourist tourist = iTouristRepository.GetById(id);
+            tourist.Active = true;
+            iTouristRepository.Update(tourist);
+        }
+
+
+
     }
 }
