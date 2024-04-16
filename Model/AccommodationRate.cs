@@ -10,7 +10,7 @@ namespace BookingApp.Model
     public class AccommodationRate : ISerializable
     {
         public int Id { get; set; }
-        public int ReservationId { get; set; }
+        public Reservation Reservation { get; set; }
         public int Cleanliness { get; set; }
         public int OwnerRate { get; set; }
         public string Comment { get; set; }
@@ -20,7 +20,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), ReservationId.ToString(), Cleanliness.ToString(), OwnerRate.ToString(), Comment };
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), Cleanliness.ToString(), OwnerRate.ToString(), Comment };
             /*
             foreach (string imagePath in Images)
             {
@@ -34,7 +34,7 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            ReservationId = Convert.ToInt32(values[1]);
+            Reservation = new Reservation() { Id = Convert.ToInt32(values[1]) };
             Cleanliness = Convert.ToInt32(values[2]);
             OwnerRate = Convert.ToInt32(values[3]);
             Comment = values[4];

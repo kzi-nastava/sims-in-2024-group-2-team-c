@@ -96,11 +96,12 @@ namespace BookingApp.Repository
 
                 // Provera dostupnosti smeštaja za navedene datume i boravak00
                 bool isAccommodationAvailable = CheckAccommodationAvailability(accommodationId, checkInDate, checkOutDate, stayDuration, reservations);
-
+                
                 if (!isAccommodationAvailable)
                 {
                     return "Accommodation is not available for the selected dates.";
                 }
+                
 
                 // Generisanje novog ID-a za rezervaciju
                 int newReservationId = maxReservationId + 1;

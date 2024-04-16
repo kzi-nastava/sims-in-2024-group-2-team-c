@@ -38,7 +38,7 @@ namespace BookingApp.Service.AccommodationServices
             {
                 var data = new AccommodationRate
                 {
-                    ReservationId = _selectedReservation.Id,
+                    Reservation = new Reservation() { Id = _selectedReservation.Id },
                     Cleanliness = cleanlinessRating,
                     OwnerRate = correctnessOfTheOwner,
                     Comment = comment

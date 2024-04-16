@@ -62,9 +62,11 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <Button Grid.Row="4" Content="Cancel Reservation" Command="{Binding CancelReservationCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" HorizontalAlignment="Left" Margin="230,199,0,0" VerticalAlignment="Top" Width="150" Height="20"/>
+        <Button Grid.Row="4" Content="Cancel Reservation" Command="{Binding CancelReservationCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" HorizontalAlignment="Left" Margin="230,254,0,0" VerticalAlignment="Top" Width="150" Height="20"/>
 
         <Button Grid.Row="4" Content="Rate" Command="{Binding RateReservationCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="230,161,0,0" Height="20"/>
+
+        <Button Grid.Row="4" Content="Reschedule Reservation" Command="{Binding RescheduleReservationCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="230,206,0,0" Height="20"/>
 
     </Grid>
 </Window>

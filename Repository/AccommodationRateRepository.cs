@@ -54,7 +54,7 @@ namespace BookingApp.Repository
 
             if (reservation != null)
             {
-                return rates.Any(rate => rate.ReservationId == reservation.ReservationId);
+                return rates.Any(rate => rate.Reservation.Id == reservation.ReservationId);
             }
             else
             {

@@ -25,7 +25,6 @@ namespace BookingApp.View
 
         private void CheckButton_Click(object sender, RoutedEventArgs e)
         {
-            // Check if all required data is entered
             if (StartDatePicker.SelectedDate == null || EndDatePicker.SelectedDate == null ||
                 string.IsNullOrWhiteSpace(StayDurationTextBox.Text))
             {
@@ -33,11 +32,9 @@ namespace BookingApp.View
                 return;
             }
 
-            // Gather reservation parameters
             DateTime startDate = StartDatePicker.SelectedDate.Value;
             DateTime endDate = EndDatePicker.SelectedDate.Value;
 
-            // Check if the selected dates are in the future
             if (startDate < DateTime.Today || endDate < DateTime.Today)
             {
                 MessageBox.Show("Please choose future dates for the reservation.");
@@ -50,7 +47,6 @@ namespace BookingApp.View
                 return;
             }
 
-            // Check against the minimum booking duration set by the owner
             if (stayDuration < selectedAccommodation.MinBookingDays)
             {
                 MessageBox.Show($"Minimum booking duration is {selectedAccommodation.MinBookingDays} days.");
@@ -58,14 +54,14 @@ namespace BookingApp.View
             }
 
             GuestReservationWindow guestReservationWindow = new GuestReservationWindow(selectedAccommodation, startDate, endDate, stayDuration);
-            guestReservationWindow.ShowDialog(); // Otvara prozor i čeka da se zatvori pre nego što se vrati na ovaj prozor
+            guestReservationWindow.Show();
 
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
             
-             this.Close(); // Go back to the first window
+             this.Close();
             
         }
 

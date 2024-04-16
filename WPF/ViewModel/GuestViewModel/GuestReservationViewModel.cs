@@ -21,6 +21,8 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
         public ICommand CancelReservationCommand => new ViewModelCommand<object>(CancelReservation);
         public ICommand RateAccommodationCommand { get; }
 
+        public ICommand RescheduleReservationCommand { get; }
+
         private ObservableCollection<GuestReservationDTO> _guestReservations;
 
         public ObservableCollection<GuestReservationDTO> GuestReservations
@@ -39,6 +41,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             _accommodationRateService = new(new AccommodationRateRepository());
             GuestReservations = new ObservableCollection<GuestReservationDTO>();
             RateReservationCommand = new ViewModelCommand<object>(RateReservation);
+            RescheduleReservationCommand = new ViewModelCommand<object>(RescheduleReservation);
             LoadGuestReservations();
         }
 
@@ -152,7 +155,21 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             }
         }
 
+        private void RescheduleReservation(object parameter)
+        {
+            if (parameter != null)
+            {
+                var selectedReservation = parameter as GuestReservationDTO;
 
+                // Ovde dodajte logiku za otvaranje novog prozora za reschedule rezervacije
+                ReservationDelayWindow rescheduleWindow = new ReservationDelayWindow(selectedReservation);
+                rescheduleWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a reservation to reschedule.");
+            }
+        }
 
 
     }

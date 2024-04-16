@@ -9,13 +9,13 @@ using System.Windows;
 
 namespace BookingApp.Repository
 {
-    public class ReservationRepository 
+    public class ReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/reservations.csv";
         private readonly Serializer<Reservation> _serializer;
         private List<Reservation> _reservations;
-        
-        
+
+
 
         public ReservationRepository()
         {
@@ -102,9 +102,36 @@ namespace BookingApp.Repository
             }
             else
             {
-               
+
                 return DateTime.MinValue; // Vraćanje DateTime.MinValue kao podrazumevane vrednosti
             }
+        }
+
+        public List<Reservation> GetReservationsByAccommodationId(int accommodationId)
+        {
+            return _reservations.Where(r => r.Accommodation.Id == accommodationId).ToList();
+        }
+
+        public Guest getGuestByReservationId(int id)
+        {
+            var reservation = _reservations.Where(r =>r.Id == id).FirstOrDefault();
+            if (reservation == null)
+            {
+                MessageBox.Show("Reservation not found.");
+                return null;
+            }
+            int Id = reservation.Guest.Id;
+            return reservation.Guest;
+        }
+
+        internal Accommodation getAccommodationByReservation(int id)
+        {
+            var reservation = _reservations.Where(r => r.Id == id).FirstOrDefault();
+            if (reservation == null) {
+                MessageBox.Show("Reservation not found.");
+                return null ;
+            }
+            return reservation.Accommodation;
         }
     }
 }
