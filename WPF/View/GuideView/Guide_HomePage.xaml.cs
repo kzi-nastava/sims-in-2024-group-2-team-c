@@ -76,6 +76,8 @@ namespace BookingApp.WPF.View.GuideView
         {
             ReviewsOverview reviewsOverview = new ReviewsOverview();
             reviewsOverview.Show();
+            //Guide_TourReviews reviewView = new Guide_TourReviews();
+            //this.NavigationService.Navigate(reviewView);
         }
         private void TourRequests_Click(object sender, RoutedEventArgs e)
         {
