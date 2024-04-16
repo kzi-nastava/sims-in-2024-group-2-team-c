@@ -47,5 +47,12 @@ namespace BookingApp.Service.TourServices
             }
             return founded;
         }
+        public List<TourInstance> FindEndedToursInstancesByYear(int year)
+        {
+            List<TourInstance> instances = GetEndedInstances();  //trazim samo za zavrsene
+            List<TourInstance> founded = instances.Where(tour => tour.Date.Year == year).ToList();
+
+            return founded;
+        }
     }
 }

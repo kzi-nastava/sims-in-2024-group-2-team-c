@@ -68,6 +68,11 @@ namespace BookingApp.WPF.View.GuideView
             // tourStatisticView.Show();
             //MessageBox.Show("SEE TOUR STATISTIC button clicked.");
         }
+        private void SeeTourStatisticDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Guide_TourStatisticDetails tourStatisticDetails = new Guide_TourStatisticDetails();
+            this.NavigationService.Navigate(tourStatisticDetails);
+        }
         private void SeeStatus_Click(object sender, RoutedEventArgs e)
         {
             //
@@ -79,6 +84,7 @@ namespace BookingApp.WPF.View.GuideView
             //Guide_TourReviews reviewView = new Guide_TourReviews();
             //this.NavigationService.Navigate(reviewView);
         }
+        
         private void TourRequests_Click(object sender, RoutedEventArgs e)
         {
             //

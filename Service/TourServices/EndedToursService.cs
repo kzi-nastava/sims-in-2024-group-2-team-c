@@ -72,6 +72,16 @@ namespace BookingApp.Service.TourServices
             }
             return percentages;
         }
+        public List<float> FindAttendencePercentagesForToursByYear(int year)
+        {
+            List<TourStatisticDTO> endedTours = FindEndedToursByYear(year);
+            List<float> percentages = new List<float>();
+            foreach (TourStatisticDTO tour in endedTours)
+            {
+                percentages.Add(CalculateAttendancePercentage(tour));
+            }
+            return percentages;
+        }
         public TourStatisticDTO FindMostVisitedTour()
         {
             List<TourStatisticDTO> endedTours = GetEndedTours();
@@ -84,6 +94,50 @@ namespace BookingApp.Service.TourServices
                     founded = tour;
                 }
                     
+            }
+            return founded;
+        }
+        public TourStatisticDTO FindMostVisitedTourForYear(int year)
+        {
+            List<TourStatisticDTO> endedTours = FindEndedToursByYear(year);
+            List<float> percentages = FindAttendencePercentagesForToursByYear(year);
+            TourStatisticDTO founded = new TourStatisticDTO();
+            foreach (TourStatisticDTO tour in endedTours)
+            {
+                if (percentages.Max() == CalculateAttendancePercentage(tour))
+                {
+                    founded = tour;
+                }
+
+            }
+            return founded;
+
+        }
+
+        public List<TourStatisticDTO> FindEndedToursByYear(int year)
+        {
+            List<TourStatisticDTO> founded = new List<TourStatisticDTO>();
+            List<TourInstance> instances = tourInstanceService.FindEndedToursInstancesByYear(year);
+            foreach (TourInstance instance in instances)
+            {
+                Tour tour = tourService.GetById(instance.IdTour);
+                TourStatisticDTO dto = new TourStatisticDTO
+                {
+                    TourInstanceId = instance.IdTour,
+                    Name = tour.Name,
+                    Description = tour.Description,
+                    Location = LoadLocation(tour.LocationId),
+                    Language = tour.Language,
+                    Duration = tour.Duration,
+                    Date = instance.Date,
+                    MaxTourists = instance.MaxTourists,
+                    ReservedTourists = instance.ReservedTourists,
+                    PresentTourists = tourService.FindPresentTouristsCount(instance.IdTour),
+                    LessThan18 = tourService.CalculateNumberOfTouristsUnder18(tour),
+                    Between18And50 = tourService.CalculateNumberOfTourists18And50(tour),
+                    MoreThan50 = tourService.CalculateNumberOfTouristsMore50(tour)
+                };
+                founded.Add(dto);
             }
             return founded;
         }

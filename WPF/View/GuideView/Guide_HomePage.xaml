@@ -85,7 +85,7 @@
                             <TextBlock Text="Description: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding StatisticTour.Description}"/>
                         </StackPanel>
-                        <Button Content="See More" Margin="0,20,0,0" Width="272"/>
+                        <Button Click="SeeTourStatisticDetailsButton_Click" Content="See More" Margin="0,20,0,0" Width="272"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>
