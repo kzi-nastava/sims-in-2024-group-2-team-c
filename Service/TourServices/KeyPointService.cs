@@ -54,6 +54,16 @@ namespace BookingApp.Service.TourServices
             return _keyPointRepository.GetById(id);
         }
 
+        public KeyPoint Update(KeyPoint keyPoint)
+        {
+            return _keyPointRepository.Update(keyPoint);
+        }
+
+        public List<KeyPoint> GetKeypointsByIds(List<int> keypointIds)
+        {
+            return _keyPointRepository.GetKeypointsByIds(keypointIds);
+        }
+
 
     }
 }

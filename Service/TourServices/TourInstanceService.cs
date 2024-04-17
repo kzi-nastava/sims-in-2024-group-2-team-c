@@ -47,5 +47,21 @@ namespace BookingApp.Service.TourServices
             }
             return founded;
         }
+
+        public List<TourInstance> GetTourInstancesByTourId(int tourId)
+        {
+           return iTourInstanceRepository.GetTourInstancesByTourId(tourId);
+        }
+
+        public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople)
+        {
+            return iTourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(tourId, numberOfPeople);
+        }
+
+        public TourInstance Update(TourInstance tourInstance)
+        {
+            return iTourInstanceRepository.Update(tourInstance);
+        }
+
     }
 }

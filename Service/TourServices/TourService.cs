@@ -49,7 +49,10 @@ namespace BookingApp.Service.TourServices
         }
 
 
-
+        public List<Tour> GetToursByLocationId(int locationId)
+        {
+            return iTourRepository.GetToursByLocationId(locationId);
+        }
 
         public List<Tour> GetFutureTours()
         {

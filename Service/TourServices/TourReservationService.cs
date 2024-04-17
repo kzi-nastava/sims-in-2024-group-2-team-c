@@ -25,7 +25,10 @@ namespace BookingApp.Service.TourServices
             return tourReservationRepository.GetByMainTouristId(mainTouristId);
         }
 
-
+        public void Save(TourReservation tourReservation)
+        {
+            tourReservationRepository.Save(tourReservation);
+        }
 
 
     }

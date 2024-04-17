@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Service.TourServices;
 
 namespace BookingApp.View
 {
@@ -22,16 +23,21 @@ namespace BookingApp.View
     public partial class AlternativeToursView : Window
     {
 
-        private TourInstanceRepository _tourInstanceRepository;
-        private LocationRepository _locationRepository;
-        private TourRepository _tourRepository;
+        private readonly TourInstanceService tourInstanceService;
+        private readonly TourService tourService;
+        private readonly LocationService locationService;
+
+
         public AlternativeToursView(List<Tour> tours)
         {
 
             InitializeComponent();
-            _tourInstanceRepository = new TourInstanceRepository();
-            _locationRepository = new LocationRepository();
-            _tourRepository = new TourRepository();
+            
+
+            tourInstanceService = new TourInstanceService();
+            tourService = new TourService();
+            locationService = new LocationService();
+
             LoadLocations(tours);
             AlternativesListView.ItemsSource = tours;
         }
@@ -41,7 +47,7 @@ namespace BookingApp.View
 
             foreach (Tour tour in tours)
             {
-                Location locationObject = _locationRepository.Get(tour.LocationId);
+                Location locationObject = locationService.Get(tour.LocationId);
                 if (locationObject != null)
                 {
                     tour.ViewLocation = $"{locationObject.City}, {locationObject.Country}";
@@ -62,7 +68,7 @@ namespace BookingApp.View
             if (AlternativesListView.SelectedItem != null)
             {
                 Tour selectedTour = (Tour)AlternativesListView.SelectedItem;
-                List<TourInstance> tourInstances = _tourInstanceRepository.GetTourInstancesByTourId(selectedTour.Id);
+                List<TourInstance> tourInstances = tourInstanceService.GetTourInstancesByTourId(selectedTour.Id);
                 AlternativeinstancesView.ItemsSource = tourInstances;
             }
         }
@@ -77,7 +83,7 @@ namespace BookingApp.View
             {
                 // Get the corresponding tour instance object
                 TourInstance instance = button.DataContext as TourInstance;
-                Tour tour = _tourRepository.GetById(instance.IdTour);
+                Tour tour = tourService.GetById(instance.IdTour);
 
                 if (instance != null )
                 {
@@ -114,7 +120,7 @@ namespace BookingApp.View
             int numberOfPeople;
             if (int.TryParse(NumberOfPeopleTextBox.Text, out numberOfPeople))
             {
-                List<TourInstance> tourInstances = _tourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(selectedTour.Id, numberOfPeople);
+                List<TourInstance> tourInstances = tourInstanceService.GetInstancesByTourIdAndAvailableSlots(selectedTour.Id, numberOfPeople);
                 AlternativeinstancesView.ItemsSource = tourInstances;
             }
             else

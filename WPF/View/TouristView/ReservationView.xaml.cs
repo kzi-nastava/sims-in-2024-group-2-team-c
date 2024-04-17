@@ -29,17 +29,17 @@ namespace BookingApp.View
 
     public partial class ReservationView : Window, INotifyPropertyChanged
     {
-        private TourInstance _tourInstance;
-        private Tour _tour;
-        private LocationRepository _locationRepository = new LocationRepository();
-        private TouristRepository _touristRepository = new TouristRepository();
-        private TourReservationRepository _reservationRepository = new TourReservationRepository();
-        private TourInstanceRepository _tourInstanceRepository = new TourInstanceRepository();
-        private TourRepository _tourRepository = new TourRepository();
-        private KeyPointRepository _keyPointRepository = new KeyPointRepository();
-        private PeopleInfoRepository _peopleRepository = new PeopleInfoRepository();
+        
+        private readonly LocationService locationService;
+        private readonly TourReservationService tourReservationService;
+        private readonly TourInstanceService tourInstanceService;
+        private readonly TourService tourService;
+        private readonly KeyPointService keyPointService;
         private readonly TourVoucherService tourVoucherService;
+        private readonly PeopleInfoService peopleInfoService;
 
+
+        private TourInstance _tourInstance;
         public TourInstance TourInstance
         {
             get { return _tourInstance; }
@@ -68,6 +68,7 @@ namespace BookingApp.View
             }
         }
 
+        private Tour _tour;
         public Tour Tour
         {
             get { return _tour; }
@@ -102,12 +103,25 @@ namespace BookingApp.View
         public ReservationView(TourInstance tourInstance, Tour tour)
         {
             InitializeComponent();
+
+            tourReservationService = new TourReservationService();
+            locationService = new LocationService();
+            tourInstanceService = new TourInstanceService();
+            tourService = new TourService();
+            keyPointService = new KeyPointService();
+            peopleInfoService = new PeopleInfoService();
+
+
             tourVoucherService = new TourVoucherService();
             TourInstance = tourInstance;
             Tour = tour;
-            Location = _locationRepository.Get(tour.LocationId);
-            Vouchers = new ObservableCollection<TouristVoucherDTO>(tourVoucherService.GetVouchersByTourId(tour.Id));
             
+            Location = locationService.Get(tour.LocationId);
+            Vouchers = new ObservableCollection<TouristVoucherDTO>(tourVoucherService.GetVouchersByTourId(tour.Id));
+
+
+            
+
             DataContext = this;
 
         }
@@ -297,7 +311,7 @@ namespace BookingApp.View
                 int age = int.TryParse(ageText, out int parsedAge) ? parsedAge : 0;
 
                 PeopleInfo onePerson = new PeopleInfo(firstName,lastName,age,false);
-                _peopleRepository.Save(onePerson);
+                peopleInfoService.Save(onePerson);
                 ids.Add(onePerson.Id);
 
             }
@@ -323,19 +337,19 @@ namespace BookingApp.View
 
             TourReservation reservation = new TourReservation(idInstance, num, LoggedInUser.Id,peopleIds);
 
-            _reservationRepository.Save(reservation);
+            tourReservationService.Save(reservation);
 
             TourInstance.ReservedTourists += num;
-            _tourInstanceRepository.Update(TourInstance);
+            tourInstanceService.Update(TourInstance);
             this.Close();
 
         }
 
         private void UpdateKeyPoints(List<int> peopleIds)
         {
-            Tour tour = _tourRepository.GetById(TourInstance.IdTour);
+            Tour tour = tourService.GetById(TourInstance.IdTour);
 
-            List<KeyPoint> keyPoints = _keyPointRepository.GetKeypointsByIds(tour.KeyPointIds);
+            List<KeyPoint> keyPoints = keyPointService.GetKeypointsByIds(tour.KeyPointIds);
 
 
             foreach (KeyPoint keyPoint in keyPoints)
@@ -346,7 +360,7 @@ namespace BookingApp.View
                     keyPoint.PeopleIds.Add(id);
                 }
 
-                _keyPointRepository.Update(keyPoint);
+                keyPointService.Update(keyPoint);
             }
 
             
