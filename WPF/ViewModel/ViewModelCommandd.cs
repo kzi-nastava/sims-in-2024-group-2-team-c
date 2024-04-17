@@ -7,17 +7,17 @@ using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModel
 {
-    public class ViewModelCommand : ICommand
+    public class ViewModelCommandd : ICommand
     {
         private readonly Action<object> _executeAction;
         private readonly Predicate<object> _canExecuteAction;
         //Constructors
-        public ViewModelCommand(Action<object> executeAction)
+        public ViewModelCommandd(Action<object> executeAction)
         {
             _executeAction = executeAction;
             _canExecuteAction = null;
         }
-        public ViewModelCommand(Action<object> executeAction, Predicate<object> canExecuteAction)
+        public ViewModelCommandd(Action<object> executeAction, Predicate<object> canExecuteAction)
         {
             _executeAction = executeAction;
             _canExecuteAction = canExecuteAction;

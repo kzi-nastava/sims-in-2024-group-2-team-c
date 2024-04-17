@@ -29,20 +29,20 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
-        public ViewModelCommand FollowTourCommand { get;  }
-        public ViewModelCommand ShowKeyPointsCommand { get; }
+        public ViewModelCommandd FollowTourCommand { get;  }
+        public ViewModelCommandd ShowKeyPointsCommand { get; }
 
-        public ViewModelCommand UserCommand {  get; }
+        public ViewModelCommandd UserCommand {  get; }
 
-        public ViewModelCommand NotificationCommand { get; }
+        public ViewModelCommandd NotificationCommand { get; }
 
         public MainViewModel() {
 
             LoggedInUser.mainViewModel = this;
-            FollowTourCommand = new ViewModelCommand(ExecuteFollowTourCommand);
+            FollowTourCommand = new ViewModelCommandd(ExecuteFollowTourCommand);
             //ShowKeyPointsCommand = new ViewModelCommand(ExecuteShowKeyPointsCommand);
-            UserCommand = new ViewModelCommand(ExecuteUserCommand);
-            NotificationCommand = new ViewModelCommand(ExecuteNotificationCommand);
+            UserCommand = new ViewModelCommandd(ExecuteUserCommand);
+            NotificationCommand = new ViewModelCommandd(ExecuteNotificationCommand);
 
 
         }
