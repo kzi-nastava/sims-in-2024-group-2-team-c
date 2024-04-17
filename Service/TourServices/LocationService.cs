@@ -30,5 +30,17 @@ namespace BookingApp.Service.TourServices
         {
             return locationRepository.GetById(id);
         }
+
+
+        public int GetIdByCityorCoutry(string searchString)
+        {
+            return locationRepository.GetIdByCityorCoutry(searchString);
+        }
+
+        public Location Get(int id)
+        {
+            return locationRepository.Get(id);
+        }
+
     }
 }

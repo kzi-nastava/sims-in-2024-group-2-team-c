@@ -23,5 +23,12 @@ namespace BookingApp.Service.TourServices
         {
             return _peopleInfoRepository.GetById(id);
         }
+
+        public PeopleInfo Save(PeopleInfo peopleInfo)
+        {
+            return _peopleInfoRepository.Save(peopleInfo);
+        }
+
+
     }
 }

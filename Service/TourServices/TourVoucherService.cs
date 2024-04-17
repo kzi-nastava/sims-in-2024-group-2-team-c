@@ -15,13 +15,12 @@ namespace BookingApp.Service.TourServices
     {
 
         private readonly ITourVoucherRepository _tourVoucherRepository;
-        private readonly ITourRepository _tourRepository;
+        
         private readonly TourService tourService;
 
         public TourVoucherService()
         {
             _tourVoucherRepository = Injectorr.CreateInstance<ITourVoucherRepository>();
-            _tourRepository = new TourRepository();
             tourService = new TourService();
         }
 
@@ -32,38 +31,37 @@ namespace BookingApp.Service.TourServices
 
         public List<TouristVoucherDTO> GetVouchersByTouristId(int touristId)
         {
-            // Retrieve all vouchers from the repository
+
             List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
-
-            // Filter vouchers based on the given touristId
             List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == touristId).ToList();
+            List<TouristVoucherDTO> vouchersDTO = FilterVouchers(filteredVouchers);
 
-            // Map the filtered list of TourVoucher to TouristVoucherDTO
-            List<TouristVoucherDTO> vouchersDTO = filteredVouchers.Select(voucher => new TouristVoucherDTO
+            return vouchersDTO;
+        }
+
+
+        private List<TouristVoucherDTO> FilterVouchers(List<TourVoucher> filteredVouchers)
+        {
+            return filteredVouchers.Select(voucher => new TouristVoucherDTO
             {
                 TourId = voucher.TourId,
                 TouristId = voucher.TouristId,
                 ExpirationDate = voucher.ExpirationDate,
-                TourName = _tourRepository.GetTourNameById(voucher.TourId) // Implement this function to get the tour name by its ID
+                TourName = tourService.GetTourNameById(voucher.TourId)
             }).ToList();
-
-            // Return the list of TouristVoucherDTO
-            return vouchersDTO;
         }
 
 
         public void RemoveExpiredVouchers()
         {
-            // Retrieve all vouchers from the repository
+            
             List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
 
-            // Get the current date and time
             DateTime currentDate = DateTime.Now;
 
             // Iterate through the vouchers
             foreach (TourVoucher voucher in allVouchers)
             {
-                // Check if the voucher has expired
                 if (voucher.ExpirationDate < currentDate)
                 {
                     // If expired, remove the voucher from the repository
@@ -88,7 +86,7 @@ namespace BookingApp.Service.TourServices
                 TouristId = voucher.TouristId,
                 ExpirationDate = voucher.ExpirationDate,
                 // Get the tour name using the tour repository
-                TourName = _tourRepository.GetTourNameById(voucher.TourId)
+                TourName = tourService.GetTourNameById(voucher.TourId)
             }).ToList();
 
             // Return the list of TouristVoucherDTO

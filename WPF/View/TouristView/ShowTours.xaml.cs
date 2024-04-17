@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,17 +26,18 @@ namespace BookingApp.View
     public partial class Window1 : Window
     {
 
-        private TourRepository _tourRepository;
-        private LocationRepository _locationRepository;
-        private TourInstanceRepository _tourInstanceRepository;
+        public readonly TourService tourService;
+        public readonly LocationService locationService;
+        public readonly TourInstanceService tourInstanceService ;
 
 
         public Window1()
         {
             InitializeComponent();
-            _tourRepository = new TourRepository();
-            _locationRepository = new LocationRepository();
-            _tourInstanceRepository = new TourInstanceRepository();
+
+            tourService = new TourService();
+            locationService = new LocationService();
+            tourInstanceService = new TourInstanceService();
 
             tourListView.IsEnabled = true;
             UpdateTourListView(ShowAllTours());
@@ -44,14 +46,13 @@ namespace BookingApp.View
         private void UpdateTourListView(List<Tour> tours)
         {
             tourListView.ItemsSource = tours;
-          
         }
 
         private void LoadLocations(List<Tour> tours) {
 
             foreach (Tour tour in tours)
             {
-                Location locationObject = _locationRepository.Get(tour.LocationId);
+                Location locationObject = locationService.Get(tour.LocationId);
                 if (locationObject != null)
                 {
                     tour.ViewLocation = $"{locationObject.City}, {locationObject.Country}";
@@ -68,7 +69,7 @@ namespace BookingApp.View
 
         private List<Tour> ShowAllTours()
         {
-            List<Tour> tours =  _tourRepository.GetAll();
+            List<Tour> tours = tourService.GetAll();
           
             LoadLocations(tours); 
 
@@ -79,7 +80,7 @@ namespace BookingApp.View
 
         private List<Tour> FilterTours(string location, string duration, string language, string numOfPeople)
         {
-            List<Tour> tours = _tourRepository.GetAll();
+            List<Tour> tours = tourService.GetAll();
 
 
             // Apply filters based on search criteria
@@ -120,8 +121,8 @@ namespace BookingApp.View
         {
             if (!string.IsNullOrEmpty(location))
             {
-                int locationId = _locationRepository.GetIdByCityorCoutry(location);
-                tours = _tourRepository.GetToursByLocationId(locationId);
+                int locationId = locationService.GetIdByCityorCoutry(location);
+                tours = tourService.GetToursByLocationId(locationId);
 
             }
 
@@ -131,10 +132,8 @@ namespace BookingApp.View
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             // Get search criteria from text boxes
-            string location = LocationText.Text.Trim();
-            string duration = DurationText.Text.Trim();
-            string language = LanguageText.Text.Trim();
-            string numOfPeople = NumOfPeopleText.Text.Trim();
+            string location, duration, language, numOfPeople;
+            Trim(out location, out duration, out language, out numOfPeople);
 
             // Filter tours based on search criteria
             List<Tour> filteredTours = FilterTours(location, duration, language, numOfPeople);
@@ -148,13 +147,21 @@ namespace BookingApp.View
             UpdateTourListView(filteredTours);
         }
 
+        private void Trim(out string location, out string duration, out string language, out string numOfPeople)
+        {
+            location = LocationText.Text.Trim();
+            duration = DurationText.Text.Trim();
+            language = LanguageText.Text.Trim();
+            numOfPeople = NumOfPeopleText.Text.Trim();
+        }
+
         private void TourListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
             if (tourListView.SelectedItem != null)
             {
                 Tour selectedTour = (Tour)tourListView.SelectedItem;
-                List<TourInstance>  tourInstances = _tourInstanceRepository.GetTourInstancesByTourId(selectedTour.Id);
+                List<TourInstance>  tourInstances = tourInstanceService.GetTourInstancesByTourId(selectedTour.Id);
                 
                 instancesListView.ItemsSource = tourInstances;
                 
@@ -178,37 +185,44 @@ namespace BookingApp.View
             {
                 // Get the corresponding tour instance object
                 TourInstance instance = button.DataContext as TourInstance;
-                Tour tour = _tourRepository.GetById(instance.IdTour);
-
-                if (instance != null && isFull(instance))
-                {
-                    
-                    // Open a new window to book the tour instance
-                    ReservationView bookWindow = new ReservationView(instance, tour);
-                    bookWindow.ShowDialog();
-                }
-                else {
-
-                    List<Tour> tours = _tourRepository.GetToursByLocationId(tour.LocationId);
-                    int indexToRemove = tours.FindIndex(tour => tour.Id == tour.Id);
-
-                    // If the index is found (not -1), remove the tour from the list
-                    if (indexToRemove != -1)
-                    {
-                        tours.RemoveAt(indexToRemove);
-                    }
-
-                    AlternativeToursView alternativeToursView = new AlternativeToursView(tours);
-                    alternativeToursView.ShowDialog();
-                
-                }
+                Tour tour = tourService.GetById(instance.IdTour);
+                OpenWindow(instance, tour);
             }
 
         }
-            
-        
 
-       
+        private void OpenWindow(TourInstance instance, Tour tour)
+        {
+            if (instance != null && isFull(instance))
+            {
+
+                // Open a new window to book the tour instance
+                ReservationView bookWindow = new ReservationView(instance, tour);
+                bookWindow.ShowDialog();
+            }
+            else
+            {
+                OpenAlternativeTours(tour);
+
+            }
+        }
+
+        public void OpenAlternativeTours(Tour tour)
+        {
+
+            List<Tour> tours = tourService.GetToursByLocationId(tour.LocationId);
+            int indexToRemove = tours.FindIndex(tour => tour.Id == tour.Id);
+
+            // If the index is found (not -1), remove the tour from the list
+            if (indexToRemove != -1)
+            {
+                tours.RemoveAt(indexToRemove);
+            }
+
+            AlternativeToursView alternativeToursView = new AlternativeToursView(tours);
+            alternativeToursView.ShowDialog();
+        }
+
 
 
     }

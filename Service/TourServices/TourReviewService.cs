@@ -21,8 +21,7 @@ namespace BookingApp.Service.TourServices
         private TourService tourService;
         private TouristService touristService;
         private KeyPointService keyPointService;
-        //private readonly ITourInstanceRepository iTourInstanceRepository;
-        //private TourInstanceService tourInstanceService;
+   
 
         public TourReviewService()
         {
@@ -31,9 +30,7 @@ namespace BookingApp.Service.TourServices
             tourService = new TourService();
             touristService = new TouristService();
             keyPointService = new KeyPointService();
-            //tourInstanceService = new(new TourInstanceRepository());
-            //tourLocationService = new(new LocationRepository());
-            //tourReservationService = new(new TourReservationRepository());
+        
         }
 
 
