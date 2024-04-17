@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:BookingApp.View"
         mc:Ignorable="d"
         Title="Register New Accommodation" Height="437" Width="403" WindowStartupLocation="CenterScreen">
+    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>

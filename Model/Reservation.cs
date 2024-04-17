@@ -32,7 +32,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(),Guest.Id.ToString(), ArrivalDate.ToString(), DepartureDate.ToString(),IsReserved.ToString() };
+            string[] csvValues = { Id.ToString(), Accommodation.Name,Guest.Username, ArrivalDate.ToString(), DepartureDate.ToString(),IsReserved.ToString() };
             return csvValues;
         }
 
@@ -40,8 +40,8 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Accommodation = new Accommodation() { Id = Convert.ToInt32(values[1]) };
-            Guest = new Guest() {  Id = Convert.ToInt32(values[2]) };
+            Accommodation = new Accommodation() { Name=values[1] };
+            Guest = new Guest() {  Username=values[2] };
             ArrivalDate = Convert.ToDateTime(values[3]);
             DepartureDate = Convert.ToDateTime(values[4]);
             IsReserved = Convert.ToBoolean(values[5]);
