@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Interfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using BookingApp.View;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository
 {
-   public class GuestRatingRepository
+   public class GuestRatingRepository : IGuestRatingRepository
     {
         private const string FilePath = "../../../Resources/Data/guestratings.csv";
         private readonly Serializer<GuestRating> _serializer;

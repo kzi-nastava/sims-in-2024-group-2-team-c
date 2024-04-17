@@ -9,13 +9,13 @@ using System.Windows;
 
 namespace BookingApp.Repository
 {
-    public class ReservationRepository 
+    public class ReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/reservations.csv";
         private readonly Serializer<Reservation> _serializer;
         private List<Reservation> _reservations;
-        
-        
+
+
 
         public ReservationRepository()
         {
@@ -77,14 +77,14 @@ namespace BookingApp.Repository
                 string[] values = line.Split('|');
 
                 int Id = Convert.ToInt32(values[0]);
-                int AccommodationId = Convert.ToInt32(values[1]);
-                int GuestId = Convert.ToInt32(values[2]);
+                string AccommodationName = values[1];
+                string GuestUsername = values[2];
                 DateTime ArrivalDate = Convert.ToDateTime(values[3]);
                 DateTime DepartureDate = Convert.ToDateTime(values[4]);
                 bool IsReserved = Convert.ToBoolean(values[5]);
 
                 // Kreiraj rezervaciju i dodaj je u listu
-                _reservations.Add(new Reservation(Id, new Accommodation { Id = AccommodationId }, new Guest { Id = GuestId }, ArrivalDate, DepartureDate, IsReserved));
+                _reservations.Add(new Reservation(Id, new Accommodation { Name = AccommodationName }, new Guest { Username = GuestUsername }, ArrivalDate, DepartureDate, IsReserved));
             }
         }
 
@@ -102,9 +102,64 @@ namespace BookingApp.Repository
             }
             else
             {
-               
+
                 return DateTime.MinValue; // Vraćanje DateTime.MinValue kao podrazumevane vrednosti
             }
         }
+
+        public List<Reservation> GetReservationsByAccommodationId(int accommodationId)
+        {
+            return _reservations.Where(r => r.Accommodation.Id == accommodationId).ToList();
+        }
+
+
+        public List<Reservation> GetReservationsById(int reservationId)
+        {
+            return _reservations.Where(r => r.Id == reservationId).ToList();
+        }
+
+        public Reservation GetReservationById(int reservationId)
+        {
+            return _reservations.FirstOrDefault(r => r.Id == reservationId);
+        }
+
+        public string GetGuestUsernameByReservationId(int reservationId)
+        {
+            // Ovdje implementirajte logiku za dohvaćanje korisničkog imena gosta na temelju ID-a rezervacije
+            Reservation reservation = _reservations.FirstOrDefault(r => r.Id == reservationId);
+            if (reservation != null)
+            {
+                return reservation.Guest.Username;
+            }
+            else
+            {
+                // Ako ne postoji rezervacija s tim ID-om, vratite null ili prazan string, ovisno o tome što je prikladno
+                return null;
+            }
+        }
+
+            public Guest getGuestByReservationId(int id)
+            {
+                var reservation = _reservations.Where(r => r.Id == id).FirstOrDefault();
+                if (reservation == null)
+                {
+                    MessageBox.Show("Reservation not found.");
+                    return null;
+                }
+                int Id = reservation.Guest.Id;
+                return reservation.Guest;
+            }
+
+            internal Accommodation getAccommodationByReservation(int id)
+            {
+                var reservation = _reservations.Where(r => r.Id == id).FirstOrDefault();
+                if (reservation == null) {
+                    MessageBox.Show("Reservation not found.");
+                    return null;
+                }
+                return reservation.Accommodation;
+
+            }
+        
     }
 }

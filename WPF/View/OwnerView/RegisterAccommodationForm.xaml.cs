@@ -21,11 +21,8 @@ namespace BookingApp.View
         private readonly AccommodationRepository _repository;
         private readonly LocationRepository locationRepository;
         List<string> imagePaths = new List<string>();
-
-
         public List<string> Images;
-
-        public event PropertyChangedEventHandler PropertyChanged; 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -40,7 +37,7 @@ namespace BookingApp.View
             DataContext = this;
             _repository = new AccommodationRepository();
             locationRepository = new LocationRepository();
-            
+
         }
 
 
@@ -48,24 +45,32 @@ namespace BookingApp.View
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
-            openFileDialog.Multiselect = true; 
+            openFileDialog.Multiselect = true;
 
             if (openFileDialog.ShowDialog() == true)
             {
-                
+
                 string[] selectedFiles = openFileDialog.FileNames;
 
-                
+
                 foreach (string fileName in selectedFiles)
                 {
-                    txtImagePath.Text += fileName + Environment.NewLine; 
+                    txtImagePath.Text += fileName + Environment.NewLine;
                 }
             }
         }
 
 
+
         private void SaveAccommodation(object sender, RoutedEventArgs e)
         {
+
+            if (!ValidateInput())
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
+
             string name = txtName.Text.Trim();
             string city = txtCity.Text.Trim().ToLower();
             Location location = locationRepository.GetLocationByCity(city);
@@ -73,14 +78,14 @@ namespace BookingApp.View
             int maxGuests = int.Parse(txtMaxGuests.Text);
             int minBookingDays = int.Parse(txtMinBookingDays.Text);
             int cancellationDays = int.Parse(txtCancellationDays.Text);
-            
+
 
             string[] paths = txtImagePath.Text.Split('|');
 
-            
+
             foreach (string path in paths)
             {
-      
+
                 if (!string.IsNullOrEmpty(path))
                 {
                     imagePaths.Add(path);
@@ -88,10 +93,12 @@ namespace BookingApp.View
             }
 
 
+
+
             Accommodation newAccommodation = new Accommodation()
             {
                 Name = name,
-                Location =location, 
+                Location = location,
                 Type = type,
                 MaxGuests = maxGuests,
                 MinBookingDays = minBookingDays,
@@ -113,5 +120,23 @@ namespace BookingApp.View
             Close();
         }
 
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrEmpty(txtName.Text) ||
+                string.IsNullOrEmpty(txtCity.Text) ||
+                string.IsNullOrEmpty(txtType.Text) ||
+                string.IsNullOrEmpty(txtMaxGuests.Text) ||
+                string.IsNullOrEmpty(txtMinBookingDays.Text) ||
+                string.IsNullOrEmpty(txtCancellationDays.Text) ||
+                string.IsNullOrEmpty(txtImagePath.Text))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.WPF.View.GuestView;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 //using BookingApp.View.GuestReservationWindow;
@@ -68,47 +70,34 @@ namespace BookingApp.View
 
             if (!string.IsNullOrEmpty(location))
             {
-
                 int locationId = locationRepository.GetIdByCityorCountry(location);
-                accommodations = accommodationRepository.GetToursByLocationId(locationId);
-
+                accommodations = accommodations.Where(a => a.Location.Id == locationId).ToList();
             }
 
             if (!string.IsNullOrEmpty(name))
             {
-
-                accommodations = accommodationRepository.GetAccommodationsByName(name);
-
+                accommodations = accommodations.Where(a => a.Name.ToLower().Contains(name)).ToList();
             }
 
             if (!string.IsNullOrEmpty(type))
             {
-
-                accommodations = accommodationRepository.GetAccommodationsByType(type);
-
+                accommodations = accommodations.Where(a => a.Type.ToLower() == type).ToList();
             }
 
-
-            if (!string.IsNullOrEmpty(numOfGuestsStr))
+            if (!string.IsNullOrEmpty(numOfGuestsStr) && int.TryParse(numOfGuestsStr, out int numOfGuests))
             {
-
-                accommodations = accommodationRepository.GetAccommodationsByNumOfGuests(numOfGuestsStr);
-
+                accommodations = accommodations.Where(a => a.MaxGuests >= numOfGuests).ToList();
             }
 
-            if (!string.IsNullOrEmpty(bookingDaysStr))
+            if (!string.IsNullOrEmpty(bookingDaysStr) && int.TryParse(bookingDaysStr, out int bookingDays))
             {
-
-                accommodations = accommodationRepository.GetAccommodationsByBookingDays(bookingDaysStr);
-
+                accommodations = accommodations.Where(a => a.MinBookingDays <= bookingDays).ToList();
             }
-
 
             LoadLocations(accommodations);
 
             return accommodations;
         }
-
 
 
         private List<Accommodation> PopulateAccommodationListView()
@@ -170,6 +159,21 @@ namespace BookingApp.View
                 AccommodationDetailsWindow accommodationDetailsWindow = new AccommodationDetailsWindow(selectedAccommodation);
                 accommodationDetailsWindow.Show();
             }
+        }
+
+        private void ReservationDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Otvaranje prozora za detalje rezervacije
+            GuestReservationDetails guestReservationDetails = new GuestReservationDetails();
+            guestReservationDetails.Show();
+        }
+
+        private void AnywhereAnytimeButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void ForumsButton_Click(object sender, RoutedEventArgs e)
+        {
         }
 
 

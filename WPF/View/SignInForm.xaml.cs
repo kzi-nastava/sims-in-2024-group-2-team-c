@@ -1,7 +1,11 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+
 using BookingApp.WPF.View.TouristView;
 using BookingApp.WPF.View.GuideView;
+
+using BookingApp.WPF.View.OwnerView;
+
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -48,8 +52,8 @@ namespace BookingApp.View
             {
                 if(user.Password == txtPassword.Password)
                 {
-                 
-                    RegisterAccommodationForm registerAccommodationForm = new RegisterAccommodationForm();
+                   
+                    OwnerWindow ownerWindow = new OwnerWindow();
                     AccommodationOverview accommodationOverview = new AccommodationOverview();
                     //TourOverview tourOverview = new TourOverview();
                    // Window1 w1 = new Window1();
@@ -68,7 +72,7 @@ namespace BookingApp.View
 
                     if (user.Role == UserRole.owner)
                     {
-                        registerAccommodationForm.Show();
+                        ownerWindow.Show();
                     }
                     else if (user.Role == UserRole.guest)
                     {

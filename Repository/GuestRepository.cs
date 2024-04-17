@@ -52,8 +52,42 @@ namespace BookingApp.Repository
             return guests.FirstOrDefault(g => g.Id == guestId);
         }
 
+        public string GetGuestUsernameById(int guestId)
+        {
+            // Pretraga gostiju po ID-ju
+            Guest guest = guests.FirstOrDefault(g => g.Id == guestId);
 
-     
+            // Ako gost nije pronađen, vraćamo null
+            if (guest == null)
+            {
+                return null;
+            }
+
+            // Vraćamo korisničko ime gosta
+            return guest.Username;
+        }
+
+        public int GetGuestIdByUsername(string username)
+        {
+            // Pretraga gosta po korisničkom imenu
+            Guest guest = guests.FirstOrDefault(g => g.Username == username);
+
+            // Ako gost nije pronađen, vraćamo -1 kao indikator da gost nije pronađen
+            if (guest == null)
+            {
+                return -1;
+            }
+
+            // Vraćamo ID pronađenog gosta
+            return guest.Id;
+        }
+
+        public Guest GetGuestByUsername(string username)
+        {
+            // Pretraga gosta po korisničkom imenu
+            return guests.FirstOrDefault(g => g.Username == username);
+        }
+
 
 
     }

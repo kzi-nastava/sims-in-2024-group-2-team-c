@@ -27,14 +27,14 @@ namespace BookingApp.Model
 
         public string[] ToCSV()  
         {
-            string[] csvValues = { Id.ToString(), Guest.Id.ToString(), Cleanliness.ToString(), RuleRespecting.ToString(), Comment, RatingDate.ToString() };
+            string[] csvValues = { Id.ToString(), Guest.Username, Cleanliness.ToString(), RuleRespecting.ToString(), Comment, RatingDate.ToString() };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Guest = new Guest() { Id = Convert.ToInt32(values[1]) };
+            Guest = new Guest() { Username = (values[1]) };
             Cleanliness = Convert.ToInt32(values[2]);
             RuleRespecting  = Convert.ToInt32(values[3]);
             Comment = values[4];
