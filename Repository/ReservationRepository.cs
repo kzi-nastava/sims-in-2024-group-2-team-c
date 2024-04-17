@@ -9,13 +9,13 @@ using System.Windows;
 
 namespace BookingApp.Repository
 {
-    public class ReservationRepository 
+    public class ReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/reservations.csv";
         private readonly Serializer<Reservation> _serializer;
         private List<Reservation> _reservations;
-        
-        
+
+
 
         public ReservationRepository()
         {
@@ -77,7 +77,7 @@ namespace BookingApp.Repository
                 string[] values = line.Split('|');
 
                 int Id = Convert.ToInt32(values[0]);
-                string AccommodationName = values[1] ;
+                string AccommodationName = values[1];
                 string GuestUsername = values[2];
                 DateTime ArrivalDate = Convert.ToDateTime(values[3]);
                 DateTime DepartureDate = Convert.ToDateTime(values[4]);
@@ -102,7 +102,7 @@ namespace BookingApp.Repository
             }
             else
             {
-               
+
                 return DateTime.MinValue; // Vraćanje DateTime.MinValue kao podrazumevane vrednosti
             }
         }
@@ -111,6 +111,7 @@ namespace BookingApp.Repository
         {
             return _reservations.Where(r => r.Accommodation.Id == accommodationId).ToList();
         }
+
 
         public List<Reservation> GetReservationsById(int reservationId)
         {
@@ -136,5 +137,29 @@ namespace BookingApp.Repository
                 return null;
             }
         }
+
+            public Guest getGuestByReservationId(int id)
+            {
+                var reservation = _reservations.Where(r => r.Id == id).FirstOrDefault();
+                if (reservation == null)
+                {
+                    MessageBox.Show("Reservation not found.");
+                    return null;
+                }
+                int Id = reservation.Guest.Id;
+                return reservation.Guest;
+            }
+
+            internal Accommodation getAccommodationByReservation(int id)
+            {
+                var reservation = _reservations.Where(r => r.Id == id).FirstOrDefault();
+                if (reservation == null) {
+                    MessageBox.Show("Reservation not found.");
+                    return null;
+                }
+                return reservation.Accommodation;
+
+            }
+        
     }
 }

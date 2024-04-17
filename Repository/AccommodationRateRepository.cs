@@ -18,25 +18,28 @@ namespace BookingApp.Repository
         private readonly Serializer<AccommodationRate> _serializer;
         private List<AccommodationRate> _accommodationRates;
         private GuestReservationRepository guestReservationRepository;
+
         private ReservationRepository reservationRepository; //dodato umesto guestresrep
+
+
 
         public AccommodationRateRepository()
         {
             _serializer = new Serializer<AccommodationRate>();
             _accommodationRates = _serializer.FromCSV(FilePath);
-            guestReservationRepository = new GuestReservationRepository(); //ovo ne treba
+            guestReservationRepository = new GuestReservationRepository(); 
             reservationRepository = new ReservationRepository();
         }
 
 
-       
+         public void Save(AccommodationRate accommodationRate)
 
-        public void Save(AccommodationRate accommodationRate)
         {
             accommodationRate.Id = NextId();
             _accommodationRates = _serializer.FromCSV(FilePath);
             _accommodationRates.Add(accommodationRate);
             _serializer.ToCSV(FilePath, _accommodationRates);
+            //guestReservationRepository = new GuestReservationRepository();
         }
 
         public int NextId()
@@ -52,14 +55,15 @@ namespace BookingApp.Repository
         public bool HasUserRatedAccommodation(int userId, string name)
         {
             List<AccommodationRate> rates = _serializer.FromCSV(FilePath);
-           // List<GuestReservation> reservations = guestReservationRepository.GetAll();
-            List<Reservation> reservations = reservationRepository.GetAll();
 
-            var reservation = reservations.FirstOrDefault(r => r.Guest.Id == userId && r.Accommodation.Name == name);
+            List<GuestReservation> reservations = guestReservationRepository.GetAll();
+
+            var reservation = reservations.FirstOrDefault(r => r.GuestId == userId && r.Accommodation.Name == name);
 
             if (reservation != null)
             {
-                return rates.Any(rate => rate.Reservation.Id == reservation.Id); //ovde sam promenila isto reservation.id, i koristim moj reservation
+                return rates.Any(rate => rate.Reservation.Id == reservation.ReservationId);
+
             }
             else
             {
@@ -68,4 +72,5 @@ namespace BookingApp.Repository
         }
 
     }
+
 }

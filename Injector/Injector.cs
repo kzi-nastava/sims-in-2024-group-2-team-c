@@ -1,5 +1,6 @@
 ﻿using BookingApp.Interfaces;
 using BookingApp.Repository;
+using BookingApp.Service.AccommodationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Injector
 {
-    public class Injector
+    public class Injectorr
     {
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
@@ -24,6 +25,14 @@ namespace BookingApp.Injector
             { typeof(ITourRepository), new TourRepository() },
             // { typeof(ITourService), new TourService() }
 
+            { typeof(ITourRepository), new TourRepository() },
+            // { typeof(ITourService), new TourService() }
+
+            { typeof(IGuestReservationRepository), new GuestReservationRepository() },
+               //{ typeof(IGuestReservationService), new GuestReservationService() }
+
+           //  { typeof(IAccommodationRateRepository), new AccommodationRateRepository() },
+               
         };
 
         public static T CreateInstance<T>()

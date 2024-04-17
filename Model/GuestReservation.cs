@@ -37,7 +37,9 @@ namespace BookingApp.Model
         public string[] ToCSV()
         {
             string[] csvValues = { ReservationId.ToString(), Accommodation.Id.ToString(), GuestId.ToString(),
+
                 StartDate.ToString(), EndDate.ToString(), StayDurationInDays.ToString(),
+
                 CheckIn.ToString(), CheckOut.ToString(),
                 NumGuests.ToString(), IsReserved.ToString()};
             return csvValues;

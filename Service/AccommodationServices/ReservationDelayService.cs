@@ -1,4 +1,4 @@
-﻿/*using BookingApp.DTO;
+﻿using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -15,6 +15,7 @@ namespace BookingApp.Service
         public ReservationDelayService()
         {
             _reservationDelayRepository = new ReservationDelayRepository();
+            _reservationRepository = new ReservationRepository();
         }
 
 
@@ -25,16 +26,16 @@ namespace BookingApp.Service
 
         public bool IsNewDatesAvailable(int accommodationId, DateTime newCheckInDate, DateTime newCheckOutDate)
         {
-            
+
             List<Reservation> reservations = _reservationRepository.GetReservationsByAccommodationId(accommodationId);
 
-            
+
             foreach (Reservation reservation in reservations)
             {
-                
+
                 if (newCheckInDate < reservation.DepartureDate && newCheckOutDate > reservation.ArrivalDate)
                 {
-                    
+
                     return false;
 
                 }
@@ -75,11 +76,11 @@ namespace BookingApp.Service
             return new ReservationDelay
             {
                 ReservationDelayId = reservationDelayDTO.ReservationDelayId,
-                Guest = new Guest { Id = reservationDelayDTO.Guest.Id },
-                Accommodation = new Accommodation { Id = reservationDelayDTO.Accommodation.Id },
+                Guest = reservationDelayDTO.Guest, //new Guest { Id = reservationDelayDTO.Guest.Id },
+                Accommodation = reservationDelayDTO.Accommodation, //new Accommodation { Id = reservationDelayDTO.Accommodation.Id },
                 NewCheckInDate = reservationDelayDTO.NewCheckInDate,
                 NewCheckOutDate = reservationDelayDTO.NewCheckOutDate,
-                Status = reservationDelayDTO.Status 
+                Status = reservationDelayDTO.Status
             };
         }
 
@@ -116,6 +117,19 @@ namespace BookingApp.Service
             }
         }
 
+        public Guest getGuestByReservation(GuestReservationDTO selectedReservation)
+        {
+            int id = selectedReservation.Id;
+            Guest guest = _reservationRepository.getGuestByReservationId(id);
+            return guest;
+        }
+
+        public Accommodation getAccommodationByReservation(GuestReservationDTO selectedReservation)
+        {
+            int id = selectedReservation.Id;
+            return _reservationRepository.getAccommodationByReservation(id);
+        }
+
+
     }
 }
-*/

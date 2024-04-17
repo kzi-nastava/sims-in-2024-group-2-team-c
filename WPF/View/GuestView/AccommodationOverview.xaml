@@ -9,9 +9,10 @@
         ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
 
     <Grid Margin="0,0,10,325">
-         <TextBlock Text="Double click on accommodation you would like to check:" Margin="10,104,-4,-215" FontWeight="Bold" />
-        
-        <DataGrid x:Name="AccommodationListView" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False" Margin="10,136,-4,-276" CanUserAddRows="False" MouseDoubleClick="AccommodationListView_MouseDoubleClick"> <!--SelectionChanged="AccommodationListView_SelectionChanged"-->
+        <TextBlock Text="Double click on accommodation you would like to check:" Margin="10,129,-4,-240" FontWeight="Bold" />
+
+        <DataGrid x:Name="AccommodationListView" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False" Margin="10,159,142,-299" CanUserAddRows="False" MouseDoubleClick="AccommodationListView_MouseDoubleClick">
+            <!--SelectionChanged="AccommodationListView_SelectionChanged"-->
             <DataGrid.Columns>
                 <!-- Definicija kolona za prikaz podataka smeštaja -->
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" />
@@ -70,6 +71,18 @@
             </StackPanel>
             <Button Content="Search" Click="SearchButton_Click" Height="29" RenderTransformOrigin="0.834,2.061" Width="78"/>
         </StackPanel>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
+            <Button Content="RESERVATION DETAILS" Click="ReservationDetailsButton_Click" Margin="9,181,-10,-181"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
+            <Button Content="ANYWHERE ANYTIME" Click="AnywhereAnytimeButton_Click" Margin="7,213,-8,-219"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10">
+            <Button Content="FORUMS" Click="ForumsButton_Click" Margin="388,261,0,-261" RenderTransformOrigin="0.633,1.802" HorizontalAlignment="Left" Width="109"/>
+        </Grid>
 
     </Grid>
 </Window>

@@ -23,6 +23,7 @@ namespace BookingApp.Model
                 OnPropertyChanged("GuestUsername");
             }
         }
+
         public int Cleanliness { get; set; }
         public int OwnerRate { get; set; }
         public string Comment { get; set; }
@@ -59,6 +60,7 @@ namespace BookingApp.Model
             */
         }
 
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -67,3 +69,8 @@ namespace BookingApp.Model
         }
     }
 }
+
+
+    
+
+

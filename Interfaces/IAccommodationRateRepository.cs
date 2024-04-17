@@ -13,4 +13,8 @@ namespace BookingApp.Interfaces
         public void Save(AccommodationRate accommodationRate);
 
     }
+
 }
+
+
+

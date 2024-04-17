@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using BookingApp.Serializer;
 using BookingApp.Repository;
+using BookingApp.Injector;
+
 
 namespace BookingApp.Service.AccommodationServices
 {
@@ -19,12 +21,11 @@ namespace BookingApp.Service.AccommodationServices
 
         private readonly IAccommodationRateRepository _repository;
         private readonly GuestReservationDTO _selectedReservation;
-        //private Reservation _selectedReservation; //ovo sam promenila na reservation
 
         private const string FilePath = "../../../Resources/Data/accommodationRate.csv";
         private readonly Serializer<AccommodationRate> _serializer;
         private List<AccommodationRate> _accommodationRates;
-        private ReservationRepository reservationRepository;
+        private ReservationRepository reservationRepository ;
 
         public List<AccommodationRate> AccommodationRates
         {
@@ -37,17 +38,16 @@ namespace BookingApp.Service.AccommodationServices
             return _serializer.FromCSV(FilePath);
         }
 
+         public AccommodationRateService(IAccommodationRateRepository repository)
+         {
+             _repository = repository;
 
-        public AccommodationRateService(IAccommodationRateRepository repository)
-        {
-            _repository = repository;
-            
-
-        }
-
+         }
+        
+       
         public AccommodationRateService()
         {
-            
+           // _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
             _accommodationRates = new List<AccommodationRate>();
             _serializer = new Serializer<AccommodationRate>();
             _accommodationRates = _serializer.FromCSV(FilePath);
@@ -56,8 +56,11 @@ namespace BookingApp.Service.AccommodationServices
         }
 
 
-         public AccommodationRateService(GuestReservationDTO selectedReservation, IAccommodationRateRepository repository)
-        //public AccommodationRateService(Reservation selectedReservation, IAccommodationRateRepository repository)
+     
+        
+
+        public AccommodationRateService(GuestReservationDTO selectedReservation, IAccommodationRateRepository repository)
+
         {
             _selectedReservation = selectedReservation;
             _repository = repository;
@@ -71,7 +74,8 @@ namespace BookingApp.Service.AccommodationServices
             {
                 var data = new AccommodationRate
                 {
-                    Reservation = new Reservation { Id = _selectedReservation.Id }, //ovo sam promenila
+
+                    Reservation = new Reservation() { Id = _selectedReservation.Id },
                     Cleanliness = cleanlinessRating,
                     OwnerRate = correctnessOfTheOwner,
                     Comment = comment
@@ -89,13 +93,14 @@ namespace BookingApp.Service.AccommodationServices
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 throw;
             }
-            
+
         }
 
         public bool HasUserRatedAccommodation(int userId, String name)
         {
             return _repository.HasUserRatedAccommodation(userId, name);
         }
+
 
         public void LoadAccommodationRatesFromCSV(string filePath)
         {
@@ -158,6 +163,5 @@ namespace BookingApp.Service.AccommodationServices
         }
 
     }
-
 
 }

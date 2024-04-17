@@ -23,6 +23,7 @@ namespace BookingApp.View
         private int stayDuration;
 
 
+
         public GuestReservationWindow()
         {
             InitializeComponent();
@@ -82,6 +83,8 @@ namespace BookingApp.View
                 AlternativniDatumiListBox.Visibility = Visibility.Collapsed;
             }
         }
+
+
 
 
         private void BookButton_Click(object sender, RoutedEventArgs e)

@@ -15,7 +15,7 @@ namespace BookingApp.Repository
         private string filePath = "../../../Resources/Data/guestReservations.csv";
         private Serializer<GuestReservation> serializer = new Serializer<GuestReservation>();
 
-        // prikazuje alternativne datume dva dana nakon poslednjeg zauzetog -- to ne valja
+ 
         public List<AvailableDateDisplay> FindAvailableReservations(Accommodation selectedAccommodation, DateTime startDate, DateTime endDate, int stayDuration)
         {
             List<GuestReservation> reservations = serializer.FromCSV(filePath);
@@ -96,7 +96,7 @@ namespace BookingApp.Repository
 
                 // Provera dostupnosti smeštaja za navedene datume i boravak00
                 bool isAccommodationAvailable = CheckAccommodationAvailability(accommodationId, checkInDate, checkOutDate, stayDuration, reservations);
-
+                
                 if (!isAccommodationAvailable)
                 {
                     return "Accommodation is not available for the selected dates.";
@@ -172,6 +172,7 @@ namespace BookingApp.Repository
             }
 
             return false; // Smeštaj nije dostupan za rezervaciju
+
         }
 
         public List<GuestReservationDTO> GetAllGuestReservations(int guestId)
@@ -214,6 +215,7 @@ namespace BookingApp.Repository
 
             return guestReservations;
         }
+
 
         private List<Accommodation> LoadAccommodations()
         {
@@ -331,4 +333,9 @@ namespace BookingApp.Repository
     }
 
 
+
 }
+
+
+
+
