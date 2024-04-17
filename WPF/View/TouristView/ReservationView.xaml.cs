@@ -174,81 +174,43 @@ namespace BookingApp.View
             SaveButton.Visibility = Visibility.Visible;
         }
 
-        /* private StackPanel CreateTouristForm(int index)
-         {
-             var stackPanel = new StackPanel();
-             stackPanel.Orientation = Orientation.Horizontal;
-
-
-
-
-             var usernameLabel = new Label();
-             usernameLabel.Content = $"Tourist {index} Username:";
-             var usernameTextBox = new TextBox();
-             usernameTextBox.Width = 60;
-
-
-             var nameLabel = new Label();
-             nameLabel.Content = $"Tourist {index} First Name:";
-             var nameTextBox = new TextBox();
-             nameTextBox.Width = 60;
-
-             var lastNameLabel = new Label();
-             lastNameLabel.Content = $"Tourist {index} Last Name:";
-             var lastNameTextBox = new TextBox();
-             lastNameTextBox.Width = 60;
-
-             var ageLabel = new Label();
-             ageLabel.Content = $"Tourist {index} Age:";
-             var ageTextBox = new TextBox();
-             ageTextBox.Width = 60;
-
-             // Add more fields as needed (e.g., Age, Username)
-             stackPanel.Children.Add(usernameLabel);
-             stackPanel.Children.Add(usernameTextBox);
-             stackPanel.Children.Add(nameLabel);
-             stackPanel.Children.Add(nameTextBox);
-             stackPanel.Children.Add(lastNameLabel);
-             stackPanel.Children.Add(lastNameTextBox);
-             stackPanel.Children.Add(ageLabel);
-             stackPanel.Children.Add(ageTextBox);
-
-             return stackPanel;
-         }*/
+        
 
         private StackPanel CreateTouristForm(int index)
         {
             var stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
 
-            
+
             var nameTextBox = new TextBox();
             var lastNameTextBox = new TextBox();
             var ageTextBox = new TextBox();
 
             // Set width for each TextBox
-           
+
             nameTextBox.Width = 60;
             lastNameTextBox.Width = 60;
             ageTextBox.Width = 60;
 
-            // Create labels and add TextBox controls to StackPanel
-            
-            stackPanel.Children.Add(new Label { Content = $"Tourist {index} First Name:" });
-            stackPanel.Children.Add(nameTextBox);
-            stackPanel.Children.Add(new Label { Content = $"Tourist {index} Last Name:" });
-            stackPanel.Children.Add(lastNameTextBox);
-            stackPanel.Children.Add(new Label { Content = $"Tourist {index} Age:" });
-            stackPanel.Children.Add(ageTextBox);
+          
+            AddToStackPanel(index, stackPanel, nameTextBox, lastNameTextBox, ageTextBox);
 
-            // Store the TextBox controls in an array and add the array to the list
+            
             TextBox[] textBoxes = new TextBox[] { nameTextBox, lastNameTextBox, ageTextBox };
             touristTextBoxes.Add(textBoxes);
 
             return stackPanel;
         }
 
-
+        private static void AddToStackPanel(int index, StackPanel stackPanel, TextBox nameTextBox, TextBox lastNameTextBox, TextBox ageTextBox)
+        {
+            stackPanel.Children.Add(new Label { Content = $"Tourist {index} First Name:" });
+            stackPanel.Children.Add(nameTextBox);
+            stackPanel.Children.Add(new Label { Content = $"Tourist {index} Last Name:" });
+            stackPanel.Children.Add(lastNameTextBox);
+            stackPanel.Children.Add(new Label { Content = $"Tourist {index} Age:" });
+            stackPanel.Children.Add(ageTextBox);
+        }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -257,80 +219,49 @@ namespace BookingApp.View
         }
 
 
-        /*
-        private List<String> ReadingUsernames() {
-
-            List<string> usernames = new List<string>();
-            foreach (UIElement element in TouristFormsPanel.Children)
-            {
-                if (element is StackPanel)
-                {
-                    StackPanel stackPanel = (StackPanel)element;
-                    foreach (UIElement child in stackPanel.Children)
-                    {
-                        if (child is TextBox)
-                        {
-                            TextBox textBox = (TextBox)child;
-                            string labelText = ((Label)stackPanel.Children[stackPanel.Children.IndexOf(child) - 1]).Content.ToString();
-                            if (labelText.Contains("Username"))
-                            {
-                                usernames.Add(textBox.Text);
-                                
-                            }
-
-                        }
-                    }
-
-
-                }
-
-
-            }
-            return usernames;
-
-
-        }*/
-
 
         public List<int> RetrievePeoplesIds()
         {
 
             List<int> ids = new List<int>();
 
-            for (int i = 0; i < touristTextBoxes.Count; i++)
-            {
-                TextBox[] textBoxes = touristTextBoxes[i];
-
-                // Retrieve values from TextBox controls
-               
-                string firstName = textBoxes[0].Text;
-                string lastName = textBoxes[1].Text;
-                string ageText = textBoxes[2].Text;
-
-                
-                int age = int.TryParse(ageText, out int parsedAge) ? parsedAge : 0;
-
-                PeopleInfo onePerson = new PeopleInfo(firstName,lastName,age,false);
-                peopleInfoService.Save(onePerson);
-                ids.Add(onePerson.Id);
-
-            }
+            GetPeopleIds(ids);
 
             return ids;
         }
 
+        private void GetPeopleIds(List<int> ids)
+        {
+            for (int i = 0; i < touristTextBoxes.Count; i++)
+            {
+                string firstName, lastName, ageText;
+                GetInformation(i, out firstName, out lastName, out ageText);
 
+                int age = int.TryParse(ageText, out int parsedAge) ? parsedAge : 0;
+
+                PeopleInfo onePerson = new PeopleInfo(firstName, lastName, age, false);
+                peopleInfoService.Save(onePerson);
+                ids.Add(onePerson.Id);
+
+            }
+        }
+
+        private void GetInformation(int i, out string firstName, out string lastName, out string ageText)
+        {
+            TextBox[] textBoxes = touristTextBoxes[i];
+
+            firstName = textBoxes[0].Text;
+            lastName = textBoxes[1].Text;
+            ageText = textBoxes[2].Text;
+        }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
 
             List<int> peopleIds = RetrievePeoplesIds();
-            //List<string> usernames = ReadingUsernames();
-            int num = peopleIds.Count();
-            //List<int> touristIds = _touristRepository.GetTouristIdsByUsernames(usernames);
             
-
-
+            int num = peopleIds.Count();
+       
             int idInstance = TourInstance.Id;
 
             UpdateKeyPoints(peopleIds);
