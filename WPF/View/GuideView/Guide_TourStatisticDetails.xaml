@@ -23,43 +23,31 @@
 
         <!-- Tour Details -->
         <StackPanel Grid.Row="1" Margin="10">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Name:" FontSize="18"/>
-                <TextBlock Text="{Binding Name}" FontSize="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Location and City:" FontSize="18"/>
-                <TextBlock Text="{Binding Location}" FontSize="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Description:" FontSize="18"/>
-                <TextBlock Text="{Binding Description}" FontSize="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Language:" FontSize="18"/>
-                <TextBlock Text="{Binding Language}" FontSize="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Max Number of Tourists:" FontSize="18"/>
-                <TextBlock Text="{Binding MaxNumberOfTourists}" FontSize="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Duration:" FontSize="18"/>
-                <TextBlock Text="{Binding Duration}" FontSize="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Key Points:" FontSize="18"/>
-                <TextBlock Text="{Binding KeyPoints}" FontSize="14"/>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Images:" FontSize="18"/>
-                <TextBlock Text="{Binding Images}" FontSize="14"/>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Most Popular Tour:" FontSize="18"/>
-                <TextBlock Text="{Binding MostPopularTour}" FontSize="14"/>
+            <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Name:    " FontSize="18"/>
+                    <TextBlock Text="{Binding MostPopularTour.Name}" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Location and City:    " FontSize="18"/>
+                    <TextBlock Text="{Binding MostPopularTour.Location}" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Description:     " FontSize="18"/>
+                    <TextBlock Text="{Binding MostPopularTour.Description}" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Language:    " FontSize="18"/>
+                    <TextBlock Text="{Binding MostPopularTour.Language}" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="MaxNumberOfTourists:     " FontSize="18"/>
+                    <TextBlock Text="{Binding MostPopularTour.MaxTourists}" FontSize="18"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Duration:     " FontSize="18"/>
+                    <TextBlock Text="{Binding MostPopularTour.Duration}" FontSize="18"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
@@ -69,6 +57,9 @@
             <ComboBox ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" Width="100"/>
             <Button Content="SHOW TOUR" Command="{Binding ShowTourCommand}" Margin="10 0"/>
         </StackPanel>
+        
+        
+    
 
     </Grid>
 </Page>

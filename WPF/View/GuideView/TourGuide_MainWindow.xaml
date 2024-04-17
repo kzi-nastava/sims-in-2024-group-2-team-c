@@ -22,6 +22,9 @@
         <DataTemplate DataType="{x:Type viewModel:TourStatistic_ViewModel}">
             <local:Guide_TourStatistic/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:GuideTourStatisticDetails_ViewModel}">
+            <local:Guide_TourStatisticDetails/>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>

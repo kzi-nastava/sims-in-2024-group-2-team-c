@@ -21,12 +21,12 @@ namespace BookingApp.WPF.View.GuideView
     /// </summary>
     public partial class Guide_TourStatisticDetails : Page
     {
-        private readonly GuideTourStatisticDetails_ViewModel viewModel;
+        //private readonly GuideTourStatisticDetails_ViewModel viewModel;
 
         public Guide_TourStatisticDetails()
         {
             InitializeComponent();
-            viewModel = new GuideTourStatisticDetails_ViewModel();
+            var viewModel = new GuideTourStatisticDetails_ViewModel();
             DataContext = viewModel;
         }
 
@@ -37,8 +37,9 @@ namespace BookingApp.WPF.View.GuideView
 
         private void HomePageButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow_ViewModel main = new MainWindow_ViewModel();
             GuideHomePage_ViewModel homePage = new GuideHomePage_ViewModel();
-            this.NavigationService.Navigate(homePage);
+            this.NavigationService.Navigate(main, homePage);
         }
     }
 }

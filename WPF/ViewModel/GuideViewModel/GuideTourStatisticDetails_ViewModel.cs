@@ -18,7 +18,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         private readonly EndedToursService _endedTourService;
         private int _selectedYear;
         private ObservableCollection<int> _years;
-        private TourStatisticDTO _tourStatistic;
+        private TourStatisticDTO _mostPopularTour;
 
         public ObservableCollection<int> Years
         {
@@ -41,13 +41,13 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             }
         }
 
-        public TourStatisticDTO TourStatistic
+        public TourStatisticDTO MostPopularTour
         {
-            get => _tourStatistic;
+            get => _mostPopularTour;
             set
             {
-                _tourStatistic = value;
-                OnPropertyChanged(nameof(TourStatistic));
+                _mostPopularTour = value;
+                OnPropertyChanged(nameof(MostPopularTour));
             }
         }
 
@@ -58,13 +58,13 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             _endedTourService = new EndedToursService();
             Years = new ObservableCollection<int>(Enumerable.Range(2010, DateTime.Now.Year - 2010 + 1));
             SelectedYear = DateTime.Now.Year;
-            TourStatistic = _endedTourService.FindMostVisitedTour();
+            MostPopularTour = _endedTourService.FindMostVisitedTour();
             ShowTourCommand = new RelayCommand(ShowTour);
         }
 
         private void LoadTourStatistic()
         {
-            TourStatistic = _endedTourService.FindMostVisitedTourForYear(SelectedYear);
+            MostPopularTour = _endedTourService.FindMostVisitedTourForYear(SelectedYear);
         }
 
         private void ShowTour()
@@ -76,7 +76,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             {
                 //TourViewModel tourViewModel = new TourViewModel(mostPopularTour);
                 //TourView.DataContext = tourViewModel; 
-                TourStatistic = mostPopularTour;
+                MostPopularTour = mostPopularTour;
             }
             else
             {
