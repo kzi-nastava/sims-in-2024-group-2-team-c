@@ -23,6 +23,7 @@ namespace BookingApp.WPF.View.OwnerView
         public OwnerWindow()
         {
             InitializeComponent();
+            //MainFrame.Navigate(new OwnerHomePage()); mozda mozes otkomentrisati kad porradi home page
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -31,10 +32,21 @@ namespace BookingApp.WPF.View.OwnerView
             this.Content = ownerHomePage;
         }
 
+        private void Ratings_Click(object sender, RoutedEventArgs e)
+        {
+            GuestRatingForm guestRatingForm = new GuestRatingForm();
+            this.Content = guestRatingForm;
+        }
+
         //sve ostale uradi ovako, samo pazi da se ne preklapa tekst gore!
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
             NavigateToPage("OwnerProfile");
+        }
+
+        private void OwnersRatings_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage("OwnersRatings");
         }
 
 
@@ -43,6 +55,7 @@ namespace BookingApp.WPF.View.OwnerView
             String pageUri = "WPF\\View\\OwnerView\\" + pageName + ".xaml"; // ovo je nacin sa putanjama, a moze da se instancira i nova stranica prilikom navigacije, pa da ne moraju da se koriste putanje, ali ima neke razlike u ponasanju stranica prilikom navigacije (procitati na linku)
             MainFrame.Navigate(new Uri(pageUri, UriKind.RelativeOrAbsolute)); // ovo je skraceni zapis za MainFrame.NavigationService.Navigate(...);
         }
+
 
 
         /* stari nacin

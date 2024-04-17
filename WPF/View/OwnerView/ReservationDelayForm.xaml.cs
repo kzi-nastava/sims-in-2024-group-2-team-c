@@ -60,6 +60,12 @@ namespace BookingApp.WPF.View.OwnerView
             }
         }
 
+        private void ExplanationTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string explanation = ExplanationTextBox.Text;
+            // Ovde možete pozvati metodu koja će sačuvati uneti tekst u CSV datoteku
+            _viewModel.SaveExplanationToCSV(explanation);
+        }
 
     }
 }

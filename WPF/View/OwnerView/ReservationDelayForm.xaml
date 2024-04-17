@@ -26,18 +26,27 @@
             </ListView.View>
         </ListView>
 
+
+
         <!-- Dugmad za odobravanje i odbijanje zahteva -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button Content="Deny" Background="Red" Foreground="White" Margin="5" Click="RejectButton_Click" Height="20"/>
             <Button Content="Allow" Background="Green" Foreground="White" Click="ApproveButton_Click" Height="20"/>
-            <Button Content="Cancel" Click="CancelButton_Click" Height="20"/>
+           
         </StackPanel>
 
-        <Popup Name="DateUnavailablePopup" Placement="Center" IsOpen="False">
-            <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="10">
-                <TextBlock Text="Selected date is already booked."/>
-            </Border>
-        </Popup>
+        <Button Content="Go Back" Click="CancelButton_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+        <TextBox x:Name="ExplanationTextBox"
+         Text="Enter Your Explanation Here (optional)"
+         Width="275"
+         Height="30"
+         FontSize="16"
+         FontWeight="Normal"
+         HorizontalAlignment="Left"
+         VerticalAlignment="Center"
+         Margin="10"
+         LostFocus="ExplanationTextBox_LostFocus"/>
 
     </Grid>
 </Page>

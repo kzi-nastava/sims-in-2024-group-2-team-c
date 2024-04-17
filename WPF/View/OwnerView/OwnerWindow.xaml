@@ -42,16 +42,18 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
             <Button x:Name="HomeButton" Content="Home" Margin="5" Style="{StaticResource LinkButtonStyle}" Click="Home_Click"/>
             <Button x:Name="AccommodationsButton" Content="Accommodations" Margin="5" Style="{StaticResource LinkButtonStyle}" />
-            <Button x:Name="RatingsButton" Content="Ratings" Margin="5" Style="{StaticResource LinkButtonStyle}" />
+            <Button x:Name="RatingsButton" Content="Ratings" Margin="5" Style="{StaticResource LinkButtonStyle }" Click="Ratings_Click" />
             <Button x:Name="RenovationButton" Content="Renovation" Margin="5" Style="{StaticResource LinkButtonStyle}" />
             <Button x:Name="StatisticsButton" Content="Statistics" Margin="5" Style="{StaticResource LinkButtonStyle}" />
         </StackPanel>
 
         <!-- Ikona za Profile u gornjem desnom uglu -->
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
-            <Image Source="C:\Users\Laptop\source\repos\sims-in-2024-group-2-team-c\Resources\Images\profilei.png" Width="24" Height="24" MouseLeftButtonDown="Profile_Click"/>
+            <Image Source="Resources\Images\profilei.png" Width="24" Height="24" MouseLeftButtonDown="Profile_Click"/>
             <TextBlock Text="Your Profile" Margin="5" VerticalAlignment="Center" MouseLeftButtonDown="Profile_Click"/>
         </StackPanel>
+
+        <Button Content="See Your Ratings" Click="OwnersRatings_Click" Margin="200" />
 
         <!-- Frame za prikaz stranica -->
         <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>

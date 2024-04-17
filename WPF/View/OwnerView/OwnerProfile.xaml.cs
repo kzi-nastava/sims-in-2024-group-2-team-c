@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BookingApp.Repository;
+using BookingApp.Service.OwnerService;
+using BookingApp.WPF.ViewModel.OwnerViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,16 @@ namespace BookingApp.WPF.View.OwnerView
     /// </summary>
     public partial class OwnerProfile : Page
     {
+        private OwnerProfileViewModel _viewModel;
         public OwnerProfile()
         {
             InitializeComponent();
+            OwnerRepository ownerRepository = new OwnerRepository(); 
+            SuperOwnerService superOwnerService = new SuperOwnerService(ownerRepository);
+            _viewModel = new OwnerProfileViewModel( ownerRepository);
+
+           
+            DataContext = _viewModel;
         }
     //page to page
         private void NotificationsAndRequests_Click(object sender, RoutedEventArgs e)

@@ -16,10 +16,13 @@ namespace BookingApp.Model
             public DateTime NewCheckInDate { get; set; } 
             public DateTime NewCheckOutDate { get; set; }
             public ReservationDelayStatus Status { get; set; } 
-       
-            public ReservationDelay() { }
+            public string Explanation { get; set; }
+        
 
-            public ReservationDelay(int reservationDelayId, Guest guest, Accommodation accommodation, DateTime newCheckInDate, DateTime newCheckOutDate, ReservationDelayStatus status)
+
+        public ReservationDelay() { }
+
+            public ReservationDelay(int reservationDelayId, Guest guest, Accommodation accommodation, DateTime newCheckInDate, DateTime newCheckOutDate, ReservationDelayStatus status, string explanation)
         {
             ReservationDelayId = reservationDelayId;
             Guest = guest;
@@ -27,11 +30,12 @@ namespace BookingApp.Model
             NewCheckInDate = newCheckInDate;
             NewCheckOutDate = newCheckOutDate;
             Status = status;
+            Explanation = explanation;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { ReservationDelayId.ToString(), Guest.Username, Accommodation.Name, NewCheckInDate.ToString(), NewCheckOutDate.ToString(), Status.ToString() };
+            string[] csvValues = { ReservationDelayId.ToString(), Guest.Username, Accommodation.Name, NewCheckInDate.ToString(), NewCheckOutDate.ToString(), Status.ToString(), Explanation };
             return csvValues;
         }
 
@@ -44,6 +48,7 @@ namespace BookingApp.Model
             NewCheckInDate = Convert.ToDateTime(values[3]);
             NewCheckOutDate = Convert.ToDateTime(values[4]);
             Status = (ReservationDelayStatus)Enum.Parse(typeof(ReservationDelayStatus), values[5]);
+            Explanation = values[6];
         }
 
     }

@@ -18,6 +18,21 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Owner Information" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="3" Margin="0,0,0,10"/>
             <!-- Dodajte ostale informacije o vlasniku ovde -->
+           
+
+            <!-- Dodajte TextBox za prikaz informacije da li je vlasnik super-vlasnik -->
+            <TextBlock Text="Super Owner:" FontWeight="Bold" Margin="10,30,0,0" Grid.Column="0" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding OwnerType}" IsReadOnly="True" Margin="10,30,0,0" Grid.Column="1" VerticalAlignment="Top"/>
+
+            <!-- Dodajte ostale informacije o vlasniku, poput imena, prezimena, email-a, itd. -->
+            <!-- Na primer: -->
+            <TextBlock Text="Username:" FontWeight="Bold" Margin="10,60,0,0" Grid.Column="0" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding OwnerUsername}" IsReadOnly="True" Margin="10,60,0,0" Grid.Column="1" VerticalAlignment="Top"/>
+
+            
+
+            <!-- Dodajte ostale informacije o vlasniku prema potrebi -->
+
         </Grid>
 
 

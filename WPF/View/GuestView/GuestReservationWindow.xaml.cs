@@ -129,6 +129,7 @@ namespace BookingApp.View
             // Rezervisanje odabranog datuma
             string resultMessage = guestReservationRepository.ReserveAccommodation(
                 selectedAccommodation.Id,
+                LoggedInUser.Id,
                 startDate,
                 endDate,
                 stayDuration,
@@ -161,7 +162,7 @@ namespace BookingApp.View
             }
 
         }
-        
+
 
         private void BookAlternativeDate_Click(object sender, RoutedEventArgs e)
         {
@@ -209,6 +210,7 @@ namespace BookingApp.View
             // Pozivanje funkcije za rezervaciju
             string resultMessage = guestReservationRepository.ReserveAccommodation(
                 selectedAccommodation.Id,
+                LoggedInUser.Id,
                 startDate,
                 endDate,
                 stayDuration,
@@ -243,7 +245,6 @@ namespace BookingApp.View
 
 
     }
-      
+
 
 }
-

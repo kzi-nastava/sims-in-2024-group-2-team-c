@@ -50,7 +50,7 @@ namespace BookingApp.View
             {
                 if(user.Password == txtPassword.Password)
                 {
-
+                   
                     OwnerWindow ownerWindow = new OwnerWindow();
                     AccommodationOverview accommodationOverview = new AccommodationOverview();
                     TourOverview tourOverview = new TourOverview();

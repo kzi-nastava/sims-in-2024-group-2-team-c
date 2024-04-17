@@ -19,12 +19,12 @@ namespace BookingApp.ViewModel
     {
         private readonly ReservationDelayRepository _reservationDelayRepository;
         private readonly ReservationDelayService _reservationDelayService;
-        private  ReservationRepository _reservationreposiotry;
+        private ReservationRepository _reservationreposiotry;
         private ReservationService _reservationservice;
 
         public ObservableCollection<ReservationDelay> ReservationDelays { get; set; }
-        public ReservationDelay SelectedReservationDelay { get;  set; }
-        
+        public ReservationDelay SelectedReservationDelay { get; set; }
+
 
         public ReservationDelayViewModel()
         {
@@ -44,6 +44,21 @@ namespace BookingApp.ViewModel
             {
                 ReservationDelays.Add(delay);
             }
+
+        }
+
+        private bool _availability;
+        public bool Availability
+        {
+            get { return _availability; }
+            set
+            {
+                if (_availability != value)
+                {
+                    _availability = value;
+                    OnPropertyChanged(nameof(Availability));
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -53,10 +68,10 @@ namespace BookingApp.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
 
 
-    public void ApproveReservationDelay()
+
+        public void ApproveReservationDelay()
         {
             if (SelectedReservationDelay != null)
             {
@@ -65,10 +80,10 @@ namespace BookingApp.ViewModel
                 _reservationDelayRepository.Update(SelectedReservationDelay);
 
                 // Poziv servisa da ažurira status
-                
+
                 _reservationDelayService.UpdateReservationDelayStatus(SelectedReservationDelay.ReservationDelayId, ReservationDelayStatus.Approved);
 
-                
+
 
                 LoadReservationDelays(); // Osvežavanje liste
                 //menjanje datuma rezervacije
@@ -102,9 +117,39 @@ namespace BookingApp.ViewModel
             }
 
         }
-       
 
-    }
+        public void SaveExplanationToCSV(string explanation)
+        {
+            if (SelectedReservationDelay != null)
+            {
+
+                SelectedReservationDelay.Explanation = explanation;
+
+
+                string filePath = "../../../Resources/Data/reservationdelay.csv";
+                string[] lines = File.ReadAllLines(filePath);
+
+                List<string> updatedLines = new List<string>();
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 1 && parts[0] == SelectedReservationDelay.ReservationDelayId.ToString())
+                    {
+                        parts[6] = explanation;
+                        updatedLines.Add(string.Join("|", parts));
+                    }
+                    else
+                    {
+                        updatedLines.Add(line);
+                    }
+                }
+
+                File.WriteAllLines(filePath, updatedLines);
+            }
+        }
+        
+    
+}
 }
 
 
