@@ -1,32 +1,41 @@
-0|Nis|des|False|True|False|1,2,16,17|1,16,2|0
-1|Kragujevac|des2|False|False|False|1,2|1|0
-2|Beograd|des3|False|False|False|1,2,2,5,1,15|1|0
-3|Novi Sad|des4|False|False|True|1,2,2,5,1,15|1|0
-4|Beograd|des4|False|True|False|1,2|1|1
-5|Beograd|description|True|True|True|1,17|1|2
-6|Kragujevac||True|True|True|2,17|1|2
-7|Beograd||False|False|True|1,2|1|2
-8|Cannes||False|True|False|2|1|3
-9|Nica||False|False|True|1|1|3
-10|Cacak||False|True|False|1,2|1|4
-11|Ljig||False|False|False|1,2|1|4
-12|Obrenovac||False|False|True|1,2|1|4
-13|Beograd||False|True|False|1,2|1|5
-14|Zagreb||False|False|False|1,2|1|5
-15|Milano||False|False|True|1,2|1|5
-16|Beograd||False|True|False|1,2|1|6
-17|Kragujevac||False|False|False|1,2|1,2|6
-18|Nis||False|False|True|1,2|1|6
-19|Beograd||False|True|False|1,2|1|7
-20|Novi Sad||False|False|True|1,2|1|7
-21|Berlin||False|True|False|||9
-22|Oslo||False|False|True|||9
-23|Katedrala|opis1|True|True|True|1|1|10
-24|Plaza|opis4|True|True|True|1|1|10
-25|Zlatibor||False|True|False|||11
-26|Cacak||False|False|False|||11
-27|Beograd||False|False|True|||11
-28|Oslo||False|True|False|||12
-29|Oslo||False|False|True|||12
-30|Novi Sad||False|True|False|||13
-31|Beograd||False|False|True|||13
+0|Manchester Museum|Visit the Manchester Museum and explore its rich history.|False|True|False|1,2,16,17|1,16,2|0
+1|Manchester Cathedral|This is a beautiful cathedral with a long history.|False|False|False|1,2|1|0
+2|Science and Industry Museum|Discover the fascinating story of Manchester's industrial past and its role in the scientific world at the Science and Industry Museum|False|False|False|1,2,2,5,1,15|1|0
+3|Whitworth Art Gallery|Immerse yourself in art at the Whitworth Art Gallery, featuring a diverse collection of contemporary and historical works in a stunning setting.|False|False|True|1,2,2,5,1,15|1|0
+4|CN Tower|Experience breathtaking views of Toronto from the iconic CN Tower, one of the tallest freestanding structures in the world. Enjoy a thrilling ride to the observation deck and marvel at the cityscape below.|False|True|False|1,2|1|1
+5|Royal Ontario Museum|Explore world cultures, natural history, and art at the Royal Ontario Museum. With a vast collection of artifacts and interactive exhibits, there's something for everyone to enjoy.|False|False|False|1,17|1|1
+6|Toronto Islands|Escape the hustle and bustle of the city and relax on the Toronto Islands. Enjoy stunning views of the skyline, rent a bike or kayak, and explore the parks, beaches, and charming communities that make up this unique urban oasis.|False|False|True|2,17|17|1
+7|Sydney Opera House Tour|Explore one of the world's most iconic landmarks with a guided tour of the Sydney Opera House. Learn about its architectural significance and rich history as you venture inside its sails|False|True|False|1,2|1|2
+8|Bondi Beach|Experience the vibrant atmosphere of Bondi Beach, one of Sydney's most famous destinations. Relax on the golden sands, catch some waves, or stroll along the scenic coastal walkway for stunning views of the coastline|False|False|True|2|1|2
+9|Akihabara Electric Town|Explore the vibrant and eclectic district of Akihabara, known as Electric Town, where you can find a plethora of anime, manga, and electronics shops. Immerse yourself in the otaku culture and discover the latest trends in anime merchandise|False|True|False|1|1|3
+10|Ghibli Museum|Step into the magical world of Studio Ghibli at the Ghibli Museum. Explore exhibits showcasing the animation process, watch exclusive short films, and immerse yourself in the enchanting creations of Hayao Miyazaki and his team|False|False|True|1,2|1|3
+11|Burj Khalifa|Experience the awe-inspiring heights of the Burj Khalifa, the tallest skyscraper in the world. Take a high-speed elevator ride to the observation deck and marvel at panoramic views of Dubai's skyline and beyond.|False|True|False|1,2|1|4
+12|Dubai Marina|Discover the sleek and modern architecture of Dubai Marina, home to some of the city's most iconic skyscrapers. Stroll along the waterfront promenade, dine at chic restaurants, and admire the dazzling city lights reflected in the marina's waters|False|False|False|1,2|1|4
+13|The Palm Jumeirah|Experience luxury living at The Palm Jumeirah, an artificial island shaped like a palm tree. Marvel at the impressive skyline of high-rise buildings and opulent resorts, and relax on pristine beaches overlooking the Arabian Gulf.|False|False|True|1,2|1|4
+14|Grauman's Chinese Theatre|Visit the historic Grauman's Chinese Theatre, known for its celebrity handprints and footprints|False|True|False|1,2|1|5
+15|Hollywood Boulevard|Stroll along Hollywood Boulevard and soak in the atmosphere of the entertainment capital of the world|False|False|False|1,2|1|5
+16|Dolby Theatre|See the famous Dolby Theatre, home to the Academy Awards ceremonies|False|False|True|1,2|1|5
+17|Sambadrome|Experience the vibrant energy of Rio Carnival at the Sambadrome parade grounds|False|True|False|1,2|1,2|6
+18|Copacabana Beach|Relax at Copacabana Beach, one of the most famous beaches in the world|False|False|True|1,2|1|6
+19|East Side Gallery|Explore the East Side Gallery, a long section of the Berlin Wall covered in vibrant street art|False|True|False|1,2|1|7
+20|Checkpoint Charlie|Visit Checkpoint Charlie, the famous border crossing point between East and West Berlin during the Cold War|False|False|True|1,2|1|7
+21|Sagrada Familia|Visit the Sagrada Familia, Gaudí's unfinished masterpiece and a symbol of Barcelona|False|True|False|||8
+22|Park Güell|Explore Park Güell, a whimsical park designed by Gaudí with colorful mosaic sculptures and stunning views of the city.|False|False|False|||8
+23|Casa Batlló|Discover Casa Batlló, a unique and imaginative building designed by Gaudí with its distinctive facade and rooftop terrace|False|False|False|||8
+24|La Pedrera|Visit La Pedrera, also known as Casa Milà, another of Gaudí's architectural gems with its undulating stone facade and rooftop sculptures|False|False|False|||8
+25|Palau Güell|Explore Palau Güell, a mansion designed by Gaudí for a wealthy industrialist, known for its intricate ironwork and lavish interiors|False|False|False|||8
+26|Casa Vicens|Discover Casa Vicens, one of Gaudí's earliest works and a UNESCO World Heritage Site, with its colorful tiles and eclectic architectural style|False|False|False|||8
+27|Colonia Güell|Visit Colonia Güell, a workers' village where Gaudí experimented with architectural techniques that would later influence his famous works in Barcelona|False|False|True|||8
+28|Uffizi Gallery|Explore the Uffizi Gallery, home to one of the most important art collections in the world, including works by Botticelli, Michelangelo, and Leonardo da Vinci|False|True|False|||9
+29|Florence Cathedral|Visit the Florence Cathedral, also known as the Duomo, with its iconic dome designed by Brunelleschi and stunning marble facade.|False|False|False|||9
+30|Ponte Vecchio|Stroll across the Ponte Vecchio, Florence's oldest bridge, lined with shops selling jewelry, art, and souvenirs|False|False|True|||9
+31|Acropolis|Explore the Acropolis, the ancient citadel of Athens, and visit the Parthenon, dedicated to the goddess Athena|False|True|False|||10
+32|Ancient Agora|Visit the Ancient Agora, the heart of ancient Athens, where philosophers like Socrates and Plato once walked|False|False|False|||10
+33|Temple of Olympian Zeus|Discover the Temple of Olympian Zeus, one of the largest temples of the ancient world, dedicated to the king of the gods|False|False|False|||10
+34|National Archaeological Museum|Explore the National Archaeological Museum, home to an extensive collection of ancient Greek artifacts, including the Mask of Agamemnon|False|False|True|||10
+35|Keizersgracht Canal|Cruise along the Keizersgracht Canal and admire the elegant merchant houses lining the waterway|False|True|False|||11
+36|Herengracht Canal|Explore the Herengracht Canal, one of the most prestigious canals in Amsterdam, lined with beautiful mansions and gardens|False|False|True|||11
+37|Vaxholm|Visit Vaxholm, one of the main islands in the Stockholm Archipelago, known for its picturesque harbor and historic fortress|False|True|False|||12
+38|Sandhamn|Explore Sandhamn, a charming island with sandy beaches, quaint cottages, and scenic hiking trails|False|False|True|||12
+39|Giza Pyramids|Explore the Giza Pyramids, including the Great Pyramid of Giza, one of the Seven Wonders of the Ancient World|False|True|False|||13
+40|Sphinx|Visit the Sphinx, a mythical creature with the body of a lion and the head of a human, guarding the pyramids of Giza|False|False|True|||13
