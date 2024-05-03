@@ -86,10 +86,13 @@ namespace BookingApp.Service.TourServices
             List<KeyPoint> keyPoints = _keyPointService.GetKeyPointsByTourId(activeTour.TourId);
             List<ActiveTourKeyPointDTO> keyPointDTOs = new List<ActiveTourKeyPointDTO>();
 
+
+            TourInstance tourInstance = _tourInstanceService.GetById(activeTour.TourInstanceId);
+
             foreach (var instance in keyPoints)
             {
                 
-                string activity = CheckActivity(instance);
+                string activity = CheckActivity(instance, tourInstance.Ended);
 
                 ActiveTourKeyPointDTO keyPoint = new ActiveTourKeyPointDTO(instance.Name, instance.Description, activity);
 
@@ -105,17 +108,29 @@ namespace BookingApp.Service.TourServices
 
 
 
-        private static string CheckActivity(KeyPoint instance)
+        private static string CheckActivity(KeyPoint instance, bool ended)
         {
             string activity;
-            if (instance.Active)
+            
+
+            if (!ended)
             {
-                activity = "ACTIVE";
+                if (instance.Active)
+                {
+                    activity = "ACTIVE";
+                }
+                else
+                {
+                    activity = "NOT ACTIVE";
+                }
             }
             else
             {
-                activity = "NOT ACTIVE";
+                activity = "PASSED";
             }
+
+
+
 
             return activity;
         }
@@ -127,6 +142,14 @@ namespace BookingApp.Service.TourServices
             Tour tour = _tourService.GetById(id);
             return tour.Description;
 
+
+        }
+
+
+        public DateTime GetDateOfInstance(int id)
+        {
+            TourInstance tourInstance = _tourInstanceService.GetById(id);
+            return tourInstance.Date;
 
         }
 

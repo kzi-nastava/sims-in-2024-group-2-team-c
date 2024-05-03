@@ -54,6 +54,20 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
+
+        private DateTime _date;
+
+        public DateTime Date
+        {
+
+            get { return _date; }
+            set
+            {
+                _date = value;
+                OnPropertyChanged(nameof(Date));
+            }
+        }
+
         private ObservableCollection<ActiveTourKeyPointDTO> _activeTourKeyPoints;
 
         public ObservableCollection<ActiveTourKeyPointDTO> ActiveTourKeyPoints
@@ -79,7 +93,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             
             _touristService.Activate(LoggedInUser.Id);
             TourDescription = _followingService.GetDescription(SelectedTour.TourId);
-
+            Date = _followingService.GetDateOfInstance(SelectedTour.TourInstanceId);
 
             LoadKeyPointsForTour(SelectedTour);
             CheckTourInstanceEnded(selectedTour.TourInstanceId);

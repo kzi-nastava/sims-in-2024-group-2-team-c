@@ -11,7 +11,7 @@
     <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height=" 100"></RowDefinition>
+                <RowDefinition Height=" 150"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
@@ -20,6 +20,7 @@
 
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -40,7 +41,15 @@
                      FontSize="15" 
                      Background="Transparent"
                      MaxWidth="300" Margin="5"/>
-                   
+
+                    <TextBlock Grid.Row="2" 
+                        Text="{Binding Date, StringFormat={}{0:MM/dd/yyyy}}" 
+                         HorizontalAlignment="Center" FontWeight="SemiBold"
+                         TextWrapping="Wrap" 
+                         FontSize="15" 
+                         Background="Transparent"
+                         MaxWidth="300" Margin="5"/>    
+
                 </Grid>
 
 
@@ -104,7 +113,11 @@
                                                                         <Setter Property="Foreground" Value="Green" />
                                                                         <!-- Change color to green for "ACTIVE" -->
                                                                     </DataTrigger>
-                                                                </Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Active}" Value="PASSED">
+                                                                    <Setter Property="Foreground" Value="Orange" />
+                                                                    <!-- Change color to green for "ACTIVE" -->
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
                                                             </Style>
                                                         </TextBlock.Style>
                                                     </TextBlock>

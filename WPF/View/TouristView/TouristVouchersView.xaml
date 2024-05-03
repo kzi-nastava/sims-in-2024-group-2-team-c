@@ -32,14 +32,14 @@
                     <Border BorderBrush="#294724" BorderThickness="1">
                         <Grid Background="#b2edb4" Height="40">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="280"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding TourName}" Margin="10,0" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="0" Text="{Binding TourName}" Margin="10,0" VerticalAlignment="Center" FontSize="15"/>
 
 
                             <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0">
-                                <TextBlock Text="Expiration Date"></TextBlock>
+                                <TextBlock Text="Expiration Date" FontWeight="SemiBold"></TextBlock>
                                 <TextBlock  Text="{Binding ExpirationDate, StringFormat={}{0:MM/dd/yyyy}}"  Margin="5,0,0,0"  />
                             </StackPanel>
 
