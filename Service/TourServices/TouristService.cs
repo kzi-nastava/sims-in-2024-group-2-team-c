@@ -34,7 +34,6 @@ namespace BookingApp.Service.TourServices
         public bool GetActivity(int id) {
             Tourist tourist = iTouristRepository.GetById(id);
             return tourist.Active;
-        
         }
 
         public void Activate(int id)

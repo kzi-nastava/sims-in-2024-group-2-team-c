@@ -17,24 +17,14 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for TouristUserView.xaml
+    /// Interaction logic for TouristHomeView.xaml
     /// </summary>
-    public partial class TouristUserView : Page
+    public partial class TouristHomeView : Page
     {
-        public TouristUserView()
+        public TouristHomeView()
         {
             InitializeComponent();
-            DataContext = new TouristUserViewModel();
-        }
-
-        private void View_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new TouristVouchersView());
-        }
-
-        private void LogOut_Click(object sender, RoutedEventArgs e)
-        {
-           
+            DataContext = new TouristHomeViewModel();
         }
     }
 }

@@ -103,6 +103,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public ViewModelCommandd NotificationCommand { get; }
 
+        public ViewModelCommandd RequestsCommand { get; }
+
         public MainViewModel()
         {
 
@@ -111,7 +113,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             //ShowKeyPointsCommand = new ViewModelCommand(ExecuteShowKeyPointsCommand);
             UserCommand = new ViewModelCommandd(ExecuteUserCommand);
             NotificationCommand = new ViewModelCommandd(ExecuteNotificationCommand);
-            //ShowToursCommand = new ViewModelCommandd(ExecuteShowTourCommand);
+            ShowToursCommand = new ViewModelCommandd(ExecuteShowTourCommand);
+            RequestsCommand = new ViewModelCommandd(ExecuteRequestCommand);
 
             CurrentMarkerIconSource = "/Resources/Images/marker.png";
             CurrentHomeIconSource = "/Resources/Images/home.png";
@@ -153,17 +156,17 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
-       /* public void ExecuteShowTourCommand(object obj)
+        public void ExecuteShowTourCommand(object obj)
         {
             CurrentMarkerIconSource = "/Resources/Images/marker.png";
             CurrentHomeIconSource = "/Resources/Images/on home.png";
             CurrentUserIconSource = "/Resources/Images/tourist.png";
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
-            CurrentChildView = new ShowAllToursViewModel();
+            CurrentChildView = new TouristHomeViewModel();
 
 
 
-        }*/
+        }
 
         public void ExecuteUserCommand(object obj)
         {
@@ -174,6 +177,17 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentRequestIconSource = "/Resources/Images/tour-request.png";
             CurrentChildView = new TouristUserViewModel();
 
+        }
+
+        public void ExecuteRequestCommand(object obj)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+            CurrentChildView = new TourRequestViewModel();
+      
         }
 
         /*public void ExecuteShowKeyPointsCommand(object obj)

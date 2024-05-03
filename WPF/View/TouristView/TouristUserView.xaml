@@ -115,7 +115,7 @@
             </Border>
 
 
-            <Button Grid.Row="6" Margin="20,10,40,10" Content="Log out" Height=" 40" Width="60" HorizontalAlignment="Right"/>
+            <Button Grid.Row="6" Margin="20,10,40,10" Content="Log out" Height=" 40" Width="60" HorizontalAlignment="Right" Click="LogOut_Click"/>
 
         </Grid>
     </ScrollViewer>
