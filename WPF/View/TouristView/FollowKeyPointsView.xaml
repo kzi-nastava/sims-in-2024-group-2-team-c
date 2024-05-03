@@ -18,67 +18,102 @@
                 <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" BorderBrush="#4e754a"  BorderThickness="3" Background="#89d980">
+            <Border Grid.Row="1" BorderBrush="#4e754a"  BorderThickness="3" Background="#b2edb4">
 
-                <TextBox Text="{Binding SelectedTour.Name}" 
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Top" 
-                         Margin="5"
-                         IsReadOnly="True"
-                         Background="Transparent" 
-                         BorderThickness="0"
-                         FontWeight="Bold"
-                         FontSize="16" />
-                
-                
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" 
+                    Text="{Binding SelectedTour.Name}" 
+                    HorizontalAlignment="Center" 
+                    FontWeight="Bold"
+                    FontSize="16" 
+                    Background="Transparent" 
+                    BorderThickness="0" 
+                    IsReadOnly="True"/>
+
+                    <TextBlock Grid.Row="1" 
+                    Text="{Binding TourDescription}" 
+                     HorizontalAlignment="Center" 
+                     TextWrapping="Wrap" 
+                     FontSize="15" 
+                     Background="Transparent"
+                     MaxWidth="300" Margin="5"/>
+                   
+                </Grid>
+
 
             </Border>
 
-            <Button Grid.Row="1"  Content="Return" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top"
-                 Margin="5"  Click="Return_Click"/>
-
-            <Grid Grid.Row="2">
+            <Button Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5"  Click="Return_Click"
+                    Width="30" Height="30"  Background="Transparent" BorderThickness="0">
+                <Image  Source="/Resources/Images/tour exit.png"/>
+            </Button>
+            
+                <Grid  Margin="30"  Background="#b2edb4" Grid.Row="2"  >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
 
-                <!-- Create a nested Grid with ColumnDefinitions -->
-                <Grid Grid.Row="2" >
-                    <Grid.ColumnDefinitions>
-                        <!-- Columns for padding on left and right, central column for content -->
-                        <ColumnDefinition Width="20" />
-                        <!-- Left padding -->
-                        <ColumnDefinition Width="*" />
-                        <!-- Central column for main content -->
-                        <ColumnDefinition Width="20" />
-                        <!-- Right padding -->
-                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="KEY POINTS" Margin="10" FontWeight="SemiBold" Grid.Row="0" HorizontalAlignment="Center" ></TextBlock>
+                    <!-- Create a nested Grid with ColumnDefinitions -->
+                    <Grid Grid.Row="1" >
+                        <Grid.ColumnDefinitions>
+                            <!-- Columns for padding on left and right, central column for content -->
+                            <ColumnDefinition Width="20" />
+                            <!-- Left padding -->
+                            <ColumnDefinition Width="*" />
+                            <!-- Central column for main content -->
+                            <ColumnDefinition Width="20" />
+                            <!-- Right padding -->
+                        </Grid.ColumnDefinitions>
 
-                    <!-- Place your content in the central column -->
-                    <ItemsControl ItemsSource="{Binding ActiveTourKeyPoints}" Grid.Column="1" Background="#b2edb4">
-                        <!-- Define the ItemTemplate for each key point -->  
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="5" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                        <!-- Place your content in the central column -->
+                        <ItemsControl  ItemsSource="{Binding ActiveTourKeyPoints}" Grid.Column="1" >
+                            <!-- Define the ItemTemplate for each key point -->
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
 
-                                    <!-- Display name, description, and active status -->
-                                    <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="5" TextWrapping="NoWrap" />
-                                    <TextBlock Text="{Binding Description}" Grid.Column="1" Margin="5" TextWrapping="NoWrap" />
-                                    <TextBlock Text="{Binding Active}" Grid.Column="2" Margin="5" TextWrapping="NoWrap" />
-                                </Grid>
+
+                                <Border BorderBrush="#294724" BorderThickness="2" Margin="0,0,0,10" Background="AliceBlue">
+                                    <Grid Margin="5" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Display name, description, and active status -->
+                                        <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="5" TextWrapping="NoWrap" />
+                                       <!-- <TextBlock Text="{Binding Description}" Grid.Column="1" Margin="5" TextWrapping="Wrap" /> -->
+                                        <TextBlock Text="{Binding Active}" Grid.Column="2" Margin="5" TextWrapping="NoWrap">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                    <!-- Default color for "NOT ACTIVE" -->
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Active}" Value="ACTIVE">
+                                                            <Setter Property="Foreground" Value="Green" />
+                                                            <!-- Change color to green for "ACTIVE" -->
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
+
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </Grid>
                 </Grid>
-            </Grid>
+           
 
             <Button Content="Rate the Tour" Grid.Row="4"
         Command="{Binding RateCommand}"   IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"

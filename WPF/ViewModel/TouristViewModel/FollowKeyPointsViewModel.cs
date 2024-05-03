@@ -20,6 +20,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private readonly TourInstanceService _tourInstanceService;
         private readonly TouristService _touristService;
         private readonly FollowTourService _followingService;
+        
 
         public FollowingTourDTO SelectedTour
         {
@@ -42,7 +43,16 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-
+        private string _tourDescription;
+        public string TourDescription
+        {
+            get { return _tourDescription; }
+            set
+            {
+                _tourDescription = value;
+                OnPropertyChanged(nameof(TourDescription));
+            }
+        }
 
         private ObservableCollection<ActiveTourKeyPointDTO> _activeTourKeyPoints;
 
@@ -61,14 +71,16 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         public FollowKeyPointsViewModel(FollowingTourDTO selectedTour)
         {
             SelectedTour = selectedTour;
+            
             _followingService = new FollowTourService();
             _tourInstanceService = new TourInstanceService();
             IsTourInstanceEnded = false;
             _touristService = new TouristService();
-            _touristService.Activate(LoggedInUser.Id);
-
-
             
+            _touristService.Activate(LoggedInUser.Id);
+            TourDescription = _followingService.GetDescription(SelectedTour.TourId);
+
+
             LoadKeyPointsForTour(SelectedTour);
             CheckTourInstanceEnded(selectedTour.TourInstanceId);
         }

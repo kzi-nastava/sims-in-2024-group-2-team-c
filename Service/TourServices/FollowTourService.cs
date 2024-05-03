@@ -119,5 +119,17 @@ namespace BookingApp.Service.TourServices
 
             return activity;
         }
+
+
+        public  string GetDescription(int id)
+        {
+
+            Tour tour = _tourService.GetById(id);
+            return tour.Description;
+
+
+        }
+
+
     }
 }
