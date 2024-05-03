@@ -21,6 +21,7 @@
     <None Remove="Resources\Images\on-tour-request.png" />
     <None Remove="Resources\Images\tour exit.png" />
     <None Remove="Resources\Images\tour-request.png" />
+    <None Remove="Resources\Images\tourist-notification.png" />
     <None Remove="Resources\Images\tourist-user.png" />
     <None Remove="Resources\Images\tourist.png" />
     <None Remove="Resources\Images\view.png" />
@@ -47,7 +48,6 @@
     <Folder Include="WPF\ViewModel\OwnerViewModel\" />
     <Folder Include="Service\TourServices\" />
     <Folder Include="WPF\ViewModel\GuideViewModel\" />
-    <Folder Include="WPF\ViewModel\TouristViewModel\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +61,7 @@
     <Resource Include="Resources\Images\on-tour-request.png" />
     <Resource Include="Resources\Images\tour exit.png" />
     <Resource Include="Resources\Images\tour-request.png" />
+    <Resource Include="Resources\Images\tourist-notification.png" />
     <Resource Include="Resources\Images\tourist-user.png" />
     <Resource Include="Resources\Images\tourist.png" />
   </ItemGroup>

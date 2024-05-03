@@ -10,19 +10,18 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
 
-        <TextBlock  Grid.Row="1"   Text="NOTIFICATIONS" Margin="10,10,10,10" HorizontalAlignment="Center" 
+        <TextBlock  Grid.Row="0"   Text="Notifications" Margin="10,10,10,10" HorizontalAlignment="Center" 
              Foreground="#40613c"
                 FontWeight="Medium"
-                FontSize="25" />
+                FontSize="30" />
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -30,30 +29,52 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"  Content="Reccommendations" Background="White"></Button>
-            <Button Grid.Column="1"  Content="Accepted Requests" Background="White"></Button>
-            <Button Grid.Column="2"  Content="Tourists added" Background="White"></Button>
+            <Button Grid.Column="0"  Content="Reccommendations" Background="White" Click=" Reccommendations_Click"></Button>
+            <Button Grid.Column="1"  Content="Accepted Requests" Background="White" Click="AcceptedRequests_Click"></Button>
+            <Button Grid.Column="2"  Content="Tourists added" Background="White" Click="TouristAdded_Click"></Button>
 
         </Grid>
 
-        <ListView Grid.Row="3" ItemsSource="{Binding Notifications}" Margin="10">
-            <!-- Define a DataTemplate to format each item -->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <!-- Display TourName -->
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                        <TextBlock Text="is present on  "></TextBlock>
-                        <TextBlock Text="{Binding TourName}" Margin="10,0" />
+        <Grid x:Name="ContentGrid" Margin="0,20,0,0" Grid.Row="2"  Background="#d1d7e0">
+            <!-- Content for Button 1 -->
+            <TextBlock x:Name="Content1" Text="Content for Button 1" />
+            
 
-                        <!-- Display ExpirationDate with custom formatting -->
-                       
+            <!-- Content for Button 2 -->
+            <TextBlock x:Name="Content2" Text="Content for Button 2" Visibility="Collapsed"/>
 
-                        <!-- Add more TextBlocks as needed for other properties -->
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <!-- Content for Button 3 -->
+
+            <ItemsControl x:Name="Content3"  ItemsSource="{Binding Notifications}" Margin="5,15,5,15"  Visibility="Collapsed">
+                <ItemsControl.ItemTemplate >
+                    <DataTemplate >
+                        <Border BorderBrush="#294724" BorderThickness="1" Margin="5" Background="White">
+                            <Grid Height="40"  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width = "Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column = "0" Source="/Resources/Images/tourist-notification.png"  Width="30" Height="25" Margin="10,0,10,0"/>
+                                <TextBlock Grid.Column = "1" Text="Tourist " VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                <TextBlock Grid.Column = "2" Text="{Binding Name}" VerticalAlignment="Center"  FontSize="15"></TextBlock>
+                                <TextBlock Grid.Column = "3" Text=" joined " VerticalAlignment="Center"  FontSize="15"></TextBlock>
+                                <TextBlock  Grid.Column = "4" Text="{Binding TourName}" VerticalAlignment="Center"  FontSize="15" />
+
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+
+        </Grid>
 
 
     </Grid>

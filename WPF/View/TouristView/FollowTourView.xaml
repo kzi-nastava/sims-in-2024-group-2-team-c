@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430"
-      Title="FollowTourView"  Background="AliceBlue">
+      Title="FollowTourView"  Background="White">
 
 
 
@@ -20,7 +20,7 @@
         <TextBlock  Grid.Row="0"   Text="Your Booked Tours" Margin="10,10,10,10" HorizontalAlignment="Center" 
             Foreground="#40613c"
             FontWeight="Medium"
-            FontSize="34" />
+            FontSize="30" />
 
         <ItemsControl Grid.Row="1"
           Name="TourDataGrid"
