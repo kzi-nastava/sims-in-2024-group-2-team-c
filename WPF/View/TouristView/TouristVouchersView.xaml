@@ -11,40 +11,42 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height=" 80"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock  Grid.Row="1"   Text="VOUCHERS" Margin="10,10,10,10" HorizontalAlignment="Center" 
-        Foreground="#40613c"
-        FontWeight="Medium"
-        FontSize="25" />
 
-        <Button Grid.Row="1"  Content="Return" 
-            HorizontalAlignment="Left" 
-             VerticalAlignment="Top"
-             Margin="5"  Click="Exit_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="20">
+
+            <Button   HorizontalAlignment="Left" Width="40" Height="40"  Click="Exit_Click"   Background="Transparent" BorderThickness="0">
+                <Image  Source="/Resources/Images/tour exit.png"/>
+            </Button>
+
+            <TextBlock  Margin="30,0,0,0" Text="VOUCHERS"  HorizontalAlignment="Left" 
+             Foreground="#40613c"  FontWeight="Medium" FontSize="25" />
+        </StackPanel>
+
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Vouchers}"  >
+            <ItemsControl.ItemTemplate >
+                <DataTemplate >
+                    <Border BorderBrush="#294724" BorderThickness="1">
+                        <Grid Background="#b2edb4" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding TourName}" Margin="10,0" VerticalAlignment="Center"/>
 
 
+                            <TextBlock Grid.Column="1" Text="{Binding ExpirationDate, StringFormat={}{0:MM/dd/yyyy}}"  Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Vouchers}" Margin="10">
-            <!-- Define a DataTemplate to format each item -->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <!-- Display TourName -->
-                        <TextBlock Text="Voucher"></TextBlock>
-                        <TextBlock Text="{Binding TourName}" Margin="10,0" />
 
-                        <!-- Display ExpirationDate with custom formatting -->
-                        <TextBlock Text="{Binding ExpirationDate, StringFormat={}{0:MM/dd/yyyy}}" Margin="10,0" />
+                        </Grid>
 
-                        <!-- Add more TextBlocks as needed for other properties -->
-                    </StackPanel>
+                    </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
 
     </Grid>
