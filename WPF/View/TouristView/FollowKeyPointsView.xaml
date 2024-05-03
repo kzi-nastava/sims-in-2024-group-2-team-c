@@ -10,15 +10,13 @@
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
     <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height=" 20"></RowDefinition>
-            <RowDefinition Height=" 100"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="30"></RowDefinition>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=" 100"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" BorderBrush="#4e754a"  BorderThickness="3" Background="#b2edb4">
+            <Border Grid.Row="0" BorderBrush="#4e754a" Margin="0,20,0,0" BorderThickness="3" Background="#b2edb4">
 
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
@@ -48,12 +46,14 @@
 
             </Border>
 
-            <Button Grid.Row="1"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5"  Click="Return_Click"
+            <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5,25,0,0"  Click="Return_Click"
                     Width="30" Height="30"  Background="Transparent" BorderThickness="0">
                 <Image  Source="/Resources/Images/tour exit.png"/>
             </Button>
+        
+        
 
-            <Border BorderBrush="Black" BorderThickness="1" Margin="30" Grid.Row="2">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="30,30,30,10" Grid.Row="1">
                 <Grid    Background="#b2edb4"   >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"></RowDefinition>
@@ -61,68 +61,91 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="KEY POINTS" Margin="10" FontWeight="SemiBold" Grid.Row="0" HorizontalAlignment="Center" ></TextBlock>
-                    <!-- Create a nested Grid with ColumnDefinitions -->
-                    <Grid Grid.Row="1" >
-                        <Grid.ColumnDefinitions>
-                            <!-- Columns for padding on left and right, central column for content -->
-                            <ColumnDefinition Width="20" />
-                            <!-- Left padding -->
-                            <ColumnDefinition Width="*" />
-                            <!-- Central column for main content -->
-                            <ColumnDefinition Width="20" />
-                            <!-- Right padding -->
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Place your content in the central column -->
-                        <ItemsControl  ItemsSource="{Binding ActiveTourKeyPoints}" Grid.Column="1" >
-                            <!-- Define the ItemTemplate for each key point -->
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
 
 
-                                    <Border BorderBrush="#294724" BorderThickness="2" Margin="0,0,0,10" Background="AliceBlue">
-                                        <Grid Margin="5" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="2*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
 
-                                            <!-- Display name, description, and active status -->
-                                            <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="5" TextWrapping="NoWrap" />
-                                            <!-- <TextBlock Text="{Binding Description}" Grid.Column="1" Margin="5" TextWrapping="Wrap" /> -->
-                                            <TextBlock Text="{Binding Active}" Grid.Column="2" Margin="5" TextWrapping="NoWrap">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock">
-                                                        <Setter Property="Foreground" Value="Red" />
-                                                        <!-- Default color for "NOT ACTIVE" -->
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Active}" Value="ACTIVE">
-                                                                <Setter Property="Foreground" Value="Green" />
-                                                                <!-- Change color to green for "ACTIVE" -->
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
-                                        </Grid>
-                                    </Border>
+                        <Grid  Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
 
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
 
-                    </Grid>
+                            <ItemsControl  ItemsSource="{Binding ActiveTourKeyPoints}" Grid.Column="1" >
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="#294724" BorderThickness="2" Margin="0,0,0,10" Background="AliceBlue">
+
+                                            <Grid>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid Margin="5" Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <!-- Display name, description, and active status -->
+                                                    <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="5" TextWrapping="NoWrap" />
+                                                   
+                                                    <TextBlock Text="{Binding Active}" Grid.Column="2" Margin="5" TextWrapping="NoWrap">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Setter Property="Foreground" Value="Red" />
+                                                                <!-- Default color for "NOT ACTIVE" -->
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Active}" Value="ACTIVE">
+                                                                        <Setter Property="Foreground" Value="Green" />
+                                                                        <!-- Change color to green for "ACTIVE" -->
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </Grid>
+                                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Background="AliceBlue">
+                                                    <TextBlock  Text="{Binding Description}"  Margin="5" TextWrapping="Wrap" MaxWidth="250" />
+                                                 </Border>
+                                            </Grid>
+                                            
+                                            
+                                            
+                                            
+                                        </Border>
+
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                        </Grid>
+                        
+                        
+                        
+
+                   
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 </Grid>
 
             </Border>
-           
 
-            <Button Content="Rate the Tour" Grid.Row="4"
-        Command="{Binding RateCommand}"   IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"
+
+            <Button Content="Rate the Tour" Grid.Row="2" IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"
             VerticalAlignment="Center" 
-            Padding="5" Width="100"/>
+            Padding="5"  Width="100"/>
 
+            <!-- Command="{Binding RateCommand}" to je za ovo gore u dugmetu  --> 
 
         </Grid>
     </ScrollViewer>
