@@ -21,33 +21,30 @@ namespace BookingApp.WPF.View.TouristView
     /// </summary>
     public partial class NotificationView : Page
     {
+
+        private readonly NotificationViewModel viewModel;
         public NotificationView()
         {
             InitializeComponent();
-            DataContext = new NotificationViewModel();
+            viewModel = new NotificationViewModel();
+            DataContext = viewModel;
         }
 
         
 
         private void Reccommendations_Click(object sender, RoutedEventArgs e)
         {
-            Content1.Visibility = Visibility.Visible;
-            Content2.Visibility = Visibility.Collapsed;
-            Content3.Visibility = Visibility.Collapsed;
+           viewModel.ShowRecommendations();
         }
 
         private void AcceptedRequests_Click(object sender, RoutedEventArgs e)
         {
-            Content1.Visibility = Visibility.Collapsed;
-            Content2.Visibility = Visibility.Visible;
-            Content3.Visibility = Visibility.Collapsed;
+            viewModel.ShowAcceptedRequests();
         }
 
         private void TouristAdded_Click(object sender, RoutedEventArgs e)
         {
-            Content1.Visibility = Visibility.Collapsed;
-            Content2.Visibility = Visibility.Collapsed;
-            Content3.Visibility = Visibility.Visible;
+            viewModel.ShowTouristsAdded();
         }
 
     }

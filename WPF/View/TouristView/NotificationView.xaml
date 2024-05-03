@@ -30,22 +30,22 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"  Content="Reccommendations" Background="White" Click=" Reccommendations_Click"></Button>
-            <Button Grid.Column="1"  Content="Accepted Requests" Background="White" Click="AcceptedRequests_Click"></Button>
-            <Button Grid.Column="2"  Content="Tourists added" Background="White" Click="TouristAdded_Click"></Button>
+            <Button Grid.Column="1"  Content="Accepted Requests" Background="White" Click="AcceptedRequests_Click" ></Button>
+            <Button Grid.Column="2"  Content="Tourists added" Background="White" Click="TouristAdded_Click" ></Button>
 
         </Grid>
 
         <Grid x:Name="ContentGrid" Margin="0,20,0,0" Grid.Row="2"  Background="#d1d7e0">
             <!-- Content for Button 1 -->
-            <TextBlock x:Name="Content1" Text="Content for Button 1" />
+            <TextBlock x:Name="Content1" Text="Content for Button 1"  Visibility="{Binding Content1Visibility}"/>
             
 
             <!-- Content for Button 2 -->
-            <TextBlock x:Name="Content2" Text="Content for Button 2" Visibility="Collapsed"/>
+            <TextBlock x:Name="Content2" Text="Content for Button 2"  Visibility="{Binding Content2Visibility}"/>
 
             <!-- Content for Button 3 -->
 
-            <ItemsControl x:Name="Content3"  ItemsSource="{Binding Notifications}" Margin="5,15,5,15"  Visibility="Collapsed">
+            <ItemsControl x:Name="Content3"  ItemsSource="{Binding Notifications}" Margin="5,15,5,15"   Visibility="{Binding Content3Visibility}">
                 <ItemsControl.ItemTemplate >
                     <DataTemplate >
                         <Border BorderBrush="#294724" BorderThickness="1" Margin="5" Background="White">
