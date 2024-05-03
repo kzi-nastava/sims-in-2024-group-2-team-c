@@ -44,14 +44,14 @@ namespace BookingApp.Service.TourServices
             var tourReviews = _tourReviewService.GetAll();
 
             // Filter active instances 
-            var activeTourInstances = tourInstances.Where(instance => instance.Started && reservedTourInstanceIds.Contains(instance.Id) && !tourReviews.Any(review => review.TourInstanceId == instance.Id)).ToList();
+            var activeTourInstances = tourInstances.Where(instance =>  reservedTourInstanceIds.Contains(instance.Id) && !tourReviews.Any(review => review.TourInstanceId == instance.Id)).ToList();
 
-            List<FollowingTourDTO> activeTourDTOs = new List<FollowingTourDTO>();
+            List<FollowingTourDTO> tourDTOs = new List<FollowingTourDTO>();
 
-            AddActiveDTOsToList(activeTourInstances, activeTourDTOs);
+            AddActiveDTOsToList(activeTourInstances, tourDTOs);
 
             
-            return activeTourDTOs;
+            return tourDTOs;
         }
 
 
@@ -68,7 +68,7 @@ namespace BookingApp.Service.TourServices
                 FollowingTourDTO dto = new FollowingTourDTO
                 {
                     Name = tour.Name,
-                    Active = true, 
+                    Active = instance.Started, 
                     TourId = tour.Id,
                     TourInstanceId = instance.Id
                 };

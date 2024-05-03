@@ -36,11 +36,23 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Display name, description, and active status -->
-                            <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="10" TextWrapping="NoWrap" FontWeight="SemiBold" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="10" TextWrapping="NoWrap" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="15"/>
                             <Button Grid.Column="1" Content="Follow the tour" 
-                        Command="{Binding ViewCommand}" Click="View_Click"
-                         VerticalAlignment="Center" 
-                         Padding="5" Margin="10" />
+        Command="{Binding DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type local:FollowTourView}}}" 
+        Click="View_Click"
+        VerticalAlignment="Center" 
+        Padding="5" Margin="10">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Active}" Value="False">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
 
 
                         </Grid>
