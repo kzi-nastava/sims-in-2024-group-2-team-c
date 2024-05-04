@@ -81,7 +81,15 @@
                     </TextBox>
                 </StackPanel>
                 <AdornerDecorator>
-                    <TextBlock Text="{Binding ElementName=myTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" Margin="20,0,0,0"/>
+                    <TextBlock Foreground="Red" Margin="20,0,0,0">
+                        <TextBlock.Text>
+                            <Binding ElementName="myTextBox" Path="(Validation.Errors)">
+                                <Binding.Converter>
+                                    <val:ValidationErrorsConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </AdornerDecorator>
             </StackPanel>
 
@@ -91,20 +99,70 @@
 
 
 
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="10" Background="#65b565">
-                <TextBlock Text="Guides Language (1-5)" VerticalAlignment="Center" FontSize="15" FontWeight="Medium" Width="322" Margin="10"/>
-                <TextBox Text="{Binding LanguageGrade,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" Margin="5"/>
-            </StackPanel> 
-        
-        
-           
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="10" Background="#65b565">
+                    <TextBlock Text="Guides Language (1-5)" FontSize="15" FontWeight="Medium" VerticalAlignment="Center" Width="322" Margin="10"/>
+                    <TextBox x:Name="myLanguageBox" Width="50" Margin="5">
+                        <TextBox.Text>
+                            <Binding Path="LanguageGrade" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+                                    <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="5" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <AdornerDecorator>
+                    <TextBlock Foreground="Red" Margin="20,0,0,0">
+                        <TextBlock.Text>
+                            <Binding ElementName="myLanguageBox" Path="(Validation.Errors)">
+                                <Binding.Converter>
+                                    <val:ValidationErrorsConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </AdornerDecorator>
+            </StackPanel>
 
-        
 
-            <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10" Background="#65b565">
+
+
+            <StackPanel Orientation="Vertical" Grid.Row="3">
+                <StackPanel Orientation="Horizontal" Margin="10" Background="#65b565">
+                    <TextBlock Text="Attraction of the tour (1-5)" VerticalAlignment="Center" FontSize="15" FontWeight="Medium" Width="322" Margin="10"/>
+                    <TextBox x:Name="myInterestingBox" Width="50" Margin="5">
+                        <TextBox.Text>
+                            <Binding Path="InterestingGrade" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+                                    <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="5" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <AdornerDecorator>
+                    <TextBlock Foreground="Red" Margin="20,0,0,0">
+                        <TextBlock.Text>
+                            <Binding ElementName="myInterestingBox" Path="(Validation.Errors)">
+                                <Binding.Converter>
+                                    <val:ValidationErrorsConverter />
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </AdornerDecorator>
+            </StackPanel>
+
+
+
+
+            <!-- <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10" Background="#65b565">
                 <TextBlock Text="Attraction of the tour (1-5)" VerticalAlignment="Center" FontSize="15" FontWeight="Medium" Width="322" Margin="10"/>
                 <TextBox Text="{Binding InterestingGrade,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" Margin="5"/>
-            </StackPanel>
+            </StackPanel> -->
 
             <StackPanel Orientation="Vertical" Grid.Row="4" Margin="10" Background="#65b565" >
                 <!-- Knowledge Grade Label -->

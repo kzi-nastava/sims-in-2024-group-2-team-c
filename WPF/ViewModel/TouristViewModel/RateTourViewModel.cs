@@ -81,7 +81,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             get
             {
                 // Check if all grades are set and not empty (greater than 0)
-                return KnowledgeGrade > 0 && LanguageGrade > 0 && InterestingGrade > 0;
+                return KnowledgeGrade > 0 && LanguageGrade > 0 && InterestingGrade > 0 &&
+            IsValid(KnowledgeGrade, LanguageGrade, InterestingGrade);
             }
         }
 
@@ -163,5 +164,21 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             }
         }
+
+        private bool IsValid(params int[] grades)
+        {
+            // Check if all provided grades are within the valid range
+            foreach (var grade in grades)
+            {
+                if ( grade < 1 || grade > 5)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+
     }
 }
