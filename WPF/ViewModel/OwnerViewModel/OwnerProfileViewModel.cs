@@ -1,34 +1,44 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
-using BookingApp.Service.OwnerService;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookingApp.WPF.ViewModel.OwnerViewModel
 {
     public class OwnerProfileViewModel : INotifyPropertyChanged
     {
-        private Owner _owner;
-        private string _ownerName;
-        private string _ownerSurname;
-        private string _ownerType;
-        public string OwnerUsername;
-        private SuperOwnerService _superOwnerService;
+       
         private OwnerRepository _ownerRepository;
-        public string OwnerType
+        public event EventHandler RequestClose;
+
+
+        public OwnerProfileViewModel()
         {
-            get { return _ownerType; }
-            set
+            _ownerRepository = new OwnerRepository();
+            LoadOwnerData();
+        }
+
+        private void LoadOwnerData()
+        {
+            Owner loggedInUser = GetOwnerByLoggedInUserId();
+            if (loggedInUser != null)
             {
-                _ownerType = value;
-                OnPropertyChanged(nameof(OwnerType));
+                OwnerName = loggedInUser.Name;
+                OwnerSurname = loggedInUser.Surname;
+                OwnerPhone = loggedInUser.PhoneNumber;
+                OwnerEmail = loggedInUser.Email;
+                SuperOwner = loggedInUser.Super;
             }
         }
 
+        public Owner GetOwnerByLoggedInUserId()
+        {
+            int loggedInUserId = LoggedInUser.Id;
+            return _ownerRepository.GetOwnerById(loggedInUserId);
+        }
+
+ 
+        private string _ownerName;
         public string OwnerName
         {
             get { return _ownerName; }
@@ -39,6 +49,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
             }
         }
 
+        private string _ownerSurname;
         public string OwnerSurname
         {
             get { return _ownerSurname; }
@@ -49,75 +60,45 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
             }
         }
 
-
-        /*public OwnerProfileViewModel(SuperOwnerService superOwnerService, OwnerRepository ownerRepository)
+        private string _ownerPhone;
+        public string OwnerPhone
         {
-            _superOwnerService = superOwnerService;
-            _ownerRepository = ownerRepository;
-            int ownerId = LoggedInUser.Id;
-            _owner = _ownerRepository.GetOwnerByLoggedInUserId(ownerId);
-            //_owner = _superOwnerService.GetOwnerById(ownerId);
-            OwnerUsername = LoggedInUser.Username;
-           // SetOwnerUsername(ownerId);
-            SetOwnerType(ownerId);
-            //OwnerUsername = _owner.Username;
-           
-           
-        }
-         private void SetOwnerType(int ownerId)
-        {
-            
-            Owner owner = _superOwnerService.GetOwnerById(ownerId);
-
-         
-            if (owner != null && owner.Super)
+            get { return _ownerPhone; }
+            set
             {
-                OwnerType = "SuperOwner";
-            }
-            else
-            {
-                OwnerType = "Owner";
-            }
-        }
-         
-         */
-
-        public OwnerProfileViewModel(OwnerRepository ownerRepository)
-        {
-            _ownerRepository = ownerRepository;
-            int ownerId = LoggedInUser.Id;
-            _owner = _ownerRepository.GetOwnerById(ownerId);
-            OwnerUsername = LoggedInUser.Username;
-            SetOwnerType();
-            OwnerName = _owner.Name;
-            OwnerSurname = _owner.Surname;
-        }
-
-        private void SetOwnerType()
-        {
-            if (_owner != null && _owner.Super)
-            {
-                OwnerType = "SuperOwner";
-            }
-            else
-            {
-                OwnerType = "Owner";
+                _ownerPhone = value;
+                OnPropertyChanged(nameof(OwnerPhone));
             }
         }
 
-        private void SetOwnerUsername(int ownerId)
+        private string _ownerEmail;
+        public string OwnerEmail
         {
-            Owner owner = _superOwnerService.GetOwnerById(ownerId);
-
-            if (owner != null)
+            get { return _ownerEmail; }
+            set
             {
-                OwnerUsername = owner.Username;
-            }
-            else
-            {
-                OwnerUsername = "Unknown";
+                _ownerEmail = value;
+                OnPropertyChanged(nameof(OwnerEmail));
             }
         }
+
+        private bool _superOwner;
+        public bool SuperOwner
+        {
+            get { return _superOwner; }
+            set
+            {
+                _superOwner = value;
+                OnPropertyChanged(nameof(SuperOwner));
+            }
+        }
+
+        public void LogOut()
+        {
+            LoggedInUser.Reset();
+            RequestClose?.Invoke(this, EventArgs.Empty);
+        }
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -127,5 +108,4 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
 }

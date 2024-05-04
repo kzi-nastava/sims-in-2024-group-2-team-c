@@ -29,10 +29,9 @@ namespace BookingApp.WPF.View.OwnerView
         public OwnerHomePage()
         {
             InitializeComponent();
-            
         }
 
-        private ICommand _navigateToGuestRatingCommand;
+       /* private ICommand _navigateToGuestRatingCommand;
 
         public ICommand NavigateToGuestRatingCommand
         {
@@ -40,35 +39,25 @@ namespace BookingApp.WPF.View.OwnerView
             {
                 return _navigateToGuestRatingCommand ?? (_navigateToGuestRatingCommand = new RelayCommand(NavigateToGuestRating));
             }
-        }
-
-        private void NavigateToGuestRating()
-        {
-             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\GuestRatingForm.xaml", UriKind.Relative));
-        }
-
-      /*  private void RateGuestsClick(object sender, RoutedEventArgs e)
-        {
-           
-            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\GuestRatingForm.xaml", UriKind.Relative));
         }*/
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        private void NavigateToGuestRating_Click(object sender, RoutedEventArgs e)
+        {
+             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\GuestRatingForm.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void NavigateToRegisterAccommodation_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\RegisterAccommodationForm.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
+        
     }
 }

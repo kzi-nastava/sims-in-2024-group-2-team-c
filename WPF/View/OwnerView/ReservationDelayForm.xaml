@@ -3,18 +3,23 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       xmlns:vm="clr-namespace:BookingApp.ViewModel"
-      Title="ReservationDelayForm" Height="285">
+      Title="ReservationDelayForm">
 
-    <Page.Resources>
-        <!-- Lokalni resursi -->
-    </Page.Resources>
+    <Grid Background="LightBlue" Margin="0,50,0,0">
+        <TextBlock Text="Notifications and Requests" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
-    <Grid Background="LightBlue">
-        <!-- Header sa Booking.com -->
-        <TextBlock Text="Booking.com" FontSize="24" FontWeight="Bold" Foreground="DarkBlue" Margin="10"/>
+        
+        <StackPanel  HorizontalAlignment="Left" Margin="10,70,0,0">
+            <TextBlock Text="Notifications" FontSize="15" />
+            <TextBlock Text="You have 2 days left to rate guest Ana Savic!" />
+            <TextBlock Text="New forum just opened. You have accommodation on this location."/>
+        </StackPanel>
 
-        <!-- Lista ReservationDelay -->
-        <ListView ItemsSource="{Binding ReservationDelays}" SelectionChanged="ListView_SelectionChanged" Margin="10,10,10,163">
+        
+        <TextBlock Text="Requests for Rescheduling Reservations" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="10,170,0,0"/>
+
+        
+        <ListView ItemsSource="{Binding ReservationDelays}" SelectionChanged="ListView_SelectionChanged" Margin="10,200,10,50">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Guest" DisplayMemberBinding="{Binding Guest.Username}" Width="150"/>
@@ -27,26 +32,19 @@
         </ListView>
 
 
-
-        <!-- Dugmad za odobravanje i odbijanje zahteva -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Deny" Background="Red" Foreground="White" Margin="5" Click="RejectButton_Click" Height="20"/>
-            <Button Content="Allow" Background="Green" Foreground="White" Click="ApproveButton_Click" Height="20"/>
-           
-        </StackPanel>
-
-        <Button Content="Go Back" Click="CancelButton_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-
+        
+        <Button Content="Deny" Background="Red" Foreground="White" Margin="290,0,0,15" Click="RejectButton_Click" Height="20" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Button Content="Allow" Background="Green" Foreground="White" Margin="605,0,0,15"  Click="ApproveButton_Click" Height="20" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+       
         <TextBox x:Name="ExplanationTextBox"
-         Text="Enter Your Explanation Here (optional)"
-         Width="275"
-         Height="30"
-         FontSize="16"
-         FontWeight="Normal"
-         HorizontalAlignment="Left"
-         VerticalAlignment="Center"
-         Margin="10"
-         LostFocus="ExplanationTextBox_LostFocus"/>
-
+             Text="Enter Your Explanation Here (optional)"
+             Width="275"
+             Height="30"
+             FontSize="16"
+             FontWeight="Normal"
+             HorizontalAlignment="Left"
+             VerticalAlignment="Bottom"
+             Margin="10"
+             LostFocus="ExplanationTextBox_LostFocus"/>
     </Grid>
 </Page>

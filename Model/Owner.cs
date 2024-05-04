@@ -4,10 +4,11 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingApp.Serializer;
 
 namespace BookingApp.Model
 {
-    public class Owner : User
+    public class Owner : User, ISerializable
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -28,6 +29,7 @@ namespace BookingApp.Model
 
         public void FromCSV(string[] values)
         {
+           
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
@@ -43,5 +45,7 @@ namespace BookingApp.Model
             NumberOfRatings = Convert.ToInt32(values[9]);
             TotalRating = Convert.ToDouble(values[10]);
         }
+
+        
     }
 }

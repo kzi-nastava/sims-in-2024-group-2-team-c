@@ -25,7 +25,7 @@ namespace BookingApp.Service.AccommodationServices
         private const string FilePath = "../../../Resources/Data/accommodationRate.csv";
         private readonly Serializer<AccommodationRate> _serializer;
         private List<AccommodationRate> _accommodationRates;
-        private ReservationRepository reservationRepository ;
+        private ReservationRepository reservationRepository;
 
         public List<AccommodationRate> AccommodationRates
         {
@@ -38,16 +38,16 @@ namespace BookingApp.Service.AccommodationServices
             return _serializer.FromCSV(FilePath);
         }
 
-         public AccommodationRateService(IAccommodationRateRepository repository)
-         {
-             _repository = repository;
+        public AccommodationRateService(IAccommodationRateRepository repository)
+        {
+            _repository = repository;
 
-         }
-        
-       
+        }
+
+
         public AccommodationRateService()
         {
-           // _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
+            // _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
             _accommodationRates = new List<AccommodationRate>();
             _serializer = new Serializer<AccommodationRate>();
             _accommodationRates = _serializer.FromCSV(FilePath);
@@ -56,8 +56,8 @@ namespace BookingApp.Service.AccommodationServices
         }
 
 
-     
-        
+
+
 
         public AccommodationRateService(GuestReservationDTO selectedReservation, IAccommodationRateRepository repository)
 
@@ -104,7 +104,7 @@ namespace BookingApp.Service.AccommodationServices
 
         public void LoadAccommodationRatesFromCSV(string filePath)
         {
-            _accommodationRates.Clear(); 
+            _accommodationRates.Clear();
 
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
@@ -112,7 +112,7 @@ namespace BookingApp.Service.AccommodationServices
                 string[] values = line.Split('|');
 
                 int Id = Convert.ToInt32(values[0]);
-                int ReservationId = Convert.ToInt32(values[1]); 
+                int ReservationId = Convert.ToInt32(values[1]);
                 int Cleanliness = Convert.ToInt32(values[2]);
                 int OwnerRate = Convert.ToInt32(values[3]);
                 string Comment = values[4];
@@ -143,12 +143,12 @@ namespace BookingApp.Service.AccommodationServices
                 {
                     Console.WriteLine($"Reservation with ID {ReservationId} not found.");
                 }
-                    
-        }
+
+            }
         }
 
-       
-        
+
+
         public string GetGuestUsernameByReservationId(int reservationId)
         {
             Reservation reservation = reservationRepository.GetReservationById(reservationId);

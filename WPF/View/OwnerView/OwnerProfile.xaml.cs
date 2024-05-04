@@ -1,5 +1,6 @@
 ﻿using BookingApp.Repository;
 using BookingApp.Service.OwnerService;
+using BookingApp.View;
 using BookingApp.WPF.ViewModel.OwnerViewModel;
 using System;
 using System.Collections.Generic;
@@ -24,21 +25,29 @@ namespace BookingApp.WPF.View.OwnerView
     public partial class OwnerProfile : Page
     {
         private OwnerProfileViewModel _viewModel;
+        
         public OwnerProfile()
         {
             InitializeComponent();
-            OwnerRepository ownerRepository = new OwnerRepository(); 
-            SuperOwnerService superOwnerService = new SuperOwnerService(ownerRepository);
-            _viewModel = new OwnerProfileViewModel( ownerRepository);
-
-           
+            _viewModel = new OwnerProfileViewModel();
             DataContext = _viewModel;
         }
-    //page to page
         private void NotificationsAndRequests_Click(object sender, RoutedEventArgs e)
         {
-            // Svaka stranica ima referencu na NavigationService Frame kontrole unutar koje se nalazi, pa se i sa stranice moze vrsiti navigacija na neku drugu stranicu
             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\ReservationDelayForm.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            _viewModel.LogOut();
+            Application.Current.Shutdown();
+            // Otvori SignInForm prozor
+            //var signInFormWindow = new SignInForm();
+            //signInFormWindow.Show();
+     
+            // Zatvori aplikaciju samo
+        }
+
+        
     }
 }

@@ -8,22 +8,76 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OwnerHomePage">
 
-    <Grid Background="LightBlue">
+    <Grid Background="LightBlue" Margin="0,50,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="20">
-            <Button Content="ADD NEW ACCOMMODATION" Margin="5" Grid.ColumnSpan="2"/>
-            <Button Content="STATISTICS" Margin="5" Grid.ColumnSpan="2"/>
-            <Button Content="SCHEDULE A RENOVATION" Margin="5" Grid.ColumnSpan="2"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="20">
+            <Button Margin="5" Height="36" FontSize="20" Click="NavigateToRegisterAccommodation_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\Resources\Images\icons8-add-30.png" ></Image>
+                    <TextBlock Text="ADD NEW ACCOMMODATION"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20">
-            <Button Content="VIEW YOUR ACCOMMODATIONS" Margin="5" Grid.ColumnSpan="2"/>
-            <Button Content="RATE YOUR GUESTS" Margin="5" Grid.ColumnSpan="2" Command="{Binding NavigateToGuestRatingCommand}"/>
-            <Button Content="FORUM" Margin="5" Grid.ColumnSpan="2"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="20">
+            <Button Margin="5" Height="33" FontSize="20" Width="139">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\Resources\Images\statisticICON.png" Width="28" Height="26" Margin="0,0,5,0"/>
+                    <TextBlock Text="STATISTICS" Height="24" Width="84"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="20">
+            <Button Margin="5" Height="36" FontSize="20" Width="274">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\Resources\Images\icons8-hammer-30.png" Width="22" Height="23" Margin="0,0,5,0"/>
+                    <TextBlock Text="SCHEDULE A RENOVATION" Height="26"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="20">
+            <Button Margin="5" Height="31" FontSize="20">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\Resources\Images\icons8-list-50.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                    <TextBlock Text="VIEW YOUR ACCOMMODATIONS"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Margin="20">
+            <Button Margin="5" FontSize="20" Click="NavigateToGuestRating_Click" Height="31">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\Resources\Images\icons8-star-30.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                    <TextBlock Text="RATE YOUR GUESTS"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="20">
+            <Button Margin="5" Height="27" FontSize="20" >
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="\Resources\Images\icons8-forum-50.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                    <TextBlock Text="FORUM"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="Auto" Width="200" Background="YellowGreen" TextWrapping="Wrap" Margin="5">
+            Use arrows to move through;
+            Enter for submitting or sending forms,
+            ESC to cancel the current action
+        </TextBox>
+
+
     </Grid>
 </Page>
