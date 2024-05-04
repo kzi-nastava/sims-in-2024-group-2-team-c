@@ -15,16 +15,16 @@ namespace BookingApp.Model
         public int KeyPointId { get; set; }
         public int GuideId { get; set; }
         public int TouristId { get; set; }
-        public int KnowledgeGrade { get; set; }
-        public int LanguageGrade { get; set; }
-        public int InterestingGrade { get; set; }
+        public int? KnowledgeGrade { get; set; }
+        public int? LanguageGrade { get; set; }
+        public int? InterestingGrade { get; set; }
         public string Comment { get; set; }
         public bool Reported { get; set; }
         public List<string> Images { get; set; }
 
         public TourReview() { }
 
-        public TourReview( int tourInstanceId, int keyPointID, int guideId, int touristId, int knowledgeGrade, int languageGrade, int interestingGrade, string comment, bool reported, List<string> images)
+        public TourReview( int tourInstanceId, int keyPointID, int guideId, int touristId, int? knowledgeGrade, int? languageGrade, int? interestingGrade, string comment, bool reported, List<string> images)
         {
            
             TourInstanceId = tourInstanceId;

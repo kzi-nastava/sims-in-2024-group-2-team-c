@@ -94,14 +94,15 @@
                                                 </Grid.RowDefinitions>
 
                                                 <Grid Margin="5" Grid.Row="0">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="2*" />
                                                         <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
 
                                                     <!-- Display name, description, and active status -->
-                                                    <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="5" TextWrapping="NoWrap" />
+
+                                                <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="5" TextWrapping="NoWrap" />
                                                    
                                                     <TextBlock Text="{Binding Active}" Grid.Column="2" Margin="5" TextWrapping="NoWrap">
                                                         <TextBlock.Style>

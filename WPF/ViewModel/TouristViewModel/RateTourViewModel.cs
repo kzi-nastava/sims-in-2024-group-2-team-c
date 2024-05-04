@@ -5,6 +5,7 @@ using BookingApp.Service.TourServices;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
     public class RateTourViewModel : ViewModelBase
     {
 
-        private int _knowledgeGrade;
-        public int KnowledgeGrade
+        private int? _knowledgeGrade;
+        public int? KnowledgeGrade
         {
             get { return _knowledgeGrade; }
             set
@@ -32,8 +33,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
-        private int _interestingGrade;
-        public int InterestingGrade
+        private int? _interestingGrade;
+        public int? InterestingGrade
         {
             get { return _interestingGrade; }
             set
@@ -61,17 +62,14 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private List<string> _images;
+        private List<string> _images = new List<string>();
         public List<string> Images
         {
             get { return _images; }
             set
             {
-
                 _images = value;
                 OnPropertyChanged(nameof(Images));
-
-
             }
         }
 
@@ -87,8 +85,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
-        private int _languageGrade;
-        public int LanguageGrade
+        private int? _languageGrade;
+        public int? LanguageGrade
         {
             get { return _languageGrade; }
             set
@@ -116,7 +114,10 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             RateCommand = new ViewModelCommandd(saveTheReview);
             AddPictureCommand = new ViewModelCommandd(OpenFileExplorer);
 
-           
+            
+            
+
+
         }
 
         
@@ -141,9 +142,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-       
 
-        private void OpenFileExplorer(object parametar)
+
+        /*private void OpenFileExplorer(object parametar)
         {
 
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -152,7 +153,123 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 Filter = "All Files|*.*|Text Files|*.txt|Image Files|*.jpg;*.png"
             };
             ShowDialog(openFileDialog);
+        }*/
+
+        /* private void OpenFileExplorer(object parameter)
+         {
+             OpenFileDialog openFileDialog = new OpenFileDialog
+             {
+                 Multiselect = true, // Allow multiple file selection
+                 Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif" // Filter for image files
+             };
+
+             if (openFileDialog.ShowDialog() == true)
+             {
+                 // Get the selected file paths
+                 Images = new List<string>(openFileDialog.FileNames);
+             }
+         }*/
+
+
+        /* private void OpenFileExplorer(object parameter)
+         {
+             OpenFileDialog openFileDialog = new OpenFileDialog
+             {
+                 Multiselect = true, // Allow multiple file selection
+                 Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif" // Filter for image files
+             };
+
+             if (openFileDialog.ShowDialog() == true)
+             {
+                 // Get the selected file paths
+                 string destinationFolder = "Resources/Images";
+                 Directory.CreateDirectory(destinationFolder); // Create the folder if it doesn't exist
+
+                 foreach (string filePath in openFileDialog.FileNames)
+                 {
+                     string fileName = Path.GetFileName(filePath);
+                     string destinationPath = Path.Combine(destinationFolder, fileName);
+
+                     // Copy the file to the destination folder
+                     File.Copy(filePath, destinationPath, true);
+
+                     // Add the destination path to the Images list
+                     Images.Add(destinationPath);
+                 }
+             }
+         }*/
+
+
+        /*  private void OpenFileExplorer(object parametar)
+          {
+              OpenFileDialog openFileDialog = new OpenFileDialog
+              {
+                  Multiselect = true, // Allow multiple file selection
+                  Filter = "All Files|*.*|Image Files|*.jpg;*.png"
+              };
+
+              if (openFileDialog.ShowDialog() == true)
+              {
+                  // Get the selected file paths
+                  foreach (var filePath in openFileDialog.FileNames)
+                  {
+                      // Get the file name without the full path
+                      string fileName = System.IO.Path.GetFileName(filePath);
+
+                      // Construct the destination path
+                      string destinationPath = "Resources/Images/" + fileName;
+
+                      try
+                      {
+                          // Copy the file to the destination folder
+                          System.IO.File.Copy(filePath, destinationPath);
+
+                          // Add the file name to the list of images
+                          Images.Add(fileName);
+                      }
+                      catch (Exception ex)
+                      {
+                          // Handle any exceptions, such as file already exists, permission denied, etc.
+                          Console.WriteLine("An error occurred while copying the file: " + ex.Message);
+                      }
+                  }
+
+                  // Notify property change for the Images property
+                  OnPropertyChanged(nameof(Images));
+              }
+          }*/
+
+       private void OpenFileExplorer(object parameter)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = true, // Allow multiple file selection
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif" // Filter for image files
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                // Get the selected file paths
+                string destinationFolder = "D:/Mila/AHHHHHHHHHHHH/sims-in-2024-group-2-team-c/Resources/Images/";
+                Directory.CreateDirectory(destinationFolder); // Create the folder if it doesn't exist
+
+               
+
+                foreach (string filePath in openFileDialog.FileNames)
+                {
+                    string fileName = Path.GetFileName(filePath);
+                    string destinationPath = Path.Combine(destinationFolder, fileName);
+
+                    // Copy the file to the destination folder
+                    File.Copy(filePath, destinationPath, true);
+
+                    // Add just the file name to the Images list
+                    Images.Add(fileName);
+                }
+            }
         }
+
+
 
         private void ShowDialog(OpenFileDialog openFileDialog)
         {
@@ -165,7 +282,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private bool IsValid(params int[] grades)
+        private bool IsValid(params int?[] grades)
         {
             // Check if all provided grades are within the valid range
             foreach (var grade in grades)
