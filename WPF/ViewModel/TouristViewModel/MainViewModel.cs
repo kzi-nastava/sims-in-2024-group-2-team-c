@@ -117,14 +117,14 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             RequestsCommand = new ViewModelCommandd(ExecuteRequestCommand);
 
             CurrentMarkerIconSource = "/Resources/Images/marker.png";
-            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentHomeIconSource = "/Resources/Images/on home.png";
             CurrentUserIconSource = "/Resources/Images/tourist.png";
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
             CurrentRequestIconSource = "/Resources/Images/tour-request.png";
 
 
 
-
+            CurrentChildView = new TouristHomeViewModel();
         }
 
         public void ExecuteNotificationCommand(object obj)

@@ -15,6 +15,7 @@
                 <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
@@ -39,7 +40,7 @@
                     <StackPanel Grid.Column="0" Orientation="Horizontal" >
                         <TextBlock Text="Create a tour request" VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"/>
                     </StackPanel>
-                    <Button Grid.Column="1" Margin="10" Content="Create" />
+                    <Button Grid.Column="1" Margin="10" Content="Create" Click="TourRequest_Click"/>
                 </Grid>
             </Border>
 
@@ -54,7 +55,7 @@
                     <StackPanel Grid.Column="0" Orientation="Horizontal" >
                         <TextBlock Text="View Statistics of tour requests" VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"/>
                     </StackPanel>
-                    <Button Grid.Column="1" Margin="10" Content="View" />
+                    <Button Grid.Column="1" Margin="10" Content="View" Click="Statistics_Click" />
                 </Grid>
             </Border>
 
@@ -68,12 +69,12 @@
                     <StackPanel Grid.Column="0" Orientation="Horizontal" >
                         <TextBlock Text="Make complex tours" VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"/>
                     </StackPanel>
-                    <Button Grid.Column="1" Margin="10" Content="Create" />
+                    <Button Grid.Column="1" Margin="10" Content="Create" Click="ComplexTour_Click"/>
                 </Grid>
             </Border>
 
 
-            <Border Grid.Row="3" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
+            <Border Grid.Row="4" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
                 <Grid Background="#b2edb4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -82,11 +83,11 @@
                     <StackPanel Grid.Column="0" Orientation="Horizontal" >
                         <TextBlock Text="View all complex tour requests" VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"/>
                     </StackPanel>
-                    <Button Grid.Column="1" Margin="10" Content="View" />
+                    <Button Grid.Column="1" Margin="10" Content="View" Click="ViewComplexTour_Click"/>
                 </Grid>
             </Border>
 
-            <Border Grid.Row="4" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
+            <Border Grid.Row="5" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
                 <Grid Background="#b2edb4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -100,7 +101,7 @@
             </Border>
 
 
-            <Border Grid.Row="5" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
+            <Border Grid.Row="6" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
                 <Grid Background="#b2edb4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -115,7 +116,7 @@
             </Border>
 
 
-            <Button Grid.Row="6" Margin="20,10,40,10" Content="Log out" Height=" 40" Width="60" HorizontalAlignment="Right" Click="LogOut_Click"/>
+            <Button Grid.Row="7" Margin="20,10,40,10" Content="Log out" Height=" 40" Width="60" HorizontalAlignment="Right" Click="LogOut_Click"/>
 
         </Grid>
     </ScrollViewer>
