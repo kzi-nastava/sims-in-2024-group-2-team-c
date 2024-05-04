@@ -9,6 +9,7 @@ using BookingApp.WPF.View.OwnerView;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using BookingApp.WPF.View.GuestView;
 
 namespace BookingApp.View
 {
@@ -54,7 +55,10 @@ namespace BookingApp.View
                 {
                    
                     OwnerWindow ownerWindow = new OwnerWindow();
-                    AccommodationOverview accommodationOverview = new AccommodationOverview();
+
+                    //AccommodationOverview accommodationOverview = new AccommodationOverview();
+                    MainGuestWindow mainGuestWindow = new MainGuestWindow();
+
                     //TourOverview tourOverview = new TourOverview();
                    // Window1 w1 = new Window1();
                    MainTouristView mainTouristView = new MainTouristView();
@@ -76,7 +80,8 @@ namespace BookingApp.View
                     }
                     else if (user.Role == UserRole.guest)
                     {
-                        accommodationOverview.Show();
+                        //accommodationOverview.Show();
+                        mainGuestWindow.Show();
                     }
                     else if (user.Role == UserRole.guide)
                     {

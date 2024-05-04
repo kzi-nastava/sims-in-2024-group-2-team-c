@@ -4,15 +4,17 @@ using BookingApp.WPF.View.GuestView;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 //using BookingApp.View.GuestReservationWindow;
 
-namespace BookingApp.View
+namespace BookingApp.WPF.View.GuestView
 {
     /// <summary>
     /// Interaction logic for AccommodationOverview.xaml
     /// </summary>
-    public partial class AccommodationOverview : Window
+    public partial class AccommodationOverview : Page
     {
 
         private AccommodationRepository accommodationRepository;
@@ -156,8 +158,9 @@ namespace BookingApp.View
             Accommodation selectedAccommodation = (Accommodation)AccommodationListView.SelectedItem;
             if (selectedAccommodation != null)
             {
-                AccommodationDetailsWindow accommodationDetailsWindow = new AccommodationDetailsWindow(selectedAccommodation);
-                accommodationDetailsWindow.Show();
+                //AccommodationDetailsWindow accommodationDetailsWindow = new AccommodationDetailsWindow(selectedAccommodation);
+                //accommodationDetailsWindow.Show();
+                NavigationService?.Navigate(new AccommodationDetails(selectedAccommodation));
             }
         }
 
@@ -168,12 +171,16 @@ namespace BookingApp.View
             guestReservationDetails.Show();
         }
 
-        private void AnywhereAnytimeButton_Click(object sender, RoutedEventArgs e)
+        private void AnywhereAnytimeButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // Navigate to Anywhere Anytime page
+            //NavigationService?.Navigate(new AnywhereAnytimePage());
         }
 
-        private void ForumsButton_Click(object sender, RoutedEventArgs e)
+        private void ForumsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // Navigate to Forums page
+            //NavigationService?.Navigate(new ForumsPage());
         }
 
 

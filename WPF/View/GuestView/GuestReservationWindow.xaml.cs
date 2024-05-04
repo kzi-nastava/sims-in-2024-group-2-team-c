@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-namespace BookingApp.View
+namespace BookingApp.WPF.View.GuestView
 {
     /// <summary>
     /// Interaction logic for GuestReservationWindow.xaml

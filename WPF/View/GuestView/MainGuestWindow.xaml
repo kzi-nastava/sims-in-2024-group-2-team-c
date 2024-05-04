@@ -1,0 +1,41 @@
+﻿<Window x:Class="BookingApp.WPF.View.GuestView.MainGuestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainGuestWindow" Height="720" Width="1280"
+        ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+    <Grid Margin="0,0,0,0">
+        <!-- Header -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="HeaderBorder" Background="CadetBlue" Padding="10,3" Margin="0,7,0,0" HorizontalAlignment="Center" Width="1280">
+                <Grid>
+                    <!-- TextBlock for "Find your next stay" -->
+                    <TextBlock x:Name="HeaderTextBlock" Text="Find your next stay" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Height="30" Margin="10,0,0,0"/>
+
+                    <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30">
+                        <TextBlock Text="BOOKING.APP" FontWeight="Bold" FontSize="20" Height="31"/>
+                    </Border>
+
+                    <!-- StackPanel for user info on the right side -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1032,0,0,0" Width="227">
+                        <!-- TextBlock for username -->
+                        <!--TextBlock Text="Korisnikov username" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/-->
+                        <TextBlock Text="{Binding Username}" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="5" Width="164"/>
+
+                        <!-- Circle with "G" indicating guest -->
+                        <Border Width="35" Height="35" CornerRadius="17.5" Background="WhiteSmoke" Margin="5 0 5 0">
+                            <TextBlock Text="G" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Frame kontrola za prikazivanje stranica -->
+        <Frame x:Name="MainFrame" Grid.Row="1" Source="/BookingApp.WPF.View.GuestView/AccommodationOverview.xaml" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
