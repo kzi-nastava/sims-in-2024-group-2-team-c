@@ -11,6 +11,9 @@
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\Manchester1.jpg" />
+    <None Remove="Resources\Images\play.png" />
+    <None Remove="Resources\Images\profileG.jpg" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -36,6 +39,12 @@
     <Folder Include="Service\TourServices\" />
     <Folder Include="WPF\ViewModel\GuideViewModel\" />
     <Folder Include="WPF\ViewModel\TouristViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Manchester1.jpg" />
+    <Resource Include="Resources\Images\play.png" />
+    <Resource Include="Resources\Images\profileG.jpg" />
   </ItemGroup>
 
 </Project>

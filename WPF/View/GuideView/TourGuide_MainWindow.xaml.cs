@@ -27,7 +27,7 @@ namespace BookingApp.WPF.View.GuideView
         }
         /*private void NavigateToHomePage()
         {
-            MainFrame.Source = new Uri("SIMS/HomePage.xaml", UriKind.Relative);
+            MainFrame.Source = new Uri("WPF/View/GuideView/HomePage.xaml", UriKind.Relative);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

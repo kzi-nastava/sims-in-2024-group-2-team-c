@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace BookingApp.Service.TourServices
 {
@@ -21,12 +23,14 @@ namespace BookingApp.Service.TourServices
         private PeopleInfoService peopleInfoService;
         //private LocationService LocationService;
         private KeyPointService keyPointService;
+        private EndedToursService endedToursService;
         public TourService()
         {
             iTourRepository = Injectorr.CreateInstance<ITourRepository>();
             tourInstanceService = new TourInstanceService();
             keyPointService = new KeyPointService();
             peopleInfoService = new PeopleInfoService();
+            endedToursService = new EndedToursService();
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
@@ -82,7 +86,24 @@ namespace BookingApp.Service.TourServices
             return null;
         }
 
-
+        public ActiveTourDTO getActiveTourDTO()
+        {
+            Tour tour = GetByActivity();
+            KeyPoint activeKeyPoint = keyPointService.FindActiveKeyPoint(tour.KeyPointIds);
+            ActiveTourDTO activeTour = new ActiveTourDTO
+            {
+                Name = tour.Name,
+                LocationId = tour.LocationId,
+                Description = tour.Description,
+                Language = tour.Language,
+                KeyPoints = tour.KeyPointIds,
+                Duration = tour.Duration,
+                Images = tour.Images,
+                Location = endedToursService.LoadLocation(tour.LocationId),
+                ActiveKeyPoint = activeKeyPoint.Name
+            };
+            return activeTour;
+        }
 
 
         public int FindPresentTouristsCount(int TourId)
@@ -150,6 +171,12 @@ namespace BookingApp.Service.TourServices
                     count++;
             }
             return count;
+        }
+        public float CalculateAttendacePercentage(TourInstance instance) 
+        {
+            Tour found = GetById(instance.IdTour);
+            float count = (float)FindPresentTouristsCount(found.Id) / instance.ReservedTourists;
+            return count * 100;
         }
         /*public int FindPresentTouristsCount(int TourId)
         {

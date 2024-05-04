@@ -79,10 +79,10 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void Reviews_Click(object sender, RoutedEventArgs e)
         {
-            ReviewsOverview reviewsOverview = new ReviewsOverview();
-            reviewsOverview.Show();
-            //Guide_TourReviews reviewView = new Guide_TourReviews();
-            //this.NavigationService.Navigate(reviewView);
+           // ReviewsOverview reviewsOverview = new ReviewsOverview();
+           // reviewsOverview.Show();
+            Guide_TourReviews reviewView = new Guide_TourReviews();
+            this.NavigationService.Navigate(reviewView);
         }
         
         private void TourRequests_Click(object sender, RoutedEventArgs e)

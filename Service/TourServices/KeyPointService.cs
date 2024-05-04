@@ -63,7 +63,16 @@ namespace BookingApp.Service.TourServices
         {
             return _keyPointRepository.GetKeypointsByIds(keypointIds);
         }
-
+        public KeyPoint FindActiveKeyPoint(List<int> ids)
+        {
+            foreach(int id in ids)
+            {
+                KeyPoint kp = GetById(id);
+                if (kp.Active == true)
+                    return kp;
+            }
+            return null;
+        }
 
     }
 }

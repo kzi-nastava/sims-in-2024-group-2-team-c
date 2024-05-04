@@ -33,8 +33,12 @@ namespace BookingApp.WPF.View.GuideView
         private void ReportButton_Click(object sender, RoutedEventArgs e)
         {
             viewModel.ReportReviewCommand.Execute(reviewsList.SelectedItem);
-            viewModel.UpdateVisibility();
+            //viewModel.UpdateVisibility();
 
+        }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
         }
     }
 }

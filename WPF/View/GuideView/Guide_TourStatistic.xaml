@@ -8,17 +8,26 @@
       d:DesignHeight="768" d:DesignWidth="1024"
       Title="Guide_TourStatistic">
 
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <StackPanel Margin="10">
-            <Button Click="Back_Click"  Command ="{Binding BackCommand}" Height="30" HorizontalAlignment="Left">
-                <TextBlock Text="BACK" FontSize="14"/>
+            <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+                <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
             </Button>
-            <TextBlock Text="TOURS STATISTIC" FontWeight="Bold" FontSize="20" Margin="0 0 0 10"/>
+            <TextBlock Text="TOURS STATISTIC" FontWeight="Bold" FontSize="30" Margin="0 0 0 10"/>
 
             <!-- SELECT TOUR AND PRESS BUTTON TO SEE TOUR STATISTIC -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <TextBlock Text="SELECT TOUR AND PRESS BUTTON TO SEE TOUR STATISTIC            " FontWeight="Bold" FontSize="16"/>
-                <Button Click="Show_Click"  Content="SHOW" Height="30" Command="{Binding ShowCommand}" HorizontalAlignment="Right" />
+                <TextBlock Text="SELECT TOUR AND PRESS BUTTON TO SEE TOUR STATISTIC " FontWeight="Bold" FontSize="16"/>
+                <Button Click="Show_Click"  Style="{StaticResource CustomButtonStyle}" Content="SHOW" Height="30" Width="80" Command="{Binding ShowCommand}" HorizontalAlignment="Right"/>
             </StackPanel>
 
             <!-- TOURS TABLE -->
@@ -26,17 +35,16 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="NAME" DisplayMemberBinding="{Binding Name}" Width="Auto" />
-                        <GridViewColumn Header="DESCRIPTION" DisplayMemberBinding="{Binding Description}" Width="80" />
-                        <GridViewColumn Header="LOCATION" DisplayMemberBinding="{Binding Location}" Width="80" />
-                        <GridViewColumn Header="LANGUAGE" DisplayMemberBinding="{Binding Language}" Width="80" />
-                        <GridViewColumn Header="DURATION" DisplayMemberBinding="{Binding Duration}" Width="80" />
-                        <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="80" />
+                        <GridViewColumn Header="DESCRIPTION" DisplayMemberBinding="{Binding Description}" Width="Auto" />
+                        <GridViewColumn Header="LOCATION" DisplayMemberBinding="{Binding Location}" Width="Auto" />
+                        <GridViewColumn Header="LANGUAGE" DisplayMemberBinding="{Binding Language}" Width="Auto" />
+                        <GridViewColumn Header="DURATION" DisplayMemberBinding="{Binding Duration}" Width="Auto" />
+                        <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="Auto" />
                     </GridView>
                 </ListView.View>
             </ListView>
 
             <!-- STATISTICS BY AGE -->
-            <TextBlock Text="STATISTICS BY AGE" FontWeight="Bold" FontSize="16" Margin="0 10 0 0"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="500"/>
@@ -47,14 +55,14 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel>
-                            <TextBlock Text="MAXIMUM NUMBER OF TOURISTS:"/>
-                            <TextBlock Text="NUMBER OF RESERVED TOURISTS:"/>
-                            <TextBlock Text="NUMBER OF PRESENT TOURISTS:"/>
+                            <TextBlock Text="MAXIMUM NUMBER OF TOURISTS:" Margin="0 10 0 10"/>
+                            <TextBlock Text="NUMBER OF RESERVED TOURISTS:"  Margin="0 10 0 10"/>
+                            <TextBlock Text="NUMBER OF PRESENT TOURISTS:"  Margin="0 10 0 10"/>
                         </StackPanel>
                         <StackPanel Margin="10 0 0 0">
-                            <TextBlock x:Name="MaxTouristsBlock" Text="{Binding MaxTourists}"/>
-                            <TextBlock x:Name="ReservedTouristsBlock" Text="{Binding ReservedTourists}"/>
-                            <TextBlock x:Name="PresentTouristsBlock" Text="{Binding PresentTourists}"/>
+                            <TextBlock x:Name="MaxTouristsBlock" Text="{Binding MaxTourists}"  Margin="0 10 0 10"/>
+                            <TextBlock x:Name="ReservedTouristsBlock" Text="{Binding ReservedTourists}"  Margin="0 10 0 10"/>
+                            <TextBlock x:Name="PresentTouristsBlock" Text="{Binding PresentTourists}" Margin="0 10 0 10"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -67,17 +75,17 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <GroupBox Header="STATISTICS BY AGE" FontWeight="Bold" Grid.RowSpan="3">
+                    <GroupBox Header="STATISTICS BY AGE" FontWeight="Bold" BorderThickness="3" Grid.RowSpan="3">
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
-                                <TextBlock Text="LESS THAN 18 YEARS: "/>
-                                <TextBlock Text="BETWEEN 18 AND 50 YEARS: "/>
-                                <TextBlock Text="MORE THAN 50 YEARS: "/>
+                                <TextBlock Text="LESS THAN 18 YEARS: "  Margin="10 10 0 10"/>
+                                <TextBlock Text="BETWEEN 18 AND 50 YEARS: "  Margin="10 10 0 10"/>
+                                <TextBlock Text="MORE THAN 50 YEARS: "  Margin="10 10 0 10"/>
                             </StackPanel>
                             <StackPanel Margin="10 0 0 0">
-                                <TextBlock x:Name="LessBlock" Text="{Binding LessThan18}"/>
-                                <TextBlock x:Name="BetweenBlock" Text="{Binding Between18And50}"/>
-                                <TextBlock x:Name="MoreBlock" Text="{Binding MoreThan50}"/>
+                                <TextBlock x:Name="LessBlock" Text="{Binding LessThan18}"  Margin="0 10 0 10"/>
+                                <TextBlock x:Name="BetweenBlock" Text="{Binding Between18And50}"  Margin="0 10 0 10"/>
+                                <TextBlock x:Name="MoreBlock" Text="{Binding MoreThan50}"  Margin="0 10 0 10"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

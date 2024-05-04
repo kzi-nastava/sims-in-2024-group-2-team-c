@@ -45,13 +45,14 @@ namespace BookingApp.Service.TourServices
                     PresentTourists = tourService.FindPresentTouristsCount(instance.IdTour),
                     LessThan18 = tourService.CalculateNumberOfTouristsUnder18(tour),
                     Between18And50 = tourService.CalculateNumberOfTourists18And50(tour),
-                    MoreThan50 = tourService.CalculateNumberOfTouristsMore50(tour)
+                    MoreThan50 = tourService.CalculateNumberOfTouristsMore50(tour),
+                    Attendence = tourService.CalculateAttendacePercentage(instance)
                 };
                 founded.Add(dto);
             }
             return founded;
         }
-        private string LoadLocation(int locationId)
+        public string LoadLocation(int locationId)
         {
             Location location = locationService.GetById(locationId);
             string ViewLocation = $"{location.City}, {location.Country}";

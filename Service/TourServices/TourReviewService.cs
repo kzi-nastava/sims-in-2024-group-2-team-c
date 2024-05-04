@@ -79,7 +79,7 @@ namespace BookingApp.Service.TourServices
                     LanguageGrade = review.LanguageGrade,
                     InterestingGrade = review.InterestingGrade,
                     StartKeyPoint = kp.Name,
-                    Reported = false,
+                    Reported = review.Reported,
                     Date = instance.Date,
                     Images = review.Images
                 };

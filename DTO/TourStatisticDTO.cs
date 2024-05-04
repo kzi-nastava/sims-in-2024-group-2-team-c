@@ -37,6 +37,7 @@ namespace BookingApp.DTO
         public int LessThan18 { get; set; }
         public int Between18And50 { get; set; }
         public int MoreThan50 { get; set; }
+        public float Attendence { get; set; }
         public TourStatisticDTO() { }
         public TourStatisticDTO(int tourInstanceId, string name, string description, string location, string language, int duration, DateTime date, int maxTourists, int reservedTourists, int presentTourists,
             int lessThan18, int between18and50, int moreThan50)

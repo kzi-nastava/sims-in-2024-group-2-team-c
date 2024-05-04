@@ -14,6 +14,15 @@
    <!--<viewModel:GuideHomePage_ViewModel/>-->     
     <!--</Page.DataContext>-->
 
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="340" />
@@ -34,58 +43,160 @@
         <!-- Left half of the window -->
         <Grid Grid.Column="0">
             <!--<Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="10" Background="#FFFFFF" Margin="20">-->
-            <GroupBox Grid.Row="0" Grid.Column="0" Width ="318" Header="PROFILE " FontWeight="Bold" Margin="10">
+            <GroupBox Grid.Row="0" Grid.Column="0" Width ="330" Header="PROFILE " FontWeight="Bold" Margin="10" Background="#d4fccc">
                 <StackPanel Margin="20">
-                    <!--<Image Source="image.png" Width="80" Height="80" HorizontalAlignment="Center" Margin="0,5,90,5"/>-->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,5,0,5"  HorizontalAlignment="Center">
-                        <TextBlock Text="USERNAME: " FontWeight="Bold" Margin="0,5,0,5"/>
-                        <TextBlock Text="{Binding Username}" />
+                    <Image Source="\Resources\Images\profileG.jpg" Width="80" Height="80" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,35,0,5"  HorizontalAlignment="Left">
+                        <TextBlock Text="USERNAME: " FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Username}" Margin="20 0 20 0"/>
                     </StackPanel>
-                    <Button Content="STATUS" Margin="0,5,0,5" Width="272" Grid.Row="1" Click="SeeStatus_Click"/>
-                    <Button Content="REVIEWS" Margin="0,5,0,5" Width="272" Grid.Row="2" Click="Reviews_Click"/>
-                    <Button Content="TOUR REQUESTS" Margin="0,5,0,5" Width="272" Grid.Row="3" Click="TourRequests_Click"/>
-                    <Button Content="REQUEST STATISTICS" Margin="0,5,0,5" Width="272" Grid.Row="3" Click="RequestStatistic_Click"/>
-                    <Button Content="QUIT JOB" Margin="0,5,0,5" Width="272" Grid.Row="5" Click="QuitJob_Click"/>
-                    <Button Content="LOG OUT" Margin="0,5,0,5" Width="272" Grid.Row="6" Click="LogOut_Click"/>
-                    <Button Content="PLAY TUTORIAL" Margin="0,5,0,5" Width="272" Grid.Row="7" Click="PlayTutorial_Click"/>
+                    <Button Content="STATUS" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="1" Click="SeeStatus_Click"/>
+                    <Button Content="REVIEWS" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="2" Click="Reviews_Click"/>
+                    <Button Content="TOUR REQUESTS" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="3" Click="TourRequests_Click"/>
+                    <Button Content="REQUEST STATISTICS" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="3" Click="RequestStatistic_Click"/>
+                    <Button Content="QUIT JOB" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="5" Click="QuitJob_Click"/>
+                    <Button Content="LOG OUT" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="6" Click="LogOut_Click"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="\Resources\Images\play.png" Width="40" Height="40" HorizontalAlignment="Center" Margin="0,35,0,5"/>
+                        <Button Content="PLAY TUTORIAL" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="234" Height="30" Grid.Row="7" Click="PlayTutorial_Click"/>
+                    </StackPanel>
                 </StackPanel>
                 <!--</Border>-->
             </GroupBox>
-            <!-- Add navigation buttons here -->
         </Grid>
 
-        <!-- Right half of the window -->
         <Grid Grid.Column="1">
             <!-- Right half of the window -->
             <StackPanel>
-                <!-- Active Tour GroupBox and buttons -->
-                <GroupBox Header="ACTIVE TOUR" FontWeight="Bold" BorderBrush="#E0E0E0" BorderThickness="1" Background="#FFFFFF" Margin="20,20,20,0" >
-                   
+                <GroupBox Header="ACTIVE TOUR" FontWeight="Bold" BorderBrush="#E0E0E0" BorderThickness="1"  Background="#d4fccc" Margin="20,20,20,0" >
+                    <StackPanel Margin="20">
+                        <!-- Check if there is an active tour -->
+                        <TextBlock  x:Name="NoActiveTourMessage" Text="There is no active tour. Start today's tour." TextAlignment="Center" Margin="0,0,0,10">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsNoActiveTourVisible}" Value="Visible">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <Button  x:Name="NoActiveTourButton" Content="TODAY'S TOUR" Margin="0,5,0,20" Width="272" Height="30" Background="LightGreen">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsNoActiveTourVisible}" Value="Visible">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <StackPanel x:Name="ActiveTourPanel" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="Name: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ActiveTour.Name}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsActiveTourVisible}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Visible">
+                            <TextBlock Text="Location: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ActiveTour.Location}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsActiveTourVisible}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Visible">
+                            <TextBlock Text="DESCRIPTION: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ActiveTour.Description}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsActiveTourVisible}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Visible">
+                            <TextBlock Text="ACTIVE KEY POINT: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ActiveTour.ActiveKeyPoint}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsActiveTourVisible}" Value="Visible">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
+                        <!-- Add more details about active tour here -->
+                        <Button x:Name="ActiveTourButton" Content="FOLLOW TOUR" Margin="0,10,0,0" Width="272" Height="30" Background="LightGreen" HorizontalAlignment="Right">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsActiveTourVisible}" Value="Visible">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+
                 </GroupBox>
 
-                <!-- Buttons between Active Tour and Most Visited -->
                 <StackPanel>
-                    <Button x:Name="CreateNewTourButton" Content="CREATE NEW TOUR" Margin="20,20,20,0" Width="437" Height="30" Click="CreateNewTourButton_Click"/>
-                    <Button x:Name="AllToursViewButton" Content="ALL TOURS VIEW" Margin="20,10,20,0" Width="437" Height="30" Click="AllToursViewButton_Click"/>
-                    <Button x:Name="FutureToursButton" Content="FUTURE TOURS" Margin="20,10,20,0" Width="437" Height="30" Click="FutureToursButton_Click"/>
-                    <Button x:Name="SeeTourStatisticButton" Content="SEE TOUR STATISTIC" Margin="20,10,20,0" Width="437" Height="30" Click="SeeTourStatisticButton_Click"/>
+                    <Button x:Name="CreateNewTourButton" Content="CREATE NEW TOUR" Style="{StaticResource CustomButtonStyle}" Margin="20,20,20,0" Width="600" Height="30" Click="CreateNewTourButton_Click"/>
+                    <Button x:Name="AllToursViewButton" Content="ALL TOURS VIEW" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="AllToursViewButton_Click"/>
+                    <Button x:Name="FutureToursButton" Content="FUTURE TOURS" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="FutureToursButton_Click"/>
+                    <Button x:Name="SeeTourStatisticButton" Content="SEE TOUR STATISTIC" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="SeeTourStatisticButton_Click"/>
                 </StackPanel>
-                <!-- Most Visited GroupBox -->
-                <GroupBox Header="THE MOST VISITED" FontWeight="Bold" BorderBrush="#E0E0E0" BorderThickness="1" Background="#FFFFFF" Margin="20,20,20,20">
+                <GroupBox Header="THE MOST VISITED" FontWeight="Bold" BorderBrush="#E0E0E0" BorderThickness="1"  Background="#d4fccc" Margin="20,20,20,20">
                     <StackPanel Margin="20">
-                        <StackPanel x:Name="VisitedTourName" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="Name: " FontWeight="Bold"/>
+                        <StackPanel x:Name="VisitedTourName" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5,0,5">
+                            <TextBlock Text="NAME: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding StatisticTour.Name}"/>
                         </StackPanel>
-                        <StackPanel x:Name="VisitedTourLocation" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="Location: " FontWeight="Bold"/>
+                        <StackPanel x:Name="VisitedTourLocation" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,15,0,5">
+                            <TextBlock Text="LOCATION: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding StatisticTour.Location}" />
                         </StackPanel>
-                        <StackPanel x:Name="VisitedTourDescription" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="Description: " FontWeight="Bold"/>
+                        <StackPanel x:Name="VisitedTourDescription" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,15,0,5">
+                            <TextBlock Text="DESCRIPTION: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding StatisticTour.Description}"/>
                         </StackPanel>
-                        <Button Click="SeeTourStatisticDetailsButton_Click" Content="See More" Margin="0,20,0,0" Width="272"/>
+                        <StackPanel x:Name="VisitedTourAttendance" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,15,0,5">
+                            <TextBlock Text="ATTENDANCE PERCENTAGE: " FontWeight="Bold"/>
+                            <TextBlock Text="{Binding StatisticTour.Attendence}"/>
+                        </StackPanel>
+                        <Button Click="SeeTourStatisticDetailsButton_Click" Content="SEE MORE" Style="{StaticResource CustomButtonStyle}" Margin="0,20,0,0" Width="272" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

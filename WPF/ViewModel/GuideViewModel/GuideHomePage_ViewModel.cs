@@ -19,18 +19,30 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
     {
         private readonly TourService _tourService;
         private readonly EndedToursService _endedToursService;
-       /* private Tour _activeTour;
-        public Tour ActiveTour
+        private ActiveTourDTO _activeTour;
+        public ActiveTourDTO ActiveTour
         {
             get { return _activeTour; }
             set
             {
                 _activeTour = value;
                 OnPropertyChanged(nameof(ActiveTour));
-                OnPropertyChanged(nameof(IsNoActiveTourVisible));
-                OnPropertyChanged(nameof(IsActiveTourVisible));
+                //OnPropertyChanged(nameof(IsNoActiveTourVisible));
+                //OnPropertyChanged(nameof(IsActiveTourVisible));
+                /*if (value)
+                {
+                    ActiveTourPanel = Visibility.Visible;
+                    NoActiveTourMessageVisibility = Visibility.Collapsed;
+                    StartTodayTourButtonVisibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ActiveTourDetailsVisibility = Visibility.Collapsed;
+                    NoActiveTourMessageVisibility = Visibility.Visible;
+                    StartTodayTourButtonVisibility = Visibility.Visible;
+                }*/
             }
-        }*/
+        }
         
         private TourStatisticDTO _statisticTour;
         public TourStatisticDTO StatisticTour
@@ -55,8 +67,34 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 }
             }
         }
-       // public bool IsNoActiveTourVisible => ActiveTour == null;
-       // public bool IsActiveTourVisible => ActiveTour != null;
+        // public bool IsNoActiveTourVisible => ActiveTour == null;
+        // public bool IsActiveTourVisible => ActiveTour != null;
+        private Visibility _isActiveTourVisible;
+        public Visibility IsActiveTourVisible 
+        {
+            get { return _isActiveTourVisible; }
+            set
+            {
+                if (_isActiveTourVisible != value)
+                {
+                    _isActiveTourVisible = value;
+                    OnPropertyChanged(nameof(IsActiveTourVisible));
+                }
+            }
+        }
+        private Visibility _isNoActiveTourVisible;
+        public Visibility IsNoActiveTourVisible
+        {
+            get { return _isNoActiveTourVisible; }
+            set
+            {
+                if (_isNoActiveTourVisible != value)
+                {
+                    _isNoActiveTourVisible = value;
+                    OnPropertyChanged(nameof(IsNoActiveTourVisible));
+                }
+            }
+        }
         /*public ICommand SeeStatusCommand { get; } // Implementirajte svoju logiku za komandu "SeeStatus"
         public ICommand SeeMoreCommand { get; } // Implementirajte svoju logiku za komandu "SeeStatus"
 
@@ -88,15 +126,17 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             Username = LoggedInUser.Username;
             _tourService = new TourService();
             _endedToursService = new EndedToursService();
-            /*ActiveTour = _tourService.GetByActivity();
+            ActiveTour = _tourService.getActiveTourDTO();
             if (ActiveTour == null)
             {
-                IsActiveTourVisible = false;
+                IsActiveTourVisible = Visibility.Hidden;
+                IsNoActiveTourVisible = Visibility.Visible;
             }
             else
             {
-                IsActiveTourVisible = true;
-            }*/
+                IsActiveTourVisible = Visibility.Visible;
+                IsNoActiveTourVisible = Visibility.Hidden;
+            }
             StatisticTour = _endedToursService.FindMostVisitedTour();
 
            /* TodaysTourCommand = new RelayCommand(parameter => TodaysTour_Click(parameter));

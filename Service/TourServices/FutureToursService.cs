@@ -15,15 +15,24 @@ namespace BookingApp.Service.TourServices
     {
         private TourInstanceService tourInstanceService;
         private TourService tourService;
+        private LocationService locationService;
         private TourVoucherService tourVoucherService;
 
         public FutureToursService()
         {
             tourInstanceService = new TourInstanceService();
             tourService = new TourService();
+            locationService = new LocationService();
             tourVoucherService = new TourVoucherService();
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
+        }
+
+        private string LoadLocation(int locationId)
+        {
+            Location location = locationService.GetById(locationId);
+            string ViewLocation = $"{location.City}, {location.Country}";
+            return ViewLocation;
         }
 
         public List<FutureTourDTO> GetFutureTourDTOs()
@@ -38,7 +47,7 @@ namespace BookingApp.Service.TourServices
                     Id = instance.Id,
                     Name = tour.Name,
                     Language = tour.Language,
-                    Location = tour.ViewLocation,
+                    Location = LoadLocation(tour.LocationId),
                     Description = tour.Description,
                     Duration = tour.Duration,
                     Date = instance.Date

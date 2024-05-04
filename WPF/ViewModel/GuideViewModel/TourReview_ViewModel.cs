@@ -38,6 +38,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 {
                     _reportMessageVisibility = value;
                     OnPropertyChanged(nameof(ReportMessageVisibility));
+                    OnPropertyChanged(nameof(Reviews));
                 }
             }
         }
@@ -52,43 +53,51 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 {
                     _unableToReportVisibility = value;
                     OnPropertyChanged(nameof(UnableToReportVisibility));
+                    OnPropertyChanged(nameof(Reviews));
                 }
             }
         }
 
         public ICommand ReportReviewCommand { get; }
+        //public ICommand BackCommand { get; }
 
         public TourReview_ViewModel()
         {
            // ReportReviewCommand = new Commands.RelayCommand(ReportReview);
             ReportReviewCommand = new ViewModelCommandd(ReportReview);
+            //BackCommand = new ViewModelCommandd(BackClick);
             _tourReviewService = new TourReviewService();
             Reviews = new ObservableCollection<TourReviewDTO>();
+            ReportMessageVisibility = Visibility.Hidden;
+            UnableToReportVisibility = Visibility.Hidden;
             LoadReviews();
         }
 
-       /* private void ReportReview()
+       /* private void BackClick(object obj)
         {
-            //if (selectedReview == null || !(selectedReview is TourReviewDTO review))
-            //    return;
-            TourReviewDTO selectedReview = (sender as FrameworkElement).DataContext as TourReviewDTO;
-            bool canReport = _tourReviewService.ReportReview((TourReviewDTO)selectedReview);
-            if (canReport)
-            {
-                review.Reported = true;
-                UpdateVisibility();
-            }
-            else
-            {
-                UpdateVisibility();
-            }
+            throw new NotImplementedException();
         }*/
+
+        /* private void ReportReview()
+         {
+             //if (selectedReview == null || !(selectedReview is TourReviewDTO review))
+             //    return;
+             TourReviewDTO selectedReview = (sender as FrameworkElement).DataContext as TourReviewDTO;
+             bool canReport = _tourReviewService.ReportReview((TourReviewDTO)selectedReview);
+             if (canReport)
+             {
+                 review.Reported = true;
+                 UpdateVisibility();
+             }
+             else
+             {
+                 UpdateVisibility();
+             }
+         }*/
         private void LoadReviews()
         {
             var ReviewView = _tourReviewService.GetReviewDTOs();
             Reviews = new ObservableCollection<TourReviewDTO>(ReviewView);
-            ReportMessageVisibility = Visibility.Hidden;
-            UnableToReportVisibility = Visibility.Hidden;
         }
 
         private void ReportReview(object selectedReview)
@@ -101,25 +110,24 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             {
                 review.Reported = true;
                 selectedReview = review;
-                UpdateVisibility();
+                //UpdateVisibility();
+                LoadReviews();
                 //selectedReview.Reported = true;
-                //ReportMessageTextBlock.Visibility = Visibility.Visible;
-                //UnableToReportTextBox.Visibility = Visibility.Hidden;
-                // Ovde možete dodati dodatne radnje kao što su ažuriranje baze podataka,
-                // prikazivanje poruke o uspešnom prijavljivanju, ažuriranje prikaza recenzija itd.
+                ReportMessageVisibility = Visibility.Visible;
+                UnableToReportVisibility = Visibility.Hidden;
             }
             else
             {
-                UpdateVisibility();
-                //ReportMessageTextBlock.Visibility = Visibility.Hidden;
-                //UnableToReportTextBox.Visibility = Visibility.Visible;
-                // Ako je recenzija već prijavljena, možete izvršiti odgovarajuće akcije, kao što je
-                // prikazivanje poruke o nemogućnosti ponovnog prijavljivanja
+                //UpdateVisibility();
+                LoadReviews();
+                ReportMessageVisibility = Visibility.Hidden;
+                UnableToReportVisibility = Visibility.Visible;
             }
         }
-        public void UpdateVisibility()
+        /*public void UpdateVisibility()
         {
             // Provera da li je poslednja recenzija prijavljena
+            //if (Reviews.LastOrDefault()?.Reported == true)
             if (Reviews.LastOrDefault()?.Reported == true)
             {
                 ReportMessageVisibility = Visibility.Visible;
@@ -130,6 +138,6 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 ReportMessageVisibility = Visibility.Hidden;
                 UnableToReportVisibility = Visibility.Visible;
             }
-        }
+        }*/
     }
 }
