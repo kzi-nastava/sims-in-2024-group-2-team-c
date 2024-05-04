@@ -1,4 +1,6 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.Model;
+using BookingApp.View;
+using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +36,8 @@ namespace BookingApp.WPF.View.TouristView
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-           
+            
+
         }
     }
 }
