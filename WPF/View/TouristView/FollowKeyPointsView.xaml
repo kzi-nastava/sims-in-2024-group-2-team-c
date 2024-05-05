@@ -155,7 +155,7 @@
             </Border>
 
 
-            <Button Content="Rate the Tour" Grid.Row="2" IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"
+            <Button Content="RATE THE TOUR" Grid.Row="2" IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"
             VerticalAlignment="Center" 
             Padding="5"  Width="100"/>
 

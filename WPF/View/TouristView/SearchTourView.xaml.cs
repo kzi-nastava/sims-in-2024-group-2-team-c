@@ -1,5 +1,4 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +16,13 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for TouristHomeView.xaml
+    /// Interaction logic for SearchTourView.xaml
     /// </summary>
-    public partial class TouristHomeView : Page
+    public partial class SearchTourView : Page
     {
-        public TouristHomeView()
+        public SearchTourView()
         {
             InitializeComponent();
-            DataContext = new TouristHomeViewModel();
         }
-
-
-        private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new SearchTourView());
-            // NavigationService.Navigate(new Uri("YourPage.xaml", UriKind.Relative));
-        }
-
-
     }
 }

@@ -108,7 +108,7 @@
                         <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Horizontal" >
-                        <TextBlock Text="Report on all attendances on tours in the last year"  VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"
+                        <TextBlock Text="Report on all attendances on tours in the last year (pdf)"  VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"
                                    TextWrapping="Wrap" MaxWidth="200"/>
                     </StackPanel>
                     <Button Grid.Column="1" Margin="10,20" Content="Download" />

@@ -20,7 +20,7 @@
             <TextBlock Text="Your review has been saved" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#40613c" FontSize="20" FontWeight="SemiBold"></TextBlock>
         </Border>
 
-        <Button Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Height="20" Content="Go back to home page" Command="{Binding GoHomeCommand}"></Button>
+        <Button Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Height="30" Content="Go back to home page" Command="{Binding GoHomeCommand}"></Button>
 
 
     </Grid>
