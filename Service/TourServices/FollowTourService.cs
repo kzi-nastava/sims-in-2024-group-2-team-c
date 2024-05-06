@@ -107,6 +107,32 @@ namespace BookingApp.Service.TourServices
 
 
 
+        public List<ActiveTourKeyPointDTO> GetKeyPointsByTour(HomeTourDTO activeTour)
+        {
+
+            List<KeyPoint> keyPoints = _keyPointService.GetKeyPointsByTourId(activeTour.TourId);
+            List<ActiveTourKeyPointDTO> keyPointDTOs = new List<ActiveTourKeyPointDTO>();
+
+            
+
+            foreach (var instance in keyPoints)
+            {
+
+               
+
+                ActiveTourKeyPointDTO keyPoint = new ActiveTourKeyPointDTO(instance.Name, instance.Description, instance.Active.ToString());
+
+                keyPointDTOs.Add(keyPoint);
+
+
+            }
+
+
+            return keyPointDTOs;
+        }
+
+
+
 
         private static string CheckActivity(KeyPoint instance, bool ended)
         {

@@ -1,17 +1,20 @@
 ﻿using BookingApp.DTO;
 using BookingApp.Service.TourServices;
+using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+
 
 namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
     public class TouristHomeViewModel : ViewModelBase
     {
-
+        public ICommand ViewTourCommand { get;  }
         private readonly TourService _tourService;
          
 
@@ -33,6 +36,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             _tourService = new TourService();
             Tours = new ObservableCollection<HomeTourDTO>(_tourService.GetAllTourDTOs());
+
+            
         }
+
+     
+
+
     }
 }

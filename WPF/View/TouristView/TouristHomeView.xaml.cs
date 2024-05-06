@@ -1,4 +1,5 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.DTO;
+using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,26 @@ namespace BookingApp.WPF.View.TouristView
             NavigationService.Navigate(new SearchTourView());
             // NavigationService.Navigate(new Uri("YourPage.xaml", UriKind.Relative));
         }
+
+        private void ViewTour_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            NavigateToNewPage(button);
+        }
+
+
+        private void NavigateToNewPage(Button button)
+        {
+            if (button?.DataContext is HomeTourDTO selectedTour)
+            {
+
+                SelectedTourViewModel selectedTourViewModel = new SelectedTourViewModel(selectedTour);
+                SelectedTourView selectedTourView = new SelectedTourView();
+                selectedTourView.DataContext = selectedTourViewModel;
+                this.NavigationService.Navigate(selectedTourView);
+            }
+        }
+
 
 
     }

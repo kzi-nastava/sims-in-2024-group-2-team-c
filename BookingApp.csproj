@@ -13,6 +13,7 @@
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\home.png" />
+    <None Remove="Resources\Images\map-marker.png" />
     <None Remove="Resources\Images\marker.png" />
     <None Remove="Resources\Images\on bell.png" />
     <None Remove="Resources\Images\on home.png" />
@@ -53,6 +54,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\bell.png" />
     <Resource Include="Resources\Images\home.png" />
+    <Resource Include="Resources\Images\map-marker.png" />
     <Resource Include="Resources\Images\marker.png" />
     <Resource Include="Resources\Images\on bell.png" />
     <Resource Include="Resources\Images\on home.png" />
