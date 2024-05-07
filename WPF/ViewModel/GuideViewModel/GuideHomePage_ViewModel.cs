@@ -19,6 +19,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
     {
         private readonly TourService _tourService;
         private readonly EndedToursService _endedToursService;
+        //private Tour _activeTour;
         private ActiveTourDTO _activeTour;
         public ActiveTourDTO ActiveTour
         {
@@ -127,6 +128,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             _tourService = new TourService();
             _endedToursService = new EndedToursService();
             ActiveTour = _tourService.getActiveTourDTO();
+            //ActiveTour = _tourService.GetByActivity();
             if (ActiveTour == null)
             {
                 IsActiveTourVisible = Visibility.Hidden;

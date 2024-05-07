@@ -13,15 +13,15 @@ namespace BookingApp.Service.TourServices
     public class LocationService
     {
         private readonly ILocationRepository locationRepository;
-        private TourInstanceService tourInstanceService;
-        private TourService tourService;
+        //private TourInstanceService tourInstanceService;
+        //private TourService tourService;
 
 
         public LocationService()
         {
             locationRepository = Injectorr.CreateInstance<ILocationRepository>();
-            tourInstanceService = new TourInstanceService();
-            tourService = new TourService();
+            //tourInstanceService = new TourInstanceService();
+            //tourService = new TourService();
             //tourInstanceService = new(new TourInstanceRepository());
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());

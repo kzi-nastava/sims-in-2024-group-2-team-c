@@ -62,8 +62,15 @@ namespace BookingApp.Model
             }*/
             KeyPointIds = values[5].Split(',').Select(int.Parse).ToList();
             Duration = Convert.ToInt32(values[6]);
-            Images = values[7].Split(',').ToList();
-           
+            if (!string.IsNullOrEmpty(values[7]))
+            {
+                Images = values[7].Split(',').ToList();
+            }
+            else
+            {
+                Images = new List<string>();
+            }
+
         }
 
         public string[] ToCSV()

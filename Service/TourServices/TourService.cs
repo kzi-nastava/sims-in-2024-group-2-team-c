@@ -23,14 +23,14 @@ namespace BookingApp.Service.TourServices
         private PeopleInfoService peopleInfoService;
         //private LocationService LocationService;
         private KeyPointService keyPointService;
-        private EndedToursService endedToursService;
+        private LocationService locationService;
         public TourService()
         {
             iTourRepository = Injectorr.CreateInstance<ITourRepository>();
             tourInstanceService = new TourInstanceService();
             keyPointService = new KeyPointService();
             peopleInfoService = new PeopleInfoService();
-            endedToursService = new EndedToursService();
+            locationService = new LocationService();
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
@@ -85,6 +85,12 @@ namespace BookingApp.Service.TourServices
             }
             return null;
         }
+        public string LoadLocation(int locationId)
+        {
+            Location location = locationService.GetById(locationId);
+            string ViewLocation = $"{location.City}, {location.Country}";
+            return ViewLocation;
+        }
 
         public ActiveTourDTO getActiveTourDTO()
         {
@@ -93,13 +99,14 @@ namespace BookingApp.Service.TourServices
             ActiveTourDTO activeTour = new ActiveTourDTO
             {
                 Name = tour.Name,
-                LocationId = tour.LocationId,
+                //LocationId = tour.LocationId,
                 Description = tour.Description,
                 Language = tour.Language,
-                KeyPoints = tour.KeyPointIds,
+                //KeyPoints = tour.KeyPointIds,
                 Duration = tour.Duration,
-                Images = tour.Images,
-                Location = endedToursService.LoadLocation(tour.LocationId),
+                //Images = tour.Images,
+                //BitmapImages = tour.BitmapImages,
+                Location = LoadLocation(tour.LocationId),
                 ActiveKeyPoint = activeKeyPoint.Name
             };
             return activeTour;
