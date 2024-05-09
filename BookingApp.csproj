@@ -12,6 +12,7 @@
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+
     <None Remove="Resources\Images\play.png" />
     <None Remove="Resources\Images\profileG.jpg" />
     <None Remove="Resources\Images\home.png" />
@@ -29,6 +30,18 @@
     <None Remove="Resources\Images\tourist-notification.png" />
     <None Remove="Resources\Images\tourist-user.png" />
     <None Remove="Resources\Images\tourist.png" />
+
+    <None Remove="Resources\Images\icons8-add-30.png" />
+    <None Remove="Resources\Images\icons8-bell-24.png" />
+    <None Remove="Resources\Images\icons8-forum-50.png" />
+    <None Remove="Resources\Images\icons8-hammer-30.png" />
+    <None Remove="Resources\Images\icons8-language-50.png" />
+    <None Remove="Resources\Images\icons8-light-50.png" />
+    <None Remove="Resources\Images\icons8-list-50.png" />
+    <None Remove="Resources\Images\icons8-star-30.png" />
+    <None Remove="Resources\Images\icons8-user-64.png" />
+    <None Remove="Resources\Images\profilei.png" />
+    <None Remove="Resources\Images\statisticICON.png" />
     <None Remove="Resources\Images\view.png" />
   </ItemGroup>
 
@@ -78,6 +91,20 @@
     <Resource Include="Resources\Images\Manchester1.jpg" />
     <Resource Include="Resources\Images\play.png" />
     <Resource Include="Resources\Images\profileG.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-add-30.png" />
+    <Resource Include="Resources\Images\icons8-bell-24.png" />
+    <Resource Include="Resources\Images\icons8-forum-50.png" />
+    <Resource Include="Resources\Images\icons8-hammer-30.png" />
+    <Resource Include="Resources\Images\icons8-language-50.png" />
+    <Resource Include="Resources\Images\icons8-light-50.png" />
+    <Resource Include="Resources\Images\icons8-list-50.png" />
+    <Resource Include="Resources\Images\icons8-star-30.png" />
+    <Resource Include="Resources\Images\icons8-user-64.png" />
+    <Resource Include="Resources\Images\profilei.png" />
+    <Resource Include="Resources\Images\statisticICON.png" />
   </ItemGroup>
 
 </Project>

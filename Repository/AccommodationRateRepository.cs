@@ -31,8 +31,18 @@ namespace BookingApp.Repository
             reservationRepository = new ReservationRepository();
         }
 
+        public String GetFilePath()
+        {
+            return FilePath;
+        }
 
-         public void Save(AccommodationRate accommodationRate)
+        public List<AccommodationRate> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+
+        public void Save(AccommodationRate accommodationRate)
 
         {
             accommodationRate.Id = NextId();

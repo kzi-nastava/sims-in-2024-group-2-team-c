@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.WPF.ViewModel.OwnerViewModel;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -8,135 +9,39 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BookingApp.View
 {
     /// <summary>
     /// Interaction logic for RegisterAccommodationForm.xaml
     /// </summary>
-    public partial class RegisterAccommodationForm : Window, INotifyPropertyChanged
+    public partial class RegisterAccommodationForm : Page
     {
-        public User LoggedInUser { get; set; }
-
-        private readonly AccommodationRepository _repository;
-        private readonly LocationRepository locationRepository;
-        List<string> imagePaths = new List<string>();
-        public List<string> Images;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-        public RegisterAccommodationForm() //bez ovoga user
+        public RegisterAccommodationViewModel viewModel;
+        public RegisterAccommodationForm() 
         {
             InitializeComponent();
-            Title = "Register New Accommodation";
-            DataContext = this;
-            _repository = new AccommodationRepository();
-            locationRepository = new LocationRepository();
+            viewModel = new RegisterAccommodationViewModel();
+            DataContext = viewModel;
 
         }
 
 
         private void BrowseImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
-            openFileDialog.Multiselect = true;
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-
-                string[] selectedFiles = openFileDialog.FileNames;
-
-
-                foreach (string fileName in selectedFiles)
-                {
-                    txtImagePath.Text += fileName + Environment.NewLine;
-                }
-            }
+            viewModel.BrowseImage_Click(sender, e);
         }
-
-
 
         private void SaveAccommodation(object sender, RoutedEventArgs e)
         {
-
-            if (!ValidateInput())
-            {
-                MessageBox.Show("Please fill in all fields.");
-                return;
-            }
-
-            string name = txtName.Text.Trim();
-            string city = txtCity.Text.Trim().ToLower();
-            Location location = locationRepository.GetLocationByCity(city);
-            string type = txtType.Text.Trim();
-            int maxGuests = int.Parse(txtMaxGuests.Text);
-            int minBookingDays = int.Parse(txtMinBookingDays.Text);
-            int cancellationDays = int.Parse(txtCancellationDays.Text);
-
-
-            string[] paths = txtImagePath.Text.Split('|');
-
-
-            foreach (string path in paths)
-            {
-
-                if (!string.IsNullOrEmpty(path))
-                {
-                    imagePaths.Add(path);
-                }
-            }
-
-
-
-
-            Accommodation newAccommodation = new Accommodation()
-            {
-                Name = name,
-                Location = location,
-                Type = type,
-                MaxGuests = maxGuests,
-                MinBookingDays = minBookingDays,
-                CancellationDays = cancellationDays,
-                Images = imagePaths
-            };
-
-            _repository.Save(newAccommodation);
-
-
-            MessageBox.Show("Accommodation registered successfully.");
-
-            Close();
+            viewModel.SaveAccommodation(sender, e);
         }
-
-
-        private void Cancel(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            NavigationService?.GoBack();
         }
 
-        private bool ValidateInput()
-        {
-            if (string.IsNullOrEmpty(txtName.Text) ||
-                string.IsNullOrEmpty(txtCity.Text) ||
-                string.IsNullOrEmpty(txtType.Text) ||
-                string.IsNullOrEmpty(txtMaxGuests.Text) ||
-                string.IsNullOrEmpty(txtMinBookingDays.Text) ||
-                string.IsNullOrEmpty(txtCancellationDays.Text) ||
-                string.IsNullOrEmpty(txtImagePath.Text))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
 
-        }
     }
 }

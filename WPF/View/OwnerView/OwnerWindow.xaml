@@ -49,11 +49,11 @@
 
         <!-- Ikona za Profile u gornjem desnom uglu -->
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
-            <Image Source="Resources\Images\profilei.png" Width="24" Height="24" MouseLeftButtonDown="Profile_Click"/>
+            <Image Source="\Resources\Images\profilei.png" Width="24" Height="24" MouseLeftButtonDown="Profile_Click"/>
             <TextBlock Text="Your Profile" Margin="5" VerticalAlignment="Center" MouseLeftButtonDown="Profile_Click"/>
         </StackPanel>
 
-        <Button Content="See Your Ratings" Click="OwnersRatings_Click" Margin="200" />
+        <!-- <Button Content="See Your Ratings" Click="OwnersRatings_Click" Margin="200" />  -->
 
         <!-- Frame za prikaz stranica -->
         <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>

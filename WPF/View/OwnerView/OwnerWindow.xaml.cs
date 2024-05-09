@@ -23,7 +23,7 @@ namespace BookingApp.WPF.View.OwnerView
         public OwnerWindow()
         {
             InitializeComponent();
-            //MainFrame.Navigate(new OwnerHomePage()); mozda mozes otkomentrisati kad porradi home page
+            MainFrame.Navigate(new OwnerHomePage()); 
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -66,7 +66,7 @@ namespace BookingApp.WPF.View.OwnerView
       
          }*/
 
-
+        
 
     }
 }
