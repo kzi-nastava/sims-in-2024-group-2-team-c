@@ -42,6 +42,8 @@
                      Width="30" Height="30"  Background="Transparent" BorderThickness="0">
                         <Image  Source="/Resources/Images/tour exit.png"/>
                     </Button>
+                    <Image Grid.Row="1" Source="{Binding SelectedTour.Images[0]}"   Height="300" Width="300" Margin="5"/>
+                    <!--    <Image Grid.Row="1" Source="D:\Mila\AHHHHHHHHHHHH\sims-in-2024-group-2-team-c\Resources\Images\Manchester1.jpg" Height="300" Width="300" Margin="5"></Image>  -->
 
 
                     <TextBlock Grid.Row="2" Text="You can see...." HorizontalAlignment="Left" Margin="30,0,0,0" FontSize="15" FontWeight="SemiBold"></TextBlock>
@@ -87,6 +89,8 @@
                          TextWrapping="Wrap" FontSize="15" FontWeight="SemiBold"
                          Background="Transparent"
                          MaxWidth="300" Margin="30,0,10,10"/>
+
+                    <Image Grid.Row="5" Source="D:\Mila\AHHHHHHHHHHHH\sims-in-2024-group-2-team-c\Resources\Images\Manchester2.jpg" Height="300" Width="300" Margin="5"></Image>
 
                     <TextBlock Grid.Row="6" Text="Dates and time" HorizontalAlignment="Left" Margin="30,10,0,0" FontSize="15" FontWeight="SemiBold" Foreground="DarkGreen" ></TextBlock>
 

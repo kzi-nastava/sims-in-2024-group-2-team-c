@@ -52,7 +52,33 @@
                                 </Grid.RowDefinitions>
 
 
-                                <Image Grid.Row="0" Source="D:\Mila\AHHHHHHHHHHHH\sims-in-2024-group-2-team-c\Resources\Images\Manchester1.jpg" Height="300" Width="300" Margin="5"></Image>
+
+                                <!--<Image Grid.Row="0" Source="D:\Mila\AHHHHHHHHHHHH\sims-in-2024-group-2-team-c\Resources\Images\Manchester1.jpg" Height="300" Width="300" Margin="5"></Image> -->
+
+
+
+                           <ScrollViewer Grid.Row="0" Margin="5" HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Disabled" >
+                                    <ItemsControl ItemsSource="{Binding Images}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding}" Width="300" Height="300" Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer> 
+
+
+                                
+
+
+
+
 
 
 

@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace BookingApp.Service.TourServices
 {
@@ -191,6 +193,7 @@ namespace BookingApp.Service.TourServices
                 
 
                 HomeTourDTO homeTour = new HomeTourDTO(tour.Id,tour.Name,locationString, tour.Images);
+
 
                 homeTours.Add(homeTour);
 

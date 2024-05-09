@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.IO;
 
 namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
@@ -15,11 +16,17 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             if (value is List<string> imageNames)
             {
                 List<string> fullImagePaths = new List<string>();
+                string basePath = AppDomain.CurrentDomain.BaseDirectory; // Get the base directory of the application
+
+                // Output the basePath to the console for debugging
+                Console.WriteLine("Base Path: " + basePath);
+
                 foreach (string imageName in imageNames)
                 {
-                    string fullPath = $"D:\\Mila\\AHHHHHHHHHHHH\\sims-in-2024-group-2-team-c\\Resources\\Images\\{imageName}";
+                    string fullPath = Path.Combine(basePath, "Resources", "Images", imageName);
                     fullImagePaths.Add(fullPath);
                 }
+
                 return fullImagePaths;
             }
             return null;
@@ -29,7 +36,6 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             throw new NotImplementedException();
         }
-
-
     }
+
 }

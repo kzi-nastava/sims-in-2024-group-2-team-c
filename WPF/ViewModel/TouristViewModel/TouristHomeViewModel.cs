@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 
 namespace BookingApp.WPF.ViewModel.TouristViewModel
@@ -16,7 +18,10 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
     {
         public ICommand ViewTourCommand { get;  }
         private readonly TourService _tourService;
-         
+
+
+      
+
 
         private ObservableCollection<HomeTourDTO> _tours;
 
@@ -37,10 +42,17 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _tourService = new TourService();
             Tours = new ObservableCollection<HomeTourDTO>(_tourService.GetAllTourDTOs());
 
-            
+           
+
+            // Load images for all tours
+           
+
+
+
+
         }
 
-     
+        
 
 
     }
