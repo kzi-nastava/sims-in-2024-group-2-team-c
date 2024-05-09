@@ -52,7 +52,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             try
             {
-                GetActiveTours();
+                GetTours();
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private void GetActiveTours()
+        private void GetTours()
         {
             var activeFollowingTours = _followTourService.GetActiveTourInstances();
             

@@ -34,7 +34,6 @@ namespace BookingApp.Service.TourServices
         public bool GetActivity(int id) {
             Tourist tourist = iTouristRepository.GetById(id);
             return tourist.Active;
-        
         }
 
         public void Activate(int id)
@@ -44,7 +43,17 @@ namespace BookingApp.Service.TourServices
             iTouristRepository.Update(tourist);
         }
 
+        public string GetFirstName(int id)
+        {
+            Tourist tourist = iTouristRepository.GetById(id);
+            return tourist.FirstName;
+        }
 
+        public string GetLastName(int id)
+        {
+            Tourist tourist = iTouristRepository.GetById(id);
+            return tourist.LastName;
+        }
 
     }
 }

@@ -15,9 +15,9 @@ namespace BookingApp.DTO
         public string TourName { get; set; }
         public string Tourist { get; set; }
         public string Comment { get; set; }
-        public int KnowledgeGrade { get; set; }
-        public int LanguageGrade { get; set; }
-        public int InterestingGrade { get; set; }
+        public int? KnowledgeGrade { get; set; }
+        public int? LanguageGrade { get; set; }
+        public int? InterestingGrade { get; set; }
         public string StartKeyPoint { get; set; }
         public bool Reported { get; set; }
         public DateTime Date {  get; set; }

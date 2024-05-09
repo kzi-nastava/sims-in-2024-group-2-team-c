@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
+
+
 namespace BookingApp.Service.TourServices
 {
     public class TourService
@@ -21,9 +25,8 @@ namespace BookingApp.Service.TourServices
        // private readonly ITourInstanceRepository iTourInstanceRepository;
         private TourInstanceService tourInstanceService;
         private PeopleInfoService peopleInfoService;
-        //private LocationService LocationService;
-        private KeyPointService keyPointService;
         private LocationService locationService;
+        private KeyPointService keyPointService;
         public TourService()
         {
             iTourRepository = Injectorr.CreateInstance<ITourRepository>();
@@ -31,7 +34,6 @@ namespace BookingApp.Service.TourServices
             keyPointService = new KeyPointService();
             peopleInfoService = new PeopleInfoService();
             locationService = new LocationService();
-            //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
         /*public Tour GetTourLocation(string country, string city)
@@ -211,7 +213,30 @@ namespace BookingApp.Service.TourServices
 
 
 
+        public List<HomeTourDTO> GetAllTourDTOs() {
 
+            List<Tour> tours = iTourRepository.GetAll();
+            List<HomeTourDTO> homeTours= new List<HomeTourDTO>();
+
+            foreach (Tour tour in tours)
+            {
+
+                Location location = locationService.GetById(tour.LocationId);
+                string locationString = $" {location.Country}";
+
+                
+
+                HomeTourDTO homeTour = new HomeTourDTO(tour.Id,tour.Name,locationString, tour.Images);
+
+
+                homeTours.Add(homeTour);
+
+            }
+
+
+            return homeTours;
+        
+        }
 
 
 

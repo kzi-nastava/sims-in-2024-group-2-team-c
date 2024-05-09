@@ -22,9 +22,6 @@ namespace BookingApp.Service.TourServices
             locationRepository = Injectorr.CreateInstance<ILocationRepository>();
             //tourInstanceService = new TourInstanceService();
             //tourService = new TourService();
-            //tourInstanceService = new(new TourInstanceRepository());
-            //tourLocationService = new(new LocationRepository());
-            //tourReservationService = new(new TourReservationRepository());
         }
         public Location GetById(int id)
         {
