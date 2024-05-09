@@ -12,6 +12,8 @@ namespace BookingApp.Interfaces
         bool HasUserRatedAccommodation(int userId, string name);
         public void Save(AccommodationRate accommodationRate);
 
+        public List<AccommodationRate> GetAll();
+
     }
 
 }

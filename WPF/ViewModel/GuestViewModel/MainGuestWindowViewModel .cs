@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.WPF.View.GuestView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             // Postavljanje Username na osnovu podataka iz baze ili drugog izvora
             Username = LoggedInUser.Username;
         }
+
     }
 }

@@ -19,12 +19,17 @@ namespace BookingApp.WPF.View.GuestView
     /// <summary>
     /// Interaction logic for ReservationDelayWindow.xaml
     /// </summary>
-    public partial class ReservationDelayWindow : Window
+    public partial class ReservationDelayWindow : Page
     {
         public ReservationDelayWindow(GuestReservationDTO selectedReservation)
         {
             InitializeComponent();
             DataContext = new ReservationDelayViewModel(selectedReservation);
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
         }
     }
 }

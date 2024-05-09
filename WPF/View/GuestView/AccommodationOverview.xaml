@@ -12,20 +12,17 @@
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Here is a list of all accommodations:" Margin="0,218,14,304" FontWeight="Bold" />
+        <TextBlock Text="Here is a list of all accommodations:" Margin="0,218,14,304" FontWeight="Bold"   FontSize="16"/>
 
         <DataGrid x:Name="AccommodationListView" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False" Margin="0,257,291,12" CanUserAddRows="False" MouseDoubleClick="AccommodationListView_MouseDoubleClick">
             <!--SelectionChanged="AccommodationListView_SelectionChanged"-->
             <DataGrid.Columns>
-                <!-- Definicija kolona za prikaz podataka smeštaja -->
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" />
 
-                <!-- Dodajemo kolone za prikaz lokacije smeštaja -->
                 <DataGridTextColumn Header="Location" Binding="{Binding LocationDetails}" IsReadOnly="True" />
 
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True" />
 
-                <!-- Dodajemo kolone za prikaz slika smeštaja -->
                 <DataGridTemplateColumn Header="Preview">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -48,7 +45,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Grid Height="635" VerticalAlignment="Center">
-            <TextBlock Text="Search any accommodation by:" Margin="0,0,14,585" FontWeight="Bold" Height="15" VerticalAlignment="Bottom" />
+            <TextBlock Text="Search any accommodation by:" Margin="0,0,14,580" FontWeight="Bold" Height="26" VerticalAlignment="Bottom"  FontSize="16"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,35,10,480">
                 <StackPanel Orientation="Vertical" Margin="0,0,40,0" Height="60">
@@ -95,9 +92,9 @@
         </Border>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,27,16" Height="234" Width="234">
-            <Button Content="RESERVATION DETAILS" Click="ReservationDetailsButton_Click" Margin="0,0,0,30" Width="234" HorizontalAlignment="Right" Height="58"/>
-            <Button Content="ANYWHERE ANYTIME" Click="AnywhereAnytimeButton_Click" Margin="0,0,0,30" Width="234" HorizontalAlignment="Right" Height="58"/>
-            <Button Content="FORUMS" Click="ForumsButton_Click" Margin="0,0,0,30" Width="234" HorizontalAlignment="Right" Height="58"/>
+            <Button Content="RESERVATION DETAILS" Click="ReservationDetailsButton_Click" Margin="0,0,0,30" Width="234" Background="CadetBlue" HorizontalAlignment="Right" Height="58"/>
+            <Button Content="ANYWHERE ANYTIME" Click="AnywhereAnytimeButton_Click" Margin="0,0,0,30" Width="234" Background="CadetBlue" HorizontalAlignment="Right" Height="58"/>
+            <Button Content="FORUMS" Click="ForumsButton_Click" Margin="0,0,0,30" Width="234" Background="CadetBlue" HorizontalAlignment="Right" Height="58"/>
         </StackPanel>
 
     </Grid>

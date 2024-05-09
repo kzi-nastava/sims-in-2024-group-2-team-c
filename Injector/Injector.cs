@@ -49,14 +49,16 @@ namespace BookingApp.Injector
             {typeof(IKeyPointRepository),new KeyPointRepository()},
 
 
-           // { typeof(ITourRepository), new TourRepository() },
+            // { typeof(ITourRepository), new TourRepository() },
             // { typeof(ITourService), new TourService() }
 
-            { typeof(IGuestReservationRepository), new GuestReservationRepository() }
-               //{ typeof(IGuestReservationService), new GuestReservationService() }
+            //{ typeof(IReservationRepository), new ReservationRepository() }
+            //{ typeof(IGuestReservationService), new GuestReservationService() }
 
-           //  { typeof(IAccommodationRateRepository), new AccommodationRateRepository() },
-               
+            //  { typeof(IAccommodationRateRepository), new AccommodationRateRepository() },
+            { typeof(IAccommodationRateRepository),new AccommodationRateRepository()},
+
+            { typeof(IReservationDelayRepository),new ReservationDelayRepository()}
 
         };
 

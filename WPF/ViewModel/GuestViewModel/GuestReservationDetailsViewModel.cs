@@ -1,6 +1,7 @@
 ﻿using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Service;
 using BookingApp.Service.AccommodationServices;
 using BookingApp.WPF.View.GuestView;
 using System;
@@ -8,14 +9,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace BookingApp.WPF.ViewModel.GuestViewModel
 {
-    public class GuestReservationViewModel : ViewModelBase
+    public class GuestReservationDetailsViewModel : ViewModelBase
     {
 
         private readonly GuestReservationService _guestReservationService;
         private readonly AccommodationRateService _accommodationRateService;
+        private readonly System.Windows.Navigation.NavigationService _navigationService;
+        private readonly MainGuestWindow _mainGuestWindow;
 
         public ICommand RateReservationCommand { get; }
         public ICommand CancelReservationCommand => new ViewModelCommand<object>(CancelReservation);
@@ -35,14 +39,17 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             }
         }
 
-        public GuestReservationViewModel()
+        public GuestReservationDetailsViewModel(MainGuestWindow mainGuestWindow, System.Windows.Navigation.NavigationService navigationService)
         {
             _guestReservationService = new(new GuestReservationRepository());
-           // _accommodationRateService = new AccommodationRateService();
-             _accommodationRateService = new(new AccommodationRateRepository());
-             GuestReservations = new ObservableCollection<GuestReservationDTO>();
+            //_accommodationRateService = new AccommodationRateService();
+            _accommodationRateService = new AccommodationRateService();
+            GuestReservations = new ObservableCollection<GuestReservationDTO>();
             RateReservationCommand = new ViewModelCommand<object>(RateReservation);
             RescheduleReservationCommand = new ViewModelCommand<object>(RescheduleReservation);
+            _mainGuestWindow = mainGuestWindow;
+            _navigationService = navigationService;
+
             LoadGuestReservations();
         }
 
@@ -137,8 +144,13 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                 {
                     if (currentDate.Subtract(checkOutDate).Days <= 5)
                     {
-                        RateAccommodationWindow rateAccommodationWindow = new RateAccommodationWindow(selectedReservation);
-                        rateAccommodationWindow.Show();
+                        //RateAccommodationWindow rateAccommodationWindow = new RateAccommodationWindow(selectedReservation);
+                        //rateAccommodationWindow.Show();
+                        if (_mainGuestWindow != null)
+                        {
+                            _mainGuestWindow.ChangeHeaderText("Rate accommodations and owners");
+                            _navigationService?.Navigate(new RateAccommodationWindow(selectedReservation));
+                        }
                     }
                     else
                     {
@@ -170,8 +182,13 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                 else
                 {
                     // Otvori prozor za reschedule rezervacije
-                    ReservationDelayWindow rescheduleWindow = new ReservationDelayWindow(selectedReservation);
-                    rescheduleWindow.ShowDialog();
+                    //ReservationDelayWindow rescheduleWindow = new ReservationDelayWindow(selectedReservation);
+                    //rescheduleWindow.ShowDialog();
+                    if (_mainGuestWindow != null)
+                    {
+                        _mainGuestWindow.ChangeHeaderText("Reschedule the reservation");
+                        _navigationService?.Navigate(new ReservationDelayWindow(selectedReservation));
+                    }
                 }
             }
             else
