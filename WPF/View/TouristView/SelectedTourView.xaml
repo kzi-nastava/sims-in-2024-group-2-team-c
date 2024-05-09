@@ -90,7 +90,9 @@
                          Background="Transparent"
                          MaxWidth="300" Margin="30,0,10,10"/>
 
-                    <Image Grid.Row="5" Source="D:\Mila\AHHHHHHHHHHHH\sims-in-2024-group-2-team-c\Resources\Images\Manchester2.jpg" Height="300" Width="300" Margin="5"></Image>
+                <!--    <Image Grid.Row="5" Source="D:\Mila\AHHHHHHHHHHHH\sims-in-2024-group-2-team-c\Resources\Images\Manchester2.jpg" Height="300" Width="300" Margin="5"></Image>  -->
+
+                    <Image Grid.Row="5" Source="{Binding SelectedTour.Images[1]}"   Height="300" Width="300" Margin="5"/>
 
                     <TextBlock Grid.Row="6" Text="Dates and time" HorizontalAlignment="Left" Margin="30,10,0,0" FontSize="15" FontWeight="SemiBold" Foreground="DarkGreen" ></TextBlock>
 

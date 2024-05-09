@@ -38,10 +38,10 @@ namespace BookingApp.DTO
                 // string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", imageName);
                 string path = Directory.GetCurrentDirectory();
                 Console.WriteLine(path);
-                string imagePath = Path.Combine(@"..\\Resources\\Images\\", imageName);
+                //string imagePath = Path.Combine(@"..\\Resources\\Images\\", imageName);
 
                 string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-/*
+
                 // Find the index of the substring "\bin\Debug\net6.0-windows\"
                 int index = baseDirectory.IndexOf("\\bin\\Debug\\net6.0-windows\\", StringComparison.OrdinalIgnoreCase);
 
@@ -52,7 +52,7 @@ namespace BookingApp.DTO
                 string newPath = Path.Combine(parentDirectory, "Resources", "Images", imageName);
 
                 // Use the new path
-                string imagePath = newPath;*/
+                string imagePath = newPath;
                 if (File.Exists(imagePath))
                 {
                     BitmapImage bitmap = new BitmapImage(new Uri(imagePath));
