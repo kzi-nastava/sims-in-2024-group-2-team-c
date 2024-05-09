@@ -1,4 +1,6 @@
 ﻿using BookingApp.DTO;
+using BookingApp.Interfaces;
+using BookingApp.Injector;
 using BookingApp.Model;
 using BookingApp.Repository;
 using System;
@@ -10,19 +12,21 @@ namespace BookingApp.Service
 {
     public class ReservationDelayService
     {
-        private readonly ReservationDelayRepository _reservationDelayRepository;
+        private readonly IReservationDelayRepository _reservationDelayRepository;
         private readonly ReservationRepository _reservationRepository; //mislim da treba servis da pozivas
+
         public ReservationDelayService()
         {
-            _reservationDelayRepository = new ReservationDelayRepository();
+            _reservationDelayRepository = Injectorr.CreateInstance<IReservationDelayRepository>();
             _reservationRepository = new ReservationRepository();
         }
 
-
+        /*
         public ReservationDelayService(ReservationRepository reservationRepository)
         {
             _reservationRepository = reservationRepository;
         }
+        */
 
         public bool IsNewDatesAvailable(int accommodationId, DateTime newCheckInDate, DateTime newCheckOutDate)
         {
@@ -90,10 +94,11 @@ namespace BookingApp.Service
             {
                 ReservationDelayId = reservationDelay.ReservationDelayId,
                 Guest = reservationDelay.Guest,
-                Accommodation = reservationDelay.Accommodation,
+                Accommodation = new Accommodation { Name = reservationDelay.Accommodation.Name, LocationDetails = reservationDelay.Accommodation.LocationDetails, Type = reservationDelay.Accommodation.Type },
                 NewCheckInDate = reservationDelay.NewCheckInDate,
                 NewCheckOutDate = reservationDelay.NewCheckOutDate,
-                Status = reservationDelay.Status
+                Status = reservationDelay.Status,
+                Explanation = reservationDelay.Explanation
             };
         }
 
@@ -130,6 +135,14 @@ namespace BookingApp.Service
             return _reservationRepository.getAccommodationByReservation(id);
         }
 
+        public List<ReservationDelay> GetAll()
+        {
+            return _reservationDelayRepository.GetAll();
+        }
 
+        public void Update(ReservationDelay selectedReservationDelay)
+        {
+            _reservationDelayRepository.Update(selectedReservationDelay);
+        }
     }
 }

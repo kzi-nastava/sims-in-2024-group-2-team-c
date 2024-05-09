@@ -22,6 +22,11 @@ namespace BookingApp.Repository
         private ReservationRepository reservationRepository; //dodato umesto guestresrep
 
 
+        public List<AccommodationRate> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
 
         public AccommodationRateRepository()
         {

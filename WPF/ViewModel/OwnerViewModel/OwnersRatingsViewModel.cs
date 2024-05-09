@@ -20,7 +20,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
         public OwnersRatingsViewModel()
         {
             rateService = new AccommodationRateService();
-            rateService.LoadAccommodationRatesFromCSV("../../../Resources/Data/accommodationRate.csv");
+            rateService.LoadAccommodationRates();
             _accommodationRates = new ObservableCollection<AccommodationRate>(rateService.AccommodationRates);
         }
 

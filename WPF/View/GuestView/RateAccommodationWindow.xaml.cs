@@ -19,7 +19,7 @@ namespace BookingApp.WPF.View.GuestView
     /// <summary>
     /// Interaction logic for RateAccommodationWindow.xaml
     /// </summary>
-    public partial class RateAccommodationWindow : Window
+    public partial class RateAccommodationWindow : Page
     {
 
         private GuestReservationDTO _selectedReservation;
@@ -28,6 +28,11 @@ namespace BookingApp.WPF.View.GuestView
             InitializeComponent();
             _selectedReservation = selectedReservation;
             DataContext = new RateAccommodationViewModel(selectedReservation);
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
         }
     }
 }

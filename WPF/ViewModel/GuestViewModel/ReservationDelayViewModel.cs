@@ -126,7 +126,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                 Accommodation = new Accommodation() { Name = _selectedReservation.Name , Type = _selectedReservation.Type},
                 NewCheckInDate = NewArrivalDate,
                 NewCheckOutDate = NewDepartureDate,
-                Status = ReservationDelayStatus.Pending // Set status to pending initially
+                Status = ReservationDelayStatus.Pending
             };
 
             try

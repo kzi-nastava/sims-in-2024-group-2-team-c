@@ -2,22 +2,23 @@
 using BookingApp.Repository;
 using System;
 using System.Windows;
-namespace BookingApp.View
+using System.Windows.Controls;
+namespace BookingApp.WPF.View.GuestView
 {
     /// <summary>
     /// Interaction logic for AccommodationDetailsWindow.xaml
     /// </summary>
-    public partial class AccommodationDetailsWindow : Window
+    public partial class AccommodationDetails : Page
     {
         private GuestReservationRepository guestReservationRepository;
         private Accommodation selectedAccommodation;
 
-        public AccommodationDetailsWindow()
+        public AccommodationDetails()
         {
             InitializeComponent();
         }
 
-        public AccommodationDetailsWindow(Accommodation selectedAccommodationSent)
+        public AccommodationDetails(Accommodation selectedAccommodationSent)
         {
             InitializeComponent();
             selectedAccommodation = selectedAccommodationSent;
@@ -60,9 +61,10 @@ namespace BookingApp.View
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            
-             this.Close();
-            
+
+            //this.Close();
+            NavigationService?.GoBack();
+
         }
 
 

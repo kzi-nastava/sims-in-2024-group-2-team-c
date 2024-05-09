@@ -1,4 +1,5 @@
-﻿using BookingApp.WPF.ViewModel.GuideViewModel;
+﻿using BookingApp.WPF.View.GuestView;
+using BookingApp.WPF.ViewModel.GuideViewModel;
 using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace BookingApp.Model
 
         public static MainViewModel mainViewModel { get; set; }
         public static MainWindow_ViewModel mainGuideViewModel { get; set; }
+
+        public static MainGuestWindow MainGuestWindow { get; set; }
         public static void Reset()
         {
             Id = 0;

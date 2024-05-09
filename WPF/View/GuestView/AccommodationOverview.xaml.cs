@@ -4,20 +4,22 @@ using BookingApp.WPF.View.GuestView;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 //using BookingApp.View.GuestReservationWindow;
 
-namespace BookingApp.View
+namespace BookingApp.WPF.View.GuestView
 {
     /// <summary>
     /// Interaction logic for AccommodationOverview.xaml
     /// </summary>
-    public partial class AccommodationOverview : Window
+    public partial class AccommodationOverview : Page
     {
 
         private AccommodationRepository accommodationRepository;
         private LocationRepository locationRepository;
-
+        private MainGuestWindow mainGuestWindow;
 
         private List<Accommodation> GetAllAccommodations()
         {
@@ -25,11 +27,12 @@ namespace BookingApp.View
         }
 
 
-        public AccommodationOverview()
+        public AccommodationOverview(MainGuestWindow mainWindow)
         {
             InitializeComponent();
             accommodationRepository = new AccommodationRepository();
             locationRepository = new LocationRepository();
+            this.mainGuestWindow = mainWindow;
 
             UpdateAccommodationListView(PopulateAccommodationListView());
         }
@@ -44,14 +47,12 @@ namespace BookingApp.View
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            // Get search criteria from text boxes
             string name = NameText.Text.Trim().ToLower();
             string location = LocationText.Text.Trim().ToLower();
             string type = TypeText.Text.Trim().ToLower();
             string numOfGuestsStr = NumberOfGuestsText.Text.Trim().ToLower();
             string bookingDaysStr = BookingDaysText.Text.Trim().ToLower();
 
-            // Filter tours based on search criteria
             List<Accommodation> filteredAccommodations = FilterAccommodations(name, location, type, numOfGuestsStr, bookingDaysStr);
 
             NameText.Text = "";
@@ -60,7 +61,6 @@ namespace BookingApp.View
             NumberOfGuestsText.Text = "";
             BookingDaysText.Text = "";
 
-            // Update accommodation list view with filtered accommodations
             UpdateAccommodationListView(filteredAccommodations);
         }
 
@@ -102,13 +102,10 @@ namespace BookingApp.View
 
         private List<Accommodation> PopulateAccommodationListView()
         {
-           
-            // Dobavljanje svih smještaja
             List<Accommodation> accommodations = accommodationRepository.GetAll();
 
             LoadLocations(accommodations);
 
-            // Postavljanje podataka smještaja u AccommodationListView
             return accommodations;
         }
 
@@ -116,12 +113,10 @@ namespace BookingApp.View
         {
                 foreach (var accommodation in accommodations)
                 {
-                    // Dobavljanje detalja lokacije koristeći ID lokacije
                     Location location = locationRepository.GetById(accommodation.Location.Id);
 
                     if (location != null)
                     {
-                        // Postavljanje svojstva LocationDetails svakog smještaja za prikaz u AccommodationListView-u
                         string LocationDetails = $"{location.City}, {location.Country}";
                         accommodation.LocationDetails = LocationDetails;
                     }
@@ -156,24 +151,35 @@ namespace BookingApp.View
             Accommodation selectedAccommodation = (Accommodation)AccommodationListView.SelectedItem;
             if (selectedAccommodation != null)
             {
-                AccommodationDetailsWindow accommodationDetailsWindow = new AccommodationDetailsWindow(selectedAccommodation);
-                accommodationDetailsWindow.Show();
+                //AccommodationDetailsWindow accommodationDetailsWindow = new AccommodationDetailsWindow(selectedAccommodation);
+                //accommodationDetailsWindow.Show();
+                if (mainGuestWindow != null)
+                {
+                    mainGuestWindow.ChangeHeaderText("Here are all accommodation details");
+                    NavigationService?.Navigate(new AccommodationDetails(selectedAccommodation));
+                }
             }
         }
 
         private void ReservationDetailsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Otvaranje prozora za detalje rezervacije
-            GuestReservationDetails guestReservationDetails = new GuestReservationDetails();
-            guestReservationDetails.Show();
+            //GuestReservationDetails guestReservationDetails = new GuestReservationDetails();
+            //guestReservationDetails.Show();
+            if (mainGuestWindow != null)
+            {
+                mainGuestWindow.ChangeHeaderText("Reservation details");
+                NavigationService?.Navigate(new GuestReservationDetails(mainGuestWindow, NavigationService));
+            }
         }
 
-        private void AnywhereAnytimeButton_Click(object sender, RoutedEventArgs e)
+        private void AnywhereAnytimeButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            //NavigationService?.Navigate(new AnywhereAnytimePage());
         }
 
-        private void ForumsButton_Click(object sender, RoutedEventArgs e)
+        private void ForumsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            //NavigationService?.Navigate(new ForumsPage());
         }
 
 

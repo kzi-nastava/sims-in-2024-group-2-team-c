@@ -14,6 +14,7 @@ namespace BookingApp.Interfaces
 
         public List<AccommodationRate> GetAll();
         public string GetFilePath();
+
     }
 
 }

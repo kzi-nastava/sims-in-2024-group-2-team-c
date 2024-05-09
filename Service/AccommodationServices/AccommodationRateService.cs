@@ -9,9 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using BookingApp.Serializer;
 using BookingApp.Repository;
 using BookingApp.Injector;
+using System.Windows.Shapes;
+using BookingApp.Service.ReservationService;
 
 
 namespace BookingApp.Service.AccommodationServices
@@ -21,11 +22,11 @@ namespace BookingApp.Service.AccommodationServices
 
         private readonly IAccommodationRateRepository _repository;
         private readonly GuestReservationDTO _selectedReservation;
-
-        private const string FilePath = "../../../Resources/Data/accommodationRate.csv";
-        private readonly Serializer<AccommodationRate> _serializer;
         private List<AccommodationRate> _accommodationRates;
-        private ReservationRepository reservationRepository;
+
+        private ReservationService.ReservationService  reservationService;
+        private ReservationRepository reservationRepository ;
+
 
         public List<AccommodationRate> AccommodationRates
         {
@@ -35,29 +36,17 @@ namespace BookingApp.Service.AccommodationServices
 
         public List<AccommodationRate> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
-        }
-
-        public AccommodationRateService(IAccommodationRateRepository repository)
-        {
-            _repository = repository;
-
+            return _repository.GetAll();
         }
 
 
-        public AccommodationRateService()
-        {
-            // _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
-            _accommodationRates = new List<AccommodationRate>();
-            _serializer = new Serializer<AccommodationRate>();
-            _accommodationRates = _serializer.FromCSV(FilePath);
+         public AccommodationRateService()
+         {
+            _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
+
             reservationRepository = new ReservationRepository();
-
+            _accommodationRates = new List<AccommodationRate>();
         }
-
-
-
-
 
         public AccommodationRateService(GuestReservationDTO selectedReservation, IAccommodationRateRepository repository)
 
@@ -102,23 +91,15 @@ namespace BookingApp.Service.AccommodationServices
         }
 
 
-        public void LoadAccommodationRatesFromCSV(string filePath)
+        public void LoadAccommodationRates()
         {
             _accommodationRates.Clear();
 
-            string[] lines = File.ReadAllLines(filePath);
-            foreach (string line in lines)
+            List<AccommodationRate> accommodationRate = GetAll();
+            foreach (AccommodationRate list in accommodationRate)
             {
-                string[] values = line.Split('|');
 
-                int Id = Convert.ToInt32(values[0]);
-                int ReservationId = Convert.ToInt32(values[1]);
-                int Cleanliness = Convert.ToInt32(values[2]);
-                int OwnerRate = Convert.ToInt32(values[3]);
-                string Comment = values[4];
-
-
-                Reservation reservation = reservationRepository.GetReservationById(ReservationId);
+                Reservation reservation = reservationRepository.GetReservationById(list.Reservation.Id);
                 if (reservation != null)
                 {
                     if (reservation != null && reservation.Guest != null)
@@ -129,19 +110,19 @@ namespace BookingApp.Service.AccommodationServices
 
                         _accommodationRates.Add(new AccommodationRate
                         {
-                            Id = Id,
+                            Id = list.Id,
                             Reservation = reservation,
                             GuestUsername = GuestUsername,
-                            Cleanliness = Cleanliness,
-                            OwnerRate = OwnerRate,
-                            Comment = Comment
+                            Cleanliness = list.Cleanliness,
+                            OwnerRate = list.OwnerRate,
+                            Comment = list.Comment
                             //Owner = owner ovo treba da dodam u accommodationRate
                         });
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Reservation with ID {ReservationId} not found.");
+                    Console.WriteLine($"Reservation with ID {list.Reservation.Id} not found.");
                 }
 
             }

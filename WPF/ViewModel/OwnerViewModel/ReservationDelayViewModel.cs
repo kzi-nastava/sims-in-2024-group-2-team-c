@@ -13,11 +13,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace BookingApp.ViewModel
+namespace BookingApp.WPF.ViewModel.OwnerViewModel
 {
     public class ReservationDelayViewModel : INotifyPropertyChanged
     {
-        private readonly ReservationDelayRepository _reservationDelayRepository;
         private readonly ReservationDelayService _reservationDelayService;
         private ReservationRepository _reservationreposiotry;
         private ReservationService _reservationservice;
@@ -28,9 +27,9 @@ namespace BookingApp.ViewModel
 
         public ReservationDelayViewModel()
         {
-            _reservationDelayRepository = new ReservationDelayRepository();
-            ReservationDelays = new ObservableCollection<ReservationDelay>(_reservationDelayRepository.GetAll());
+            //_reservationDelayRepository = new ReservationDelayRepository();
             _reservationDelayService = new ReservationDelayService();
+            ReservationDelays = new ObservableCollection<ReservationDelay>(_reservationDelayService.GetAll());           
             _reservationservice = new ReservationService();
             _reservationreposiotry = new ReservationRepository();
 
@@ -39,7 +38,7 @@ namespace BookingApp.ViewModel
         public void LoadReservationDelays()
         {
             ReservationDelays.Clear();
-            List<ReservationDelay> delays = _reservationDelayRepository.GetAll();
+            List<ReservationDelay> delays = _reservationDelayService.GetAll();
             foreach (var delay in delays)
             {
                 ReservationDelays.Add(delay);
@@ -77,7 +76,7 @@ namespace BookingApp.ViewModel
             {
 
                 SelectedReservationDelay.Status = ReservationDelayStatus.Approved;
-                _reservationDelayRepository.Update(SelectedReservationDelay);
+                _reservationDelayService.Update(SelectedReservationDelay);
 
                 // Poziv servisa da ažurira status
 
@@ -108,7 +107,7 @@ namespace BookingApp.ViewModel
             if (SelectedReservationDelay != null)
             {
                 SelectedReservationDelay.Status = ReservationDelayStatus.Rejected;
-                _reservationDelayRepository.Update(SelectedReservationDelay);
+                _reservationDelayService.Update(SelectedReservationDelay);
 
                 // Poziv servisa da ažurira status
                 _reservationDelayService.UpdateReservationDelayStatus(SelectedReservationDelay.ReservationDelayId, ReservationDelayStatus.Rejected);

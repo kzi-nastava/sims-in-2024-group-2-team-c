@@ -12,13 +12,14 @@ namespace BookingApp.DTO
         public int ReservationDelayId { get; set; }
         public Guest Guest { get; set; }
         public Accommodation Accommodation { get; set; }
-        public DateTime NewCheckInDate { get; set; } // Novi datum prijave
+        public DateTime NewCheckInDate { get; set; }
         public DateTime NewCheckOutDate { get; set; }
-        public ReservationDelayStatus Status { get; set; } // Status zahteva (Odobren, Odbijen, Na čekanju)
+        public ReservationDelayStatus Status { get; set; }
+        public string Explanation { get; set; }
 
         public ReservationDelayDTO() { }
 
-        public ReservationDelayDTO(int reservationDelayId, Guest guest, Accommodation accommodation, DateTime newCheckInDate, DateTime newCheckOutDate, ReservationDelayStatus status)
+        public ReservationDelayDTO(int reservationDelayId, Guest guest, Accommodation accommodation, DateTime newCheckInDate, DateTime newCheckOutDate, ReservationDelayStatus status, String explanation)
         {
             ReservationDelayId = reservationDelayId;
             Guest = guest;
@@ -26,6 +27,7 @@ namespace BookingApp.DTO
             NewCheckInDate = newCheckInDate;
             NewCheckOutDate = newCheckOutDate;
             Status = status;
+            Explanation = explanation;
         }
     }
 

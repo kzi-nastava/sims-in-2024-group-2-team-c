@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Interfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace BookingApp.Repository
 {
-    public class ReservationDelayRepository
+    public class ReservationDelayRepository : IReservationDelayRepository
     {
         private const string FilePath = "../../../Resources/Data/reservationdelay.csv";
         private readonly Serializer<ReservationDelay> _serializer;
