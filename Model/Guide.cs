@@ -13,19 +13,22 @@ namespace BookingApp.Model
     class Guide : User, ISerializable
     {
        // public int Id { get; set; }
-        //public List<int> TourInstancesIds { get; set; }
-        public List<int> ToursIds { get; set; }
-        //public bool resigned { get; set; }
+        public List<int> TourInstancesIds { get; set; }
+        public List<int> TourReviewsIds { get; set; }
+        //public List<int> ToursIds { get; set; }
+        //public List<DateTime> ReservedDates { get; set; }
+
+        public bool resigned { get; set; }
 
         public Guide() : base()
         {
-            ToursIds = new List<int>();
+            TourInstancesIds = new List<int>();
         }
         public Guide(string username, string password, List<int> toursIds)
         {
             Username = username;
             Password = password;
-            ToursIds = toursIds;
+            TourInstancesIds = toursIds;
         }
 
 /*        public void FromCSV(string[] values)

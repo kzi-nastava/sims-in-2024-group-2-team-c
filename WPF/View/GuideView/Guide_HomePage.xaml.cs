@@ -100,7 +100,10 @@ namespace BookingApp.WPF.View.GuideView
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Window parentWindow = Window.GetWindow(this);
+            parentWindow.Close();
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
         }
         private void PlayTutorial_Click(object sender, RoutedEventArgs e)
         {

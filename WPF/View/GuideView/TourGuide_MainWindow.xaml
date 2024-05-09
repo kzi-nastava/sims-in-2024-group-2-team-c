@@ -9,8 +9,9 @@
         Title="TourGuide_MainWindow" 
         Height="768" 
         Width="1024" 
-        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
+    <!--ResizeMode="NoResize"-->
+        
 <!--SizeToContent="Width"-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:MainWindow_ViewModel}">

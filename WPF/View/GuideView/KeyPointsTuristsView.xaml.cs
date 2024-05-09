@@ -1,5 +1,6 @@
 ﻿using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,6 +52,7 @@ namespace BookingApp.View
         private readonly KeyPointRepository _keyPointRepository;
         private readonly TouristRepository _touristRepository;
         private readonly PeopleInfoRepository _peopleInfoRepository;
+        private readonly TouristNotificationService touristNotificationService;
         public KeyPointsTuristsView(List<PeopleInfo> touristsList, KeyPoint selectedKeyPoint)
         {
             InitializeComponent();
@@ -59,6 +61,7 @@ namespace BookingApp.View
             _keyPointRepository = new KeyPointRepository();
             _peopleInfoRepository = new PeopleInfoRepository();
             _touristRepository = new TouristRepository();
+            touristNotificationService = new TouristNotificationService();
             Tourists = new ObservableCollection<PeopleInfo>();
             touristsListBox.ItemsSource = touristsList;
             SelectedKeyPoint = selectedKeyPoint;
@@ -76,6 +79,7 @@ namespace BookingApp.View
             if (SelectedKeyPoint != null)
             {
                 SelectedKeyPoint.PresentPeopleIds.Add(peopleInfo.Id);
+                touristNotificationService.SendNotification(peopleInfo,SelectedKeyPoint);
                 _keyPointRepository.Update(SelectedKeyPoint);
             }
             peopleInfo.Active = true;

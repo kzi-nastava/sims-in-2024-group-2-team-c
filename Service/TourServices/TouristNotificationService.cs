@@ -17,11 +17,13 @@ namespace BookingApp.Service.TourServices
 
         private readonly ITouristNotificationRepository _touristNotificationRepository;
         private readonly TouristService _touristService;
+        private readonly TourService _tourService;
 
 
         public TouristNotificationService() {
             _touristService = new TouristService();
             _touristNotificationRepository = Injectorr.CreateInstance<ITouristNotificationRepository>();
+            _tourService = new TourService();
         }
 
         
@@ -32,6 +34,18 @@ namespace BookingApp.Service.TourServices
             _touristNotificationRepository.Save(touristNotification);
         }
 
+        public void SendNotification(PeopleInfo info, KeyPoint selectedPoint)
+        {
+            Tour tour = _tourService.GetById(selectedPoint.TourId);
+            TouristNotification notification = new TouristNotification 
+            {
+                Name = info.FirstName,
+                TourInstanceId = selectedPoint.TourId,
+                TourName = tour.Name,
+                TouristId = 4
+            };
+            Save(notification);
+        }
 
         public IEnumerable<TouristNotification> GetAllNotificationsForUser(int userId)
         {

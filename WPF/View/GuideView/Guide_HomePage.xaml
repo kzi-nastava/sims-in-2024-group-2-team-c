@@ -10,8 +10,8 @@
       Height="768" 
       Width="1024" >
     <!--d:DesignHeight="450" d:DesignWidth="800"-->
-   <!-- <Page.DataContext>-->
-   <!--<viewModel:GuideHomePage_ViewModel/>-->     
+    <!-- <Page.DataContext>-->
+    <!--<viewModel:GuideHomePage_ViewModel/>-->
     <!--</Page.DataContext>-->
 
     <Page.Resources>
@@ -30,7 +30,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -75,6 +75,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock  x:Name="NoActiveTourMessage" Grid.Row="0" Text="There is no active tour. Start today's tour." TextAlignment="Center" Margin="0,5,0,5">
@@ -89,7 +90,7 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <Button  x:Name="NoActiveTourButton" Grid.Row="1" Content="TODAY'S TOUR" Margin="0,5,0,20" Width="272" Height="30" BorderBrush="DarkGreen" BorderThickness="2" Background="LightGreen">
+                        <Button  x:Name="NoActiveTourButton" Grid.Row="1" Content="TODAY'S TOUR" Margin="0,5,0,5" BorderBrush="DarkGreen" BorderThickness="2" Background="LightGreen">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Visibility" Value="Hidden"/>
@@ -101,7 +102,7 @@
                                 </Style>
                             </Button.Style>
                         </Button>
-                        <StackPanel x:Name="ActiveTourPanel" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,5">
+                        <StackPanel x:Name="ActiveTourPanel" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5,0,5">
                             <TextBlock Text="NAME: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding ActiveTour.Name}">
                                 <TextBlock.Style>
@@ -116,7 +117,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Visibility="Visible" Margin="0,10,0,5">
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Visibility="Visible" Margin="0,5,0,5">
                             <TextBlock Text="LOCATION: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding ActiveTour.Location}">
                                 <TextBlock.Style>
@@ -131,7 +132,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" Visibility="Visible" Margin="0,10,0,5">
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" Visibility="Visible" Margin="0,5,0,5" >
                             <TextBlock Text="DESCRIPTION: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding ActiveTour.Description}">
                                 <TextBlock.Style>
@@ -146,7 +147,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Visibility="Visible" Margin="0,10,0,5">
+                        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" Visibility="Visible" Margin="0,10,0,5" >
                             <TextBlock Text="ACTIVE KEY POINT: " FontWeight="Bold"/>
                             <TextBlock Text="{Binding ActiveTour.ActiveKeyPoint}">
                                 <TextBlock.Style>
@@ -162,7 +163,7 @@
                             </TextBlock>
                         </StackPanel>
                         <!-- Add more details about active tour here -->
-                        <Button x:Name="ActiveTourButton" Grid.Row="4" Content="FOLLOW TOUR" Margin="0,10,0,0" Width="272" Height="30" BorderBrush="DarkGreen" BorderThickness="2" Background="LightGreen" HorizontalAlignment="Right">
+                        <Button x:Name="ActiveTourButton" Grid.Row="4" Content="FOLLOW TOUR" Width="272" BorderBrush="DarkGreen" BorderThickness="2" Background="LightGreen" HorizontalAlignment="Right" Grid.RowSpan="2">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Visibility" Value="Collapsed"/>
