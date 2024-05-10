@@ -102,7 +102,6 @@
     <Resource Include="Resources\Images\icons8-list-50.png" />
     <Resource Include="Resources\Images\icons8-star-30.png" />
     <Resource Include="Resources\Images\icons8-user-64.png" />
-    <Resource Include="Resources\Images\profilei.png" />
     <Resource Include="Resources\Images\statisticICON.png" />
   </ItemGroup>
 
