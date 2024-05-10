@@ -16,7 +16,6 @@
     <None Remove="Resources\Images\play.png" />
     <None Remove="Resources\Images\profileG.jpg" />
     <None Remove="Resources\Images\home.png" />
-    <None Remove="Resources\Images\Manchester1.jpg" />
     <None Remove="Resources\Images\Manchester2.jpg" />
     <None Remove="Resources\Images\map-marker.png" />
     <None Remove="Resources\Images\marker.png" />
@@ -70,7 +69,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\bell.png" />
     <Resource Include="Resources\Images\home.png" />
-    <Resource Include="Resources\Images\Manchester1.jpg" />
     <Resource Include="Resources\Images\Manchester2.jpg" />
     <Resource Include="Resources\Images\map-marker.png" />
     <Resource Include="Resources\Images\marker.png" />
@@ -87,7 +85,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\Manchester1.jpg" />
     <Resource Include="Resources\Images\play.png" />
     <Resource Include="Resources\Images\profileG.jpg" />
   </ItemGroup>
@@ -102,7 +99,6 @@
     <Resource Include="Resources\Images\icons8-list-50.png" />
     <Resource Include="Resources\Images\icons8-star-30.png" />
     <Resource Include="Resources\Images\icons8-user-64.png" />
-    <Resource Include="Resources\Images\profilei.png" />
     <Resource Include="Resources\Images\statisticICON.png" />
   </ItemGroup>
 

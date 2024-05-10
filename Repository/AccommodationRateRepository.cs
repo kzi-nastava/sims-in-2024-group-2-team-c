@@ -41,10 +41,7 @@ namespace BookingApp.Repository
             return FilePath;
         }
 
-        public List<AccommodationRate> GetAll()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
+        
 
 
         public void Save(AccommodationRate accommodationRate)
