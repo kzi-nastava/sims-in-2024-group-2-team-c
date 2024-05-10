@@ -1,5 +1,4 @@
-﻿
-using BookingApp.Model;
+﻿using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service;
 using BookingApp.Service.ReservationService;
@@ -29,7 +28,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
         {
             //_reservationDelayRepository = new ReservationDelayRepository();
             _reservationDelayService = new ReservationDelayService();
-            ReservationDelays = new ObservableCollection<ReservationDelay>(_reservationDelayService.GetAll());           
+            ReservationDelays = new ObservableCollection<ReservationDelay>(_reservationDelayService.GetAll());
             _reservationservice = new ReservationService();
             _reservationreposiotry = new ReservationRepository();
 
@@ -146,9 +145,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
                 File.WriteAllLines(filePath, updatedLines);
             }
         }
-        
-    
-}
-}
 
 
+    }
+}
