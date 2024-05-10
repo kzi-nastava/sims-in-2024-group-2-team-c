@@ -62,6 +62,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
+        public ViewModelCommandd CreateTourCommand { get; }
 
         public TouristUserViewModel() {
             _mainViewModel = LoggedInUser.mainViewModel;
@@ -72,7 +73,19 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             Name = _touristService.GetFirstName(LoggedInUser.Id);
             LastName = _touristService.GetLastName(LoggedInUser.Id);
 
+            CreateTourCommand = new ViewModelCommandd(ExecuteCreateTourCommand);
+
 
         }
+
+
+        public void ExecuteCreateTourCommand(object obj)
+        {
+
+            _mainViewModel.ExecuteRequestCreation(obj);
+        }
+
+
+
     }
 }

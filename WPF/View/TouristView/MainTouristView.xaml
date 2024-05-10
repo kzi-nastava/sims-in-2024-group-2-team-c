@@ -25,7 +25,15 @@
         <DataTemplate DataType="{x:Type viewModel:TourRequestViewModel}">
             <local:TourRequestView/>
         </DataTemplate>
-
+        <DataTemplate DataType="{x:Type viewModel:TourRequestCreationViewModel}">
+            <local:TourRequestCreationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:FollowKeyPointsViewModel}">
+            <local:FollowKeyPointsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RateTourViewModel}">
+            <local:RateTourView/>
+        </DataTemplate>
     </Window.Resources>
 
 

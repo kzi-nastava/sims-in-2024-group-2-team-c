@@ -55,11 +55,11 @@
 
             </Border>
 
-            <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5,25,0,0"  Click="Return_Click"
+            <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5,25,0,0"  Command="{Binding GoBackCommand}"
                     Width="30" Height="30"  Background="Transparent" BorderThickness="0">
-                <Image  Source="/Resources/Images/tour exit.png"/>
+                <Image  Source="/Resources/Images/tour exit.png"/> 
             </Button>
-        
+            <!-- Click="Return_Click"-->
         
 
             <Border BorderBrush="Black" BorderThickness="1" Margin="30,30,30,10" Grid.Row="1">
@@ -155,11 +155,11 @@
             </Border>
 
 
-            <Button Content="RATE THE TOUR" Grid.Row="2" IsEnabled="{Binding IsTourInstanceEnded}"  Click="Rate_Click"
+            <Button Content="RATE THE TOUR" Grid.Row="2" IsEnabled="{Binding IsTourInstanceEnded}"    Click="Rate_Click"
             VerticalAlignment="Center" 
             Padding="5"  Width="100"/>
 
-            <!-- Command="{Binding RateCommand}" to je za ovo gore u dugmetu  --> 
+            <!-- Command="{Binding RateCommand}" Command="{Binding DataContext.RateCommand, RelativeSource={RelativeSource AncestorType={x:Type local:FollowKeyPointsView}}}"Click="Rate_Click"to je za ovo gore u dugmetu  --> 
 
         </Grid>
     </ScrollViewer>

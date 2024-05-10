@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
 using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
@@ -200,7 +201,52 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
     */
 
-        
+        public void ExecuteRequestCreation(object obj)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+            CurrentChildView = new TourRequestCreationViewModel();
+
+        }
+
+
+        public void ExecuteFollowKeyPoints(object tour)
+        {
+            if (tour is FollowingTourDTO followingTour)
+            {
+                // Use followingTour object to set properties or perform actions
+                CurrentMarkerIconSource = "/Resources/Images/on marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+                // Example of setting CurrentChildView to a new TourRequestCreationViewModel
+                CurrentChildView = new FollowKeyPointsViewModel(followingTour);
+            }
+
+        }
+
+        public void ExecuteRateTour(object tour)
+        {
+            if (tour is FollowingTourDTO followingTour)
+            {
+                // Use followingTour object to set properties or perform actions
+                CurrentMarkerIconSource = "/Resources/Images/on marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+                // Example of setting CurrentChildView to a new TourRequestCreationViewModel
+                CurrentChildView = new RateTourViewModel(followingTour);
+            }
+
+        }
+
 
     }
 }

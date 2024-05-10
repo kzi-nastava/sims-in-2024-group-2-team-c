@@ -26,10 +26,10 @@ namespace BookingApp.WPF.View.TouristView
             InitializeComponent();
         }
 
-        private void Return_Click(object sender, RoutedEventArgs e)
+      /*  private void Return_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
-        }
+        }*/
 
         private void Rate_Click(object sender, RoutedEventArgs e)
         {
