@@ -1,4 +1,5 @@
-﻿using BookingApp.Injector;
+﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -47,6 +48,38 @@ namespace BookingApp.Service.TourServices
             touristService.UpdateTourRequests(tourRequest.Id);
 
         }
+
+        public List<TouristRequestDTO> GetTouristRequests() { 
+        
+            List<TourRequest> requests = iTourRequestRepository.GetAll();
+
+            List<TourRequest> touristsRequests = requests.Where(request => request.TouristId == LoggedInUser.Id).ToList();
+
+            List<TouristRequestDTO> requestDtos = new List<TouristRequestDTO>();
+
+            int number = 0;
+
+            foreach (var request in touristsRequests) {
+
+                TouristRequestDTO touristRequestDTO;
+                if (request.Status)
+                {
+                    touristRequestDTO = new TouristRequestDTO("ACCEPTED", ++number, request.Id);
+                }
+                else
+                {
+                    touristRequestDTO = new TouristRequestDTO("INVALID", ++number, request.Id);
+                }
+                requestDtos.Add(touristRequestDTO);
+
+
+            }
+
+
+            return requestDtos;
+        }
+
+
 
 
     }

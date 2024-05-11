@@ -270,6 +270,24 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentChildView = new SavedTourRequestViewModel();
         }
 
+        public void ExecuteSingleTourView(object tourRequest)
+        {
+            if (tourRequest is TouristRequestDTO request)
+            {
+                // Use followingTour object to set properties or perform actions
+                CurrentMarkerIconSource = "/Resources/Images/marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+                // Example of setting CurrentChildView to a new TourRequestCreationViewModel
+                CurrentChildView = new SingleTourRequestViewModel(request);
+            }
+
+        }
+
+
 
     }
 }

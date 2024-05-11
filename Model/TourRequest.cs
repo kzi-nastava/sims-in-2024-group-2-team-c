@@ -59,11 +59,11 @@ namespace BookingApp.Model
             EndDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
             LocationId = Convert.ToInt32(values[4]);
             GuideId= Convert.ToInt32(values[5]);
-            PeopleIds = values[5].Split(',').Select(int.Parse).ToList();
-            Language = values[6];
-            NumberOfPeople = Convert.ToInt32(values[7]);
-            Description = values[8];
-            TouristId = Convert.ToInt32(values[9]);
+            PeopleIds = values[6].Split(',').Select(int.Parse).ToList();
+            Language = values[7];
+            NumberOfPeople = Convert.ToInt32(values[8]);
+            Description = values[9];
+            TouristId = Convert.ToInt32(values[10]);
         }
     }
 }
