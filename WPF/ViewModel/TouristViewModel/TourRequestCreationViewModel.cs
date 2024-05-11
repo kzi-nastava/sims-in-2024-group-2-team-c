@@ -19,6 +19,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private readonly TourRequestService tourRequestService;
 
 
+        private readonly MainViewModel _mainViewModel;
+
+
         private ObservableCollection<Location> _locations;
         public ObservableCollection<Location> Locations
         {
@@ -38,6 +41,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _selectedLocation = value;
                 OnPropertyChanged(nameof(SelectedLocation));
+                UpdateRequestCreatable();
             }
         }
 
@@ -49,6 +53,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _description = value;
                 OnPropertyChanged(nameof(Description));
+                UpdateRequestCreatable();
             }
         }
 
@@ -73,6 +78,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _selectedLanguage = value;
                 OnPropertyChanged(nameof(SelectedLanguage));
+                UpdateRequestCreatable();
             }
         }
 
@@ -85,6 +91,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _startDate = value;
                 OnPropertyChanged(nameof(StartDate));
+                UpdateRequestCreatable();
             }
         }
 
@@ -96,6 +103,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _endDate = value;
                 OnPropertyChanged(nameof(EndDate));
+                UpdateRequestCreatable();
             }
         }
 
@@ -108,6 +116,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _people = value;
                 OnPropertyChanged(nameof(People));
+                
+
             }
         }
 
@@ -120,8 +130,22 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _peopleList = value;
                 OnPropertyChanged(nameof(PeopleList));
+                
             }
         }
+
+
+        private bool _isRequestCreatable;
+        public bool IsRequestCreatable
+        {
+            get { return _isRequestCreatable; }
+            set
+            {
+                _isRequestCreatable = value;
+                OnPropertyChanged(nameof(IsRequestCreatable));
+            }
+        }
+
 
 
         public ViewModelCommandd SearchCommand { get; private set; }
@@ -130,6 +154,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
 
         public TourRequestCreationViewModel() {
+
+            _mainViewModel = LoggedInUser.mainViewModel;
+
             _locationService = new LocationService();
             _languageService = new LanguageService();
             tourRequestService = new TourRequestService();
@@ -142,7 +169,33 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             LoadLocations();
             LoadLanguages();
+
+            IsRequestCreatable = false;
         }
+
+
+        private void UpdateRequestCreatable()
+        {
+            // Check if description, location, language, and dates are selected
+            bool basicCriteriaMet = !string.IsNullOrEmpty(Description) &&
+                                     SelectedLocation != null &&
+                                     SelectedLanguage != null &&
+                                     StartDate != DateTime.MinValue &&
+                                     EndDate != DateTime.MinValue;
+
+            // Check if start date is before end date and both dates are in the future
+            bool datesValid = StartDate < EndDate && StartDate > DateTime.Today && EndDate > DateTime.Today;
+
+            // Check if People collection has elements
+            bool peoplePresent = People.Count > 0;
+
+            // Update IsRequestCreatable based on all criteria
+            IsRequestCreatable = basicCriteriaMet && datesValid && peoplePresent;
+        }
+
+
+
+
 
         public void LoadLocations()
         {
@@ -165,9 +218,14 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 {
                     // Add a new person with empty details
                     People.Add(new PeopleInfo());
+                    
+
                 }
+                UpdateRequestCreatable();
             }
         }
+
+       
 
         // Create request command handler
         private void CreateRequest(object parameter)
@@ -178,11 +236,15 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 PeopleList.Add(person);
             }
 
-            tourRequestService.CreateTourRequest(SelectedLocation,Description,SelectedLanguage,StartDate,EndDate,PeopleList);
-
+            tourRequestService.CreateTourRequest(SelectedLocation, Description, SelectedLanguage, StartDate, EndDate, PeopleList);
+            
             // Clear the People collection after adding them to the list
             People.Clear();
+
+            _mainViewModel.ExecuteSavedTourRequestView(parameter);
+
         }
+
 
     }
 }

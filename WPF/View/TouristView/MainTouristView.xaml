@@ -31,8 +31,8 @@
         <DataTemplate DataType="{x:Type viewModel:FollowKeyPointsViewModel}">
             <local:FollowKeyPointsView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:RateTourViewModel}">
-            <local:RateTourView/>
+        <DataTemplate DataType="{x:Type viewModel:SavedTourRequestViewModel}">
+            <local:SavedTourRequestView/>
         </DataTemplate>
     </Window.Resources>
 

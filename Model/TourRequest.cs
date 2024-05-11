@@ -24,8 +24,10 @@ namespace BookingApp.Model
         public int NumberOfPeople { get; set; }
         public string Description { get; set; }
 
+        public int TouristId;
+
         public TourRequest() { }
-        public TourRequest( bool status, DateTime startDate, DateTime endDate, int locationId, int guideId, List<int> peopleIds, string language, int numberOfPeople, string description)
+        public TourRequest( bool status, DateTime startDate, DateTime endDate, int locationId, int guideId, List<int> peopleIds, string language, int numberOfPeople, string description, int touristId)
         {
            
             Status = status;
@@ -37,12 +39,13 @@ namespace BookingApp.Model
             Language = language;
             NumberOfPeople = numberOfPeople;
             Description = description;
+            TouristId = touristId;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), Status.ToString(), /*StartDate.ToString(), EndDate.ToString(),*/ StartDate.ToString("dd.MM.yyyy. HH:mm:ss"),EndDate.ToString("dd.MM.yyyy. HH:mm:ss"), LocationId.ToString(),
-                                  GuideId.ToString(), string.Join(",", PeopleIds), Language, NumberOfPeople.ToString(), Description  };
+                                  GuideId.ToString(), string.Join(",", PeopleIds), Language, NumberOfPeople.ToString(), Description, TouristId.ToString()  };
             return csvValues;
         }
 
@@ -60,6 +63,7 @@ namespace BookingApp.Model
             Language = values[6];
             NumberOfPeople = Convert.ToInt32(values[7]);
             Description = values[8];
+            TouristId = Convert.ToInt32(values[9]);
         }
     }
 }

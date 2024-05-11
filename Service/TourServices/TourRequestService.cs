@@ -41,7 +41,7 @@ namespace BookingApp.Service.TourServices
 
             List<int> peopleinfoIds = peopleInfoService.SavePeopleInfoList(peopleInfos);
             
-            TourRequest tourRequest = new TourRequest(false,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description);
+            TourRequest tourRequest = new TourRequest(false,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description,LoggedInUser.Id);
             Save(tourRequest);
 
             touristService.UpdateTourRequests(tourRequest.Id);

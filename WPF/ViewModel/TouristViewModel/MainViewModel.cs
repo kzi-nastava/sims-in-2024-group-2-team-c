@@ -248,5 +248,28 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+        public void ExecuteTourRequestView(object obj)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+
+            CurrentChildView = new TourRequestViewModel();
+        }
+
+        public void ExecuteSavedTourRequestView(object obj)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+
+            CurrentChildView = new SavedTourRequestViewModel();
+        }
+
+
     }
 }
