@@ -22,7 +22,6 @@ namespace BookingApp.Service.TourServices
         private TouristService touristService;
         private KeyPointService keyPointService;
    
-
         public TourReviewService()
         {
             iTourReviewRepository = Injectorr.CreateInstance<ITourReviewsRepository>();
