@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace BookingApp.Service.TourServices
 {
@@ -16,6 +17,7 @@ namespace BookingApp.Service.TourServices
         private readonly ITourRequestRepository iTourRequestRepository;
         private readonly PeopleInfoService peopleInfoService;
         private readonly TouristService touristService;
+        private readonly LocationService locationService;
         
 
         public TourRequestService()
@@ -23,6 +25,7 @@ namespace BookingApp.Service.TourServices
             iTourRequestRepository = Injectorr.CreateInstance<ITourRequestRepository>();
             peopleInfoService = new PeopleInfoService();
             touristService = new TouristService();
+            locationService = new LocationService();
 
 
         }
@@ -81,6 +84,28 @@ namespace BookingApp.Service.TourServices
 
 
 
+
+        public SelectedTourRequestDTO GetTourRequest(TouristRequestDTO touristRequest) {
+        
+            
+            TourRequest request = GetById(touristRequest.TourRequestId);
+            Location location = locationService.Get(request.LocationId);
+            string CityAndCountry = location.City + ", " + location.Country;
+            string activity;
+            if (request.Status) {
+                activity = "ACCEPTED";
+            }
+            else
+            {
+                activity = "INVALID";
+            }
+
+            SelectedTourRequestDTO selectedRequest = new SelectedTourRequestDTO(touristRequest.Number,request.StartDate,request.EndDate,request.Description, CityAndCountry,request.Language,activity);
+            return selectedRequest;
+        }
+
+
+       
 
     }
 }
