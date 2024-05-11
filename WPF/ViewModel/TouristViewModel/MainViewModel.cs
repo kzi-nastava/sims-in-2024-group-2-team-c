@@ -205,9 +205,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
             CurrentMarkerIconSource = "/Resources/Images/marker.png";
             CurrentHomeIconSource = "/Resources/Images/home.png";
-            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentUserIconSource = "/Resources/Images/on tourist.png";
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
-            CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
             CurrentChildView = new TourRequestCreationViewModel();
 
         }

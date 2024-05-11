@@ -23,6 +23,9 @@ namespace BookingApp.Service.TourServices
             //tourInstanceService = new TourInstanceService();
             //tourService = new TourService();
         }
+
+        public List<Location> GetAll() { return locationRepository.GetAll(); }
+
         public Location GetById(int id)
         {
             return locationRepository.GetById(id);

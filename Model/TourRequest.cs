@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,9 @@ namespace BookingApp.Model
         public string Description { get; set; }
 
         public TourRequest() { }
-        public TourRequest(int id, bool status, DateTime startDate, DateTime endDate, int locationId, int guideId, List<int> peopleIds, string language, int numberOfPeople, string description)
+        public TourRequest( bool status, DateTime startDate, DateTime endDate, int locationId, int guideId, List<int> peopleIds, string language, int numberOfPeople, string description)
         {
-            Id = id;
+           
             Status = status;
             StartDate = startDate;
             EndDate = endDate;
@@ -40,7 +41,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Status.ToString(), StartDate.ToString(), EndDate.ToString(), LocationId.ToString(),
+            string[] csvValues = { Id.ToString(), Status.ToString(), /*StartDate.ToString(), EndDate.ToString(),*/ StartDate.ToString("dd.MM.yyyy. HH:mm:ss"),EndDate.ToString("dd.MM.yyyy. HH:mm:ss"), LocationId.ToString(),
                                   GuideId.ToString(), string.Join(",", PeopleIds), Language, NumberOfPeople.ToString(), Description  };
             return csvValues;
         }
@@ -49,8 +50,10 @@ namespace BookingApp.Model
         {
             Id = Convert.ToInt32(values[0]);
             Status = Convert.ToBoolean(values[1]);
-            StartDate = Convert.ToDateTime(values[2]);
-            EndDate = Convert.ToDateTime(values[3]);
+            //StartDate = Convert.ToDateTime(values[2]);
+            // EndDate = Convert.ToDateTime(values[3]);
+            StartDate = DateTime.ParseExact(values[2].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            EndDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
             LocationId = Convert.ToInt32(values[4]);
             GuideId= Convert.ToInt32(values[5]);
             PeopleIds = values[5].Split(',').Select(int.Parse).ToList();

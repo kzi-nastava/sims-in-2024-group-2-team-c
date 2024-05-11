@@ -7,12 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="RequestStatisticsView">
-
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
     <Grid>
-        <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5,25,0,0"  Click="GoBack_Click"
-Width="30" Height="30"  Background="Transparent" BorderThickness="0">
-            <Image  Source="/Resources/Images/tour exit.png"/>
-        </Button>
-        <TextBlock Text="TOUR REQUEST STATISTICS" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-    </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+            <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,25,0,0"  Click="GoBack_Click"
+     Width="30" Height="30"  Background="Transparent" BorderThickness="0">
+                <Image  Source="/Resources/Images/tour exit.png"/>
+            </Button>
+
+            <TextBlock Text="REQUEST STATISTICS" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="#40613c"
+     FontWeight="Medium" FontSize="30" ></TextBlock>
+
+
+
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -1,5 +1,4 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for TourRequestCreationView.xaml
+    /// Interaction logic for DatePickerView.xaml
     /// </summary>
-    public partial class TourRequestCreationView : Page
+    public partial class DatePickerView : Page
     {
-        public TourRequestCreationView()
+        public DatePickerView()
         {
             InitializeComponent();
-            DataContext = new TourRequestCreationViewModel();
-        }
-
-        private void GoBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.GoBack();
         }
     }
 }
