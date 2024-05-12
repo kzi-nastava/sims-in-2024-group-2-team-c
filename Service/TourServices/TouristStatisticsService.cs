@@ -130,5 +130,31 @@ namespace BookingApp.Service.TourServices
             return counter;
         }
 
+
+        public int GetPeople(int year)
+        {
+            int counter = 0;
+
+            List<TourRequest> requests = _requestService.GetByTourist(LoggedInUser.Id);
+
+            foreach (var request in requests)
+            {
+
+                if (year == 0)
+                {
+                    if (request.Status == TourRequestStatus.Accepted) { counter += request.NumberOfPeople; }
+                }
+                else
+                {
+                    if (request.Status == TourRequestStatus.Accepted && request.CreationDate.Year == year) { counter += request.NumberOfPeople; }
+                }
+            }
+            return counter;
+
+
+        }
+
+
+
     }
 }

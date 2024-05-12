@@ -69,9 +69,17 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Accepted" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Denied" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock  Text="{Binding AcceptedPercentage}" />
+                    <TextBlock Text="%"/>
+                </StackPanel>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding AcceptedPercentage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding InvalidPercentage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock  Text="{Binding InvalidPercentage}" />
+                    <TextBlock Text="%"/>
+                </StackPanel>
+
+                
 
             </Grid>
 
@@ -147,6 +155,27 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
+
+            <Border Grid.Row="12" Margin="10,20,10,20" BorderBrush="Black" BorderThickness="1" Background="LightGreen" Width="400">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Average number of people on requested tours" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+                    <StackPanel  Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Margin="10" Text="Choose a year" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                        <ComboBox  Margin="10" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"  Height="20" Width="80"/>
+                    </StackPanel>
+                    <Border Grid.Row="2" Width="50"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Background="AliceBlue" BorderBrush="Black" BorderThickness="1">
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding NumberOfPeople}" FontSize="15"/>
+
+                    </Border>
+                </Grid>
+            </Border>
+        
 
         </Grid>
     </ScrollViewer>

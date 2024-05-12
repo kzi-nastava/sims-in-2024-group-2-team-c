@@ -84,6 +84,37 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+        private int _selectedYear;
+
+        public int SelectedYear
+        {
+
+            get { return _selectedYear; }
+            set
+            {
+                _selectedYear = value;
+                OnPropertyChanged(nameof(SelectedYear));
+                LoadNumberOfPeople();
+                //OnPropertyChanged(nameof(NumberOfPeople));
+            }
+
+        }
+
+
+        private int _numberOfPeople;
+
+        public int NumberOfPeople
+        {
+
+            get { return _numberOfPeople; }
+            set
+            {
+                _numberOfPeople = value;
+                OnPropertyChanged(nameof(NumberOfPeople));
+            }
+
+        }
+
 
         public SeriesCollection LocationsCollection { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
@@ -119,9 +150,22 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             Load();
             LoadTheLanguageChart();
             LoadPieChart();
-            
+            LoadNumberOfPeople();
             
         }
+
+
+        private void LoadNumberOfPeople()
+        {
+
+            NumberOfPeople = _tourStatisticsService.GetPeople(SelectedYear);
+
+
+        }
+
+
+
+
 
         private void LoadPieChart()
         {
