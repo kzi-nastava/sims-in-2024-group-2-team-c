@@ -1,5 +1,4 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,16 +16,13 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for RequestStatisticsView.xaml
+    /// Interaction logic for SingleTourRequestView.xaml
     /// </summary>
-    public partial class RequestStatisticsView : Page
+    public partial class SingleTourRequestView : Page
     {
-        public RequestStatisticsView()
+        public SingleTourRequestView()
         {
             InitializeComponent();
-            DataContext = new RequestStatisticsViewModel();
         }
-
-        
     }
 }

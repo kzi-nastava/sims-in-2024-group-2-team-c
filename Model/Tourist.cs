@@ -15,7 +15,9 @@ namespace BookingApp.Model
 
         public bool Active { get; set; }
 
-        List<int> ReservationIds { get; set; }
+       public  List<int> ReservationIds { get; set; }
+
+       public  List<int> TourRequestIds { get; set; }
 
         public Tourist() { }
 
@@ -40,12 +42,13 @@ namespace BookingApp.Model
             Age = Convert.ToInt32(values[4]);
             Active = Convert.ToBoolean(values[5]);
             ReservationIds = values[6].Split(',').Select(int.Parse).ToList();
+            TourRequestIds = values[7].Split(',').Select(int.Parse).ToList();
         }
 
         public string[] ToCSV()
         {
             //string[] userCSV = base.ToCSV(); // Call base class's ToCSV method
-            string[] touristCSV = { Id.ToString(),Username, FirstName, LastName, Age.ToString(), Active.ToString(), string.Join(",", ReservationIds) };
+            string[] touristCSV = { Id.ToString(),Username, FirstName, LastName, Age.ToString(), Active.ToString(), string.Join(",", ReservationIds), string.Join(",", TourRequestIds) };
             return touristCSV;
         }
 

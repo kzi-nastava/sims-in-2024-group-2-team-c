@@ -40,11 +40,11 @@
                     <StackPanel Grid.Column="0" Orientation="Horizontal" >
                         <TextBlock Text="Create a tour request" VerticalAlignment="Center" Margin="10" FontSize="15" FontWeight="Medium"/>
                     </StackPanel>
-                    <Button Grid.Column="1" Margin="10" Content="Create" Click="TourRequest_Click"/>
+                    <Button Grid.Column="1" Margin="10" Content="Create" Command="{Binding CreateTourCommand}"/>
                 </Grid>
             </Border>
 
-
+            <!--  Click="TourRequest_Click"-->
 
             <Border Grid.Row="2" Margin="30,10,30,10" BorderBrush="Black" BorderThickness="1">
                 <Grid Background="#b2edb4">

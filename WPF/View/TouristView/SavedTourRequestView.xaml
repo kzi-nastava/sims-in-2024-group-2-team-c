@@ -1,0 +1,42 @@
+﻿<Page x:Class="BookingApp.WPF.View.TouristView.SavedTourRequestView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430" Background="White"
+      Title="SavedTourRequestView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderBrush="Black" Background="AliceBlue"  Height="100" Margin="10,40,10,10" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="2">
+            <TextBlock Text="Your tour request has been created" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#40613c" FontSize="20" FontWeight="SemiBold" Margin="10"></TextBlock>
+        </Border>
+
+        <Border Grid.Row="1" Width="400" Height="250"  BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="2" CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Your Tour Request has been saved in your list of tour requests. To check it out click the next button. If no guide accepts the tour requuest 48 hours before the selected dates it will become inavlid. You will get a notification if your tourrequest has been accepted"
+                           TextWrapping="Wrap" MaxWidth="350" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" FontSize="15" FontWeight="SemiBold"></TextBlock>
+
+                <Button Grid.Row="1" Content="Go to your Tour requests" Command="{Binding TourRequestCommand}" Height="30" Width="150" Background="AliceBlue" FontWeight="SemiBold"/>
+
+            </Grid>
+            
+        </Border>
+
+
+        <Button Grid.Row="2" Height="30" Width="150" VerticalAlignment="Top" Margin="20" Content="Go back to home page" Command="{Binding GoHomeCommand}" Background="AliceBlue" FontWeight="SemiBold"/>
+
+    </Grid>
+</Page>

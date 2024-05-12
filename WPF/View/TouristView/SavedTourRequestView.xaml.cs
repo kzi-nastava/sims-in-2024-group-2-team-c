@@ -17,16 +17,14 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for RequestStatisticsView.xaml
+    /// Interaction logic for SavedTourRequestView.xaml
     /// </summary>
-    public partial class RequestStatisticsView : Page
+    public partial class SavedTourRequestView : Page
     {
-        public RequestStatisticsView()
+        public SavedTourRequestView()
         {
             InitializeComponent();
-            DataContext = new RequestStatisticsViewModel();
+            DataContext = new SavedTourRequestViewModel();
         }
-
-        
     }
 }

@@ -80,7 +80,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        
+        public ViewModelCommandd GoBackCommand { get; }
+        public ViewModelCommandd RateCommand { get; }
 
         public FollowKeyPointsViewModel(FollowingTourDTO selectedTour)
         {
@@ -97,6 +98,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             LoadKeyPointsForTour(SelectedTour);
             CheckTourInstanceEnded(selectedTour.TourInstanceId);
+
+            _mainViewModel = LoggedInUser.mainViewModel;
+
+            GoBackCommand = new ViewModelCommandd(ExecuteGoBackCommand);
+            RateCommand = new ViewModelCommandd(ExecuteRateCommand);
+
         }
 
         private void LoadKeyPointsForTour(FollowingTourDTO SelectedTour)
@@ -117,6 +124,24 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 IsTourInstanceEnded = tourInstance.Ended;
             }
+        }
+
+
+        public void ExecuteGoBackCommand(object obj)
+        {
+
+            _mainViewModel.ExecuteFollowTourCommand(obj);
+        }
+
+        public void ExecuteRateCommand(object tour)
+        {
+
+            if (tour is FollowingTourDTO followingTour)
+            {
+                _mainViewModel.ExecuteRateTour(followingTour);
+            }
+
+            
         }
 
 

@@ -55,5 +55,13 @@ namespace BookingApp.Service.TourServices
             return tourist.LastName;
         }
 
+        public void UpdateTourRequests(int tourRequestId)
+        {
+            Tourist tourist = GetById(LoggedInUser.Id);
+            tourist.TourRequestIds.Add(tourRequestId);
+            iTouristRepository.Update(tourist);
+
+        }
+
     }
 }

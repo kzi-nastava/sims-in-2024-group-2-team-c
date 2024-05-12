@@ -7,8 +7,52 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="TourRequestView">
-
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
     <Grid>
-        <TextBlock Text="TOUR REQUEST PAGE" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="TOUR REQUESTS" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="#40613c"
+            FontWeight="Medium" FontSize="30"/>
+
+
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding TourRequests}" HorizontalContentAlignment="Left">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Background="#b2edb4" Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                        <Grid  Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock  Text="Request" Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>
+                                <TextBlock  Text="{Binding Number}"  VerticalAlignment="Center" FontSize="15"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Activity}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                        <!-- Default color -->
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Activity}" Value="INVALID">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+
+
     </Grid>
+    </ScrollViewer>
 </Page>

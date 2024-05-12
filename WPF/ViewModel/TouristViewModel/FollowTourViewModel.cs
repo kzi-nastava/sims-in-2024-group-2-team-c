@@ -43,7 +43,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _followTourService = new FollowTourService();
             _mainViewModel = LoggedInUser.mainViewModel;
             FollowingTours = new ObservableCollection<FollowingTourDTO>();
-           // ViewCommand = new ViewModelCommand(ShowKeyPoints);
+           ViewCommand = new ViewModelCommandd(ExecuteViewCommand);
             LoadAciveTours();
         }
 
@@ -72,12 +72,15 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private void ShowKeyPoints(object obj)
+        public void ExecuteViewCommand(object tour)
         {
-           
 
-                
-           
+            if (tour is FollowingTourDTO followingTour)
+            {
+                // Call the mainViewModel's function passing the tour
+                _mainViewModel.ExecuteFollowKeyPoints(followingTour);
+            }
+
         }
 
 

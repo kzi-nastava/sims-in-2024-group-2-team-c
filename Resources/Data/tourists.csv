@@ -1,5 +1,5 @@
-1|anna_mark|Anna|Mark|23|False|99,100
-2|jane_smith|Jane|Smith|25|False|104,105
-3|tom_jones|Tom|Jones|40|False|106
-4|mila_b|Mila|Budim|21|True|107,108
-5|bob_brown|Bob|Brown|28|False|109,110,111
+1|anna_mark|Anna|Mark|23|False|99,100|1
+2|jane_smith|Jane|Smith|25|False|104,105|23
+3|tom_jones|Tom|Jones|40|False|106|3
+4|mila_b|Mila|Budim|21|True|107,108|2,1
+5|bob_brown|Bob|Brown|28|False|109,110,111|31

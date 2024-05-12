@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Accommodation.Name,Guest.Username, ArrivalDate.ToString(), DepartureDate.ToString(),IsReserved.ToString() };
+            string[] csvValues = { Id.ToString(), Accommodation.Name,Guest.Username, /*ArrivalDate.ToString(), DepartureDate.ToString(),*/ArrivalDate.ToString("dd.MM.yyyy. HH:mm:ss"),DepartureDate.ToString("dd.MM.yyyy. HH:mm:ss"), IsReserved.ToString() };
             return csvValues;
         }
 
@@ -42,8 +43,10 @@ namespace BookingApp.Model
             Id = Convert.ToInt32(values[0]);
             Accommodation = new Accommodation() { Name=values[1] };
             Guest = new Guest() {  Username=values[2] };
-            ArrivalDate = Convert.ToDateTime(values[3]);
-            DepartureDate = Convert.ToDateTime(values[4]);
+           // ArrivalDate = Convert.ToDateTime(values[3]);
+            ArrivalDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            //DepartureDate = Convert.ToDateTime(values[4]);
+            DepartureDate = DateTime.ParseExact(values[4].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
             IsReserved = Convert.ToBoolean(values[5]);
         }
     }
