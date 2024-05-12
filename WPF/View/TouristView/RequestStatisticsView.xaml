@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
@@ -11,21 +12,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-            <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,25,0,0"  Click="GoBack_Click"
+            <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,25,0,0"  Command="{Binding GoBackCommand}"
      Width="30" Height="30"  Background="Transparent" BorderThickness="0">
                 <Image  Source="/Resources/Images/tour exit.png"/>
             </Button>
@@ -33,6 +34,20 @@
             <TextBlock Text="REQUEST STATISTICS" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="#40613c"
      FontWeight="Medium" FontSize="30" ></TextBlock>
 
+            <TextBlock Grid.Row="1" Text="Tour request status" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
+
+            <TextBlock Grid.Row="6" Text="Number of requests per language" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
+
+            <lvc:CartesianChart Grid.Row="7" Series="{Binding SeriesCollection}"  Height="300" Width="300" HorizontalAlignment="Left" Margin="20,0">
+                <lvc:CartesianChart.AxisX >
+                    <lvc:Axis Title="Language of the tour" Labels="{Binding Labels}" Foreground="Black" FontWeight="SemiBold" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Number of Requests" Labels="{Binding Values}" Foreground="Black" FontWeight="SemiBold"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+            
 
 
         </Grid>

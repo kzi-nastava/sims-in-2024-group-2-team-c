@@ -24,6 +24,8 @@ namespace BookingApp.Model
         public int NumberOfPeople { get; set; }
         public string Description { get; set; }
 
+        //public DateTime DateOfCreation { get; set; }
+
         public int TouristId;
 
         public TourRequest() { }

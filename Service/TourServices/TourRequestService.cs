@@ -104,8 +104,17 @@ namespace BookingApp.Service.TourServices
             return selectedRequest;
         }
 
+        public List<TourRequest> GetByTourist(int id)
+        {
+            List<TourRequest> requests = GetAll();
+            List<TourRequest> touristsRequests = requests.Where(request => request.TouristId == id).ToList();
 
-       
+            return touristsRequests;
+
+        }
+
+
+
 
     }
 }
