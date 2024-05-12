@@ -62,6 +62,9 @@
                                     <DataTrigger Binding="{Binding TourRequest.Status}" Value="INVALID">
                                         <Setter Property="Foreground" Value="Red"/>
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding TourRequest.Status}" Value="ON HOLD">
+                                        <Setter Property="Foreground" Value="Orange"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>

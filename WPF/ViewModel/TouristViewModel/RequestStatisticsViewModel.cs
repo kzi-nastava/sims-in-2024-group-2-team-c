@@ -22,8 +22,11 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         public List<string> Labels { get; set; }
         public List<int> Values { get; set; }
 
+        public List<int>  LocationValues { get; set; }
         public Func<double,string> Formatter { get; set; }
         public List<object> LanguageRequests { get; private set; }
+
+        public List<object>  LocationRequests { get; private set; }
 
         public ViewModelCommandd GoBackCommand { get; }
 
@@ -54,9 +57,37 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             List<TourRequest> requests = _tourRequestService.GetByTourist(LoggedInUser.Id);
 
-            var locationCounts = _tourStatisticsService.GroupByLocation(requests);
+            var locationCounts = _tourStatisticsService.GroupByLocation(requests).OrderByDescending(x => x.Value) 
+                         .ToList();
+
+            LocationsCollection = new SeriesCollection();
+
+            LocationLabels = locationCounts.Select(x => x.Key).ToList();
+            LocationValues = locationCounts.Select(x => x.Value).ToList();
 
 
+
+            LocationsCollection = new SeriesCollection
+            {
+                    new RowSeries
+                    {
+                        Title = "Tour Requests",
+                        Values = new ChartValues<int>(LocationValues),
+                        Fill = Brushes.LightGreen
+                    }
+            };
+
+            Formatter = value => value.ToString();
+
+
+
+            LocationRequests = new List<object>();
+
+            var locationRequests = locationCounts
+                                   .Select(g => new { Location = g.Key, LocationRequests = g.Value })
+                                   .ToList();
+
+            LocationRequests  = locationRequests.Cast<object>().ToList();
 
         }
 

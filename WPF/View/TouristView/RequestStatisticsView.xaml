@@ -48,7 +48,7 @@
             </lvc:CartesianChart>
 
 
-            <ItemsControl Grid.Row="8" Width="380" Margin="20" ItemsSource="{Binding LanguageRequests}">
+            <ItemsControl Grid.Row="8" Width="380" Margin="10,20,10,30" ItemsSource="{Binding LanguageRequests}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <!-- Use a UniformGrid to arrange items in a grid with multiple columns -->
@@ -61,9 +61,9 @@
                         <!-- Each item is contained within a StackPanel -->
                         <StackPanel>
                             <!-- Language name -->
-                            <TextBlock Text="{Binding Language}" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding Language}" FontWeight="SemiBold"  FontSize="10" HorizontalAlignment="Center"/>
                             <!-- Number -->
-                            <TextBlock Text="{Binding Requests}" Margin="0,5,0,0"/>
+                            <TextBlock Text="{Binding Requests}" Margin="5"  FontSize="10" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -73,18 +73,36 @@
             <TextBlock Grid.Row="9" Text="Number of requests per location" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
 
 
-            <lvc:CartesianChart Grid.Row="10" Series="{Binding LocationsCollection}"  Height="300" Width="300" HorizontalAlignment="Left" Margin="20,0">
-                <lvc:CartesianChart.AxisX >
-                    <lvc:Axis Title="Number of requests" LabelFormatter="{Binding Formatter}" Foreground="Black" FontWeight="SemiBold" />
+            <lvc:CartesianChart Grid.Row="10" Series="{Binding LocationsCollection}" Height="300" Width="300" HorizontalAlignment="Left" Margin="20,10">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Number of requests" Labels="{Binding LocationValues}" Foreground="Black" FontWeight="SemiBold" LabelFormatter="{Binding Formatter}" />
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Location" Labels="{Binding LocationLabels}" Foreground="Black" FontWeight="SemiBold"/>
                 </lvc:CartesianChart.AxisY>
-                <lvc:CartesianChart.DataTooltip>
-                    <lvc:DefaultTooltip SelectionMode="SharedYValues"></lvc:DefaultTooltip>
-                </lvc:CartesianChart.DataTooltip>
             </lvc:CartesianChart>
 
+        
+            <ItemsControl Grid.Row="11" Width="380" Margin="10,20,10,30" ItemsSource="{Binding LocationRequests}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!-- Use a UniformGrid to arrange items in a grid with multiple columns -->
+                        <UniformGrid Columns="{Binding Path=Items.Count, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Each item is contained within a StackPanel -->
+                        <StackPanel>
+                            <!-- Language name -->
+                            <TextBlock Text="{Binding Location}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                            <!-- Number -->
+                            <TextBlock Text="{Binding LocationRequests}" Margin="5"  FontSize="10" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
 
         </Grid>
