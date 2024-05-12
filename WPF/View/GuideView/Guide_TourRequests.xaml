@@ -42,7 +42,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- First column -->
-            <Border BorderBrush="Black" BorderThickness="1" Width="400" Grid.Column="0">
+            <Border BorderBrush="Black" BorderThickness="1" Width="400"  Grid.Column="0">
                 <StackPanel Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="STARTING DATE:" Margin="5,20,30,0"/>
