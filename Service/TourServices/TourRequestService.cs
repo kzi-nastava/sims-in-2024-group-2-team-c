@@ -48,10 +48,10 @@ namespace BookingApp.Service.TourServices
 
             List<int> peopleinfoIds = peopleInfoService.SavePeopleInfoList(peopleInfos);
             
-            TourRequest tourRequest = new TourRequest(false,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description,LoggedInUser.Id);
-            Save(tourRequest);
+            //TourRequest tourRequest = new TourRequest(false,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description,LoggedInUser.Id);
+            //Save(tourRequest);
 
-            touristService.UpdateTourRequests(tourRequest.Id);
+            //touristService.UpdateTourRequests(tourRequest.Id);
 
         }
 
@@ -68,7 +68,7 @@ namespace BookingApp.Service.TourServices
             foreach (var request in touristsRequests) {
 
                 TouristRequestDTO touristRequestDTO;
-                if (request.Status)
+                if (request.Status == TourRequestStatus.Accepted)
                 {
                     touristRequestDTO = new TouristRequestDTO("ACCEPTED", ++number, request.Id);
                 }
@@ -95,7 +95,7 @@ namespace BookingApp.Service.TourServices
             Location location = locationService.Get(request.LocationId);
             string CityAndCountry = location.City + ", " + location.Country;
             string activity;
-            if (request.Status) {
+            if (request.Status == TourRequestStatus.Accepted) {
                 activity = "ACCEPTED";
             }
             else
@@ -129,7 +129,7 @@ namespace BookingApp.Service.TourServices
             List<TourRequestDTO> dtos = new List<TourRequestDTO>();
             foreach(TourRequest tr in requests)
             {
-                if(tr.Status != true)
+                if(tr.Status != TourRequestStatus.Accepted && tr.Status != TourRequestStatus.Invalid)
                 {
                     TourRequestDTO dto = new TourRequestDTO
                 {
@@ -160,7 +160,7 @@ namespace BookingApp.Service.TourServices
             TourRequest found = GetById(request.Id);
             if (found != null)
             {
-                found.Status = true; //zahtev prihvacen
+                found.Status = TourRequestStatus.Accepted; //zahtev prihvacen
                 Update(found);
                 return true;
             }

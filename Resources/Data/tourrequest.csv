@@ -1,13 +1,13 @@
-0|False|10.05.2024. 12:00:00|19.06.2024. 12:00:00|1|1|1,2,3|Turkish|3|description|4
-1|False|02.02.2024. 12:00:00|19.03.2024. 12:00:00|2|1|1,2,3|Slovenian|1|description|4
-2|False|11.06.2024. 12:00:00|17.06.2024. 12:00:00|5|1|1,2,3|Portuguese|3|description|4
-3|False|10.05.2024. 12:00:00|26.06.2024. 12:00:00|1|1|1,2,3|Swedish|7|description|4
-4|False|10.02.2024. 12:00:00|19.08.2024. 12:00:00|1|1|1,2,3|Polish|10|description|4
-5|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Slovenian|1|bla bla bla bla bla bla bla |4
-6|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |4
-7|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Swedish|1|bla bla bla bla bla bla bla |4
-8|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |4
-9|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Portuguese|1|bla bla bla bla bla bla bla |4
-10|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |4
-11|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Bulgarian|1|bla bla bla bla bla bla bla |4
-12|True|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Polish|1|bla bla bla bla bla bla bla |4
+0|OnHold|10.05.2024. 12:00:00|19.06.2024. 12:00:00|1|1|1,2,3|Turkish|3|description|12.05.2024. 12:00:00|4
+1|OnHold|02.02.2024. 12:00:00|19.03.2024. 12:00:00|2|1|1,2,3|Slovenian|1|description|12.05.2024. 12:00:00|4
+2|OnHold|11.06.2024. 12:00:00|17.06.2024. 12:00:00|5|1|1,2,3|Portuguese|3|description|12.05.2024. 12:00:00|4
+3|OnHold|10.05.2024. 12:00:00|26.06.2024. 12:00:00|1|1|1,2,3|Swedish|7|description|12.05.2024. 12:00:00|4
+4|OnHold|10.02.2024. 12:00:00|19.08.2024. 12:00:00|1|1|1,2,3|Polish|10|description|12.05.2024. 12:00:00|4
+5|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Slovenian|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+6|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+7|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Swedish|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+8|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+9|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Portuguese|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+10|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+11|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Bulgarian|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
+12|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Polish|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
