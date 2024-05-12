@@ -55,5 +55,80 @@ namespace BookingApp.Service.TourServices
         }
 
 
+        public List<int> GetRequestYears()
+        {
+
+           List<TourRequest> requests=  _requestService.GetByTourist(LoggedInUser.Id);
+
+            List<int> years = new List<int>();
+
+            foreach (var request in requests)
+            {
+
+                int year = request.CreationDate.Year;
+
+                if (!years.Contains(year) && request.Status != TourRequestStatus.OnHold)
+                {
+                    // Add the item to the list
+                    years.Add(year);
+                }
+
+            }
+
+            return years;
+
+
+        }
+
+        public int CountAcceptedRequests(int year)
+        {
+
+            int counter = 0;
+
+            List<TourRequest> requests = _requestService.GetByTourist(LoggedInUser.Id);
+
+           
+
+            foreach (var request in requests)
+            {
+                
+
+                if(year == 0)
+                {
+                    if (request.Status == TourRequestStatus.Accepted) { counter++; }
+                }
+                else
+                {
+                    if (request.Status == TourRequestStatus.Accepted && request.CreationDate.Year == year) { counter++; }
+                }
+
+                
+            }
+            return counter;
+        }
+
+        public int CountInvalidRequests(int year)
+        {
+
+            int counter = 0;
+
+            List<TourRequest> requests = _requestService.GetByTourist(LoggedInUser.Id);
+
+
+            foreach (var request in requests)
+            {
+
+                if (year == 0)
+                {
+                    if (request.Status == TourRequestStatus.Invalid) { counter++; }
+                }
+                else
+                {
+                    if (request.Status == TourRequestStatus.Invalid && request.CreationDate.Year == year) { counter++; }
+                }
+            }
+            return counter;
+        }
+
     }
 }

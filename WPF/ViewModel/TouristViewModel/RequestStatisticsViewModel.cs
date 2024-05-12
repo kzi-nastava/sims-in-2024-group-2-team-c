@@ -1,9 +1,12 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
 using BookingApp.Service.TourServices;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +18,79 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
     public  class RequestStatisticsViewModel : ViewModelBase
     {
 
+        private double _acceptedPercentage;
+
+        public double AcceptedPercentage
+        {
+
+            get { return _acceptedPercentage; }
+            set
+            {
+                _acceptedPercentage = value;
+                OnPropertyChanged(nameof(AcceptedPercentage));
+                
+            }
+
+        }
+
+
+        private double _invalidPercentage;
+
+        public double InvalidPercentage
+        {
+
+            get { return _invalidPercentage; }
+            set
+            {
+                _invalidPercentage = value;
+                OnPropertyChanged(nameof(InvalidPercentage));
+
+            }
+
+        }
+
+
+
+        private  ObservableCollection<int> _years;
+
+        public ObservableCollection<int> Years
+        {
+            get { return _years; }
+            set
+            {
+                _years = value;
+                OnPropertyChanged(nameof(Years));
+            }
+        }
+
+        private int _selectedItem;
+
+        public int SelectedItem
+        {
+
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                LoadPieChart();
+
+                
+               OnPropertyChanged(nameof(PieSeriesCollection));
+              //  LoadPieChart();
+
+            }
+
+        }
+
+
+
         public SeriesCollection LocationsCollection { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
+
+        public SeriesCollection PieSeriesCollection { get; set; }
+
+        
 
         public List<string> LocationLabels { get; set; }
         public List<string> Labels { get; set; }
@@ -41,9 +115,59 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _tourStatisticsService = new TouristStatisticsService();
 
             GoBackCommand = new ViewModelCommandd(ExecuteGoBackCommand);
-
+            LoadTheYears();
             Load();
             LoadTheLanguageChart();
+            LoadPieChart();
+            
+            
+        }
+
+        private void LoadPieChart()
+        {
+
+            int invalidRequests = _tourStatisticsService.CountInvalidRequests(SelectedItem);
+            int validRequests = _tourStatisticsService.CountAcceptedRequests(SelectedItem);
+
+            PieSeriesCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title="Accepted",
+                    Values = new ChartValues<ObservableValue>{new ObservableValue(validRequests)},
+                    DataLabels = true,
+                    Fill = Brushes.LightGreen
+                },
+                new PieSeries
+                {
+                    Title="Invalid",
+                    Values = new ChartValues<ObservableValue>{new ObservableValue(invalidRequests)},
+                    DataLabels = true,
+                    Fill = Brushes.LightSalmon
+                }
+
+            };
+
+
+            double totalValue = 0;
+
+            // Calculate total value
+            double totalAcceptedValue = ((ObservableValue)PieSeriesCollection[0].Values[0]).Value;
+            double totalInvalidValue = ((ObservableValue)PieSeriesCollection[1].Values[0]).Value;
+
+            AcceptedPercentage = Math.Round((totalAcceptedValue / (totalAcceptedValue + totalInvalidValue)) * 100, 0);
+            InvalidPercentage = Math.Round((totalInvalidValue / (totalAcceptedValue + totalInvalidValue)) * 100,0);
+
+
+
+
+        }
+
+        private void LoadTheYears()
+        {
+
+            Years = new ObservableCollection<int>(_tourStatisticsService.GetRequestYears());
+            
         }
 
         public void ExecuteGoBackCommand(object obj)
@@ -79,7 +203,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             Formatter = value => value.ToString();
 
-
+            
 
             LocationRequests = new List<object>();
 

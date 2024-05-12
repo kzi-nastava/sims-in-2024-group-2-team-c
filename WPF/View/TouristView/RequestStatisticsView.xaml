@@ -36,7 +36,50 @@
 
             <TextBlock Grid.Row="1" Text="Tour request status" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
 
-            <TextBlock Grid.Row="6" Text="Number of requests per language" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
+            <Border Grid.Row="2" Height="60" Margin="0,0,0,20" Width="300" Background="LightGreen" BorderBrush="Black" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Choose a year" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedItem}"  Height="20" Width="80">
+                        
+                    </ComboBox>
+
+                </Grid>
+
+            </Border>
+
+            <lvc:PieChart Grid.Row="3" Width="250" Height="250" Series="{Binding PieSeriesCollection}" LegendLocation="Bottom"/>
+
+
+            <Grid Grid.Row="4" Width="150" Height="50" Margin="30,30,30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Accepted" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Denied" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding AcceptedPercentage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding InvalidPercentage}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            </Grid>
+
+
+
+
+
+            <TextBlock Grid.Row="6" Text="Number of requests per language" Height="30" Margin="20,30,20,20" FontSize="15" FontWeight="SemiBold"/>
 
             <lvc:CartesianChart Grid.Row="7" Series="{Binding SeriesCollection}"  Height="300" Width="300" HorizontalAlignment="Left" Margin="20,0">
                 <lvc:CartesianChart.AxisX >
