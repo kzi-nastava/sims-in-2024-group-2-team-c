@@ -17,29 +17,31 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.GuideView
 {
     /// <summary>
-    /// Interaction logic for Guide_TourReviews.xaml
+    /// Interaction logic for Guide_TourRequests.xaml
     /// </summary>
-    public partial class Guide_TourReviews : Page
+    public partial class Guide_TourRequests : Page
     {
-        private readonly TourReview_ViewModel viewModel;
-        //private readonly MainWindow_ViewModel mainView;
-
-        public Guide_TourReviews()
+        private readonly TourRequests_ViewModel viewModel;
+        private MainWindow_ViewModel mainView;
+        public Guide_TourRequests()
         {
             InitializeComponent();
-            viewModel = new TourReview_ViewModel();
+            viewModel = new TourRequests_ViewModel();
             DataContext = viewModel;
         }
-
-        private void ReportButton_Click(object sender, RoutedEventArgs e)
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ReportReviewCommand.Execute(reviewsList.SelectedItem);
-            //viewModel.UpdateVisibility();
+            viewModel.AcceptTourRequestCommand.Execute(requestsView.SelectedItem);
 
         }
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
         }
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            //viewModel.SearchTourRequestCommand;
+        }
+
     }
 }
