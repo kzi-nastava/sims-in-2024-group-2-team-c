@@ -82,7 +82,7 @@ namespace BookingApp.Service.TourServices
         public List<TourRequestDTO> FilterRequestsByDate(DateTime SelectedStartDate, DateTime SelectedEndDate)
         {
             List<TourRequestDTO> filteredTourRequests = GetAllTourRequestDTOs();
-            filteredTourRequests = filteredTourRequests.Where(t => t.StartDate >= SelectedStartDate && t.EndDate <= SelectedEndDate).ToList();
+            filteredTourRequests = filteredTourRequests.Where(t => t.StartDate.Date >= SelectedStartDate && t.EndDate.Date <= SelectedEndDate).ToList();
             return filteredTourRequests;
         }
 

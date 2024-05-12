@@ -103,10 +103,21 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         {
             TourRequests = new ObservableCollection<TourRequestDTO>(_tourRequestService.GetAllTourRequestDTOs());
         }
+        /*public void LoadDatePicker()
+        {
+            DateTime? selectedStartDate = SelectedStartDate;
+            DateTime? selectedEndDate = SelectedEndDate;
+            if (selectedStartDate.HasValue && selectedEndDate.HasValue)
+            {
+                DateTime startDate = selectedStartDate.Value;
+                DateTime endDate = selectedEndDate.Value;
+            }
+        }*/
 
         private void SearchTourRequests(object obj)
         {
             var allTourRequests = new ObservableCollection<TourRequestDTO>(_tourRequestService.GetAllTourRequestDTOs());
+            //LoadDatePicker();
             if (SelectedStartDate == default && SelectedEndDate == default && SelectedLocation == null && SelectedNumberOfTourists == 0 && SelectedLanguage == null)
             {
                 TourRequests = allTourRequests;
@@ -115,11 +126,23 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
 
             var filteredTourRequests = new List<TourRequestDTO>(allTourRequests);
 
-            if (SelectedStartDate != default && SelectedEndDate != default)
+            DateTime? selectedStartDate = SelectedStartDate;
+            DateTime? selectedEndDate = SelectedEndDate;
+            if (selectedStartDate.HasValue && selectedEndDate.HasValue)
+            {
+                DateTime startDate = selectedStartDate.Value;
+                DateTime endDate = selectedEndDate.Value;
+                if (startDate != default && endDate != default)
+                {
+                    filteredTourRequests = _tourRequestService.FilterRequestsByDate(SelectedStartDate, SelectedEndDate);
+
+                }
+            }
+            /*if (SelectedStartDate != default && SelectedEndDate != default)
             {
                 filteredTourRequests = _tourRequestService.FilterRequestsByDate(SelectedStartDate, SelectedEndDate);
-                
-            }
+
+            }*/
 
             if (!string.IsNullOrEmpty(SelectedLocation))
             {
