@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace BookingApp.DTO
     public class TourRequestDTO
     {
         public int Id { get; set; }
-        public bool Status { get; set; }
+        public TourRequestStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Location { get; set; }

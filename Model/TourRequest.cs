@@ -11,10 +11,11 @@ using System.Xml.Linq;
 
 namespace BookingApp.Model
 {
+    public enum TourRequestStatus { Accepted, Invalid, OnHold };
     public class TourRequest : ISerializable
     {
         public int Id { get; set; }
-        public bool Status { get; set; }
+        public TourRequestStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int LocationId { get; set; }
@@ -24,12 +25,12 @@ namespace BookingApp.Model
         public int NumberOfPeople { get; set; }
         public string Description { get; set; }
 
-        //public DateTime DateOfCreation { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public int TouristId;
 
         public TourRequest() { }
-        public TourRequest( bool status, DateTime startDate, DateTime endDate, int locationId, int guideId, List<int> peopleIds, string language, int numberOfPeople, string description, int touristId)
+        public TourRequest( TourRequestStatus status, DateTime startDate, DateTime endDate, int locationId, int guideId, List<int> peopleIds, string language, int numberOfPeople, string description,DateTime dateOfCreation, int touristId)
         {
            
             Status = status;
@@ -41,6 +42,7 @@ namespace BookingApp.Model
             Language = language;
             NumberOfPeople = numberOfPeople;
             Description = description;
+            CreationDate = dateOfCreation;
             TouristId = touristId;
         }
 
@@ -48,7 +50,7 @@ namespace BookingApp.Model
         {
 
             string[] csvValues = { Id.ToString(), Status.ToString(), /*StartDate.ToString(), EndDate.ToString(),*/ StartDate.ToString("dd.MM.yyyy. HH:mm:ss"),EndDate.ToString("dd.MM.yyyy. HH:mm:ss"), LocationId.ToString(),
-                                  GuideId.ToString(), string.Join(",", PeopleIds), Language, NumberOfPeople.ToString(), Description, TouristId.ToString()  };
+                                  GuideId.ToString(), string.Join(",", PeopleIds), Language, NumberOfPeople.ToString(), Description,CreationDate.ToString("dd.MM.yyyy. HH:mm:ss"), TouristId.ToString()  };
 
             return csvValues;
         }
@@ -56,7 +58,7 @@ namespace BookingApp.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Status = Convert.ToBoolean(values[1]);
+            Status = (TourRequestStatus)Enum.Parse(typeof(TourRequestStatus), values[1]);
             //StartDate = Convert.ToDateTime(values[2]);
             // EndDate = Convert.ToDateTime(values[3]);
             StartDate = DateTime.ParseExact(values[2].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
@@ -67,7 +69,8 @@ namespace BookingApp.Model
             Language = values[7];
             NumberOfPeople = Convert.ToInt32(values[8]);
             Description = values[9];
-            TouristId = Convert.ToInt32(values[10]);
+            CreationDate = DateTime.ParseExact(values[10].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            TouristId = Convert.ToInt32(values[11]);
 
         }
     }
