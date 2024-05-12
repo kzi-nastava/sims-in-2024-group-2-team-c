@@ -101,9 +101,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
-        private int _numberOfPeople;
+        private double _numberOfPeople;
 
-        public int NumberOfPeople
+        public double NumberOfPeople
         {
 
             get { return _numberOfPeople; }
@@ -158,7 +158,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private void LoadNumberOfPeople()
         {
 
-            NumberOfPeople = _tourStatisticsService.GetPeople(SelectedYear);
+            NumberOfPeople = Math.Round(_tourStatisticsService.GetPeople(SelectedYear),2);
 
 
         }

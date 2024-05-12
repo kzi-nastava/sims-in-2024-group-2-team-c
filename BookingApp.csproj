@@ -62,8 +62,6 @@
 
     <Folder Include="WPF\ViewModel\GuideViewModel\" />
 
-    <Folder Include="Service\TourServices\" />
-
   </ItemGroup>
 
   <ItemGroup>
