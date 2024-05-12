@@ -63,6 +63,10 @@ namespace BookingApp.WPF.View.GuideView
             var viewModel = new TourStatistic_ViewModel();
             viewModel.SelectedTour = (TourStatisticDTO)tourView.SelectedItem;
         }
+        private void GenerateReport_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
 
         /*private void TourView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -49,7 +49,7 @@ namespace BookingApp.Injector
             {typeof(IKeyPointRepository),new KeyPointRepository()},
 
 
-            // { typeof(ITourRepository), new TourRepository() },
+            
             // { typeof(ITourService), new TourService() }
 
             //{ typeof(IReservationRepository), new ReservationRepository() }

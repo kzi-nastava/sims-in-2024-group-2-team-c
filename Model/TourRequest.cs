@@ -46,8 +46,10 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
+
             string[] csvValues = { Id.ToString(), Status.ToString(), /*StartDate.ToString(), EndDate.ToString(),*/ StartDate.ToString("dd.MM.yyyy. HH:mm:ss"),EndDate.ToString("dd.MM.yyyy. HH:mm:ss"), LocationId.ToString(),
                                   GuideId.ToString(), string.Join(",", PeopleIds), Language, NumberOfPeople.ToString(), Description, TouristId.ToString()  };
+
             return csvValues;
         }
 
@@ -66,6 +68,7 @@ namespace BookingApp.Model
             NumberOfPeople = Convert.ToInt32(values[8]);
             Description = values[9];
             TouristId = Convert.ToInt32(values[10]);
+
         }
     }
 }

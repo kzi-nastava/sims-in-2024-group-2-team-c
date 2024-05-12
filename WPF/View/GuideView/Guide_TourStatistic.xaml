@@ -19,15 +19,21 @@
     </Page.Resources>
     <Grid>
         <StackPanel Margin="10">
-            <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
-                <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
-            </Button>
-            <TextBlock Text="TOURS STATISTIC" FontWeight="Bold" FontSize="30" Margin="0 0 0 10"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+                    <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
+                </Button>
+                <Button Click="GenerateReport_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding GenerateReportCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+                    <TextBlock Text="GENERATE TOURISTS REPORT" FontSize="14"/>
+                </Button>
+            </StackPanel>
+
+            <TextBlock Text="TOURS STATISTIC" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,0 "/>
 
             <!-- SELECT TOUR AND PRESS BUTTON TO SEE TOUR STATISTIC -->
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <TextBlock Text="SELECT TOUR AND PRESS BUTTON TO SEE TOUR STATISTIC " FontWeight="Bold" FontSize="16"/>
-                <Button Click="Show_Click"  Style="{StaticResource CustomButtonStyle}" Content="SHOW" Height="30" Width="80" Command="{Binding ShowCommand}" HorizontalAlignment="Right"/>
+                <Button Click="Show_Click"  Style="{StaticResource CustomButtonStyle}" Content="SHOW" Height="30" Width="80" Margin="350,0,0,0" Command="{Binding ShowCommand}" HorizontalAlignment="Right"/>
             </StackPanel>
 
             <!-- TOURS TABLE -->

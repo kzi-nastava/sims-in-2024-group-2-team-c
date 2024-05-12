@@ -32,7 +32,7 @@
             <Button Content="&lt;&lt; BACK" Style="{StaticResource CustomButtonStyle}" Command="{Binding NavigateBackCommand}" Height="30" Width="200"/>
             <Button Content="HOME PAGE" Style="{StaticResource CustomButtonStyle}" Command="{Binding NavigateToHomePageCommand}" Height="30" Width="200"/>
         </StackPanel>
-        <Label Grid.Row="1" Content="TOUR STATISTIC" FontSize="28" HorizontalAlignment="Left"/>
+        <Label Grid.Row="1" Content="TOUR STATISTIC" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,0 "/>
 
         <!-- Tour Details -->
         <StackPanel Grid.Row="2" Margin="10">

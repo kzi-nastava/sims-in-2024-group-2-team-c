@@ -87,7 +87,8 @@ namespace BookingApp.WPF.View.GuideView
         
         private void TourRequests_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_TourRequests requestsView = new Guide_TourRequests();
+            this.NavigationService.Navigate(requestsView);
         }
         private void RequestStatistic_Click(object sender, RoutedEventArgs e)
         {
