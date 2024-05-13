@@ -1,4 +1,5 @@
-﻿using BookingApp.Injector;
+﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -63,6 +64,14 @@ namespace BookingApp.Service.TourServices
         public List<TourRequestNotification> GetAllRequestNotifications(int userId)
         {
             return _tourRequestNotificationService.GetByUserId(userId);
+
+        }
+
+        public TouristRequestDTO GetAcceptedRequest(int requestId)
+        {
+
+            return _tourRequestNotificationService.GetRequest(requestId);
+
 
         }
 

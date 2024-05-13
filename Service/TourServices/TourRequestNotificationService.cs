@@ -1,4 +1,5 @@
-﻿using BookingApp.Injector;
+﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -14,9 +15,11 @@ namespace BookingApp.Service.TourServices
     {
 
         private readonly ITourRequestNotificationRepository tourRequestNotificationRepository;
+        private readonly TourRequestService tourRequestService;
 
         public TourRequestNotificationService() {
             tourRequestNotificationRepository = Injectorr.CreateInstance<ITourRequestNotificationRepository>();
+            tourRequestService = new TourRequestService();
         }
 
 
@@ -37,6 +40,18 @@ namespace BookingApp.Service.TourServices
 
             return userNotifications.ToList();
         }
+
+        
+
+        public TouristRequestDTO GetRequest(int requestId)
+        {
+
+            List<TouristRequestDTO> requests = tourRequestService.GetTouristRequests();
+
+            return requests.FirstOrDefault(request => request.TourRequestId == requestId);
+
+        }
+
 
 
     }

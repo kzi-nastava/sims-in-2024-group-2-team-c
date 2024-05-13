@@ -85,18 +85,35 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
 
         private readonly TouristNotificationService _notificationService;
+        private readonly MainViewModel _mainViewModel;
 
-        
+        public ViewModelCommandd ViewCommand { get; }
+
 
         public NotificationViewModel() {
-
-            
+            _mainViewModel = LoggedInUser.mainViewModel;
+            ViewCommand = new ViewModelCommandd(ExecuteViewCommand);
             Content1Visibility = Visibility.Visible;
             _notificationService = new TouristNotificationService();
             LoadNotifications();
             LoadRequestNotifications();
         
         }
+
+
+        private void ExecuteViewCommand(object parameter)
+        {
+            if (parameter is int requestId)
+            {
+               TouristRequestDTO request = _notificationService.GetAcceptedRequest(requestId);
+                if (request != null)
+                {
+                    _mainViewModel.ExecuteSingleTourView(request);
+                }
+
+            }
+        }
+
 
 
         public void LoadRequestNotifications()
