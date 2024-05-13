@@ -38,9 +38,42 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             tourRequestService = new TourRequestService();
             NavigateCommand = new ViewModelCommandd(ExecuteTourRequest);
 
+            RefreshTourRequests();
+
             LoadTourRequests();
         
         
+        }
+
+
+        private void RefreshTourRequests()
+        {
+
+            List<TourRequest> requests = tourRequestService.GetAll();
+            DateTime now = DateTime.Now;
+
+            DateTime limitDate = now.AddHours(48);
+            foreach (TourRequest request in requests)
+            {
+
+               if(request.Status == TourRequestStatus.OnHold)
+                {
+
+                    TimeSpan timeDifference = request.StartDate - now;
+
+                    bool is48HoursAway = timeDifference.TotalHours >= 48;
+
+                    if (!is48HoursAway)
+                    {
+                        request.Status = TourRequestStatus.Invalid;
+                        tourRequestService.Update(request);
+                    }
+
+
+                }
+
+            }
+
         }
 
         private void LoadTourRequests()

@@ -20,7 +20,7 @@ namespace BookingApp.Injector
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
             //{ typeof(IUserRepository), new UserRepository() },
-            //{ typeof(IUserService), new UserService() },
+            { typeof(ITourReccommendationsRepository), new TourReccommendationsRepository() },
             { typeof(ITourRequestRepository), new TourRequestRepository() },
             { typeof(ITourRepository), new TourRepository() },
             { typeof(ITourReviewsRepository), new TourReviewsRepository() },
@@ -28,7 +28,7 @@ namespace BookingApp.Injector
             { typeof(ITourReservationRepository), new TourReservationRepository() },
             // { typeof(ITourService), new TourService() }
 
-            //{ typeof(IAccommodationRepository), new AccommodationRepository() },
+            { typeof(ITourRequestNotificationRepository), new TourRequestNotificationRepository() },
             // { typeof(IAccommodationService), new AccommodationService() }
 
             { typeof(ILocationRepository), new LocationRepository() },

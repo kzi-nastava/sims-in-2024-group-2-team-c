@@ -24,5 +24,10 @@ namespace BookingApp.WPF.View.TouristView
         {
             InitializeComponent();
         }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }
