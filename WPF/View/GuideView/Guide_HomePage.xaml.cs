@@ -92,7 +92,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void RequestStatistic_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_TourRequestStatistic requestStatistics = new Guide_TourRequestStatistic();
+            this.NavigationService.Navigate(requestStatistics);
         }
         private void QuitJob_Click(object sender, RoutedEventArgs e)
         {

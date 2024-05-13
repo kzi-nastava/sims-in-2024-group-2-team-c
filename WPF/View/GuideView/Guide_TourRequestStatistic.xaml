@@ -1,0 +1,103 @@
+﻿<Page x:Class="BookingApp.WPF.View.GuideView.Guide_TourRequestStatistic"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.GuideView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Guide_TourRequestStatistic">
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+                <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
+            </Button>
+
+            <TextBlock Text="TOUR STATISTIC" Grid.Row="1" FontWeight="Bold" Margin="5"/>
+
+            <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="Black" StrokeThickness="1" Grid.Row="2"/>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <ComboBox Margin="5" Name="LocationComboBox" VerticalAlignment="Top" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}">
+                    </ComboBox>
+                    <ComboBox Margin="5" Name="LanguageComboBox" VerticalAlignment="Top" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
+                    </ComboBox>
+                    <ComboBox Margin="5" Name="YearComboBox" VerticalAlignment="Top" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"/>
+                    <!-- Button SEARCH -->
+                    <Button Content="SEARCH" Click="Search_Click" Command ="{Binding SearchCommand}" Grid.Column="1" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                </StackPanel>
+                <!-- YearListBox -->
+                <ListView x:Name="CombinedListBox" Grid.Column="1" Margin="5" ItemsSource="{Binding TourRequests}" Visibility="Visible">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="YEAR" DisplayMemberBinding="{Binding Year}" Width="Auto"/>
+                            <GridViewColumn Header="MONTH" DisplayMemberBinding="{Binding Month}" Width="Auto"/>
+                            <GridViewColumn Header="MONTHLY NUMBER OF REQUESTS" DisplayMemberBinding="{Binding MonthNumberOfTours}" Width="Auto"/>
+                            <GridViewColumn Header="ANNUAL NUMBER OF TOUR REQUESTS" DisplayMemberBinding="{Binding YearNumberOfTours}" Width="Auto"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+            <!-- Grid za GroupBox-e -->
+            <Grid Grid.Row="4" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- GroupBox "THE MOST POPULAR LOCATION" -->
+                <GroupBox Header="THE MOST POPULAR LOCATION" Grid.Column="0" Margin="5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="LOCATION: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding MostPopularLocation}" Margin="5,20,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding NumberOfRequestsByLocation}" Margin="5,20,0,0"/>
+                        </StackPanel>
+                        <Button Content="CREATE TOUR" Click="CreateTourLocation_Click" Margin="5" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- GroupBox "THE MOST POPULAR LANGUAGE" -->
+                <GroupBox Header="THE MOST POPULAR LANGUAGE" Grid.Column="1" Margin="5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="LANGUAGE: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding MostPopularLanguage}" Margin="5,20,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding NumberOfRequestsByLanguage}" Margin="5,20,0,0"/>
+                        </StackPanel>
+                        <Button Content="CREATE TOUR" Click="CreateTourLanguage_Click" Margin="5" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

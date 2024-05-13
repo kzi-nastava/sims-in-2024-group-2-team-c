@@ -29,7 +29,15 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         public TourRequestDTO SelectedTourRequest
         {
             get { return _selectedTourRequest; }
-            set { _selectedTourRequest = value; OnPropertyChanged(nameof(SelectedTourRequest)); }
+            set
+            {
+                if (_selectedTourRequest != value)
+                {
+                    _selectedTourRequest = value;
+                    OnPropertyChanged(nameof(_selectedTourRequest));
+                }
+            }
+         
         }
         private DateTime _selectedStartDate;
         public DateTime SelectedStartDate
@@ -101,7 +109,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         }
         public void LoadRequests()
         {
-            TourRequests = new ObservableCollection<TourRequestDTO>(_tourRequestService.GetAllTourRequestDTOs());
+            TourRequests = new ObservableCollection<TourRequestDTO>(_tourRequestService.GetOnHoldRequests());
         }
         /*public void LoadDatePicker()
         {
@@ -167,10 +175,12 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             
             if (SelectedTourRequest != null)
             {
-                var canAccept = _tourRequestService.AcceptRequest(SelectedTourRequest);
-                if (canAccept == true)
-                    LoadRequests();
-               // MessageBox.Show("Ok");
+                _tourRequestService.AcceptRequest(SelectedTourRequest);
+                TourRequests.Remove(SelectedTourRequest);
+                //bool canAccept = _tourRequestService.AcceptRequest(SelectedTourRequest);
+                /*if (canAccept == true)
+                    LoadRequests();*/
+                // MessageBox.Show("Ok");
             }
             /*else
             {

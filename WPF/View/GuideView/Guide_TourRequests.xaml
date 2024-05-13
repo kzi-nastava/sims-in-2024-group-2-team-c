@@ -79,7 +79,7 @@
         </Grid>
 
         <!-- ListView for displaying TourReviews -->
-        <ListView x:Name="requestsView" Grid.Row="4" Margin="5" ItemsSource="{Binding TourRequests}" SelectedItem="{Binding SelectedTourRequest}" IsEnabled="True" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="400">
+        <ListView x:Name="requestsView" Grid.Row="4" Margin="5" ItemsSource="{Binding TourRequests}" SelectedItem="{Binding Path =SelectedTourRequest}" SelectionChanged="TourRequestView_SelectionChanged" IsEnabled="True" IsSynchronizedWithCurrentItem="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="400">
             <ListView.View>
             <GridView>
                 <GridViewColumn Header="LOCATION" DisplayMemberBinding="{Binding Location}" Width="Auto"/>
