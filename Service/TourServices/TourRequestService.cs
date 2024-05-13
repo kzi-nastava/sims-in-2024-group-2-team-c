@@ -106,10 +106,14 @@ namespace BookingApp.Service.TourServices
             }
             return languages;
         }
-       /* public string GetMostPopularLocation() 
-        {
-            
-        }*/
+       /*public string GetMostPopularLocation() 
+       {
+            List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
+            foreach (StatisticTourRequestDTO request in requests)
+            {
+
+            }
+       }*/
        public List<StatisticTourRequestDTO> GetTourRequestStatistics()
         {
             List<TourRequestDTO> requests = GetAllTourRequestDTOs();
