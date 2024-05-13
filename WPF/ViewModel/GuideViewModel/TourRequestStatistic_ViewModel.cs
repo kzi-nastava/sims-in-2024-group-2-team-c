@@ -162,21 +162,20 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         }
         private void UpdateTourRequests()
         {
-            if (SelectedLocation != null && SelectedLanguage == "Language")
+            TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatistics());
+            if (SelectedLocation != null /*&& SelectedLanguage == "Language"*/)
             {
+                //SelectedLanguage = null;
                 TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatisticsByLocation(SelectedLocation));
             }
-            else if (SelectedLanguage != null && SelectedLocation == "Location")
+            if (SelectedLanguage != null /*&& SelectedLocation == "Location"*/)
             {
+                //SelectedLocation = null;
                 TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatisticsByLanguage(SelectedLanguage));
             }
-            else if (SelectedYear != 0 && SelectedLanguage == "Language" && SelectedLocation == "Location")
+            if (SelectedYear != 0/* && SelectedLanguage == "Language" && SelectedLocation == "Location"*/)
             {
                 TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatisticsByYear(SelectedYear));
-            }
-            else
-            {
-                TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatistics());
             }
         }
     }
