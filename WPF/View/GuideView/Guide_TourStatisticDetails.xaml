@@ -27,10 +27,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-            <!--<Button Content="&lt;&lt; BACK" Style="{StaticResource CustomButtonStyle}" Click="BackButton_Click" Height="30" Width="200"/>-->
-            <!--<Button Content="HOME PAGE" Style="{StaticResource CustomButtonStyle}" Click="HomePageButton_Click" Height="30" Width="200"/>-->
-            <Button Content="&lt;&lt; BACK" Style="{StaticResource CustomButtonStyle}" Command="{Binding NavigateBackCommand}" Height="30" Width="200"/>
-            <Button Content="HOME PAGE" Style="{StaticResource CustomButtonStyle}" Command="{Binding NavigateToHomePageCommand}" Height="30" Width="200"/>
+            <Button Content="&lt;&lt; BACK" Style="{StaticResource CustomButtonStyle}" Click="BackButton_Click" Height="30" Width="200"/>
+            <Button Content="HOME PAGE" Style="{StaticResource CustomButtonStyle}" Click="HomePageButton_Click" Height="30" Width="200"/>
+            <!--<Button Content="&lt;&lt; BACK" Style="{StaticResource CustomButtonStyle}" Command="{Binding NavigateBackCommand}" Height="30" Width="200"/>-->
+           <!-- <Button Content="HOME PAGE" Style="{StaticResource CustomButtonStyle}" Command="{Binding NavigateToHomePageCommand}" Height="30" Width="200"/>-->
         </StackPanel>
         <Label Grid.Row="1" Content="TOUR STATISTIC" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,0 "/>
 
