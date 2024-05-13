@@ -40,7 +40,7 @@ namespace BookingApp.Service.TourServices
         public List<TourRequest> GetAll() { return iTourRequestRepository.GetAll(); }
         public TourRequest GetById(int id) { return iTourRequestRepository.GetById(id); }
 
-
+        
 
 
         public void CreateTourRequest(Location location,string description,Language language,DateTime startDate, DateTime endDate,List<PeopleInfo> peopleInfos)
@@ -48,10 +48,10 @@ namespace BookingApp.Service.TourServices
 
             List<int> peopleinfoIds = peopleInfoService.SavePeopleInfoList(peopleInfos);
             
-            //TourRequest tourRequest = new TourRequest(false,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description,LoggedInUser.Id);
-            //Save(tourRequest);
+            TourRequest tourRequest = new TourRequest(TourRequestStatus.OnHold,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description, DateTime.Now, LoggedInUser.Id);
+            Save(tourRequest);
 
-            //touristService.UpdateTourRequests(tourRequest.Id);
+            touristService.UpdateTourRequests(tourRequest.Id);
 
         }
 
@@ -72,9 +72,13 @@ namespace BookingApp.Service.TourServices
                 {
                     touristRequestDTO = new TouristRequestDTO("ACCEPTED", ++number, request.Id);
                 }
-                else
+                else if(request.Status == TourRequestStatus.Invalid)
                 {
                     touristRequestDTO = new TouristRequestDTO("INVALID", ++number, request.Id);
+                }
+                else
+                {
+                    touristRequestDTO = new TouristRequestDTO("ON HOLD", ++number, request.Id);
                 }
                 requestDtos.Add(touristRequestDTO);
 
@@ -283,12 +287,18 @@ namespace BookingApp.Service.TourServices
             Location location = locationService.Get(request.LocationId);
             string CityAndCountry = location.City + ", " + location.Country;
             string activity;
-            if (request.Status == TourRequestStatus.Accepted) {
+
+            if (request.Status == TourRequestStatus.Accepted)
+            {
                 activity = "ACCEPTED";
+            }
+            else if (request.Status == TourRequestStatus.Invalid)
+            {
+                activity = "INVALID";
             }
             else
             {
-                activity = "INVALID";
+                activity = "ON HOLD";
             }
 
             SelectedTourRequestDTO selectedRequest = new SelectedTourRequestDTO(touristRequest.Number,request.StartDate,request.EndDate,request.Description, CityAndCountry,request.Language,activity);

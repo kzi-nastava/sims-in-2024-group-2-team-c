@@ -36,7 +36,58 @@
 
             <TextBlock Grid.Row="1" Text="Tour request status" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
 
-            <TextBlock Grid.Row="6" Text="Number of requests per language" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
+            <Border Grid.Row="2" Height="60" Margin="0,0,0,20" Width="300" Background="LightGreen" BorderBrush="Black" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Choose a year" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedItem}"  Height="20" Width="80">
+                        
+                    </ComboBox>
+
+                </Grid>
+
+            </Border>
+
+            <lvc:PieChart Grid.Row="3" Width="250" Height="250" Series="{Binding PieSeriesCollection}" LegendLocation="Bottom"/>
+
+
+            <Grid Grid.Row="4" Width="150" Height="50" Margin="30,30,30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Accepted" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Denied" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock  Text="{Binding AcceptedPercentage}" />
+                    <TextBlock Text="%"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock  Text="{Binding InvalidPercentage}" />
+                    <TextBlock Text="%"/>
+                </StackPanel>
+
+                
+
+            </Grid>
+
+
+
+
+
+            <TextBlock Grid.Row="6" Text="Number of requests per language" Height="30" Margin="20,30,20,20" FontSize="15" FontWeight="SemiBold"/>
 
             <lvc:CartesianChart Grid.Row="7" Series="{Binding SeriesCollection}"  Height="300" Width="300" HorizontalAlignment="Left" Margin="20,0">
                 <lvc:CartesianChart.AxisX >
@@ -48,7 +99,7 @@
             </lvc:CartesianChart>
 
 
-            <ItemsControl Grid.Row="8" Width="380" Margin="20" ItemsSource="{Binding LanguageRequests}">
+            <ItemsControl Grid.Row="8" Width="380" Margin="10,20,10,30" ItemsSource="{Binding LanguageRequests}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <!-- Use a UniformGrid to arrange items in a grid with multiple columns -->
@@ -61,9 +112,9 @@
                         <!-- Each item is contained within a StackPanel -->
                         <StackPanel>
                             <!-- Language name -->
-                            <TextBlock Text="{Binding Language}" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding Language}" FontWeight="SemiBold"  FontSize="10" HorizontalAlignment="Center"/>
                             <!-- Number -->
-                            <TextBlock Text="{Binding Requests}" Margin="0,5,0,0"/>
+                            <TextBlock Text="{Binding Requests}" Margin="5"  FontSize="10" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -73,19 +124,58 @@
             <TextBlock Grid.Row="9" Text="Number of requests per location" Height="30" Margin="20" FontSize="15" FontWeight="SemiBold"/>
 
 
-            <lvc:CartesianChart Grid.Row="10" Series="{Binding LocationsCollection}"  Height="300" Width="300" HorizontalAlignment="Left" Margin="20,0">
-                <lvc:CartesianChart.AxisX >
-                    <lvc:Axis Title="Number of requests" LabelFormatter="{Binding Formatter}" Foreground="Black" FontWeight="SemiBold" />
+            <lvc:CartesianChart Grid.Row="10" Series="{Binding LocationsCollection}" Height="300" Width="300" HorizontalAlignment="Left" Margin="20,10">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Number of requests" Labels="{Binding LocationValues}" Foreground="Black" FontWeight="SemiBold" LabelFormatter="{Binding Formatter}" />
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Location" Labels="{Binding LocationLabels}" Foreground="Black" FontWeight="SemiBold"/>
                 </lvc:CartesianChart.AxisY>
-                <lvc:CartesianChart.DataTooltip>
-                    <lvc:DefaultTooltip SelectionMode="SharedYValues"></lvc:DefaultTooltip>
-                </lvc:CartesianChart.DataTooltip>
             </lvc:CartesianChart>
 
+        
+            <ItemsControl Grid.Row="11" Width="380" Margin="10,20,10,30" ItemsSource="{Binding LocationRequests}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!-- Use a UniformGrid to arrange items in a grid with multiple columns -->
+                        <UniformGrid Columns="{Binding Path=Items.Count, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Each item is contained within a StackPanel -->
+                        <StackPanel>
+                            <!-- Language name -->
+                            <TextBlock Text="{Binding Location}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                            <!-- Number -->
+                            <TextBlock Text="{Binding LocationRequests}" Margin="5"  FontSize="10" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+            <Border Grid.Row="12" Margin="10,20,10,20" BorderBrush="Black" BorderThickness="1" Background="LightGreen" Width="400">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Average number of people on requested tours" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+                    <StackPanel  Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Margin="10" Text="Choose a year" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                        <ComboBox  Margin="10" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"  Height="20" Width="80"/>
+                    </StackPanel>
+                    <Border Grid.Row="2" Width="50"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Background="AliceBlue" BorderBrush="Black" BorderThickness="1">
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding NumberOfPeople}" FontSize="15"/>
+
+                    </Border>
+                </Grid>
+            </Border>
+        
 
         </Grid>
     </ScrollViewer>

@@ -1,9 +1,12 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
 using BookingApp.Service.TourServices;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +18,120 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
     public  class RequestStatisticsViewModel : ViewModelBase
     {
 
+        private double _acceptedPercentage;
+
+        public double AcceptedPercentage
+        {
+
+            get { return _acceptedPercentage; }
+            set
+            {
+                _acceptedPercentage = value;
+                OnPropertyChanged(nameof(AcceptedPercentage));
+                
+            }
+
+        }
+
+
+        private double _invalidPercentage;
+
+        public double InvalidPercentage
+        {
+
+            get { return _invalidPercentage; }
+            set
+            {
+                _invalidPercentage = value;
+                OnPropertyChanged(nameof(InvalidPercentage));
+
+            }
+
+        }
+
+
+
+        private  ObservableCollection<int> _years;
+
+        public ObservableCollection<int> Years
+        {
+            get { return _years; }
+            set
+            {
+                _years = value;
+                OnPropertyChanged(nameof(Years));
+            }
+        }
+
+        private int _selectedItem;
+
+        public int SelectedItem
+        {
+
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                LoadPieChart();
+
+                
+               OnPropertyChanged(nameof(PieSeriesCollection));
+              //  LoadPieChart();
+
+            }
+
+        }
+
+
+        private int _selectedYear;
+
+        public int SelectedYear
+        {
+
+            get { return _selectedYear; }
+            set
+            {
+                _selectedYear = value;
+                OnPropertyChanged(nameof(SelectedYear));
+                LoadNumberOfPeople();
+                //OnPropertyChanged(nameof(NumberOfPeople));
+            }
+
+        }
+
+
+        private double _numberOfPeople;
+
+        public double NumberOfPeople
+        {
+
+            get { return _numberOfPeople; }
+            set
+            {
+                _numberOfPeople = value;
+                OnPropertyChanged(nameof(NumberOfPeople));
+            }
+
+        }
+
+
         public SeriesCollection LocationsCollection { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
+
+        public SeriesCollection PieSeriesCollection { get; set; }
+
+        
 
         public List<string> LocationLabels { get; set; }
         public List<string> Labels { get; set; }
         public List<int> Values { get; set; }
 
+        public List<int>  LocationValues { get; set; }
         public Func<double,string> Formatter { get; set; }
         public List<object> LanguageRequests { get; private set; }
+
+        public List<object>  LocationRequests { get; private set; }
 
         public ViewModelCommandd GoBackCommand { get; }
 
@@ -38,9 +146,72 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _tourStatisticsService = new TouristStatisticsService();
 
             GoBackCommand = new ViewModelCommandd(ExecuteGoBackCommand);
-
+            LoadTheYears();
             Load();
             LoadTheLanguageChart();
+            LoadPieChart();
+            LoadNumberOfPeople();
+            
+        }
+
+
+        private void LoadNumberOfPeople()
+        {
+
+            NumberOfPeople = Math.Round(_tourStatisticsService.GetPeople(SelectedYear),2);
+
+
+        }
+
+
+
+
+
+        private void LoadPieChart()
+        {
+
+            int invalidRequests = _tourStatisticsService.CountInvalidRequests(SelectedItem);
+            int validRequests = _tourStatisticsService.CountAcceptedRequests(SelectedItem);
+
+            PieSeriesCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title="Accepted",
+                    Values = new ChartValues<ObservableValue>{new ObservableValue(validRequests)},
+                    DataLabels = true,
+                    Fill = Brushes.LightGreen
+                },
+                new PieSeries
+                {
+                    Title="Invalid",
+                    Values = new ChartValues<ObservableValue>{new ObservableValue(invalidRequests)},
+                    DataLabels = true,
+                    Fill = Brushes.LightSalmon
+                }
+
+            };
+
+
+            double totalValue = 0;
+
+            // Calculate total value
+            double totalAcceptedValue = ((ObservableValue)PieSeriesCollection[0].Values[0]).Value;
+            double totalInvalidValue = ((ObservableValue)PieSeriesCollection[1].Values[0]).Value;
+
+            AcceptedPercentage = Math.Round((totalAcceptedValue / (totalAcceptedValue + totalInvalidValue)) * 100, 0);
+            InvalidPercentage = Math.Round((totalInvalidValue / (totalAcceptedValue + totalInvalidValue)) * 100,0);
+
+
+
+
+        }
+
+        private void LoadTheYears()
+        {
+
+            Years = new ObservableCollection<int>(_tourStatisticsService.GetRequestYears());
+            
         }
 
         public void ExecuteGoBackCommand(object obj)
@@ -54,9 +225,37 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             List<TourRequest> requests = _tourRequestService.GetByTourist(LoggedInUser.Id);
 
-            var locationCounts = _tourStatisticsService.GroupByLocation(requests);
+            var locationCounts = _tourStatisticsService.GroupByLocation(requests).OrderByDescending(x => x.Value) 
+                         .ToList();
+
+            LocationsCollection = new SeriesCollection();
+
+            LocationLabels = locationCounts.Select(x => x.Key).ToList();
+            LocationValues = locationCounts.Select(x => x.Value).ToList();
 
 
+
+            LocationsCollection = new SeriesCollection
+            {
+                    new RowSeries
+                    {
+                        Title = "Tour Requests",
+                        Values = new ChartValues<int>(LocationValues),
+                        Fill = Brushes.LightGreen
+                    }
+            };
+
+            Formatter = value => value.ToString();
+
+            
+
+            LocationRequests = new List<object>();
+
+            var locationRequests = locationCounts
+                                   .Select(g => new { Location = g.Key, LocationRequests = g.Value })
+                                   .ToList();
+
+            LocationRequests  = locationRequests.Cast<object>().ToList();
 
         }
 

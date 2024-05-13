@@ -14,6 +14,22 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
     public class NotificationViewModel : ViewModelBase
     {
+
+        private ObservableCollection<TourReccommendations> _reccommendations;
+
+        public ObservableCollection<TourReccommendations> Reccommendations
+        {
+            get { return _reccommendations; }
+            set
+            {
+                _reccommendations = value;
+                OnPropertyChanged(nameof(Reccommendations));
+            }
+        }
+
+
+
+
         private ObservableCollection<TouristNotification> _notifications;
 
         public ObservableCollection<TouristNotification> Notifications
@@ -22,6 +38,20 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             set { 
                 _notifications = value; 
                 OnPropertyChanged(nameof(Notifications));
+            }
+        }
+
+
+
+        private ObservableCollection<TourRequestNotification> _requestNotifications;
+
+        public ObservableCollection<TourRequestNotification> RequestNotifications
+        {
+            get { return _requestNotifications; }
+            set
+            {
+                _requestNotifications = value;
+                OnPropertyChanged(nameof(RequestNotifications));
             }
         }
 
@@ -71,12 +101,51 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
 
         private readonly TouristNotificationService _notificationService;
+        private readonly MainViewModel _mainViewModel;
+
+
+        public ViewModelCommandd ViewCommand { get; }
+        
+
 
         public NotificationViewModel() {
+            _mainViewModel = LoggedInUser.mainViewModel;
+            ViewCommand = new ViewModelCommandd(ExecuteViewCommand);
+           
             Content1Visibility = Visibility.Visible;
             _notificationService = new TouristNotificationService();
             LoadNotifications();
+            LoadRequestNotifications();
+            LoadReccomendations();
         
+        }
+
+
+        public void LoadReccomendations()
+        {
+
+            Reccommendations = new ObservableCollection<TourReccommendations>(_notificationService.GetReccommendations());
+
+        }
+
+        private void ExecuteViewCommand(object parameter)
+        {
+            if (parameter is int requestId)
+            {
+               TouristRequestDTO request = _notificationService.GetAcceptedRequest(requestId);
+                if (request != null)
+                {
+                    _mainViewModel.ExecuteSingleTourView(request);
+                }
+
+            }
+        }
+
+        public void LoadRequestNotifications()
+        {
+
+            RequestNotifications = new ObservableCollection<TourRequestNotification>(_notificationService.GetAllRequestNotifications(LoggedInUser.Id));
+
         }
 
         public void LoadNotifications()
