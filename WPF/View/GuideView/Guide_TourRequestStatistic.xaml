@@ -7,7 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Guide_TourRequestStatistic">
-
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -17,7 +25,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Content="BACK" Grid.Row="0"  Width="100" Height="30" HorizontalAlignment="Left"/>
+            <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+                <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
+            </Button>
 
             <TextBlock Text="TOUR STATISTIC" Grid.Row="1" FontWeight="Bold" Margin="5"/>
 
@@ -25,36 +35,30 @@
 
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400"/>
-                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Vertical" Grid.Column="0">
                     <ComboBox Margin="5" Name="LocationComboBox" VerticalAlignment="Top" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}">
-                        <ComboBoxItem Content="LOCATION"/>
-                        <!-- Dodajte ostale opcije za Location -->
                     </ComboBox>
                     <ComboBox Margin="5" Name="LanguageComboBox" VerticalAlignment="Top" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
-                        <ComboBoxItem Content="LANGUAGE"/>
-                        <!-- Dodajte ostale opcije za Language -->
                     </ComboBox>
                     <ComboBox Margin="5" Name="YearComboBox" VerticalAlignment="Top" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"/>
                     <!-- Button SEARCH -->
                     <Button Content="SEARCH" Grid.Column="1" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <!-- YearListBox -->
-                <ListBox x:Name="CombinedListBox" Grid.Column="1" Margin="5" ItemsSource="{Binding TourRequests}" Visibility="Visible">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Year}" Margin="5"/>
-                                <TextBlock Text="{Binding Month}" Margin="5"/>
-                                <TextBlock Text="{Binding MonthNumberOfTours}" Margin="5"/>
-                                <TextBlock Text="{Binding YearNumberOfTours}" Margin="5"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <ListView x:Name="CombinedListBox" Grid.Column="1" Margin="5" ItemsSource="{Binding TourRequests}" Visibility="Visible">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="YEAR" DisplayMemberBinding="{Binding Year}" Width="Auto"/>
+                            <GridViewColumn Header="MONTH" DisplayMemberBinding="{Binding Month}" Width="Auto"/>
+                            <GridViewColumn Header="MONTHLY NUMBER OF REQUESTS" DisplayMemberBinding="{Binding MonthNumberOfTours}" Width="Auto"/>
+                            <GridViewColumn Header="ANNUAL NUMBER OF TOUR REQUESTS" DisplayMemberBinding="{Binding YearNumberOfTours}" Width="Auto"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
 
             <!-- Grid za GroupBox-e -->
@@ -68,12 +72,12 @@
                 <GroupBox Header="THE MOST POPULAR LOCATION" Grid.Column="0" Margin="5">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="LOCATION: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding MostPopularLocation}" Margin="5"/>
+                            <TextBlock Text="LOCATION: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding MostPopularLocation}" Margin="5,20,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding NumberOfRequestsByLocation}" Margin="5"/>
+                            <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding NumberOfRequestsByLocation}" Margin="5,20,0,0"/>
                         </StackPanel>
                         <Button Content="CREATE TOUR" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
@@ -83,12 +87,12 @@
                 <GroupBox Header="THE MOST POPULAR LANGUAGE" Grid.Column="1" Margin="5">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="LANGUAGE: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding MostPopularLanguage}" Margin="5"/>
+                            <TextBlock Text="LANGUAGE: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding MostPopularLanguage}" Margin="5,20,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding NumberOfRequestsByLanguage}" Margin="5"/>
+                            <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
+                            <TextBlock Text="{Binding NumberOfRequestsByLanguage}" Margin="5,20,0,0"/>
                         </StackPanel>
                         <Button Content="CREATE TOUR" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>

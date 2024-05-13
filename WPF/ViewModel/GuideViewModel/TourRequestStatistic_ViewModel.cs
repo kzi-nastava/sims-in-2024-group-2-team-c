@@ -127,17 +127,34 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             set { _tourRequests = value; OnPropertyChanged(nameof(TourRequests)); }
         }
         public ICommand SearchCommand { get; set; }
+        //public ICommand BackCommand { get; set; }
 
         public TourRequestStatistic_ViewModel()
         {
             _tourRequestService = new TourRequestService();
             //_locationService = new LocationService();
-            Years = new ObservableCollection<int>(Enumerable.Range(2010, DateTime.Now.Year - 2010 + 1));
+            Years = new ObservableCollection<int>(Enumerable.Range(2020, DateTime.Now.Year - 2020 + 1));
+            Years.Add(0);
             Locations = new ObservableCollection<string>(_tourRequestService.GetAllLocations());
             Languages = new ObservableCollection<string>(_tourRequestService.GetAllLanguages());
-            // MostPopularLocation = _tourRequestService.GetMostPopularLocation();
+            ShowMostPopularLocation();
+            ShowMostPopularLanguage();
             SearchCommand = new ViewModelCommandd(ExecuteSearchCommand);
+            UpdateTourRequests();
+            //BackCommand = 
             //SelectedYear = DateTime.Now.Year;
+        }
+        private void ShowMostPopularLocation()
+        {
+            (string mostPopularLocation, int maxCountLocation) = _tourRequestService.GetMostPopularLocation();
+            MostPopularLocation = mostPopularLocation;
+            NumberOfRequestsByLocation = maxCountLocation;
+        }
+        private void ShowMostPopularLanguage()
+        {
+            (string mostPopularLanguage, int maxCountLanguage) = _tourRequestService.GetMostPopularLanguage();
+            MostPopularLanguage = mostPopularLanguage;
+            NumberOfRequestsByLanguage = maxCountLanguage;
         }
         private void ExecuteSearchCommand(object parameter)
         {
@@ -145,7 +162,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         }
         private void UpdateTourRequests()
         {
-            //TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatistics());
+            TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatistics());
             if (SelectedLocation != null && SelectedYear == 0)
             {
                 //TourRequests = new ObservableCollection<StatisticTourRequestDTO>(
@@ -160,7 +177,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 /* TourRequests = new ObservableCollection<StatisticTourRequestDTO>(
                     _tourRequests.Where(t => t.Language == SelectedLanguage));*/
             }
-            else if (SelectedYear != 0)
+            else if (SelectedYear != 0 && SelectedLanguage=="Language" && SelectedLocation=="Location")
             {
 
                 /*TourRequests = new ObservableCollection<StatisticTourRequestDTO>(

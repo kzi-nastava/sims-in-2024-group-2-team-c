@@ -27,5 +27,9 @@ namespace BookingApp.WPF.View.GuideView
             TourRequestStatistic_ViewModel viewModel = new TourRequestStatistic_ViewModel();
             DataContext = viewModel;
         }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService?.GoBack();
+        }
     }
 }

@@ -93,6 +93,7 @@ namespace BookingApp.Service.TourServices
                 if(!locations.Contains(request.Location))
                     locations.Add(request.Location);
             }
+            locations.Add("Location");
             return locations;
         }
         public List<string> GetAllLanguages()
@@ -104,17 +105,60 @@ namespace BookingApp.Service.TourServices
                 if (!languages.Contains(request.Language))
                     languages.Add(request.Language);
             }
+            languages.Add("Language");
             return languages;
         }
-       /*public string GetMostPopularLocation() 
+       public (string mostPopularLocation, int maxCount) GetMostPopularLocation() 
        {
             List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
-            foreach (StatisticTourRequestDTO request in requests)
+            Dictionary<string, int> locationCounts = new Dictionary<string, int>();
+            foreach (var tourRequest in requests)
             {
-
+                if (!locationCounts.ContainsKey(tourRequest.Location))
+                {
+                    locationCounts[tourRequest.Location] = 0; 
+                }
+                locationCounts[tourRequest.Location]++; 
             }
-       }*/
-       public List<StatisticTourRequestDTO> GetTourRequestStatistics()
+            int maxCount = 0;
+            string mostPopularLocation = null;
+
+            foreach (var kvp in locationCounts)
+            {
+                if (kvp.Value > maxCount)
+                {
+                    maxCount = kvp.Value;
+                    mostPopularLocation = kvp.Key;
+                }
+            }
+            return (mostPopularLocation, maxCount);
+        }
+        public (string mostPopularLanguage, int maxCount) GetMostPopularLanguage()
+        {
+            List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
+            Dictionary<string, int> LanguageCounts = new Dictionary<string, int>();
+            foreach (var tourRequest in requests)
+            {
+                if (!LanguageCounts.ContainsKey(tourRequest.Language))
+                {
+                    LanguageCounts[tourRequest.Language] = 0;
+                }
+                LanguageCounts[tourRequest.Language]++;
+            }
+            int maxCount = 0;
+            string mostPopularLanguage = null;
+
+            foreach (var kvp in LanguageCounts)
+            {
+                if (kvp.Value > maxCount)
+                {
+                    maxCount = kvp.Value;
+                    mostPopularLanguage = kvp.Key;
+                }
+            }
+            return (mostPopularLanguage, maxCount);
+        }
+        public List<StatisticTourRequestDTO> GetTourRequestStatistics()
         {
             List<TourRequestDTO> requests = GetAllTourRequestDTOs();
             List<StatisticTourRequestDTO> dtos = new List<StatisticTourRequestDTO>();
