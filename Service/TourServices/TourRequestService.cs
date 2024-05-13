@@ -65,7 +65,7 @@ namespace BookingApp.Service.TourServices
 
             int number = 0;
 
-            foreach (var request in touristsRequests) {
+            foreach (TourRequest request in touristsRequests) {
 
                 TouristRequestDTO touristRequestDTO;
                 if (request.Status == TourRequestStatus.Accepted)
@@ -84,9 +84,149 @@ namespace BookingApp.Service.TourServices
 
             return requestDtos;
         }
+        public List<string> GetAllLocations()
+        {
+            List<string> locations = new List<string>();
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            foreach (TourRequestDTO request in requests)
+            {
+                if(!locations.Contains(request.Location))
+                    locations.Add(request.Location);
+            }
+            return locations;
+        }
+        public List<string> GetAllLanguages()
+        {
+            List<string> languages = new List<string>();
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            foreach (TourRequestDTO request in requests)
+            {
+                if (!languages.Contains(request.Language))
+                    languages.Add(request.Language);
+            }
+            return languages;
+        }
+       /* public string GetMostPopularLocation() 
+        {
+            
+        }*/
+       public List<StatisticTourRequestDTO> GetTourRequestStatistics()
+        {
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            List<StatisticTourRequestDTO> dtos = new List<StatisticTourRequestDTO>();
+            foreach(TourRequestDTO request in requests)
+            {
+                StatisticTourRequestDTO statistic = new StatisticTourRequestDTO 
+                {
+                    Location = request.Location,
+                    Language = request.Language,
+                    Year = request.StartDate.Year,
+                    Month = request.StartDate.Month,
+                    MonthNumberOfTours = CalculateNumberOfTourRequestByMonth(request.StartDate.Month),
+                    YearNumberOfTours = CalculateNumberOfTourRequestByYear(request.StartDate.Year)
+                };
+                dtos.Add(statistic);
+            }
+            return dtos;
+        }
+        public List<StatisticTourRequestDTO> GetTourRequestStatisticsByYear(int SelectedYear)
+        {
+            List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
+            List<StatisticTourRequestDTO> founded = new List<StatisticTourRequestDTO>();
+            foreach (StatisticTourRequestDTO request in requests)
+            {
+                if (request.Year == SelectedYear)
+                {
+                    //request.YearNumberOfTours = CalculateNumberOfTourRequestByLocation(request.Location);
+                    founded.Add(request);
+                }
 
+            }
+            return founded;
+        }
+        public List<StatisticTourRequestDTO> GetTourRequestStatisticsByLocation(string SelectedLocation)
+        {
+            List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
+            List<StatisticTourRequestDTO> founded = new List<StatisticTourRequestDTO>();
+            foreach (StatisticTourRequestDTO request in requests)
+            {
+                if(request.Location == SelectedLocation)
+                {
+                    request.YearNumberOfTours = CalculateNumberOfTourRequestByLocation(request.Location);
+                    founded.Add(request);
+                }
 
+            }
+            return founded;
+        }
+        public List<StatisticTourRequestDTO> GetTourRequestStatisticsByLanguage(string SelectedLanguage)
+        {
+            List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
+            List<StatisticTourRequestDTO> founded = new List<StatisticTourRequestDTO>();
+            foreach (StatisticTourRequestDTO request in requests)
+            {
+                if (request.Language == SelectedLanguage)
+                {
+                    request.YearNumberOfTours = CalculateNumberOfTourRequestByLanguage(request.Language);
+                    founded.Add(request);
+                }
 
+            }
+            return founded;
+        }
+        public int CalculateNumberOfTourRequestByLocation(string SelectedLocation)
+        {
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            int count = 0;
+            foreach (TourRequestDTO request in requests)
+            {
+                if (request.Location == SelectedLocation)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int CalculateNumberOfTourRequestByLanguage(string SelectedLanguage)
+        {
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            int count = 0;
+            foreach (TourRequestDTO request in requests)
+            {
+                if (request.Language == SelectedLanguage)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public int CalculateNumberOfTourRequestByMonth(int Month)
+        {
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            int count = 0;
+            foreach (TourRequestDTO request in requests)
+            {
+                if(request.StartDate.Month == Month)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int CalculateNumberOfTourRequestByYear(int Year)
+        {
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            int count = 0;
+            foreach (TourRequestDTO request in requests)
+            {
+                if (request.StartDate.Year == Year)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
 
         public SelectedTourRequestDTO GetTourRequest(TouristRequestDTO touristRequest) {
         
