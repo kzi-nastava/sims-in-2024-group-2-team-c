@@ -26,6 +26,20 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+
+        private ObservableCollection<TourRequestNotification> _requestNotifications;
+
+        public ObservableCollection<TourRequestNotification> RequestNotifications
+        {
+            get { return _requestNotifications; }
+            set
+            {
+                _requestNotifications = value;
+                OnPropertyChanged(nameof(RequestNotifications));
+            }
+        }
+
+
         private Visibility _content1Visibility = Visibility.Collapsed;
         private Visibility _content2Visibility = Visibility.Collapsed;
         private Visibility _content3Visibility = Visibility.Collapsed;
@@ -72,11 +86,24 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         private readonly TouristNotificationService _notificationService;
 
+        
+
         public NotificationViewModel() {
+
+            
             Content1Visibility = Visibility.Visible;
             _notificationService = new TouristNotificationService();
             LoadNotifications();
+            LoadRequestNotifications();
         
+        }
+
+
+        public void LoadRequestNotifications()
+        {
+
+            RequestNotifications = new ObservableCollection<TourRequestNotification>(_notificationService.GetAllRequestNotifications(LoggedInUser.Id));
+
         }
 
         public void LoadNotifications()

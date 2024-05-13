@@ -26,6 +26,17 @@ namespace BookingApp.Service.TourServices
             tourRequestNotificationRepository.Save(notification);
         }
 
+        public List<TourRequestNotification> GetAll() { return tourRequestNotificationRepository.GetAll(); }
+
+        public List<TourRequestNotification> GetByUserId(int userId)
+        {
+            List<TourRequestNotification> notifications = GetAll();
+
+            var userNotifications = notifications.Where(notification =>
+                notification.TouristId == userId );
+
+            return userNotifications.ToList();
+        }
 
 
     }

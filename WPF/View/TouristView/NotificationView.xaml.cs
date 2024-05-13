@@ -47,5 +47,12 @@ namespace BookingApp.WPF.View.TouristView
             viewModel.ShowTouristsAdded();
         }
 
+        private void ViewTourClick_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+
+        }
     }
 }

@@ -18,12 +18,13 @@ namespace BookingApp.Service.TourServices
         private readonly ITouristNotificationRepository _touristNotificationRepository;
         private readonly TouristService _touristService;
         private readonly TourService _tourService;
-
+        private readonly TourRequestNotificationService _tourRequestNotificationService;
 
         public TouristNotificationService() {
             _touristService = new TouristService();
             _touristNotificationRepository = Injectorr.CreateInstance<ITouristNotificationRepository>();
             _tourService = new TourService();
+            _tourRequestNotificationService = new TourRequestNotificationService();
         }
 
         
@@ -57,6 +58,12 @@ namespace BookingApp.Service.TourServices
                 notification.TouristId == userId && _touristService.GetActivity(userId));
 
             return userNotifications;
+        }
+
+        public List<TourRequestNotification> GetAllRequestNotifications(int userId)
+        {
+            return _tourRequestNotificationService.GetByUserId(userId);
+
         }
 
 

@@ -41,7 +41,26 @@
             
 
             <!-- Content for Button 2 -->
-            <TextBlock x:Name="Content2" Text="Content for Button 2"  Visibility="{Binding Content2Visibility}"/>
+            <ItemsControl x:Name="Content2"  ItemsSource="{Binding RequestNotifications}" Margin="5,15,5,15"   Visibility="{Binding Content2Visibility}">
+                <ItemsControl.ItemTemplate >
+                    <DataTemplate >
+                        <Border BorderBrush="#294724" BorderThickness="1" Margin="5" Background="White">
+                            <Grid Height="60">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="Your tour request has been approved"  Margin="10,0,10,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="350"/>
+                                <Button Grid.Column="1" Content="View" Click="ViewTourClick_Click"  Margin="10,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="20"/>
+
+                            </Grid>
+                            
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
             <!-- Content for Button 3 -->
 
