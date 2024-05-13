@@ -162,37 +162,21 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         }
         private void UpdateTourRequests()
         {
-            TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatistics());
-            if (SelectedLocation != null && SelectedYear == 0)
+            if (SelectedLocation != null && SelectedLanguage == "Language")
             {
-                //TourRequests = new ObservableCollection<StatisticTourRequestDTO>(
-                //    _tourRequests.Where(t => t.Location == SelectedLocation));
                 TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatisticsByLocation(SelectedLocation));
-
-
             }
-            else if (SelectedLanguage != null && SelectedYear == 0)
+            else if (SelectedLanguage != null && SelectedLocation == "Location")
             {
                 TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatisticsByLanguage(SelectedLanguage));
-                /* TourRequests = new ObservableCollection<StatisticTourRequestDTO>(
-                    _tourRequests.Where(t => t.Language == SelectedLanguage));*/
             }
-            else if (SelectedYear != 0 && SelectedLanguage=="Language" && SelectedLocation=="Location")
+            else if (SelectedYear != 0 && SelectedLanguage == "Language" && SelectedLocation == "Location")
             {
-
-                /*TourRequests = new ObservableCollection<StatisticTourRequestDTO>(
-                        _tourRequests.Where(t => t.StartDate.Year == SelectedYear));*/
                 TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatisticsByYear(SelectedYear));
-                /* if (IsMonthListBoxVisible == Visibility.Visible)
-                {
-                    TourRequests = new ObservableCollection<TourRequestDTO>(
-                        _tourRequests.Where(t => t.StartDate.Year == SelectedYear && t.StartDate.Month == SelectedMonth));
-                }
-                else
-                {
-                    TourRequests = new ObservableCollection<TourRequestDTO>(
-                        _tourRequests.Where(t => t.StartDate.Year == SelectedYear));
-                }*/
+            }
+            else
+            {
+                TourRequests = new ObservableCollection<StatisticTourRequestDTO>(_tourRequestService.GetTourRequestStatistics());
             }
         }
     }

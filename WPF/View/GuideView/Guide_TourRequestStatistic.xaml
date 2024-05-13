@@ -46,7 +46,7 @@
                     </ComboBox>
                     <ComboBox Margin="5" Name="YearComboBox" VerticalAlignment="Top" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"/>
                     <!-- Button SEARCH -->
-                    <Button Content="SEARCH" Grid.Column="1" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <Button Content="SEARCH" Click="Search_Click" Command ="{Binding SearchCommand}" Grid.Column="1" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <!-- YearListBox -->
                 <ListView x:Name="CombinedListBox" Grid.Column="1" Margin="5" ItemsSource="{Binding TourRequests}" Visibility="Visible">
@@ -79,7 +79,7 @@
                             <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
                             <TextBlock Text="{Binding NumberOfRequestsByLocation}" Margin="5,20,0,0"/>
                         </StackPanel>
-                        <Button Content="CREATE TOUR" Margin="5" HorizontalAlignment="Right"/>
+                        <Button Content="CREATE TOUR" Click="CreateTourLocation_Click" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -94,7 +94,7 @@
                             <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
                             <TextBlock Text="{Binding NumberOfRequestsByLanguage}" Margin="5,20,0,0"/>
                         </StackPanel>
-                        <Button Content="CREATE TOUR" Margin="5" HorizontalAlignment="Right"/>
+                        <Button Content="CREATE TOUR" Click="CreateTourLanguage_Click" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

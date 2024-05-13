@@ -31,5 +31,18 @@ namespace BookingApp.WPF.View.GuideView
         {
             this.NavigationService?.GoBack();
         }
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as TourRequestStatistic_ViewModel;
+            viewModel.SearchCommand.Execute(null);
+        }
+        private void CreateTourLocation_Click(object sender, RoutedEventArgs e)
+        {
+            //this.NavigationService?.Navigate();
+        }
+        private void CreateTourLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            //this.NavigationService?.Navigate();
+        }
     }
 }
