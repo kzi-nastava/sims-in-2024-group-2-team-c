@@ -176,20 +176,20 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         private void UpdateRequestCreatable()
         {
-            // Check if description, location, language, and dates are selected
+            
             bool basicCriteriaMet = !string.IsNullOrEmpty(Description) &&
                                      SelectedLocation != null &&
                                      SelectedLanguage != null &&
                                      StartDate != DateTime.MinValue &&
                                      EndDate != DateTime.MinValue;
 
-            // Check if start date is before end date and both dates are in the future
+            
             bool datesValid = StartDate < EndDate && StartDate > DateTime.Today && EndDate > DateTime.Today;
 
-            // Check if People collection has elements
+           
             bool peoplePresent = People.Count > 0;
 
-            // Update IsRequestCreatable based on all criteria
+            
             IsRequestCreatable = basicCriteriaMet && datesValid && peoplePresent;
         }
 
@@ -227,10 +227,10 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
        
 
-        // Create request command handler
+        
         private void CreateRequest(object parameter)
         {
-            // Add all entered people to the PeopleList
+            
             foreach (var person in People)
             {
                 PeopleList.Add(person);
@@ -238,7 +238,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             tourRequestService.CreateTourRequest(SelectedLocation, Description, SelectedLanguage, StartDate, EndDate, PeopleList);
             
-            // Clear the People collection after adding them to the list
+            
             People.Clear();
 
             _mainViewModel.ExecuteSavedTourRequestView(parameter);

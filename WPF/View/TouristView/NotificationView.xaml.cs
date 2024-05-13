@@ -1,4 +1,7 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
+using BookingApp.Service.TourServices;
+using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,12 +50,32 @@ namespace BookingApp.WPF.View.TouristView
             viewModel.ShowTouristsAdded();
         }
 
-        private void ViewTourClick_Click(object sender, RoutedEventArgs e)
+
+
+        private void ViewTour_Click(object sender, RoutedEventArgs e)
         {
-
-
-
-
+            if (sender is FrameworkElement frameworkElement && frameworkElement.DataContext is TourReccommendations reccommendation)
+            {
+                int tourId = reccommendation.TourId;
+                NavigateToNewPage(tourId);
+            }
         }
+
+
+
+        private void NavigateToNewPage(int id)
+        {
+            TourService tourService = new TourService();
+            List<HomeTourDTO> homeTourDTOs = tourService.GetAllTourDTOs();
+
+            HomeTourDTO selectedTour = homeTourDTOs.FirstOrDefault(t => t.TourId == id);
+
+            SelectedTourViewModel selectedTourViewModel = new SelectedTourViewModel(selectedTour);
+                SelectedTourView selectedTourView = new SelectedTourView();
+                selectedTourView.DataContext = selectedTourViewModel;
+                this.NavigationService.Navigate(selectedTourView);
+            
+        }
+
     }
 }

@@ -8,6 +8,8 @@
       d:DesignHeight="750" d:DesignWidth="430"
       Title="NotificationView" Background="White">
 
+  
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
@@ -37,8 +39,157 @@
 
         <Grid x:Name="ContentGrid" Margin="0,20,0,0" Grid.Row="2"  Background="#d1d7e0">
             <!-- Content for Button 1 -->
-            <TextBlock x:Name="Content1" Text="Content for Button 1"  Visibility="{Binding Content1Visibility}"/>
-            
+            <ItemsControl x:Name="Content1"  ItemsSource="{Binding Reccommendations}" Margin="5,15,5,15"   Visibility="{Binding Content1Visibility}">
+                <ItemsControl.ItemTemplate >
+                    <DataTemplate >
+                        <Border BorderBrush="#294724" BorderThickness="1" Margin="5" Background="White">
+                            <Grid Height="80">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Notification for when location is the same -->
+                            <Grid Height="80" Grid.Column="0"  >
+
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Opacity" Value="0"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsLocation}" Value="True"/>
+                                                        <Condition Binding="{Binding IsLanguage}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Opacity" Value="1"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width ="300"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="20">
+                                        <StackPanel  Orientation="Horizontal">
+                                            <TextBlock Grid.Column = "0"  Text="{Binding GuideName}" VerticalAlignment="Center" FontSize="15"  TextWrapping="Wrap" ></TextBlock>
+                                            <TextBlock Grid.Column = "1" Text=" has made a tour that is in " VerticalAlignment="Center"  FontSize="15" TextWrapping="Wrap" ></TextBlock>
+                                            
+                                        </StackPanel >
+                                        <StackPanel  Orientation="Horizontal" >
+                                            
+                                            <TextBlock  Grid.Column = "4" Text="{Binding Location}" VerticalAlignment="Center"  FontSize="15"  TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    
+
+
+
+
+
+                                </Grid>
+
+
+
+
+
+
+
+                                <!-- Notification for when language is the same -->
+                                <Grid Height="80" Grid.Column="0"  >
+
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Opacity" Value="0"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsLocation}" Value="False"/>
+                                                        <Condition Binding="{Binding IsLanguage}" Value="True"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Opacity" Value="1"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width ="300"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+
+                                        <StackPanel  Grid.Column="0" Orientation="Horizontal"  VerticalAlignment="Center" Margin="20">
+                                            <TextBlock Grid.Column = "0"   Text="{Binding GuideName}" VerticalAlignment="Center" FontSize="15"  TextWrapping="Wrap" ></TextBlock>
+                                            <TextBlock Grid.Column = "1" Text=" has made a tour in " VerticalAlignment="Center"  FontSize="15" TextWrapping="Wrap" ></TextBlock>
+                                            <TextBlock Grid.Column = "2" Text="{Binding Language}" VerticalAlignment="Center"  FontSize="15"  TextWrapping="Wrap" ></TextBlock>
+                                        </StackPanel >
+                                        
+                                   
+
+
+                                </Grid>
+
+
+
+                                <!-- Notification for when both are the same -->
+                                <Grid Height="80" Grid.Column="0"  >
+
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Opacity" Value="0"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding IsLocation}" Value="True"/>
+                                                        <Condition Binding="{Binding IsLanguage}" Value="True"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Opacity" Value="1"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width ="300"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="20">
+                                        <StackPanel  Orientation="Horizontal">
+                                            <TextBlock Grid.Column = "0"  Text="{Binding GuideName}" VerticalAlignment="Center" FontSize="15"  TextWrapping="Wrap" ></TextBlock>
+                                            <TextBlock Grid.Column = "1" Text=" has made a tour in " VerticalAlignment="Center"  FontSize="15" TextWrapping="Wrap" ></TextBlock>
+                                            <TextBlock Grid.Column = "2" Text="{Binding Language}" VerticalAlignment="Center"  FontSize="15"  TextWrapping="Wrap" ></TextBlock>
+                                        </StackPanel >
+                                        <StackPanel  Orientation="Horizontal" >
+                                            <TextBlock  Grid.Column = "3" Text=" and it's in " VerticalAlignment="Center"  FontSize="15"   TextWrapping="Wrap" />
+                                            <TextBlock  Grid.Column = "4" Text="{Binding Location}" VerticalAlignment="Center"  FontSize="15"  TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                   
+
+
+
+
+
+                                </Grid>
+
+
+                                <Button Grid.Column="1" Width="50" Height="30" Margin="20" Content="View" Click="ViewTour_Click"/>
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
 
             <!-- Content for Button 2 -->
             <ItemsControl x:Name="Content2"  ItemsSource="{Binding RequestNotifications}" Margin="5,15,5,15"   Visibility="{Binding Content2Visibility}">
@@ -52,7 +203,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="Your tour request has been approved"  Margin="10,0,10,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" MaxWidth="350"/>
-                                <Button Grid.Column="1" Content="View" Command="{Binding DataContext.ViewCommand, ElementName=Content2}" CommandParameter="{Binding Id}" Margin="20,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="20"/>
+                                <Button Grid.Column="1" Content="View" Command="{Binding DataContext.ViewCommand,RelativeSource={RelativeSource AncestorType={x:Type local:NotificationView}}}" CommandParameter="{Binding RequestId}" Margin="20,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Height="20"/>
 
                             </Grid>
                             

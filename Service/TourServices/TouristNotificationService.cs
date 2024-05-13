@@ -15,21 +15,19 @@ namespace BookingApp.Service.TourServices
     public class TouristNotificationService
     {
 
-
         private readonly ITouristNotificationRepository _touristNotificationRepository;
         private readonly TouristService _touristService;
         private readonly TourService _tourService;
         private readonly TourRequestNotificationService _tourRequestNotificationService;
+        private readonly TourReccommendationsService _tourReccommendationsService;
 
         public TouristNotificationService() {
             _touristService = new TouristService();
             _touristNotificationRepository = Injectorr.CreateInstance<ITouristNotificationRepository>();
             _tourService = new TourService();
             _tourRequestNotificationService = new TourRequestNotificationService();
+            _tourReccommendationsService = new TourReccommendationsService();
         }
-
-        
-
 
         public void Save(TouristNotification touristNotification)
         {
@@ -51,10 +49,9 @@ namespace BookingApp.Service.TourServices
 
         public IEnumerable<TouristNotification> GetAllNotificationsForUser(int userId)
         {
-            // Fetch all notifications from the repository
+            
             var allNotifications = _touristNotificationRepository.GetAll();
 
-            // Filter notifications based on userId and active TourInstance status
             var userNotifications = allNotifications.Where(notification =>
                 notification.TouristId == userId && _touristService.GetActivity(userId));
 
@@ -64,17 +61,16 @@ namespace BookingApp.Service.TourServices
         public List<TourRequestNotification> GetAllRequestNotifications(int userId)
         {
             return _tourRequestNotificationService.GetByUserId(userId);
-
         }
 
         public TouristRequestDTO GetAcceptedRequest(int requestId)
         {
-
             return _tourRequestNotificationService.GetRequest(requestId);
-
-
         }
 
+        public List<TourReccommendations> GetReccommendations() {
+            return _tourReccommendationsService.MakeReccommendations();
+        }
 
 
     }

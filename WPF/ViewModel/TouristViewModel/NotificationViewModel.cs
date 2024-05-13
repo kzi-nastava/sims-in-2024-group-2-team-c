@@ -14,6 +14,22 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
     public class NotificationViewModel : ViewModelBase
     {
+
+        private ObservableCollection<TourReccommendations> _reccommendations;
+
+        public ObservableCollection<TourReccommendations> Reccommendations
+        {
+            get { return _reccommendations; }
+            set
+            {
+                _reccommendations = value;
+                OnPropertyChanged(nameof(Reccommendations));
+            }
+        }
+
+
+
+
         private ObservableCollection<TouristNotification> _notifications;
 
         public ObservableCollection<TouristNotification> Notifications
@@ -87,19 +103,30 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private readonly TouristNotificationService _notificationService;
         private readonly MainViewModel _mainViewModel;
 
+
         public ViewModelCommandd ViewCommand { get; }
+        
 
 
         public NotificationViewModel() {
             _mainViewModel = LoggedInUser.mainViewModel;
             ViewCommand = new ViewModelCommandd(ExecuteViewCommand);
+           
             Content1Visibility = Visibility.Visible;
             _notificationService = new TouristNotificationService();
             LoadNotifications();
             LoadRequestNotifications();
+            LoadReccomendations();
         
         }
 
+
+        public void LoadReccomendations()
+        {
+
+            Reccommendations = new ObservableCollection<TourReccommendations>(_notificationService.GetReccommendations());
+
+        }
 
         private void ExecuteViewCommand(object parameter)
         {
@@ -113,8 +140,6 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             }
         }
-
-
 
         public void LoadRequestNotifications()
         {
