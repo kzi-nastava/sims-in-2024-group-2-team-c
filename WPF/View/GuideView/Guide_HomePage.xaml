@@ -68,7 +68,7 @@
         <Grid Grid.Column="1">
             <!-- Right half of the window -->
             <StackPanel>
-                <GroupBox Header="ACTIVE TOUR" FontWeight="Bold"  BorderBrush="#E0E0E0" BorderThickness="1"  Background="#d4fccc" Margin="20,20,20,0">
+                <GroupBox Header="ACTIVE TOUR" FontWeight="Bold"  BorderBrush="#E0E0E0" BorderThickness="1"  Background="#d4fccc" Margin="10">
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -189,19 +189,19 @@
                     <StackPanel Margin="20">
                         <StackPanel x:Name="VisitedTourName" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,5,0,5">
                             <TextBlock Text="NAME: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding StatisticTour.Name}"/>
+                            <TextBlock Text="{Binding StatisticTour.Name}" Margin="150,5,0,5"/>
                         </StackPanel>
                         <StackPanel x:Name="VisitedTourLocation" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,5">
                             <TextBlock Text="LOCATION: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding StatisticTour.Location}" />
+                            <TextBlock Text="{Binding StatisticTour.Location}" Margin="128,5,0,5"/>
                         </StackPanel>
                         <StackPanel x:Name="VisitedTourDescription" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,5">
                             <TextBlock Text="DESCRIPTION: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding StatisticTour.Description}"/>
+                            <TextBlock Text="{Binding StatisticTour.Description}" Margin="112,5,0,5"/>
                         </StackPanel>
                         <StackPanel x:Name="VisitedTourAttendance" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,5">
                             <TextBlock Text="ATTENDANCE PERCENTAGE: " FontWeight="Bold"/>
-                            <TextBlock Text="{Binding StatisticTour.Attendence}"/>
+                            <TextBlock Text="{Binding StatisticTour.Attendence}" Margin="33,5,0,5"/>
                         </StackPanel>
                         <Button Click="SeeTourStatisticDetailsButton_Click" Content="SEE MORE" Style="{StaticResource CustomButtonStyle}" Margin="0,20,0,0" Width="272" HorizontalAlignment="Right"/>
                     </StackPanel>

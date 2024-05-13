@@ -15,6 +15,7 @@ namespace BookingApp.Service.TourServices
     {
         private TourInstanceService tourInstanceService;
         private TourService tourService;
+        private KeyPointService keyPointService;
         private LocationService locationService;
 
         public EndedToursService()
@@ -22,6 +23,7 @@ namespace BookingApp.Service.TourServices
             tourInstanceService = new TourInstanceService();
             tourService = new();
             locationService = new LocationService();
+            keyPointService = new KeyPointService();
         }
 
         public List<TourStatisticDTO> GetEndedTours()
@@ -46,11 +48,24 @@ namespace BookingApp.Service.TourServices
                     LessThan18 = tourService.CalculateNumberOfTouristsUnder18(tour),
                     Between18And50 = tourService.CalculateNumberOfTourists18And50(tour),
                     MoreThan50 = tourService.CalculateNumberOfTouristsMore50(tour),
-                    Attendence = tourService.CalculateAttendacePercentage(instance)
+                    Attendence = tourService.CalculateAttendacePercentage(instance),
+                    KeyPoint = LoadKeyPoints(tour.KeyPointIds)
                 };
                 founded.Add(dto);
             }
             return founded;
+        }
+        public string LoadKeyPoints(List<int> Ids)
+        {
+            //string keyPoints = string.Empty;
+            List<string> keyPointName = new List<string>();
+            foreach(int id in Ids)
+            {
+                KeyPoint kp = keyPointService.GetById(id);
+                keyPointName.Add(kp.Name);
+                
+            }
+            return string.Join(",", keyPointName);
         }
         public string LoadLocation(int locationId)
         {
