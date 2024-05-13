@@ -117,9 +117,9 @@ namespace BookingApp.Service.TourServices
         }
 
 
-        public void Update(TourRequest tourRequest)
+        public TourRequest Update(TourRequest tourRequest)
         {
-             tourRequest = iTourRequestRepository.Update(tourRequest);
+             return iTourRequestRepository.Update(tourRequest);
 
         }
 
@@ -129,10 +129,8 @@ namespace BookingApp.Service.TourServices
             List<TourRequestDTO> dtos = new List<TourRequestDTO>();
             foreach(TourRequest tr in requests)
             {
-                if(tr.Status != TourRequestStatus.Accepted && tr.Status != TourRequestStatus.Invalid)
-                {
                     TourRequestDTO dto = new TourRequestDTO
-                {
+                    {
                     Id = tr.Id,
                     Status = tr.Status,
                     StartDate = tr.StartDate,
@@ -143,8 +141,20 @@ namespace BookingApp.Service.TourServices
                     Language = tr.Language,
                     NumberOfPeople = tr.NumberOfPeople,
                     Description = tr.Description
-                };
+                    };
                 dtos.Add(dto);
+            }
+            return dtos;
+        }
+        public List<TourRequestDTO> GetOnHoldRequests()
+        {
+            List<TourRequestDTO> requests = GetAllTourRequestDTOs();
+            List<TourRequestDTO> dtos = new List<TourRequestDTO>();
+            foreach (TourRequestDTO tr in requests)
+            {
+                if (tr.Status == TourRequestStatus.OnHold)
+                {
+                    dtos.Add(tr);
                 }
             }
             return dtos;
@@ -155,16 +165,16 @@ namespace BookingApp.Service.TourServices
             string ViewLocation = $"{location.City}, {location.Country}";
             return ViewLocation;
         }
-        public bool AcceptRequest(TourRequestDTO request)
+        public void AcceptRequest(TourRequestDTO request)
         {
             TourRequest found = GetById(request.Id);
             if (found != null)
             {
                 found.Status = TourRequestStatus.Accepted; //zahtev prihvacen
-                Update(found);
-                return true;
+                found = Update(found);
+                //return true;
             }
-            return false;
+           // return false;
         }
         public List<TourRequestDTO> FilterRequestsByDate(DateTime SelectedStartDate, DateTime SelectedEndDate)
         {

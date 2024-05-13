@@ -1,4 +1,6 @@
-﻿using BookingApp.WPF.ViewModel.GuideViewModel;
+﻿using BookingApp.DTO;
+using BookingApp.Model;
+using BookingApp.WPF.ViewModel.GuideViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +40,18 @@ namespace BookingApp.WPF.View.GuideView
         {
             NavigationService?.GoBack();
         }
+        private void TourRequestView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (requestsView.SelectedItem != null)
+            {
+                viewModel.SelectedTourRequest = (TourRequestDTO)requestsView.SelectedItem;
+            }
+        }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             //viewModel.SearchTourRequestCommand;
         }
+        
 
     }
 }
