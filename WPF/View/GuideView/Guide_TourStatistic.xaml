@@ -37,7 +37,7 @@
             </StackPanel>
 
             <!-- TOURS TABLE -->
-            <ListView x:Name="tourView" ItemsSource="{Binding EndedTours}" SelectedItem="{Binding Path=SelectedTour}" IsEnabled="True" SelectionChanged="TourView_SelectionChanged" IsSynchronizedWithCurrentItem="True" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="420">
+            <ListView x:Name="tourView" ItemsSource="{Binding EndedTours}" SelectedItem="{Binding Path=SelectedTour}" IsEnabled="True" SelectionChanged="TourView_SelectionChanged" IsSynchronizedWithCurrentItem="True" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="400">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="NAME" DisplayMemberBinding="{Binding Name}" Width="Auto" />
