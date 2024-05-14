@@ -42,5 +42,14 @@ namespace BookingApp.Service.TourServices
             return locationRepository.Get(id);
         }
 
+        public Location FindLocation(string city, string country)
+        {
+            return locationRepository.FindLocation(city, country);
+        }
+        public void Save(Location location)
+        {
+            locationRepository.Save(location);
+        }
+
     }
 }

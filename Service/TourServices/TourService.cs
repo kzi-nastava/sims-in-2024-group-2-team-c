@@ -74,7 +74,45 @@ namespace BookingApp.Service.TourServices
             }
             return founded;
         }
-       public Tour GetByActivity()
+        public void CreateTour(string name, string city, string country, string description, string language, int maxTourists, List<int> keyPointIds, List<DateTime> tourDates, int duration, List<string> imagePaths)
+        {
+
+            Location location = locationService.FindLocation(city, country);
+            if (location == null)
+            {
+                location = new Location(city, country);
+                locationService.Save(location);
+            }
+
+            if (keyPointIds.Count < 2)
+            {
+                throw new ArgumentException("Tura mora da sadrži barem dve ključne tačke.");
+            }
+
+            Tour newTour = new Tour
+            {
+                Name = name,
+                LocationId = location.Id,
+                Description = description,
+                Language = language,
+                KeyPointIds = keyPointIds,
+                Duration = duration,
+                Images = imagePaths,
+            };
+            Save(newTour);
+            //kreiranje instanci ture
+            List<int> tourInstancesids = new List<int>();
+
+            for (int i = 0; i < tourDates.Count; i++)
+            {
+                TourInstance tourInstance = new TourInstance(newTour.Id, maxTourists, 0, false, false, tourDates[i]);
+                tourInstanceService.Save(tourInstance);
+                int tourInstanceid = tourInstance.Id;
+                tourInstancesids.Add(tourInstanceid);
+            }
+            keyPointService.SetKeyPointTourId(keyPointIds, newTour.Id);
+        }
+        public Tour GetByActivity()
         {
             List<TourInstance> instances = tourInstanceService.GetAll();
             foreach (TourInstance i in instances)

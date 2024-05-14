@@ -2,10 +2,12 @@
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Service.TourServices;
+using BookingApp.WPF.View.GuideView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -127,6 +129,9 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             set { _tourRequests = value; OnPropertyChanged(nameof(TourRequests)); }
         }
         public ICommand SearchCommand { get; set; }
+       // public ICommand CreateTourLanguageCommand { get; set; }
+//        public ICommand CreateTourLocationCommand { get; set; }
+
         //public ICommand BackCommand { get; set; }
 
         public TourRequestStatistic_ViewModel()
@@ -140,10 +145,37 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             ShowMostPopularLocation();
             ShowMostPopularLanguage();
             SearchCommand = new ViewModelCommandd(ExecuteSearchCommand);
+            //CreateTourLanguageCommand = new ViewModelCommandd(ExecuteCreateCommandByLanguage);
+           // CreateTourLocationCommand = new ViewModelCommandd(ExecuteCreateCommandByLocation);
             UpdateTourRequests();
             //BackCommand = 
             //SelectedYear = DateTime.Now.Year;
         }
+
+        /*private void ExecuteCreateCommandByLanguage(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteCreateCommandByLocation(object obj)
+        {
+            string mostPopularItem = obj as string;
+
+            if (!string.IsNullOrEmpty(mostPopularItem))
+            {
+                // Kreiramo novi ViewModel za CreateTourByRequest i prosleđujemo mostPopularItem
+                CreateTourByRequest_ViewModel viewModel = new CreateTourByRequest_ViewModel
+                {
+                    Location = mostPopularItem  // Postavljamo lokaciju ili jezik u zavisnosti od parametra
+                };
+
+                // Navigacija na CreateTourByRequest Page
+                Guide_CreateTourByRequest createTourPage = new Guide_CreateTourByRequest();
+                createTourPage.DataContext = viewModel; // Postavljamo novi ViewModel kao DataContext za stranicu
+                this.NavigationService.Navigate(createTourPage);
+            }
+        }*/
+
         private void ShowMostPopularLocation()
         {
             (string mostPopularLocation, int maxCountLocation) = _tourRequestService.GetMostPopularLocation();

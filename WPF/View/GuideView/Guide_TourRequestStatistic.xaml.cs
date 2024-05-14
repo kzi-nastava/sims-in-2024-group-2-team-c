@@ -21,6 +21,7 @@ namespace BookingApp.WPF.View.GuideView
     /// </summary>
     public partial class Guide_TourRequestStatistic : Page
     {
+        
         public Guide_TourRequestStatistic()
         {
             InitializeComponent();
@@ -38,11 +39,25 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void CreateTourLocation_Click(object sender, RoutedEventArgs e)
         {
-            //this.NavigationService?.Navigate();
+            var MainViewModel = DataContext as TourRequestStatistic_ViewModel;
+            CreateTourByRequest_ViewModel viewModel = new CreateTourByRequest_ViewModel
+            {
+                Location = MainViewModel.MostPopularLocation
+            };
+            Guide_CreateTourByRequest createTourPage = new Guide_CreateTourByRequest();
+            createTourPage.DataContext = viewModel;
+            this.NavigationService.Navigate(createTourPage);
         }
         private void CreateTourLanguage_Click(object sender, RoutedEventArgs e)
         {
-            //this.NavigationService?.Navigate();
+            var MainViewModel = DataContext as TourRequestStatistic_ViewModel;
+            CreateTourByRequest_ViewModel viewModel = new CreateTourByRequest_ViewModel
+            {
+                Language = MainViewModel.MostPopularLanguage
+            };
+            Guide_CreateTourByRequest createTourPage = new Guide_CreateTourByRequest();
+            createTourPage.DataContext = viewModel;
+            this.NavigationService.Navigate(createTourPage);
         }
     }
 }

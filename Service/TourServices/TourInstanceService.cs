@@ -71,7 +71,10 @@ namespace BookingApp.Service.TourServices
         {
             return iTourInstanceRepository.Update(tourInstance);
         }
-
+        public void Save(TourInstance tourInstance)
+        {
+            iTourInstanceRepository.Save(tourInstance);
+        }
 
     }
 }
