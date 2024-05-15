@@ -12,7 +12,7 @@ using System.Windows;
 using BookingApp.Repository;
 using BookingApp.Injector;
 using System.Windows.Shapes;
-using BookingApp.Service.ReservationService;
+using BookingApp.Service.AccommodationServices;
 
 
 namespace BookingApp.Service.AccommodationServices
@@ -24,7 +24,7 @@ namespace BookingApp.Service.AccommodationServices
         private readonly GuestReservationDTO _selectedReservation;
         private List<AccommodationRate> _accommodationRates;
 
-        private ReservationService.ReservationService  reservationService;
+        private ReservationService  reservationService;
         private ReservationRepository reservationRepository ;
 
 

@@ -13,7 +13,7 @@ namespace BookingApp.Service
     public class ReservationDelayService
     {
         private readonly IReservationDelayRepository _reservationDelayRepository;
-        private readonly ReservationRepository _reservationRepository; //mislim da treba servis da pozivas
+        private readonly ReservationRepository _reservationRepository; 
 
         public ReservationDelayService()
         {

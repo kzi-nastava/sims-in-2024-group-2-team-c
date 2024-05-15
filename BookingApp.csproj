@@ -57,8 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\AccommodationServices\" />
-    <Folder Include="WPF\ViewModel\OwnerViewModel\" />
     <Folder Include="Service\TourServices\" />
     <Folder Include="WPF\ViewModel\GuideViewModel\" />
   </ItemGroup>
