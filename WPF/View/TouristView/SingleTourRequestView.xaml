@@ -39,8 +39,20 @@
 
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,30,10,10">
                     <TextBlock Text="Date:  " VerticalAlignment="Center" FontSize="15" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding TourRequest.StartInterval}" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="NO DATE IS PICKED"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TourRequest.Status}" Value="ACCEPTED">
+                                        <Setter Property="Text" Value="{Binding ChosenDate}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </StackPanel>
+
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="20,10,10,10">
                     <TextBlock Text="Location:  " VerticalAlignment="Center" FontSize="15" FontWeight="SemiBold"/>

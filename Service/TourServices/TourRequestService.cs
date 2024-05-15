@@ -280,30 +280,7 @@ namespace BookingApp.Service.TourServices
             return count;
         }
 
-        public SelectedTourRequestDTO GetTourRequest(TouristRequestDTO touristRequest) {
-        
-            
-            TourRequest request = GetById(touristRequest.TourRequestId);
-            Location location = locationService.Get(request.LocationId);
-            string CityAndCountry = location.City + ", " + location.Country;
-            string activity;
-
-            if (request.Status == TourRequestStatus.Accepted)
-            {
-                activity = "ACCEPTED";
-            }
-            else if (request.Status == TourRequestStatus.Invalid)
-            {
-                activity = "INVALID";
-            }
-            else
-            {
-                activity = "ON HOLD";
-            }
-
-            SelectedTourRequestDTO selectedRequest = new SelectedTourRequestDTO(touristRequest.Number,request.StartDate,request.EndDate,request.Description, CityAndCountry,request.Language,activity);
-            return selectedRequest;
-        }
+       
 
         public List<TourRequest> GetByTourist(int id)
         {

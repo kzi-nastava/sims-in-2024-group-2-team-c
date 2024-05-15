@@ -62,6 +62,13 @@ namespace BookingApp.Service.TourServices
            return iTourInstanceRepository.GetTourInstancesByTourId(tourId);
         }
 
+        public TourInstance GetRequestInstance(int tourId)
+        {
+            List<TourInstance> instances = GetAll();
+            TourInstance instance = instances.FirstOrDefault(tour => tour.IdTour == tourId);
+            return instance;
+        }
+
         public List<TourInstance> GetInstancesByTourIdAndAvailableSlots(int tourId, int? numberOfPeople)
         {
             return iTourInstanceRepository.GetInstancesByTourIdAndAvailableSlots(tourId, numberOfPeople);

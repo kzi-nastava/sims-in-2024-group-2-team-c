@@ -75,7 +75,7 @@ namespace BookingApp.Service.TourServices
             }
             return founded;
         }
-        public int CreateTour(string name, string city, string country, string description, string language, int maxTourists, List<int> keyPointIds, List<DateTime> tourDates, int duration, List<string> imagePaths)
+        public Tour CreateTour(string name, string city, string country, string description, string language, int maxTourists, List<int> keyPointIds, List<DateTime> tourDates, int duration, List<string> imagePaths)
         {
 
             Location location = locationService.FindLocation(city, country);
@@ -113,7 +113,7 @@ namespace BookingApp.Service.TourServices
             }
             keyPointService.SetKeyPointTourId(keyPointIds, newTour.Id);
 
-            return newTour.Id;
+            return newTour;
         }
         public Tour GetByActivity()
         {

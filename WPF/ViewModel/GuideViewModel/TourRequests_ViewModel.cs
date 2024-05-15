@@ -40,7 +40,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             }
          
         }
-        private DateTime _selectedStartDate;
+        private DateTime _selectedStartDate = new DateTime(2024, 1, 1);
         public DateTime SelectedStartDate
         {
             get { return _selectedStartDate; }
@@ -51,7 +51,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             }
         }
 
-        private DateTime _selectedEndDate;
+        private DateTime _selectedEndDate = new DateTime(2024, 1, 1);
         public DateTime SelectedEndDate
         {
             get { return _selectedEndDate; }
