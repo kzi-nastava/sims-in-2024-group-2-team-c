@@ -46,6 +46,5 @@ namespace BookingApp.Model
             TotalRating = Convert.ToDouble(values[10]);
         }
 
-        
     }
 }

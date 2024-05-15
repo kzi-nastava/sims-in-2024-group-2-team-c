@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Repository;
+using System.Reflection;
 
 namespace BookingApp.Repository
 {
@@ -19,7 +20,7 @@ namespace BookingApp.Repository
         private List<AccommodationRate> _accommodationRates;
         private GuestReservationRepository guestReservationRepository;
 
-        private ReservationRepository reservationRepository; //dodato umesto guestresrep
+        private ReservationRepository reservationRepository;
 
 
         public List<AccommodationRate> GetAll()
@@ -48,7 +49,6 @@ namespace BookingApp.Repository
             _accommodationRates = _serializer.FromCSV(FilePath);
             _accommodationRates.Add(accommodationRate);
             _serializer.ToCSV(FilePath, _accommodationRates);
-            //guestReservationRepository = new GuestReservationRepository();
         }
 
         public int NextId()
@@ -61,24 +61,57 @@ namespace BookingApp.Repository
             return _accommodationRates.Max(a => a.Id) + 1;
         }
 
-        public bool HasUserRatedAccommodation(int userId, string name)
+        public bool HasUserRatedAccommodation(int userId, int reservationId)
         {
             List<AccommodationRate> rates = _serializer.FromCSV(FilePath);
 
             List<GuestReservation> reservations = guestReservationRepository.GetAll();
 
-            var reservation = reservations.FirstOrDefault(r => r.GuestId == userId && r.Accommodation.Name == name);
+            var reservation = reservations.FirstOrDefault(r => r.GuestId == userId && r.ReservationId == reservationId);
 
             if (reservation != null)
             {
                 return rates.Any(rate => rate.Reservation.Id == reservation.ReservationId);
-
             }
             else
             {
                 return false;
             }
         }
+
+        public void Update(AccommodationRate accommodationRate)
+        {
+            _accommodationRates = _serializer.FromCSV(FilePath);
+
+            int index = _accommodationRates.FindIndex(r => r.Id == accommodationRate.Id);
+            if (index != -1)
+            {
+                _accommodationRates[index] = accommodationRate;
+                _serializer.ToCSV(FilePath, _accommodationRates);
+            }
+            else
+            {
+                throw new Exception("Accommodation rate with the specified ID not found.");
+            }
+        }
+
+        public AccommodationRate GetById(int id)
+        {
+            _accommodationRates = _serializer.FromCSV(FilePath);
+
+            var accommodationRate = _accommodationRates.FirstOrDefault(r => r.Id == id);
+
+            if (accommodationRate == null)
+            {   
+                throw new Exception("Accommodation rate with the specified ID not found.");
+            }
+            else
+            {
+                return accommodationRate;
+            }
+        }
+
+
 
     }
 

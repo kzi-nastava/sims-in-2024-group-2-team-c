@@ -34,17 +34,17 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="LightBlue">
         <!-- Booking.com u gornjem levom uglu -->
         <TextBlock Text="Booking.com" FontSize="18" FontWeight="Bold" Foreground="DarkBlue" Margin="10"/>
 
         <!-- Horizontalni meni -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
-            <Button x:Name="HomeButton" Content="Home" Margin="5" Style="{StaticResource LinkButtonStyle}" Click="Home_Click"/>
-            <Button x:Name="AccommodationsButton" Content="Accommodations" Margin="5" Style="{StaticResource LinkButtonStyle}" />
-            <Button x:Name="RatingsButton" Content="Ratings" Margin="5" Style="{StaticResource LinkButtonStyle }" Click="Ratings_Click" />
-            <Button x:Name="RenovationButton" Content="Renovation" Margin="5" Style="{StaticResource LinkButtonStyle}" />
-            <Button x:Name="StatisticsButton" Content="Statistics" Margin="5" Style="{StaticResource LinkButtonStyle}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" >
+            <Button x:Name="HomeButton" Content="Home" Margin="5" Style="{StaticResource LinkButtonStyle}" Click="Home_Click" FontSize="15"/>
+            <Button x:Name="AccommodationsButton" Content="Accommodations" Margin="5" Style="{StaticResource LinkButtonStyle}" FontSize="15" />
+            <Button x:Name="RatingsButton" Content="Ratings" Margin="5" Style="{StaticResource LinkButtonStyle }" Click="Ratings_Click" FontSize="15"/>
+            <Button x:Name="RenovationButton" Content="Renovation" Margin="5" Style="{StaticResource LinkButtonStyle}" Click="Renovations_Click" FontSize="15"/>
+            <Button x:Name="StatisticsButton" Content="Statistics" Margin="5" Style="{StaticResource LinkButtonStyle}" FontSize="15"/>
         </StackPanel>
 
         <!-- Ikona za Profile u gornjem desnom uglu -->
@@ -56,6 +56,6 @@
         <!-- <Button Content="See Your Ratings" Click="OwnersRatings_Click" Margin="200" />  -->
 
         <!-- Frame za prikaz stranica -->
-        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,55,0,0"/>
     </Grid>
 </Window>

@@ -27,7 +27,7 @@ namespace BookingApp.Model
             Guest = guest;
             ArrivalDate = startDate;
             DepartureDate = endDate;
-            IsReserved = isReserved; 
+            IsReserved = isReserved;  //jel treba ovde kao da je pocetna vrednost uvek true dok se to ne promeni
         }
 
         public string[] ToCSV()

@@ -10,7 +10,6 @@ namespace BookingApp.WPF.View.GuestView
     /// </summary>
     public partial class AccommodationDetails : Page
     {
-        private GuestReservationRepository guestReservationRepository;
         private Accommodation selectedAccommodation;
 
         public AccommodationDetails()
@@ -61,8 +60,6 @@ namespace BookingApp.WPF.View.GuestView
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-
-            //this.Close();
             NavigationService?.GoBack();
 
         }

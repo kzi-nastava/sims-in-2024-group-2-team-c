@@ -54,6 +54,12 @@ namespace BookingApp.Repository
             return _guestRatings.Max(r => r.Id) + 1;
         }
 
+        public GuestRating GetRatingsByOwnerId(int Id)
+        {
+            GuestRating rating = _guestRatings.Find(r => r.Owner.Id == Id);
+            return rating;
+        }
+
     }
 
 }

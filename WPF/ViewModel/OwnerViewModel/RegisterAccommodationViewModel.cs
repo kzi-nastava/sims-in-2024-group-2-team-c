@@ -15,11 +15,21 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
     public class RegisterAccommodationViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public User LoggedInUser { get; set; }
         private readonly AccommodationRepository _repository;
         private readonly LocationRepository locationRepository;
         List<string> imagePaths = new List<string>();
         public List<string> Images;
+
+        private LoggedInUser _loggedInUser;
+        public LoggedInUser LoggedInUser
+        {
+            get { return _loggedInUser; }
+            set
+            {
+                _loggedInUser = value;
+                OnPropertyChanged(nameof(LoggedInUser));
+            }
+        }
 
         private string _name;
         public string Name
@@ -154,6 +164,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
                 MaxGuests = maxGuests,
                 MinBookingDays = minBookingDays,
                 CancellationDays = cancellationDays,
+                Owner = new Owner { Id = LoggedInUser.Id },
                 Images = imagePaths
             };
 

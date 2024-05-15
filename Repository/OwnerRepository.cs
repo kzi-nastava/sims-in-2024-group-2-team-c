@@ -78,5 +78,15 @@ namespace BookingApp.Repository
            
             return _owners.FirstOrDefault(owner => owner.Id == loggedInUserId);
         }
+
+        public Owner GetOwnerByUsername(string ownerUsername)
+        {
+            return _owners.FirstOrDefault(o => o.Username == ownerUsername);
+        }
+
+        public int GetOwnerIdByOwnerUsername(string ownerUsername)
+        {
+            return GetOwnerByUsername(ownerUsername).Id;
+        }
     }
 }

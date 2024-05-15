@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.GuestView"
+        xmlns:converters="clr-namespace:BookingApp.Converters"
         d:DesignHeight="720"
         d:DesignWidth="1280"
         mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:FirstImageConverter x:Key="FirstImageConverter"/>
+    </Page.Resources>
 
     <Grid Margin="10,52,10,10" Background="#F0F0F0">
         <Grid.RowDefinitions>
@@ -26,18 +31,7 @@
                 <DataGridTemplateColumn Header="Preview">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding Images}" HorizontalAlignment="Left">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Image Source="{Binding}" Width="70" Height="70" Margin="0,0,10,0"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            <Image Source="{Binding Images, Converter={StaticResource FirstImageConverter}}" Width="70" Height="70" Margin="0,0,10,0"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

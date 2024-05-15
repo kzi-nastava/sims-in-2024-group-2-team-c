@@ -8,7 +8,7 @@
     mc:Ignorable="d" 
     d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Margin="0,50,0,0" Background="LightBlue">
+    <Grid  Background="LightBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -17,7 +17,7 @@
 
         <TextBlock Text="Add New Accommodation" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -69,8 +69,8 @@
                 <TextBox x:Name="txtImagePath" Width="100" Margin="80,0,0,70" VerticalAlignment="Top"/>
             </StackPanel>
 
-            <Button Grid.Row="10" Grid.Column="1" x:Name="btnSave" Content="Save" Click="SaveAccommodation" Margin="5" Width="70" Background="Green" Height="30"/>
-            <Button Grid.Row="10" Grid.Column="0" Content="Cancel" Click="CancelButton_Click" Margin="5" Width="70" Background="IndianRed" Height="30"/>
+            <Button Grid.Row="10" Grid.Column="1" x:Name="btnSave" Content="Save" Click="SaveAccommodation" Margin="130,5,0,5" Width="70" Background="Green" Height="30" />
+            <Button Grid.Row="10" Grid.Column="0" Content="Cancel" Click="CancelButton_Click" Margin="5" Width="70" Background="IndianRed" Height="30" />
 
         </Grid>
     </Grid>

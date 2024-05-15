@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace BookingApp.Model
 {
-    class GuestReservation : ISerializable
+    public class GuestReservation : ISerializable
     {
 
         public int ReservationId { get; set; }

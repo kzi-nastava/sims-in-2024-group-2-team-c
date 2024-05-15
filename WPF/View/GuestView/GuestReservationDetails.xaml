@@ -4,13 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.GuestView"
+        xmlns:converters="clr-namespace:BookingApp.Converters"
         d:DesignHeight="720"
         d:DesignWidth="1280"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:GuestReservationDetails}}}">
 
     <Page.Resources>
-        <local:CheckOutDateToColorConverter x:Key="CheckOutDateToColorConverter"/>
+        <converters:CheckOutDateToColorConverter x:Key="CheckOutDateToColorConverter"/>
+        <Style x:Key="CenteredCellStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
     </Page.Resources>
 
     <Grid Margin="10,52,10,10" Background="#F0F0F0">
@@ -22,26 +28,27 @@
             <RowDefinition Height="Auto" MinHeight="390.72"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Margin="10,10,10,17" Text="Here is a list of all your reservations:" FontWeight="Bold" FontSize="17"/>
+        <TextBlock Grid.Row="1" Margin="10,10,10,17" Text="List of all your reservations:" FontWeight="Bold" FontSize="17"/>
 
-        <Border Background="LightBlue" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,14,15,0" Width="140" Height="30" Grid.Row="1">
+        <Border Background="LightBlue" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1092,0,0,0" Width="140" Height="30" Grid.Row="1">
             <TextBlock Text="Scroll down to see all." FontWeight="Bold" Margin="1,0,1,0"/>
         </Border>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="2" ItemsSource="{Binding GuestReservations}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True" Margin="10,10,10,362" Grid.RowSpan="3">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" ItemsSource="{Binding GuestReservations}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True" Margin="10,44,10,313" Grid.RowSpan="4">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource CenteredCellStyle}"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" ElementStyle="{StaticResource CenteredCellStyle}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" ElementStyle="{StaticResource CenteredCellStyle}"/>
                 <DataGridTemplateColumn Header="Preview">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!-- Dodajte kod za prikaz slike ili preview-a ako je potrebno -->
+                            <Image Source="{Binding ImageUrl}" Width="160" Height="160" Margin="5,0,5,0"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="CheckIn" Binding="{Binding CheckIn}"/>
-                <DataGridTextColumn Header="CheckOut" Binding="{Binding CheckOut}"/>
+                <DataGridTextColumn Header="CheckIn" Binding="{Binding CheckIn}" ElementStyle="{StaticResource CenteredCellStyle}"/>
+                <DataGridTextColumn Header="CheckOut" Binding="{Binding CheckOut}" ElementStyle="{StaticResource CenteredCellStyle}"/>
+                <DataGridTextColumn Header="Owner" Binding="{Binding OwnerUsername}" ElementStyle="{StaticResource CenteredCellStyle}"/>
             </DataGrid.Columns>
 
             <DataGrid.RowStyle>
@@ -51,15 +58,15 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <Separator Grid.Row="4" Margin="0,34,0,329"/>
+        <Separator Grid.Row="4" Margin="0,91,0,300"/>
 
-        <TextBlock Grid.Row="4" Margin="10,78,10,17" Text="Click on any row from the table and:" FontWeight="Bold" FontSize="17">
+        <TextBlock Grid.Row="4" Margin="10,109,10,0" Text="Click on any row from the table and:" FontWeight="Bold" FontSize="17">
             <TextBlock.TextDecorations>
                 <TextDecoration Location="Underline"/>
             </TextBlock.TextDecorations>
         </TextBlock>
 
-        <Grid  Grid.Row="4" VerticalAlignment="Top" Margin="10,117,10,0" Height="274">
+        <Grid  Grid.Row="4" VerticalAlignment="Top" Margin="10,131,10,0" Height="260">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -72,16 +79,16 @@
             <Button Content="RATE" Command="{Binding RateReservationCommand}" 
         CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" 
         HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" 
-        Margin="440,14,0,0" Height="50" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
+        Margin="440,23,0,0" Height="41" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
 
             <!-- Drugi red: Click here if you want to see your grades by the owners -->
             <Label Content="Click here if you want to see your grades by the owners:" 
         VerticalAlignment="Top" Margin="0,87,0,0" Height="41" FontSize="15"/>
 
-            <Button Content="RATING LIST" Command="{Binding RateReservationCommand}" 
+            <Button Content="RATING LIST" Command="{Binding RatingListCommand}" 
         CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" 
         HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" 
-        Margin="440,80,0,0" Height="50" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
+        Margin="440,87,0,0" Height="43" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
 
             <!-- Treći red: Click here if you want to reschedule your reservation -->
             <Label Content="Click here if you want to reschedule your reservation:" 
@@ -90,7 +97,7 @@
             <Button Content="RESCHEDULE RESERVATION" Command="{Binding RescheduleReservationCommand}" 
         CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" 
         HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" 
-        Margin="440,144,0,0" Height="50" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
+        Margin="440,151,0,0" Height="43" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
 
             <!-- Četvrti red: Click here if you want to cancel your reservation -->
             <Label Content="Click here if you want to cancel your reservation:" 
@@ -99,7 +106,7 @@
             <Button Content="CANCEL RESERVATION" Command="{Binding CancelReservationCommand}" 
         CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItem}" 
         HorizontalAlignment="Left" VerticalAlignment="Top" Width="244" 
-        Margin="440,208,0,0" Height="50" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
+        Margin="440,215,0,0" Height="43" FontSize="18" Background="CadetBlue" Grid.ColumnSpan="2"/>
         </Grid>
 
         <Button BorderThickness="0" Background="Transparent" Margin="1004,330,15,17" Grid.Row="4" Click="GoBackButton_Click">
