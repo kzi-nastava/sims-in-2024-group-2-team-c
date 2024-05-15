@@ -26,7 +26,15 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             get { return _selectedDate; }
             set
             {
-                _selectedDate = value;
+                if(value > TourRequest.StartDate.Date && value< TourRequest.EndDate.Date)
+                {
+                    _selectedDate = value;
+                }
+                else
+                {
+                    MessageBox.Show("Selektuj turu izmedju " + TourRequest.StartDate.ToString("dd.MM.yyyy. HH:mm:ss") + "i " + TourRequest.EndDate.ToString("dd.MM.yyyy. HH:mm:ss"));
+                }
+                
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
