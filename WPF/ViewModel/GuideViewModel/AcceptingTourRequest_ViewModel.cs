@@ -75,15 +75,16 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             List<string> images = new List<string>();
             List<DateTime> dates = new List<DateTime>();
             dates.Add(SelectedDate);
-            TourRequestNotification notification = new TourRequestNotification 
+            
+            int tourId = tourService.CreateTour(Name, location[0].Trim(), location[1].Trim(), Description, TourRequest.Language, 20, TourRequest.PeopleIds, dates, 2, images);
+            TourRequestNotification notification = new TourRequestNotification
             {
                 Id = tourRequestNotificationService.NextId(),
-                RequestId= TourRequest.Id,
-                TourId = 5,
+                RequestId = TourRequest.Id,
+                TourId = tourId,
                 TouristId = 4
                 //TouristId = TourRequest.PeopleIds[0]
             };
-            tourService.CreateTour(Name, location[0], location[1], Description, TourRequest.Language, 20, TourRequest.PeopleIds, dates, 2, images);
             tourRequestNotificationService.SendNotification(notification);
             IsSent = Visibility.Visible;
         }
