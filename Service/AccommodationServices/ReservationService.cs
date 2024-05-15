@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingApp.Service.ReservationService
+namespace BookingApp.Service.AccommodationServices
 {
     public class ReservationService
     {
@@ -17,7 +17,11 @@ namespace BookingApp.Service.ReservationService
             _reservationRepository = new ReservationRepository();
         }
 
-       
+        public List<Reservation> GetAll()
+        {
+            return _reservationRepository.GetAll();
+        }
+
         public Reservation FindOldReservation(Guest guest, Accommodation accommodation)
         {
             // Pretražite listu rezervacija da biste pronašli staru rezervaciju na osnovu gosta i smeštaja
@@ -29,7 +33,7 @@ namespace BookingApp.Service.ReservationService
                     return reservation;
                 }
             }
-            return null; 
+            return null;
         }
     }
 }

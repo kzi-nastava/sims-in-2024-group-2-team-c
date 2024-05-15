@@ -37,10 +37,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
            
         }
 
-       
-
-
-
+     
         public ObservableCollection<Reservation> Reservations
         {
             get { return reservations; }

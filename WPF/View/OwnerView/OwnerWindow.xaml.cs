@@ -38,6 +38,12 @@ namespace BookingApp.WPF.View.OwnerView
             this.Content = guestRatingForm;
         }
 
+        private void Renovations_Click(object sender, RoutedEventArgs e)
+        {
+            RenovationsList renovationsList = new RenovationsList();
+            this.Content = renovationsList;
+        }
+
         //sve ostale uradi ovako, samo pazi da se ne preklapa tekst gore!
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
