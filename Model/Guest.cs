@@ -9,10 +9,12 @@ namespace BookingApp.Model
         public string Surname { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public bool SuperGuestStatus { get; set; }
+        public int BonusPoints { get; set; }
 
         public Guest() { }
 
-        public Guest(string username, string password,string name,string surname, string email, string phonenumber)
+        public Guest(string username, string password,string name,string surname, string email, string phonenumber, bool superGuest, int bonusPoints)
         {
             Username = username;
             Password = password;
@@ -20,12 +22,14 @@ namespace BookingApp.Model
             Surname = surname;
             Email = email;
             PhoneNumber = phonenumber;
+            SuperGuestStatus = superGuest;
+            BonusPoints = bonusPoints;
 
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password, Name, Surname, Email, PhoneNumber };
+            string[] csvValues = { Id.ToString(), Username, Password, Name, Surname, Email, PhoneNumber, SuperGuestStatus.ToString(), BonusPoints.ToString() };
             return csvValues;
         }
 
@@ -38,6 +42,8 @@ namespace BookingApp.Model
             Surname = values[4];
             Email = values[5];
             PhoneNumber = values[6];
+            SuperGuestStatus = Convert.ToBoolean(values[7]);
+            BonusPoints = Convert.ToInt32(values[8]);
         }
 
 

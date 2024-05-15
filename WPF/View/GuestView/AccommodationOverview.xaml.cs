@@ -21,10 +21,6 @@ namespace BookingApp.WPF.View.GuestView
         private LocationRepository locationRepository;
         private MainGuestWindow mainGuestWindow;
 
-        private List<Accommodation> GetAllAccommodations()
-        {
-            return accommodationRepository.GetAll();
-        }
 
 
         public AccommodationOverview(MainGuestWindow mainWindow)
@@ -76,7 +72,7 @@ namespace BookingApp.WPF.View.GuestView
 
             if (!string.IsNullOrEmpty(name))
             {
-                accommodations = accommodations.Where(a => a.Name.ToLower().Contains(name)).ToList();
+                accommodations = accommodations.Where(a => a.Name.ToLower().StartsWith(name)).ToList();
             }
 
             if (!string.IsNullOrEmpty(type))

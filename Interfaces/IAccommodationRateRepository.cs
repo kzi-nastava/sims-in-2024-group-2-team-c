@@ -9,12 +9,12 @@ namespace BookingApp.Interfaces
 {
     public interface IAccommodationRateRepository
     {
-        bool HasUserRatedAccommodation(int userId, string name);
+        bool HasUserRatedAccommodation(int userId, int Id);
         public void Save(AccommodationRate accommodationRate);
-
         public List<AccommodationRate> GetAll();
         public string GetFilePath();
-
+        void Update(AccommodationRate accommodationRate);
+        public AccommodationRate GetById(int id);
     }
 
 }

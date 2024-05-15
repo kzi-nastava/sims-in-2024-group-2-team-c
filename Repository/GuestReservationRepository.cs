@@ -13,12 +13,20 @@ namespace BookingApp.Repository
     {
 
         private string filePath = "../../../Resources/Data/guestReservations.csv";
-        private Serializer<GuestReservation> serializer = new Serializer<GuestReservation>();
+        private Serializer<GuestReservation> serializer; // = new Serializer<GuestReservation>();
+        private readonly OwnerRepository ownerRepository;
+        List<GuestReservation> reservations;
 
- 
+        public GuestReservationRepository()
+        {
+            serializer = new Serializer<GuestReservation>();
+            reservations = serializer.FromCSV(filePath);
+            ownerRepository = new OwnerRepository();
+        }
+
         public List<AvailableDateDisplay> FindAvailableReservations(Accommodation selectedAccommodation, DateTime startDate, DateTime endDate, int stayDuration)
         {
-            List<GuestReservation> reservations = serializer.FromCSV(filePath);
+            //List<GuestReservation> reservations = serializer.FromCSV(filePath);
 
             // Filtriranje rezervacija za odabrani smeštaj
             List<GuestReservation> accommodationReservations = reservations
@@ -80,7 +88,7 @@ namespace BookingApp.Repository
 
         public List<GuestReservation> GetAll()
         {
-            List<GuestReservation> reservations = serializer.FromCSV(filePath);
+            //List<GuestReservation> reservations = serializer.FromCSV(filePath);
             return reservations;
         }
 
@@ -89,7 +97,7 @@ namespace BookingApp.Repository
         {
             try
             {
-                List<GuestReservation> reservations = serializer.FromCSV(filePath);
+                //List<GuestReservation> reservations = serializer.FromCSV(filePath);
 
                 // Pronalazak maksimalnog ID-a u postojećim rezervacijama
                 int maxReservationId = reservations.Count > 0 ? reservations.Max(r => r.ReservationId) : 0;
@@ -179,8 +187,6 @@ namespace BookingApp.Repository
         {
             List<GuestReservationDTO> guestReservations = new List<GuestReservationDTO>();
 
-            List<GuestReservation> reservations = serializer.FromCSV(filePath);
-
             List<Accommodation> accommodations = LoadAccommodations();
 
             List<Location> locations = LoadLocations();
@@ -197,6 +203,8 @@ namespace BookingApp.Repository
 
                         string location = $"{accommodationLocation.Country}, {accommodationLocation.City}";
 
+                        Owner owner = ownerRepository.GetOwnerById(accommodation.Owner.Id);
+
                         GuestReservationDTO reservationDTO = new GuestReservationDTO
                         {
                             Id = reservation.ReservationId,
@@ -205,7 +213,8 @@ namespace BookingApp.Repository
                             Type = accommodation.Type,
                             ImageUrl = accommodation.Images.Count > 0 ? accommodation.Images[0] : "",
                             CheckIn = reservation.CheckIn,
-                            CheckOut = reservation.CheckOut
+                            CheckOut = reservation.CheckOut,
+                            OwnerUsername = owner.Username
                         };
 
                         guestReservations.Add(reservationDTO);

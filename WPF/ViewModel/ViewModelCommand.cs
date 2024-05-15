@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,23 @@ namespace BookingApp.WPF.ViewModel
     {
         private readonly Action<T> _executeAction;
         private readonly Predicate<T> _canExecuteAction;
+        private Func<AccommodationRate> rateAccommodation;
+        private Action navigateToRenovatePage;
 
         public ViewModelCommand(Action<T> executeAction)
         {
             _executeAction = executeAction;
             _canExecuteAction = null;
+        }
+
+        public ViewModelCommand(Func<AccommodationRate> rateAccommodation)
+        {
+            this.rateAccommodation = rateAccommodation;
+        }
+
+        public ViewModelCommand(Action navigateToRenovatePage)
+        {
+            this.navigateToRenovatePage = navigateToRenovatePage;
         }
 
         public ViewModelCommand(Action<T> executeAction, Predicate<T> canExecuteAction)

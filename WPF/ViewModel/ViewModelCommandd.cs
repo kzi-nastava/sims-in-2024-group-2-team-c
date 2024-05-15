@@ -11,12 +11,20 @@ namespace BookingApp.WPF.ViewModel
     {
         private readonly Action<object> _executeAction;
         private readonly Predicate<object> _canExecuteAction;
+        private Action navigateToRenovatePage;
+
         //Constructors
         public ViewModelCommandd(Action<object> executeAction)
         {
             _executeAction = executeAction;
             _canExecuteAction = null;
         }
+
+        public ViewModelCommandd(Action navigateToRenovatePage)
+        {
+            this.navigateToRenovatePage = navigateToRenovatePage;
+        }
+
         public ViewModelCommandd(Action<object> executeAction, Predicate<object> canExecuteAction)
         {
             _executeAction = executeAction;

@@ -12,6 +12,8 @@ namespace BookingApp.Interfaces
         public List<GuestRating> GetAll();
         public void Save(GuestRating guestRating);
         public void Delete(int id);
-       // public int NextId();
+        // public int NextId();
+
+        public GuestRating GetRatingsByOwnerId(int Id);
     }
 }

@@ -3,6 +3,7 @@ using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Serializer;
+using BookingApp.Service.OwnerService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,10 @@ namespace BookingApp.Service.AccommodationServices
 {
     public class GuestReservationService
     {
-        private readonly IGuestReservationRepository _guestReservationRepository;
-        
+        private readonly IGuestReservationRepository _guestReservationRepository;        
         public GuestReservationService(IGuestReservationRepository guestReservationRepository)
         {
-            _guestReservationRepository = guestReservationRepository;
-        }
+            _guestReservationRepository = guestReservationRepository;        }
 
 
         public List<GuestReservationDTO> GetAllGuestReservations(int guestId)

@@ -12,7 +12,6 @@ using System.Windows;
 using BookingApp.Repository;
 using BookingApp.Injector;
 using System.Windows.Shapes;
-using BookingApp.Service.ReservationService;
 
 
 namespace BookingApp.Service.AccommodationServices
@@ -22,9 +21,10 @@ namespace BookingApp.Service.AccommodationServices
 
         private readonly IAccommodationRateRepository _repository;
         private readonly GuestReservationDTO _selectedReservation;
+        private readonly AccommodationRate _ratedAccommodation;
         private List<AccommodationRate> _accommodationRates;
 
-        private ReservationService.ReservationService  reservationService;
+        private ReservationService  reservationService;
         private ReservationRepository reservationRepository ;
 
 
@@ -39,15 +39,34 @@ namespace BookingApp.Service.AccommodationServices
             return _repository.GetAll();
         }
 
-
-         public AccommodationRateService()
-         {
+        public AccommodationRateService()
+        {
             _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
 
             reservationRepository = new ReservationRepository();
             _accommodationRates = new List<AccommodationRate>();
         }
 
+        public AccommodationRateService(GuestReservationDTO selectedReservation)
+         {
+            _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
+
+            reservationRepository = new ReservationRepository();
+            _accommodationRates = new List<AccommodationRate>();
+            _selectedReservation = selectedReservation;
+
+         }
+
+        public AccommodationRateService(AccommodationRate ratedAccommodation)
+        {
+            _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
+
+            reservationRepository = new ReservationRepository();
+            _accommodationRates = new List<AccommodationRate>();
+            _ratedAccommodation = ratedAccommodation;
+        }
+
+        /*
         public AccommodationRateService(GuestReservationDTO selectedReservation, IAccommodationRateRepository repository)
 
         {
@@ -56,7 +75,16 @@ namespace BookingApp.Service.AccommodationServices
 
         }
 
-        public void RateAccommodation(int cleanlinessRating, int correctnessOfTheOwner, string comment)
+        public AccommodationRateService(AccommodationRate ratedAccommodation, IAccommodationRateRepository repository)
+
+        {
+            _ratedAccommodation = ratedAccommodation;
+            _repository = repository;
+
+        }
+        */
+
+        public AccommodationRate RateAccommodation(int cleanlinessRating, int correctnessOfTheOwner, string comment, List<string> Images)
         {
 
             try
@@ -67,15 +95,18 @@ namespace BookingApp.Service.AccommodationServices
                     Reservation = new Reservation() { Id = _selectedReservation.Id },
                     Cleanliness = cleanlinessRating,
                     OwnerRate = correctnessOfTheOwner,
-                    Comment = comment
-
+                    Comment = comment,
+                    WhatToRenovate = null,
+                    LevelOfUrgency = 0,
+                    AccommodationRatingTime = DateTime.Now,
+                    Images = Images
                 };
 
                 _repository.Save(data);
 
 
                 MessageBox.Show("Accommodaiton and owner successfully rated.");
-
+                return data;
             }
             catch (IOException ex)
             {
@@ -85,9 +116,9 @@ namespace BookingApp.Service.AccommodationServices
 
         }
 
-        public bool HasUserRatedAccommodation(int userId, String name)
+        public bool HasUserRatedAccommodation(int userId, int Id)
         {
-            return _repository.HasUserRatedAccommodation(userId, name);
+            return _repository.HasUserRatedAccommodation(userId, Id);
         }
 
 
@@ -128,8 +159,6 @@ namespace BookingApp.Service.AccommodationServices
             }
         }
 
-
-
         public string GetGuestUsernameByReservationId(int reservationId)
         {
             Reservation reservation = reservationRepository.GetReservationById(reservationId);
@@ -140,6 +169,33 @@ namespace BookingApp.Service.AccommodationServices
             else
             {
                 return null;
+            }
+        }
+
+        public void UpdateAccommodationRateData(AccommodationRate ratedAccommodation, string whatToRenovate, int levelOfUrgency)
+        {
+            try
+            {
+                AccommodationRate rateToUpdate = _repository.GetById(ratedAccommodation.Id);
+
+                if (rateToUpdate != null)
+                {
+                    rateToUpdate.WhatToRenovate = whatToRenovate;
+                    rateToUpdate.LevelOfUrgency = levelOfUrgency;
+
+                    _repository.Update(rateToUpdate);
+
+                    MessageBox.Show("Accommodation renovation information successfully updated.");
+                }
+                else
+                {
+                    MessageBox.Show("Accommodation rate data not found for the selected reservation.");
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
             }
         }
 
