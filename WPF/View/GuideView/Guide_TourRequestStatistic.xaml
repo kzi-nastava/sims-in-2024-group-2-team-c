@@ -79,7 +79,7 @@
                             <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
                             <TextBlock Text="{Binding NumberOfRequestsByLocation}" Margin="5,20,0,0"/>
                         </StackPanel>
-                        <Button Content="CREATE TOUR" Click="CreateTourLocation_Click" Margin="5" HorizontalAlignment="Right"/>
+                        <Button Content="CREATE TOUR" Command="{Binding CreateTourLocationCommand}" Click="CreateTourLocation_Click" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -94,7 +94,7 @@
                             <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
                             <TextBlock Text="{Binding NumberOfRequestsByLanguage}" Margin="5,20,0,0"/>
                         </StackPanel>
-                        <Button Content="CREATE TOUR" Click="CreateTourLanguage_Click" Margin="5" HorizontalAlignment="Right"/>
+                        <Button Content="CREATE TOUR" Command="{Binding CreateTourLanguageCommand}" Click="CreateTourLanguage_Click" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

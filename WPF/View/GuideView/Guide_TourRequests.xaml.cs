@@ -31,11 +31,11 @@ namespace BookingApp.WPF.View.GuideView
             viewModel = new TourRequests_ViewModel();
             DataContext = viewModel;
         }
-        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        /*private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
             viewModel.AcceptTourRequestCommand.Execute(requestsView.SelectedItem);
 
-        }
+        }*/
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();

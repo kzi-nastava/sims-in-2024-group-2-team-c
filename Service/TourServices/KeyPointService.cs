@@ -75,10 +75,41 @@ namespace BookingApp.Service.TourServices
             }
             return kp;
         }
+        public void SetKeyPointTourId(List<int> keyPointIds, int tourId)
+        {
+            foreach (int id in keyPointIds)
+            {
+                KeyPoint kp = _keyPointRepository.GetById(id);
+                kp.TourId = tourId;
+                _keyPointRepository.Update(kp);
+            }
+        }
+        public List<int> ParseKeyPointIds(List<string> keyPointsList)
+        {
+            List<int> ids = new List<int>();
+            KeyPoint startedPoint = SaveKeyPoint(keyPointsList[0], true, false);
+            ids.Add(startedPoint.Id);
 
-        
-
-
+            for (int i = 1; i < keyPointsList.Count - 1; i++)
+            {
+                KeyPoint kp = SaveKeyPoint(keyPointsList[i], false, false);
+                ids.Add(kp.Id);
+            }
+            KeyPoint endedPoint = SaveKeyPoint(keyPointsList[keyPointsList.Count - 1], false, true);
+            ids.Add(endedPoint.Id);
+            return ids;
+        }
+        public KeyPoint SaveKeyPoint(string Name, bool startPoint, bool endPoint)
+        {
+            KeyPoint kp = new KeyPoint
+            {
+                Name = Name,
+                StartingPoint = startPoint,
+                EndingPoint = endPoint
+            };
+            _keyPointRepository.Save(kp);
+            return kp;
+        }
 
     }
 }

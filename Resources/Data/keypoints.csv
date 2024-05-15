@@ -1,7 +1,7 @@
 0|Manchester Museum|Visit the Manchester Museum and explore its rich history.|False|True|False|1,2,16,17|1,16,2|0
-1|Manchester Cathedral|This is a beautiful cathedral with a long history.|False|False|False|1,2,3|1,3|0
-2|Science and Industry Museum|Discover the fascinating story of Manchester's industrial past and its role in the scientific world at the Science and Industry Museum|False|False|False|1,2,2,5,1,15|1|0
-3|Whitworth Art Gallery|Immerse yourself in art at the Whitworth Art Gallery, featuring a diverse collection of contemporary and historical works in a stunning setting.|False|False|True|1,2,2,5,1,15|1|0
+1|Manchester Cathedral|This is a beautiful cathedral with a long history.|False|False|False|1,2,3|1,3|14
+2|Science and Industry Museum|Discover the fascinating story of Manchester's industrial past and its role in the scientific world at the Science and Industry Museum|False|False|False|1,2,2,5,1,15|1|14
+3|Whitworth Art Gallery|Immerse yourself in art at the Whitworth Art Gallery, featuring a diverse collection of contemporary and historical works in a stunning setting.|False|False|True|1,2,2,5,1,15|1|14
 4|CN Tower|Experience breathtaking views of Toronto from the iconic CN Tower, one of the tallest freestanding structures in the world. Enjoy a thrilling ride to the observation deck and marvel at the cityscape below.|True|True|False|1,2|1|1
 5|Royal Ontario Museum|Explore world cultures, natural history, and art at the Royal Ontario Museum. With a vast collection of artifacts and interactive exhibits, there's something for everyone to enjoy.|False|False|False|1,17|1|1
 6|Toronto Islands|Escape the hustle and bustle of the city and relax on the Toronto Islands. Enjoy stunning views of the skyline, rent a bike or kayak, and explore the parks, beaches, and charming communities that make up this unique urban oasis.|False|False|True|2,17|17|1
@@ -19,13 +19,13 @@
 18|Copacabana Beach|Relax at Copacabana Beach, one of the most famous beaches in the world|False|False|True|1,2|1|6
 19|East Side Gallery|Explore the East Side Gallery, a long section of the Berlin Wall covered in vibrant street art|False|True|False|1,2|1|7
 20|Checkpoint Charlie|Visit Checkpoint Charlie, the famous border crossing point between East and West Berlin during the Cold War|False|False|True|1,2|1|7
-21|Sagrada Familia|Visit the Sagrada Familia, Gaudí's unfinished masterpiece and a symbol of Barcelona|False|True|False|||8
-22|Park Güell|Explore Park Güell, a whimsical park designed by Gaudí with colorful mosaic sculptures and stunning views of the city.|False|False|False|||8
-23|Casa Batlló|Discover Casa Batlló, a unique and imaginative building designed by Gaudí with its distinctive facade and rooftop terrace|False|False|False|||8
-24|La Pedrera|Visit La Pedrera, also known as Casa Milà, another of Gaudí's architectural gems with its undulating stone facade and rooftop sculptures|False|False|False|||8
-25|Palau Güell|Explore Palau Güell, a mansion designed by Gaudí for a wealthy industrialist, known for its intricate ironwork and lavish interiors|False|False|False|||8
-26|Casa Vicens|Discover Casa Vicens, one of Gaudí's earliest works and a UNESCO World Heritage Site, with its colorful tiles and eclectic architectural style|False|False|False|||8
-27|Colonia Güell|Visit Colonia Güell, a workers' village where Gaudí experimented with architectural techniques that would later influence his famous works in Barcelona|False|False|True|||8
+21|Sagrada Familia|Visit the Sagrada Familia, Gaudï¿½'s unfinished masterpiece and a symbol of Barcelona|False|True|False|||8
+22|Park Gï¿½ell|Explore Park Gï¿½ell, a whimsical park designed by Gaudï¿½ with colorful mosaic sculptures and stunning views of the city.|False|False|False|||8
+23|Casa Batllï¿½|Discover Casa Batllï¿½, a unique and imaginative building designed by Gaudï¿½ with its distinctive facade and rooftop terrace|False|False|False|||8
+24|La Pedrera|Visit La Pedrera, also known as Casa Milï¿½, another of Gaudï¿½'s architectural gems with its undulating stone facade and rooftop sculptures|False|False|False|||8
+25|Palau Gï¿½ell|Explore Palau Gï¿½ell, a mansion designed by Gaudï¿½ for a wealthy industrialist, known for its intricate ironwork and lavish interiors|False|False|False|||8
+26|Casa Vicens|Discover Casa Vicens, one of Gaudï¿½'s earliest works and a UNESCO World Heritage Site, with its colorful tiles and eclectic architectural style|False|False|False|||8
+27|Colonia Gï¿½ell|Visit Colonia Gï¿½ell, a workers' village where Gaudï¿½ experimented with architectural techniques that would later influence his famous works in Barcelona|False|False|True|||8
 28|Uffizi Gallery|Explore the Uffizi Gallery, home to one of the most important art collections in the world, including works by Botticelli, Michelangelo, and Leonardo da Vinci|False|True|False|||9
 29|Florence Cathedral|Visit the Florence Cathedral, also known as the Duomo, with its iconic dome designed by Brunelleschi and stunning marble facade.|False|False|False|||9
 30|Ponte Vecchio|Stroll across the Ponte Vecchio, Florence's oldest bridge, lined with shops selling jewelry, art, and souvenirs|False|False|True|||9

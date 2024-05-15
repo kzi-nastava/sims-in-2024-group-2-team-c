@@ -2,6 +2,7 @@
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Service.TourServices;
+using BookingApp.WPF.View.GuideView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -176,7 +177,17 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             if (SelectedTourRequest != null)
             {
                 _tourRequestService.AcceptRequest(SelectedTourRequest);
+                Guide_AcceptingTourRequest nextWindow  = new Guide_AcceptingTourRequest();
+                AcceptingTourRequest_ViewModel nextViewModel = new AcceptingTourRequest_ViewModel()
+                {
+                    TourRequest = SelectedTourRequest
+                };
+                nextWindow.DataContext = nextViewModel; // Postavite DataContext sledećeg prozora na novi ViewModel
+                nextWindow.Show();
                 TourRequests.Remove(SelectedTourRequest);
+
+                
+
                 //bool canAccept = _tourRequestService.AcceptRequest(SelectedTourRequest);
                 /*if (canAccept == true)
                     LoadRequests();*/
