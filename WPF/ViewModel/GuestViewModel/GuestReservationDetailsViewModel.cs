@@ -3,6 +3,7 @@ using BookingApp.Model;
 using BookingApp.Repository;
 using BookingApp.Service;
 using BookingApp.Service.AccommodationServices;
+using BookingApp.Service.OwnerService;
 using BookingApp.WPF.View.GuestView;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,12 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
         private readonly AccommodationRateService _accommodationRateService;
         private readonly System.Windows.Navigation.NavigationService _navigationService;
         private readonly MainGuestWindow _mainGuestWindow;
+        private readonly OwnerNotificationService _ownerNotificationService;
 
         public ICommand RateReservationCommand { get; }
+
+        public ICommand RatingListCommand { get; }
+
         public ICommand CancelReservationCommand => new ViewModelCommand<object>(CancelReservation);
         public ICommand RateAccommodationCommand { get; }
 
@@ -47,10 +52,32 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             GuestReservations = new ObservableCollection<GuestReservationDTO>();
             RateReservationCommand = new ViewModelCommand<object>(RateReservation);
             RescheduleReservationCommand = new ViewModelCommand<object>(RescheduleReservation);
+            RatingListCommand = new ViewModelCommand<object>(RatingList);
             _mainGuestWindow = mainGuestWindow;
             _navigationService = navigationService;
+            _ownerNotificationService = new OwnerNotificationService();
 
             LoadGuestReservations();
+        }
+
+        private void RatingList(object parameter)
+        {
+            if (parameter != null)
+            {
+                var selectedReservation = parameter as GuestReservationDTO;
+
+                if (CanRateReservation(selectedReservation.Id))
+                {
+                    MessageBox.Show("You have not rated this reservation yet.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                _navigationService?.Navigate(new RatingsByTheOwnerView(selectedReservation));
+            }
+            else
+            {
+                MessageBox.Show("Please select a reservation to rate.");
+            }
         }
 
         private void LoadGuestReservations()
@@ -82,6 +109,9 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                 }
                 int reservationId = selectedReservation.Id;
                 string result = _guestReservationService.CancelReservation(reservationId);
+                string textMessage = "Reservation of accommodation named " + selectedReservation.Name + " scheduled from "
+                + selectedReservation.CheckIn + " until " + selectedReservation.CheckOut + " has been canceled.";
+                _ownerNotificationService.save(selectedReservation, textMessage);
                 MessageBox.Show(result);
             }
             catch (Exception ex)
@@ -103,11 +133,11 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             }
         }
 
-        private bool CanRateReservation(String Name)
+        private bool CanRateReservation(int Id)
         {
             try
             {
-                return !_accommodationRateService.HasUserRatedAccommodation(LoggedInUser.Id, Name);
+                return !_accommodationRateService.HasUserRatedAccommodation(LoggedInUser.Id, Id);
             }
             catch (Exception ex)
             {
@@ -131,7 +161,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                     return;
                 }
 
-                if (!CanRateReservation(selectedReservation.Name))
+                if (!CanRateReservation(selectedReservation.Id))
                 {
                     MessageBox.Show("You have already rated this accommodation.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
@@ -149,7 +179,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                         if (_mainGuestWindow != null)
                         {
                             _mainGuestWindow.ChangeHeaderText("Rate accommodations and owners");
-                            _navigationService?.Navigate(new RateAccommodationWindow(selectedReservation));
+                            _navigationService?.Navigate(new AccommodationRateView(selectedReservation, _navigationService));
                         }
                     }
                     else
@@ -187,7 +217,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                     if (_mainGuestWindow != null)
                     {
                         _mainGuestWindow.ChangeHeaderText("Reschedule the reservation");
-                        _navigationService?.Navigate(new ReservationDelayWindow(selectedReservation));
+                        _navigationService?.Navigate(new ReservationDelayView(selectedReservation));
                     }
                 }
             }

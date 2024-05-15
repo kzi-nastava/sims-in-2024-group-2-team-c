@@ -8,10 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\accommodation-allegro.jpg" />
+    <None Remove="Resources\Images\accommodation-ana.jpg" />
+    <None Remove="Resources\Images\accommodation-anamana.jpg" />
+    <None Remove="Resources\Images\accommodation-anci.jpg" />
+    <None Remove="Resources\Images\accommodation-harrys.jpg" />
+    <None Remove="Resources\Images\accommodation-heaven.jpg" />
+    <None Remove="Resources\Images\accommodation-hilton.jpg" />
+    <None Remove="Resources\Images\accommodation-HotelMoskva.jpg" />
+    <None Remove="Resources\Images\accommodation-ikea.jpg" />
+    <None Remove="Resources\Images\accommodation-LaVie.jpg" />
+    <None Remove="Resources\Images\accommodation-lena.jpg" />
+    <None Remove="Resources\Images\accommodation-lenas.jpg" />
+    <None Remove="Resources\Images\accommodation-mala.jpg" />
+    <None Remove="Resources\Images\accommodation-maria.jpg" />
+    <None Remove="Resources\Images\accommodation-peninsula.jpg" />
+    <None Remove="Resources\Images\accommodation-sara.jpg" />
+    <None Remove="Resources\Images\accommodation-sheraton.jpg" />
+    <None Remove="Resources\Images\accommodation-silvia.jpg" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\gallery-image-icon.png" />
     <None Remove="Resources\Images\play.png" />
     <None Remove="Resources\Images\profileG.jpg" />
     <None Remove="Resources\Images\home.png" />
@@ -57,12 +76,32 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="WPF\ViewModel\OwnerViewModel\" />
     <Folder Include="Service\TourServices\" />
     <Folder Include="WPF\ViewModel\GuideViewModel\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\accommodation-allegro.jpg" />
+    <Resource Include="Resources\Images\accommodation-ana.jpg" />
+    <Resource Include="Resources\Images\accommodation-anamana.jpg" />
+    <Resource Include="Resources\Images\accommodation-anci.jpg" />
+    <Resource Include="Resources\Images\accommodation-harrys.jpg" />
+    <Resource Include="Resources\Images\accommodation-heaven.jpg" />
+    <Resource Include="Resources\Images\accommodation-hilton.jpg" />
+    <Resource Include="Resources\Images\accommodation-HotelMoskva.jpg" />
+    <Resource Include="Resources\Images\accommodation-ikea.jpg" />
+    <Resource Include="Resources\Images\accommodation-LaVie.jpg" />
+    <Resource Include="Resources\Images\accommodation-lena.jpg" />
+    <Resource Include="Resources\Images\accommodation-lenas.jpg" />
+    <Resource Include="Resources\Images\accommodation-mala.jpg" />
+    <Resource Include="Resources\Images\accommodation-maria.jpg" />
+    <Resource Include="Resources\Images\accommodation-peninsula.jpg" />
+    <Resource Include="Resources\Images\accommodation-sara.jpg" />
+    <Resource Include="Resources\Images\accommodation-sheraton.jpg" />
+    <Resource Include="Resources\Images\accommodation-silvia.jpg" />
     <Resource Include="Resources\Images\bell.png" />
+    <Resource Include="Resources\Images\gallery-image-icon.png" />
     <Resource Include="Resources\Images\home.png" />
     <Resource Include="Resources\Images\Manchester2.jpg" />
     <Resource Include="Resources\Images\map-marker.png" />

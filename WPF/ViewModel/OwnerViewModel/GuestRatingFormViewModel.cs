@@ -37,7 +37,17 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
            
         }
 
-     
+        private LoggedInUser _loggedInUser;
+        public LoggedInUser LoggedInUser
+        {
+            get { return _loggedInUser; }
+            set
+            {
+                _loggedInUser = value;
+                OnPropertyChanged(nameof(LoggedInUser));
+            }
+        }
+
         public ObservableCollection<Reservation> Reservations
         {
             get { return reservations; }
@@ -73,7 +83,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
 
 
             //Guest guest = guestRepository.GetGuestById(SelectedReservation.Guest.Id);
-            Guest guest = guestRepository.GetGuestByUsername(SelectedReservation.Guest.Username);
+            //Guest guest = guestRepository.GetGuestByUsername(SelectedReservation.Guest.Username);
 
 
 
@@ -93,11 +103,12 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
 
             GuestRating newGuestRating = new GuestRating()
             {
-                Guest = guest,
+                Guest = new Guest { Username = selectedReservation.Guest.Username },
                 Cleanliness = cleanliness,
                 RuleRespecting = ruleRespecting,
                 Comment = comment,
                 RatingDate = ratingDate,
+                Owner = new Owner { Id = LoggedInUser.Id }
             };
 
             guestRatingRepository.Save(newGuestRating);

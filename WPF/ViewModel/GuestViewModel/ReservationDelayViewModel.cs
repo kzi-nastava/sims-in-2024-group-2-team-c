@@ -16,6 +16,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
     public class ReservationDelayViewModel : ViewModelBase
     {
         private GuestReservationDTO _selectedReservation;
+        private readonly GuestRatingService _guestRatingService;
 
         private readonly ReservationDelayService _reservationDelayService;
 

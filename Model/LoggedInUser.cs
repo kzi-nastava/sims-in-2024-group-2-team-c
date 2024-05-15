@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Model
 {
-    class LoggedInUser
+    public class LoggedInUser
     {
 
         public static int Id { get; set; }
