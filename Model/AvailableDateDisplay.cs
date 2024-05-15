@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Model
 {
-    class AvailableDateDisplay
+    public class AvailableDateDisplay
     {
 
         public DateTime CheckIn { get; set; }

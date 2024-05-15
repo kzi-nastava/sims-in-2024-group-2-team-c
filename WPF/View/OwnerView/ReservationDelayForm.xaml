@@ -3,10 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       xmlns:vm="clr-namespace:BookingApp.View"
-      Title="ReservationDelayForm" Height="285">
+      Title="ReservationDelayForm" Height="450" Width="800" >
 
 
-    <Grid Background="LightBlue" Margin="0,50,0,0">
+    <Grid Background="LightBlue">
         <TextBlock Text="Notifications and Requests" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
         
@@ -19,7 +19,7 @@
         
         <TextBlock Text="Requests for Rescheduling Reservations" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="10,170,0,0"/>
 
-        
+
         <ListView ItemsSource="{Binding ReservationDelays}" SelectionChanged="ListView_SelectionChanged" Margin="10,200,10,50">
             <ListView.View>
                 <GridView>

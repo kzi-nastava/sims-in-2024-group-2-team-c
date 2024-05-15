@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using BookingApp.Serializer;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace BookingApp.Model
 {
     public class AccommodationRate : ISerializable, INotifyPropertyChanged
     {
         public int Id { get; set; }
-        public Reservation Reservation { get; set; } //svuda smo reservation objekat
-        //public string GuestUsername { get; set; } //dodato
+        public Reservation Reservation { get; set; }
+
         private string _guestUsername;
         public string GuestUsername
         {
@@ -29,17 +30,26 @@ namespace BookingApp.Model
         public string Comment { get; set; }
         public List<String> Images { get; set; }
 
+        public string WhatToRenovate { get; set; }
+
+        public int LevelOfUrgency { get; set; }
+
+        public DateTime AccommodationRatingTime { get; set; }
+
         public AccommodationRate() { }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), Cleanliness.ToString(), OwnerRate.ToString(), Comment };
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), Cleanliness.ToString(), OwnerRate.ToString(), Comment, WhatToRenovate, LevelOfUrgency.ToString(),/* AccommodationRatingTime.ToString()*/AccommodationRatingTime.ToString("dd.MM.yyyy. HH:mm:ss") };
+
+            csvValues = csvValues.Concat(Images).ToArray();
             /*
             foreach (string imagePath in Images)
             {
                 csvValues.Append($"{imagePath};");
             }
             */
+
             return csvValues;
         }
 
@@ -51,13 +61,18 @@ namespace BookingApp.Model
             Cleanliness = Convert.ToInt32(values[2]);
             OwnerRate = Convert.ToInt32(values[3]);
             Comment = values[4];
-            Images = new List<string>();
+            //Images = new List<string>();
+            WhatToRenovate = values[5];
+            LevelOfUrgency = Convert.ToInt32(values[6]);
+            //AccommodationRatingTime = Convert.ToDateTime(values[7]);
+            AccommodationRatingTime = DateTime.ParseExact(values[7].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
             /*
             for (int i = 5; i < values.Length; i++)
             {
                 Images.Add(values[i]);
             }
             */
+            Images = values.Skip(8).ToList();
         }
 
 

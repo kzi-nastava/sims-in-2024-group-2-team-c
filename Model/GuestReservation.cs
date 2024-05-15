@@ -1,11 +1,12 @@
 ﻿using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 
 namespace BookingApp.Model
 {
-    class GuestReservation : ISerializable
+    public class GuestReservation : ISerializable
     {
 
         public int ReservationId { get; set; }
@@ -38,9 +39,9 @@ namespace BookingApp.Model
         {
             string[] csvValues = { ReservationId.ToString(), Accommodation.Id.ToString(), GuestId.ToString(),
 
-                StartDate.ToString(), EndDate.ToString(), StayDurationInDays.ToString(),
+               /* StartDate.ToString(), EndDate.ToString()*/ StartDate.ToString("dd.MM.yyyy. HH:mm:ss"),EndDate.ToString("dd.MM.yyyy. HH:mm:ss"), StayDurationInDays.ToString(),
 
-                CheckIn.ToString(), CheckOut.ToString(),
+                /*CheckIn.ToString(), CheckOut.ToString(),*/ CheckIn.ToString("dd.MM.yyyy. HH:mm:ss"),CheckOut.ToString("dd.MM.yyyy. HH:mm:ss"),
                 NumGuests.ToString(), IsReserved.ToString()};
             return csvValues;
 
@@ -63,11 +64,11 @@ namespace BookingApp.Model
                 MessageBox.Show("Greška: Vrednost za GuestId nije validna.");
             }
 
-            StartDate = Convert.ToDateTime(values[3]);
-            EndDate = Convert.ToDateTime(values[4]);
+            StartDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);//Convert.ToDateTime(values[3]);
+            EndDate = DateTime.ParseExact(values[4].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);//Convert.ToDateTime(values[4]);
             StayDurationInDays = Convert.ToInt32(values[5]);
-            CheckIn = Convert.ToDateTime(values[6]);
-            CheckOut = Convert.ToDateTime(values[7]);
+            CheckIn = DateTime.ParseExact(values[6].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);//Convert.ToDateTime(values[6]);
+            CheckOut = DateTime.ParseExact(values[7].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture); //Convert.ToDateTime(values[7]);
             NumGuests = Convert.ToInt32(values[8]);
             IsReserved = Convert.ToBoolean(values[9]);
         }

@@ -1,4 +1,5 @@
-﻿using BookingApp.Model;
+﻿using BookingApp.Interfaces;
+using BookingApp.Model;
 using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookingApp.Repository
 {
-    public class GuestRepository
+    public class GuestRepository : IGuestRepository
     {
 
         private const string FilePath = "../../../Resources/Data/guests.csv";
@@ -44,6 +45,17 @@ namespace BookingApp.Repository
                 return 1;
             }
             return guests.Max(guest => guest.Id) + 1;
+        }
+
+        public Guest Update(Guest guest)
+        {
+            guests = _serializer.FromCSV(FilePath);
+            Guest current = guests.Find(t => t.Id == guest.Id);
+            int index = guests.IndexOf(current);
+            guests.Remove(current);
+            guests.Insert(index, guest);
+            _serializer.ToCSV(FilePath, guests);
+            return guest;
         }
 
         public Guest GetGuestById(int guestId)

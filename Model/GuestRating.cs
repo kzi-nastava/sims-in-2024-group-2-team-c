@@ -18,6 +18,7 @@ namespace BookingApp.Model
         public int RuleRespecting { get; set; } 
         public string Comment { get; set; }
         public DateTime RatingDate { get; set; }
+        public Owner Owner { get; set; }
 
         public GuestRating()
         {
@@ -27,7 +28,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()  
         {
-            string[] csvValues = { Id.ToString(), Guest.Username, Cleanliness.ToString(), RuleRespecting.ToString(), Comment, RatingDate.ToString() };
+            string[] csvValues = { Id.ToString(), Guest.Username, Cleanliness.ToString(), RuleRespecting.ToString(), Comment,/* RatingDate.ToString()*/ RatingDate.ToString("dd.MM.yyyy. HH:mm:ss"), Owner.Id.ToString() };
             return csvValues;
         }
 
@@ -38,7 +39,9 @@ namespace BookingApp.Model
             Cleanliness = Convert.ToInt32(values[2]);
             RuleRespecting  = Convert.ToInt32(values[3]);
             Comment = values[4];
-            RatingDate = Convert.ToDateTime(values[5]);
+           // RatingDate = Convert.ToDateTime(values[5]);
+           RatingDate = DateTime.ParseExact(values[5].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            Owner = new Owner() { Id = Convert.ToInt32(values[6]) };
         }
 
         

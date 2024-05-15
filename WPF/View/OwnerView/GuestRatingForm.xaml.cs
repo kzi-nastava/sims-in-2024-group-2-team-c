@@ -55,13 +55,13 @@ namespace BookingApp.WPF.View.OwnerView
    
         }
 
-        /*private void OwnersRatings_Click(object sender, RoutedEventArgs e)
+        private void OwnersRatings_Click(object sender, RoutedEventArgs e)
         {
             // Svaka stranica ima referencu na NavigationService Frame kontrole unutar koje se nalazi, pa se i sa stranice moze vrsiti navigacija na neku drugu stranicu
-            this.NavigationService.Navigate(new Uri("\\WPF\\View\\OwnerView\\OwnersRatings.xaml", UriKind.RelativeOrAbsolute));
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\OwnersRatings.xaml", UriKind.RelativeOrAbsolute));
             
         }
-        */
+        
 
       
 

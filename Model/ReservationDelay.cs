@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace BookingApp.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { ReservationDelayId.ToString(), Guest.Username, Accommodation.Name, NewCheckInDate.ToString(), NewCheckOutDate.ToString(), Status.ToString(), Explanation };
+            string[] csvValues = { ReservationDelayId.ToString(), Guest.Username, Accommodation.Name, /*NewCheckInDate.ToString(), NewCheckOutDate.ToString(),*/NewCheckInDate.ToString("dd.MM.yyyy. HH:mm:ss"),NewCheckOutDate.ToString("dd.MM.yyyy. HH:mm:ss"), Status.ToString(), Explanation };
             return csvValues;
         }
 
@@ -45,8 +46,8 @@ namespace BookingApp.Model
             ReservationDelayId = Convert.ToInt32(values[0]);
             Guest = new Guest() { Username=values[1] };
             Accommodation = new Accommodation { Name=values[2] };
-            NewCheckInDate = Convert.ToDateTime(values[3]);
-            NewCheckOutDate = Convert.ToDateTime(values[4]);
+            NewCheckInDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);// Convert.ToDateTime(values[3]);
+            NewCheckOutDate = DateTime.ParseExact(values[4].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);//Convert.ToDateTime(values[4]);
             Status = (ReservationDelayStatus)Enum.Parse(typeof(ReservationDelayStatus), values[5]);
             Explanation = values[6];
         }

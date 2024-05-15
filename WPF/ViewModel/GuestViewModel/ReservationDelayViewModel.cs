@@ -16,6 +16,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
     public class ReservationDelayViewModel : ViewModelBase
     {
         private GuestReservationDTO _selectedReservation;
+        private readonly GuestRatingService _guestRatingService;
 
         private readonly ReservationDelayService _reservationDelayService;
 
@@ -71,8 +72,8 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             SelectedReservation = selectedReservation;
             SendRequestCommand = new ViewModelCommand<object>(SendRequest);
 
-            NewArrivalDate = DateTime.Today.AddDays(1); // Postavi na trenutni datum
-            NewDepartureDate = DateTime.Today.AddDays(2); // Postavi na sutrašnji datum
+            NewArrivalDate = DateTime.Today.AddDays(1);
+            NewDepartureDate = DateTime.Today.AddDays(2);
             ReservationDelayRequests = new ObservableCollection<ReservationDelayDTO>();
             LoadReservationDelayRequests();
         }

@@ -49,12 +49,19 @@ namespace BookingApp.Repository
         
         public List<Accommodation> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            List<Accommodation> accommodations = _serializer.FromCSV(FilePath);
+
+            foreach (var accommodation in accommodations)
+            {
+                string[] imagePathsArray = accommodation.Images.ToArray();
+                accommodation.Images = imagePathsArray.ToList();
+            }
+
+            return accommodations;
         }
 
         public List<Accommodation> GetToursByLocationId(int locationId)
         {
-            // Pronalaženje smeštaja na osnovu ID-a lokacije
             return _accommodations.Where(acc => acc.Location.Id == locationId).ToList();
         }
 
