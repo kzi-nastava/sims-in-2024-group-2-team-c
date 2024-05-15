@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Repository;
 using BookingApp.Service.AccommodationServices;
 using BookingApp.Service.OwnerService;
 using System;
@@ -19,12 +20,57 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
         private Accommodation selectedAccommodation;
         private OwnerStatistics ownerStatistic;
         private RenovationService renovationService; //mozda vadi iz accommodation repository
+        AccommodationRepository accommodationRepository;
+        //dodajem ova tri ovako
+        private Dictionary<int, int> _monthlyReservations;
+        private Dictionary<int, int> _monthlyCancellations;
+        private Dictionary<int, int> _monthlyDelays;
+        public Dictionary<int, int> MonthlyReservations
+        {
+            get { return _monthlyReservations; }
+            set
+            {
+                _monthlyReservations = value;
+                OnPropertyChanged(nameof(MonthlyReservations));
+            }
+        }
+
+        public Dictionary<int, int> MonthlyCancellations
+        {
+            get { return _monthlyCancellations; }
+            set
+            {
+                _monthlyCancellations = value;
+                OnPropertyChanged(nameof(MonthlyCancellations));
+            }
+        }
+
+        public Dictionary<int, int> MonthlyDelays
+        {
+            get { return _monthlyDelays; }
+            set
+            {
+                _monthlyDelays = value;
+                OnPropertyChanged(nameof(MonthlyDelays));
+            }
+        }
+
+        public void GetMonthlyStatistics(int accommodationId, int year)
+        {
+            var accommodation = accommodationRepository.GetAccommodationById(accommodationId); // Pretpostavimo da imate ovu metodu
+
+            MonthlyReservations = _ownerStatisticsService.NumberOfReservationsByMonth(accommodation, year);
+            MonthlyCancellations = _ownerStatisticsService.NumberOfCancellationsByMonth(accommodation, year);
+            MonthlyDelays = _ownerStatisticsService.NumberOfDelaysByMonth(accommodation, year);
+        }
+
         public ObservableCollection<OwnerStatistics> OwnerStatistics { get; set; }
 
         public OwnerStatisticsViewModel() 
         {
             _ownerStatisticsService = new OwnerStatisticsService();
             renovationService = new RenovationService();
+            accommodationRepository = new AccommodationRepository();
             Accommodations = new ObservableCollection<Accommodation>(renovationService.GetAccommodations());
             RefreshStatistics(); // Ovo osvežava statistiku kada se instancira ViewModel
         }

@@ -5,28 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       xmlns:vm="clr-namespace:BookingApp.WPF.ViewModel.OwnerViewModel"
-
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OwnerStatisticsForm">
 
-
-    <Grid  Background="LightBlue">
-        <StackPanel Margin="20" >
+    <Grid Background="LightBlue">
+        <StackPanel Margin="20">
             <TextBlock Text="Owner Statistics" FontWeight="Bold" FontSize="20"/>
             <TextBlock Text="Choose an Accommodation" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0" FontSize="15"/>
             <ComboBox x:Name="accommodationsComboBox" 
-          SelectedItem="{Binding SelectedAccommodation}" 
-          ItemsSource="{Binding Accommodations}" 
-          DisplayMemberPath="Name" 
-          Margin="10,5,0,0"  
-          HorizontalAlignment="Center" 
-          FontSize="15" 
-          SelectionChanged="AccommodationsComboBox_SelectionChanged"/>
+                      SelectedItem="{Binding SelectedAccommodation}" 
+                      ItemsSource="{Binding Accommodations}" 
+                      DisplayMemberPath="Name" 
+                      Margin="10,5,0,0"  
+                      HorizontalAlignment="Center" 
+                      FontSize="15" 
+                      SelectionChanged="AccommodationsComboBox_SelectionChanged"/>
 
-            <!-- Tabela -->
-            <Grid Margin="0 20" >
-                <Grid.ColumnDefinitions >
+            <!-- Godišnja statistika -->
+            <Grid Margin="0 20">
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -49,8 +47,7 @@
                 <TextBlock Text="Number of Reservations" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" />
                 <TextBlock Text="{Binding OwnerStatistic.ReservationsByYear[2022]}" Grid.Column="1" Grid.Row="1"/>
                 <TextBlock Text="{Binding OwnerStatistic.ReservationsByYear[2023]}" Grid.Column="2" Grid.Row="1"/>
-                <TextBlock Text="{Binding OwnerStatistic.ReservationsByYear[2024]}" Grid.Column="3" Grid.Row="1" />
-
+                <TextBlock Text="{Binding OwnerStatistic.ReservationsByYear[2024]}" Grid.Column="3" Grid.Row="1"/>
 
                 <TextBlock Text="Number of Cancellations" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center"/>
                 <TextBlock Text="{Binding OwnerStatistic.CancellationsByYear[2022]}" Grid.Column="1" Grid.Row="2"/>
@@ -63,7 +60,100 @@
                 <TextBlock Text="{Binding OwnerStatistic.DelaysByYear[2024]}" Grid.Column="3" Grid.Row="3"/>
             </Grid>
 
-            <Button Content="Refresh" Click="Button_Click"  Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <!-- Mesečna statistika -->
+            <StackPanel Margin="20,40,20,0">
+                <TextBlock Text="Monthly Statistics" FontWeight="Bold" FontSize="18" Margin="0,10,0,10"/>
+                <TextBlock Text="Choose a Year" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0" FontSize="15"/>
+                <ComboBox x:Name="YearComboBox" Width="200" Margin="10" SelectionChanged="YearComboBox_SelectionChanged"
+                          SelectedItem="{Binding SelectedYear}" HorizontalAlignment="Center">
+                    <ComboBoxItem Content="2022" />
+                    <ComboBoxItem Content="2023" />
+                    <ComboBoxItem Content="2024" />
+                </ComboBox>
+
+                <!-- Tabela -->
+                <Grid Margin="0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock Text="Statistic" FontWeight="Bold" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Jan" FontWeight="Bold" Grid.Column="1" Grid.Row="0"/>
+                    <TextBlock Text="Feb" FontWeight="Bold" Grid.Column="2" Grid.Row="0"/>
+                    <TextBlock Text="Mar" FontWeight="Bold" Grid.Column="3" Grid.Row="0"/>
+                    <TextBlock Text="Apr" FontWeight="Bold" Grid.Column="4" Grid.Row="0"/>
+                    <TextBlock Text="May" FontWeight="Bold" Grid.Column="5" Grid.Row="0"/>
+                    <TextBlock Text="Jun" FontWeight="Bold" Grid.Column="6" Grid.Row="0"/>
+                    <TextBlock Text="Jul" FontWeight="Bold" Grid.Column="7" Grid.Row="0"/>
+                    <TextBlock Text="Aug" FontWeight="Bold" Grid.Column="8" Grid.Row="0"/>
+                    <TextBlock Text="Sep" FontWeight="Bold" Grid.Column="9" Grid.Row="0"/>
+                    <TextBlock Text="Oct" FontWeight="Bold" Grid.Column="10" Grid.Row="0"/>
+                    <TextBlock Text="Nov" FontWeight="Bold" Grid.Column="11" Grid.Row="0"/>
+                    <TextBlock Text="Dec" FontWeight="Bold" Grid.Column="12" Grid.Row="0"/>
+
+                    <!-- Body -->
+                    <TextBlock Text="Number of Reservations" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding MonthlyReservations[1]}" Grid.Column="1" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[2]}" Grid.Column="2" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[3]}" Grid.Column="3" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[4]}" Grid.Column="4" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[5]}" Grid.Column="5" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[6]}" Grid.Column="6" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[7]}" Grid.Column="7" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[8]}" Grid.Column="8" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[9]}" Grid.Column="9" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[10]}" Grid.Column="10" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[11]}" Grid.Column="11" Grid.Row="1"/>
+                    <TextBlock Text="{Binding MonthlyReservations[12]}" Grid.Column="12" Grid.Row="1"/>
+
+                    <TextBlock Text="Number of Cancellations" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[1]}" Grid.Column="1" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[2]}" Grid.Column="2" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[3]}" Grid.Column="3" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[4]}" Grid.Column="4" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[5]}" Grid.Column="5" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[6]}" Grid.Column="6" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[7]}" Grid.Column="7" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[8]}" Grid.Column="8" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[9]}" Grid.Column="9" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[10]}" Grid.Column="10" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[11]}" Grid.Column="11" Grid.Row="2"/>
+                    <TextBlock Text="{Binding MonthlyCancellations[12]}" Grid.Column="12" Grid.Row="2"/>
+
+                    <TextBlock Text="Number of Delays" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding MonthlyDelays[1]}" Grid.Column="1" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[2]}" Grid.Column="2" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[3]}" Grid.Column="3" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[4]}" Grid.Column="4" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[5]}" Grid.Column="5" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[6]}" Grid.Column="6" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[7]}" Grid.Column="7" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[8]}" Grid.Column="8" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[9]}" Grid.Column="9" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[10]}" Grid.Column="10" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[11]}" Grid.Column="11" Grid.Row="3"/>
+                    <TextBlock Text="{Binding MonthlyDelays[12]}" Grid.Column="12" Grid.Row="3"/>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

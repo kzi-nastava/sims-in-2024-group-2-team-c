@@ -18,11 +18,9 @@ namespace BookingApp.Model
         public Dictionary<int, int> CancellationsByYear { get; set; }
         public Dictionary<int, int> DelaysByYear { get; set; }
 
-       /* public int Year { get; set; }
-        public int NumOfReservations { get; set; }
-        public int NumOfCancellations { get; set; }
-        public int NumOfReschedules { get; set; }
-        public int NumOfSuggestions { get; set; }*/
-        
+        public Dictionary<int, Dictionary<int, int>> ReservationsByMonth { get; set; }
+        public Dictionary<int, Dictionary<int, int>> CancellationsByMonth { get; set; }
+        public Dictionary<int, Dictionary<int, int>> DelaysByMonth { get; set; }
+
     }
 }
