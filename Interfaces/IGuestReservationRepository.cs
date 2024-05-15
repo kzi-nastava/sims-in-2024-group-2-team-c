@@ -10,14 +10,14 @@ namespace BookingApp.Interfaces
 {
     public interface IGuestReservationRepository
     {
-
-        //List<GuestReservation> GetAll();
-        List<GuestReservationDTO> GetAllGuestReservations(int guestId);
+        //List<GuestReservationDTO> GetAllGuestReservations(int guestId);
 
         string CancelReservation(int reservationId);
         bool GetReservationStatus(int reservationId);
 
-        //List<GuestReservation> GetAll();
+        List<GuestReservation> GetAll();
+
+        public void AddReservation(GuestReservation reservation);
 
         //public GuestReservation GetReservationById(int reservationId);
 

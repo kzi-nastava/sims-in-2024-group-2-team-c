@@ -16,19 +16,20 @@ namespace BookingApp.Service.GuestService
     {
         private readonly IGuestRepository _guestRepository;
         //private readonly GuestReservationService _guestReservationService;
-        private readonly GuestReservationRepository guestReservationRepository;
+        //private readonly GuestReservationRepository guestReservationRepository;
+        private readonly GuestReservationService _guestReservationService;
 
         public SuperGuestService()
         {
             _guestRepository = Injectorr.CreateInstance<IGuestRepository>();
-            guestReservationRepository = new GuestReservationRepository();
-            //_guestReservationService = new GuestReservationService(guestReservationRepository);
+            //guestReservationRepository = new GuestReservationRepository();
+            _guestReservationService = new GuestReservationService();
 
         }
 
         public Guest GetGuest(int id)
         {
-            List<GuestReservationDTO> guestReservations = guestReservationRepository.GetAllGuestReservations(id);
+            List<GuestReservationDTO> guestReservations = _guestReservationService.GetAllGuestReservations(id);
             var reservationsInLastYear = guestReservations
                 .Where(r => r.CheckIn >= DateTime.Now.AddYears(-1))
                 .ToList();

@@ -97,12 +97,10 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
         {
             GuestRating rating = _guestRatingService.GetRatingsByOwnerUsername(OwnerUsername);
 
-            //if (ratings.Count > 0)
-            //{
-            Cleanliness = (int)rating.Cleanliness; //s.Average(r => r.Cleanliness);
-            RuleRespecting = (int)rating.RuleRespecting; //s.Average(r => r.RuleRespecting);
-            Comment = rating.Comment; //string.Join("\n", ratings.Select(r => r.Comment));
-            //}
+            Cleanliness = (int)rating.Cleanliness;
+            RuleRespecting = (int)rating.RuleRespecting;
+            Comment = rating.Comment;
+            
         }
     }
 }

@@ -40,7 +40,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
 
         private void NavigateToGuestProfilView(object parameter)
         {
-            // Ovde postavljamo kod za navigaciju
             if (_navigationService != null)
             {
                 _mainGuestWindow.ChangeHeaderText("User informations");
