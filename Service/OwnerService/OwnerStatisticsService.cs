@@ -75,7 +75,61 @@ namespace BookingApp.Service.OwnerService
             return delaysByYear;
         }
 
-       
+        public Dictionary<int, int> NumberOfReservationsByMonth(Accommodation accommodation, int year)
+        {
+            List<Reservation> reservations = _reservationService.GetAll()
+                .Where(reservation => reservation.Accommodation.Name == accommodation.Name && reservation.ArrivalDate.Year == year)
+                .ToList();
+
+            var reservationsByMonth = reservations.GroupBy(reservation => reservation.ArrivalDate.Month)
+                                                  .ToDictionary(group => group.Key, group => group.Count());
+
+            EnsureAllMonthsPresent(reservationsByMonth);
+
+            return reservationsByMonth;
+        }
+
+
+        public Dictionary<int, int> NumberOfCancellationsByMonth(Accommodation accommodation, int year)
+        {
+            List<Reservation> reservations = _reservationService.GetAll()
+                .Where(reservation => reservation.Accommodation.Name == accommodation.Name && reservation.ArrivalDate.Year == year && !reservation.IsReserved)
+                .ToList();
+
+            var cancellationsByMonth = reservations.GroupBy(reservation => reservation.ArrivalDate.Month)
+                                                   .ToDictionary(group => group.Key, group => group.Count());
+
+            EnsureAllMonthsPresent(cancellationsByMonth);
+
+            return cancellationsByMonth;
+        }
+
+
+        public Dictionary<int, int> NumberOfDelaysByMonth(Accommodation accommodation, int year)
+        {
+            List<ReservationDelay> delays = _reservationDelayService.GetAll()
+                .Where(delay => delay.Accommodation.Name == accommodation.Name && delay.NewCheckInDate.Year == year)
+                .ToList();
+
+            var delaysByMonth = delays.GroupBy(delay => delay.NewCheckInDate.Month)
+                                      .ToDictionary(group => group.Key, group => group.Count());
+
+            EnsureAllMonthsPresent(delaysByMonth);
+
+            return delaysByMonth;
+        }
+
+
+        private void EnsureAllMonthsPresent(Dictionary<int, int> dictionary)
+        {
+            for (int month = 1; month <= 12; month++)
+            {
+                if (!dictionary.ContainsKey(month))
+                {
+                    dictionary[month] = 0;
+                }
+            }
+        }
 
 
     }

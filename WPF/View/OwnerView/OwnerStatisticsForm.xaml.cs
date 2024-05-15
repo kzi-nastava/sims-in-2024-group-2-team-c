@@ -43,5 +43,15 @@ namespace BookingApp.WPF.View.OwnerView
             }
         }
 
+        private void YearComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (YearComboBox.SelectedItem is ComboBoxItem selectedItem && int.TryParse(selectedItem.Content.ToString(), out int selectedYear))
+            {
+                // Pretpostavimo da imate ID smeštaja koji se može proslediti ovde
+                int accommodationId = 1; // Primer ID-a smeštaja
+                view.GetMonthlyStatistics(accommodationId, selectedYear);
+            }
+        }
+
     }
 }
