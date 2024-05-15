@@ -46,11 +46,11 @@
                 <StackPanel Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="STARTING DATE:" Margin="5,20,30,0"/>
-                        <DatePicker Margin="30,20,0,0" SelectedDate="{Binding SelectedStartDateProperty,Mode=TwoWay}"/>
+                        <DatePicker Margin="30,20,0,0" SelectedDate="{Binding SelectedStartDate,Mode=TwoWay}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="ENDING DATE:" Margin="5,20,30,0"/>
-                        <DatePicker Margin="39,20,0,0" SelectedDate="{Binding SelectedEndDateProperty,Mode=TwoWay}"/>
+                        <DatePicker Margin="39,20,0,0" SelectedDate="{Binding SelectedEndDate,Mode=TwoWay}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="LOCATION:" Margin="5,20,30,0"/>

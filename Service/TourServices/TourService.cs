@@ -48,6 +48,7 @@ namespace BookingApp.Service.TourServices
 
         public List<Tour> GetAll() {  return iTourRepository.GetAll(); }
         public Tour GetById(int id) { return iTourRepository.GetById(id); }
+        public int NextId() { return iTourRepository.NextId(); }
 
         public string GetTourNameById(int tourId)
         {

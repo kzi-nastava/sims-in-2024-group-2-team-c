@@ -40,8 +40,13 @@ namespace BookingApp.Service.TourServices
 
             return userNotifications.ToList();
         }
+        public void SendNotification(TourRequestNotification notification)
+        {
+            Save(notification);
+        }
+        public int NextId() { return tourRequestNotificationRepository.NextId(); }
 
-        
+
 
         public TouristRequestDTO GetRequest(int requestId)
         {
