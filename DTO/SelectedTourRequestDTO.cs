@@ -13,6 +13,8 @@ namespace BookingApp.DTO
         public DateTime StartInterval { get; set; }
         public DateTime EndInterval { get; set; }
 
+        public DateTime ChosenDate { get; set; }
+
         public string Description { get; set; }
 
         public string Location { get; set; }
@@ -23,7 +25,7 @@ namespace BookingApp.DTO
         
         public SelectedTourRequestDTO() { }
 
-        public SelectedTourRequestDTO(int number,DateTime startInterval,DateTime endInterval,string description,string location,string language,string status)
+        public SelectedTourRequestDTO(int number,DateTime startInterval,DateTime endInterval,string description,string location,string language,string status,DateTime chosenDate)
         {
             Number = number;
             StartInterval = startInterval;
@@ -32,6 +34,7 @@ namespace BookingApp.DTO
             Location = location;
             Language = language;
             Status = status;
+            ChosenDate = chosenDate;
         }
 
 

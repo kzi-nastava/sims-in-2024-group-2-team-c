@@ -24,11 +24,26 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
+
+        private DateTime _chosenDate;
+        public DateTime ChosenDate
+        {   get { return _chosenDate; }
+            set
+            {
+                _chosenDate = value;
+                OnPropertyChanged(nameof(ChosenDate));
+            }
+
+
+        }
+
+
+
         public ViewModelCommandd GoHomeCommand { get; }
 
 
 
-        private readonly TourRequestService _tourRequestService;
+        private readonly TourRequestNotificationService _notificationService;
 
         public ViewModelCommandd GoBackCommand { get; }
 
@@ -36,7 +51,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public SingleTourRequestViewModel(TouristRequestDTO request) {
 
-            _tourRequestService = new TourRequestService();
+            _notificationService = new TourRequestNotificationService();
             _mainViewModel = LoggedInUser.mainViewModel;
 
             GoBackCommand = new ViewModelCommandd(ExecuteGoBackCommand);
@@ -47,8 +62,15 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
         private void LoadTourRequest(TouristRequestDTO request) {
+
+            
         
-           TourRequest = _tourRequestService.GetTourRequest(request);
+           TourRequest = _notificationService.GetTourRequest(request);
+            if (TourRequest.Status == "ACCEPTED")
+            {
+                ChosenDate = TourRequest.ChosenDate;
+
+            }
         
         
         }

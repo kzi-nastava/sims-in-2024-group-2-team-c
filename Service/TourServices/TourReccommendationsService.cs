@@ -34,7 +34,7 @@ namespace BookingApp.Service.TourServices
             return tourReccommendationsRepository.GetAll();
         }
 
-        public List<TourReccommendations> MakeReccommendations() {
+       /* public List<TourReccommendations> MakeReccommendations() {
 
             List<TourReccommendations> recommendations = GetAll();
 
@@ -83,13 +83,60 @@ namespace BookingApp.Service.TourServices
                 isLanguage = true; isLocation = true;
                 CreateRecommendation(recommendations, request, RequestLocation, isLanguage, isLocation);
             }
+        }*/
+
+        public List<TourReccommendations> MakeReccommendations()
+        {
+            return GetAll();
         }
 
-        private void CreateRecommendation(List<TourReccommendations> recommendations, TourRequest request, Location RequestLocation, bool isLanguage, bool isLocation)
+
+
+        private void CreateRecommendation(/*List<TourReccommendations> recommendations,*/ TourRequest request, Location RequestLocation, bool isLanguage, bool isLocation,int tourId)
         {
-            TourReccommendations tourReccommendation = new TourReccommendations(12, isLanguage, isLocation, $"{RequestLocation.City}, {RequestLocation.Country}", request.Language, "guide1", request.Id);
+            TourReccommendations tourReccommendation = new TourReccommendations(tourId, isLanguage, isLocation, $"{RequestLocation.City}, {RequestLocation.Country}", request.Language, "guide1", request.Id);
             tourReccommendationsRepository.Save(tourReccommendation);
-            recommendations.Add(tourReccommendation);
+            //recommendations.Add(tourReccommendation);
         }
+
+        public void CheckForRecommendation(Tour tour) {
+
+            List<TourRequest> requests = tourRequestService.GetAll();
+
+            List<TourRequest> invalidRequests = requests.Where(request=>  request.Status == TourRequestStatus.Accepted).ToList();
+
+            bool isLanguage = false;
+            bool isLocation = false;
+
+            foreach (TourRequest request in invalidRequests)
+            {
+
+                Location RequestLocation = locationService.GetById(request.LocationId);
+                Location TourLocation = locationService.GetById(tour.LocationId);
+
+                if (request.Language == tour.Language && (RequestLocation.City != TourLocation.City || RequestLocation.Country != TourLocation.Country))
+                {
+                    isLanguage = true;
+                    CreateRecommendation( request, RequestLocation, isLanguage, isLocation,tour.Id);
+                }
+                else if (request.Language != tour.Language && (RequestLocation.City == TourLocation.City || RequestLocation.Country == TourLocation.Country))
+                {
+                    isLocation = true;
+                    CreateRecommendation( request, RequestLocation, isLanguage, isLocation, tour.Id);
+                }
+                else if (tour.Language == request.Language && (RequestLocation.City == TourLocation.City || RequestLocation.Country == TourLocation.Country))
+                {
+                    isLanguage = true; isLocation = true;
+                    CreateRecommendation( request, RequestLocation, isLanguage, isLocation, tour.Id);
+                }
+
+
+
+            }
+
+
+        }
+
+
     }
 }

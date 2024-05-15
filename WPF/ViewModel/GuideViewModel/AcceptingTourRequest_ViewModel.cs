@@ -54,6 +54,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         private readonly TourRequestNotificationService tourRequestNotificationService;
         private readonly TourRequestService tourRequestService;
         private readonly TourService tourService;
+        private readonly TourReccommendationsService tourReccommendationsService;
 
         public AcceptingTourRequest_ViewModel()
         {
@@ -62,6 +63,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             tourRequestService = new TourRequestService();
             tourService = new TourService();
             tourRequestNotificationService = new TourRequestNotificationService();
+            tourReccommendationsService = new TourReccommendationsService();
             /*if(SelectedDate!=null && SelectedDate < TourRequest.StartDate.Date && SelectedDate > TourRequest.EndDate.Date)
             {
                 MessageBox.Show("Selektuj turu izmedju "+ TourRequest.StartDate.ToString("dd.MM.yyyy. HH:mm:ss") + "i "+ TourRequest.EndDate.ToString("dd.MM.yyyy. HH:mm:ss"));
@@ -76,16 +78,17 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             List<DateTime> dates = new List<DateTime>();
             dates.Add(SelectedDate);
             
-            int tourId = tourService.CreateTour(Name, location[0].Trim(), location[1].Trim(), Description, TourRequest.Language, 20, TourRequest.PeopleIds, dates, 2, images);
+            Tour tour = tourService.CreateTour(Name, location[0].Trim(), location[1].Trim(), Description, TourRequest.Language, 20, TourRequest.PeopleIds, dates, 2, images);
             TourRequestNotification notification = new TourRequestNotification
             {
                 Id = tourRequestNotificationService.NextId(),
                 RequestId = TourRequest.Id,
-                TourId = tourId,
+                TourId = tour.Id,
                 TouristId = 4
                 //TouristId = TourRequest.PeopleIds[0]
             };
             tourRequestNotificationService.SendNotification(notification);
+            tourReccommendationsService.CheckForRecommendation(tour);
             IsSent = Visibility.Visible;
         }
     }
