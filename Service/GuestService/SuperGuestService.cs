@@ -61,7 +61,7 @@ namespace BookingApp.Service.GuestService
                 return guest;
             }
 
-            if (reservationsInLastYear.Count == 12)
+            if (reservationsInLastYear.Count == 7)
             {
                 Guest guest = new Guest
                 {
@@ -75,7 +75,7 @@ namespace BookingApp.Service.GuestService
                 return guest;
             }
 
-            if (reservationsInLastYear.Count == 13)
+            if (reservationsInLastYear.Count == 8)
             {
                 Guest guest = new Guest
                 {
@@ -89,7 +89,7 @@ namespace BookingApp.Service.GuestService
                 return guest;
             }
 
-            if (reservationsInLastYear.Count == 14)
+            if (reservationsInLastYear.Count == 9)
             {
                 Guest guest = new Guest
                 {

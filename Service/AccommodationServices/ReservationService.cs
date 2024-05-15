@@ -17,6 +17,10 @@ namespace BookingApp.Service.AccommodationServices
             _reservationRepository = new ReservationRepository();
         }
 
+        public List<Reservation> GetAll()
+        {
+            return _reservationRepository.GetAll();
+        }
 
         public Reservation FindOldReservation(Guest guest, Accommodation accommodation)
         {

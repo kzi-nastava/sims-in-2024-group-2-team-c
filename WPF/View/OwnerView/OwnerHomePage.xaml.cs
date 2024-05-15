@@ -51,6 +51,17 @@ namespace BookingApp.WPF.View.OwnerView
             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\RegisterAccommodationForm.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void NavigateToScheduleRenovation_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\ScheduleRenovation.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+            private void NavigateToStatistics_Click(object sender, RoutedEventArgs e)
+            {
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\OwnerStatisticsForm.xaml", UriKind.RelativeOrAbsolute));
+            //this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\AccommodationStatistics.xaml", UriKind.RelativeOrAbsolute));
+            }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

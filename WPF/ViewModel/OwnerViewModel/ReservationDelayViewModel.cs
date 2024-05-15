@@ -23,15 +23,24 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
         public ObservableCollection<ReservationDelay> ReservationDelays { get; set; }
         public ReservationDelay SelectedReservationDelay { get; set; }
 
+        /*public ObservableCollection<ReservationDelay> _reservationDelays
+        {
+            get { return ReservationDelays; }
+            set
+            {
+                ReservationDelays = value;
+                OnPropertyChanged("_reservationDelays");
+            }
+        }*/
+
 
         public ReservationDelayViewModel()
         {
-            //_reservationDelayRepository = new ReservationDelayRepository();
             _reservationDelayService = new ReservationDelayService();
             ReservationDelays = new ObservableCollection<ReservationDelay>(_reservationDelayService.GetAll());
             _reservationservice = new ReservationService();
             _reservationreposiotry = new ReservationRepository();
-
+            //_reservationDelays= new ObservableCollection<ReservationDelay>(_reservationDelayService.GetAll()); 
         }
 
         public void LoadReservationDelays()

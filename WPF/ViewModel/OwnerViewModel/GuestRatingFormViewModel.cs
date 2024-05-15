@@ -37,7 +37,6 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
            
         }
 
-
         private LoggedInUser _loggedInUser;
         public LoggedInUser LoggedInUser
         {
@@ -48,7 +47,6 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
                 OnPropertyChanged(nameof(LoggedInUser));
             }
         }
-
 
         public ObservableCollection<Reservation> Reservations
         {

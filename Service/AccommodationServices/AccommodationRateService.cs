@@ -12,7 +12,7 @@ using System.Windows;
 using BookingApp.Repository;
 using BookingApp.Injector;
 using System.Windows.Shapes;
-
+using BookingApp.Service.AccommodationServices;
 
 namespace BookingApp.Service.AccommodationServices
 {
