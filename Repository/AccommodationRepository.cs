@@ -62,7 +62,6 @@ namespace BookingApp.Repository
 
         public List<Accommodation> GetToursByLocationId(int locationId)
         {
-            // Pronalaženje smeštaja na osnovu ID-a lokacije
             return _accommodations.Where(acc => acc.Location.Id == locationId).ToList();
         }
 

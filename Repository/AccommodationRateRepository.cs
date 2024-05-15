@@ -20,7 +20,7 @@ namespace BookingApp.Repository
         private List<AccommodationRate> _accommodationRates;
         private GuestReservationRepository guestReservationRepository;
 
-        private ReservationRepository reservationRepository; //dodato umesto guestresrep
+        private ReservationRepository reservationRepository;
 
 
         public List<AccommodationRate> GetAll()
@@ -49,7 +49,6 @@ namespace BookingApp.Repository
             _accommodationRates = _serializer.FromCSV(FilePath);
             _accommodationRates.Add(accommodationRate);
             _serializer.ToCSV(FilePath, _accommodationRates);
-            //guestReservationRepository = new GuestReservationRepository();
         }
 
         public int NextId()
@@ -84,10 +83,7 @@ namespace BookingApp.Repository
         {
             _accommodationRates = _serializer.FromCSV(FilePath);
 
-            // Pronađite indeks ocene smeštaja koja se ažurira
             int index = _accommodationRates.FindIndex(r => r.Id == accommodationRate.Id);
-
-            // Ako je pronađen indeks, zamenite staru ocenu smeštaja novom
             if (index != -1)
             {
                 _accommodationRates[index] = accommodationRate;

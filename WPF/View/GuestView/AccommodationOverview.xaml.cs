@@ -39,7 +39,6 @@ namespace BookingApp.WPF.View.GuestView
             AccommodationListView.ItemsSource = accommodations;
 
         }
-        
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -51,13 +50,18 @@ namespace BookingApp.WPF.View.GuestView
 
             List<Accommodation> filteredAccommodations = FilterAccommodations(name, location, type, numOfGuestsStr, bookingDaysStr);
 
+            ClearSearchFields();
+
+            UpdateAccommodationListView(filteredAccommodations);
+        }
+
+        private void ClearSearchFields()
+        {
             NameText.Text = "";
             LocationText.Text = "";
             TypeText.Text = "";
             NumberOfGuestsText.Text = "";
             BookingDaysText.Text = "";
-
-            UpdateAccommodationListView(filteredAccommodations);
         }
 
         private List<Accommodation> FilterAccommodations(string name, string location, string type, string numOfGuestsStr, string bookingDaysStr)
@@ -123,32 +127,11 @@ namespace BookingApp.WPF.View.GuestView
                 }
         }
 
-        /*
-        private void AccommodationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Accommodation selectedAccommodation = (Accommodation)AccommodationListView.SelectedItem;
-            if (selectedAccommodation != null)
-            {
-                // Prikaz informacija o selektovanom smeštaju
-                IdTextBlock.Text = selectedAccommodation.Id.ToString();
-                NameTextBlock.Text = selectedAccommodation.Name;
-                LocationTextBlock.Text = selectedAccommodation.LocationDetails;
-                TypeTextBlock.Text = selectedAccommodation.Type;
-                MaxGuestsTextBlock.Text = selectedAccommodation.MaxGuests.ToString();
-                MinBookingDaysTextBlock.Text = selectedAccommodation.MinBookingDays.ToString();
-                MinCancellationDaysTextBlock.Text = selectedAccommodation.CancellationDays.ToString();
-            }
-        }
-        */
-
-
         private void AccommodationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Accommodation selectedAccommodation = (Accommodation)AccommodationListView.SelectedItem;
             if (selectedAccommodation != null)
             {
-                //AccommodationDetailsWindow accommodationDetailsWindow = new AccommodationDetailsWindow(selectedAccommodation);
-                //accommodationDetailsWindow.Show();
                 if (mainGuestWindow != null)
                 {
                     mainGuestWindow.ChangeHeaderText("Here are all accommodation details");
@@ -159,8 +142,6 @@ namespace BookingApp.WPF.View.GuestView
 
         private void ReservationDetailsButton_Click(object sender, RoutedEventArgs e)
         {
-            //GuestReservationDetails guestReservationDetails = new GuestReservationDetails();
-            //guestReservationDetails.Show();
             if (mainGuestWindow != null)
             {
                 mainGuestWindow.ChangeHeaderText("Reservation details");

@@ -46,8 +46,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
 
         public GuestReservationDetailsViewModel(MainGuestWindow mainGuestWindow, System.Windows.Navigation.NavigationService navigationService)
         {
-            _guestReservationService = new(new GuestReservationRepository());
-            //_accommodationRateService = new AccommodationRateService();
+            _guestReservationService = new GuestReservationService();
             _accommodationRateService = new AccommodationRateService();
             GuestReservations = new ObservableCollection<GuestReservationDTO>();
             RateReservationCommand = new ViewModelCommand<object>(RateReservation);
@@ -174,8 +173,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                 {
                     if (currentDate.Subtract(checkOutDate).Days <= 5)
                     {
-                        //RateAccommodationWindow rateAccommodationWindow = new RateAccommodationWindow(selectedReservation);
-                        //rateAccommodationWindow.Show();
                         if (_mainGuestWindow != null)
                         {
                             _mainGuestWindow.ChangeHeaderText("Rate accommodations and owners");
@@ -211,9 +208,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
                 }
                 else
                 {
-                    // Otvori prozor za reschedule rezervacije
-                    //ReservationDelayWindow rescheduleWindow = new ReservationDelayWindow(selectedReservation);
-                    //rescheduleWindow.ShowDialog();
                     if (_mainGuestWindow != null)
                     {
                         _mainGuestWindow.ChangeHeaderText("Reschedule the reservation");

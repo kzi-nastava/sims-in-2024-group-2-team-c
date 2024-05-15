@@ -22,7 +22,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
     {
 
         private readonly AccommodationRateService _service;
-        //private AccommodationRate accommodationRate;
         private int _cleanlinessRating;
         private int _correctnessOfTheOwnerRating;
         private string _comment;
@@ -148,60 +147,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             }
         }
 
-        /*
-        private List<string> _selectedFilePaths;
-        public List<string> SelectedFilePaths
-        {
-            get { return _selectedFilePaths; }
-            set
-            {
-                _selectedFilePaths = value;
-                OnPropertyChanged(nameof(SelectedFilePaths));
-            }
-        }
-        */
-
-        /*public ICommand IncreaseCleanlinessCommand { get; }
-        public ICommand DecreaseCleanlinessCommand { get; }
-        public ICommand IncreaseCorrectnessOfTheOwnerCommand { get; }
-        public ICommand DecreaseCorrectnessOfTheOwnerCommand { get; }
-
-        private void IncreaseCleanliness(object obj)
-        {
-            // Povećaj ocenu čistoće, ali ne prelazi 5
-            if (CleanlinessRating < 5)
-            {
-                CleanlinessRating++;
-            }
-        }
-
-        private void DecreaseCleanliness(object obj)
-        {
-            // Smanji ocenu čistoće, ali ne ide ispod 1
-            if (CleanlinessRating > 1)
-            {
-                CleanlinessRating--;
-            }
-        }
-
-        private void IncreaseCorrectnessOfTheOwner(object obj)
-        {
-            // Povećaj ocenu čistoće, ali ne prelazi 5
-            if (CorrectnessOfTheOwner < 5)
-            {
-                CorrectnessOfTheOwner++;
-            }
-        }
-
-        private void DecreaseCorrectnessOfTheOwner(object obj)
-        {
-            // Smanji ocenu čistoće, ali ne ide ispod 1
-            if (CorrectnessOfTheOwner > 1)
-            {
-                CorrectnessOfTheOwner--;
-            }
-        }
-        */
         private void NavigateToRenovatePage(AccommodationRate accommodationRate)
         {
             if (!CanRenovate)
@@ -245,12 +190,6 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             IsRated = false;
             IsReservationRated = false;
             Name = selectedReservation.Name;
-            /*
-            IncreaseCleanlinessCommand = new ViewModelCommand<object>(IncreaseCleanliness);
-            DecreaseCleanlinessCommand = new ViewModelCommand<object>(DecreaseCleanliness);
-            IncreaseCorrectnessOfTheOwnerCommand = new ViewModelCommand<object>(IncreaseCorrectnessOfTheOwner);
-            DecreaseCorrectnessOfTheOwnerCommand = new ViewModelCommand<object>(DecreaseCorrectnessOfTheOwner);
-            */
             _service = new AccommodationRateService(selectedReservation);
             RateAccommodationCommand = new ViewModelCommand<GuestReservationDTO>(RateAccommodation);
             RenovateAccommodationCommand = new ViewModelCommand<AccommodationRate>((rate) => NavigateToRenovatePage(rate));
