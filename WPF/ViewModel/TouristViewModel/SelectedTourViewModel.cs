@@ -1,4 +1,5 @@
-﻿using BookingApp.DTO;
+﻿using BookingApp.Commands;
+using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Service.TourServices;
 using System;
@@ -7,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
@@ -64,9 +67,26 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
+
+       
+
         private readonly FollowTourService _followTourService;
         private readonly TourInstanceService _tourInstanceService;
-        
+
+        private int _currentImageIndex;
+
+        private BitmapImage _currentImage;
+
+        public BitmapImage CurrentImage
+           {
+            get { return _currentImage; }
+            set{
+                    _currentImage = value;
+                    OnPropertyChanged(nameof(CurrentImage));
+               
+                }
+            }
+        public ViewModelCommandd NextImageCommand { get;  }
 
         public SelectedTourViewModel(HomeTourDTO selectedTour) { 
             SelectedTour = selectedTour;
@@ -75,6 +95,25 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             LoadKeyPointsForTour(SelectedTour);
             LoadTourInstances(SelectedTour.TourId);
             TourDescription = _followTourService.GetDescription(SelectedTour.TourId);
+
+            
+            _currentImageIndex = 1;
+            UpdateCurrentImage();
+            NextImageCommand = new ViewModelCommandd(NextImage);
+
+        }
+
+
+        private void NextImage(object obj)
+        {
+            _currentImageIndex = (_currentImageIndex + 1) % SelectedTour.Images.Count;
+            UpdateCurrentImage();
+        }
+
+        private void UpdateCurrentImage()
+        {
+            CurrentImage = SelectedTour.Images[_currentImageIndex];
+            
         }
 
 

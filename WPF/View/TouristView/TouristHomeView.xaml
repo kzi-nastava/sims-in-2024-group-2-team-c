@@ -27,6 +27,62 @@
             </Setter>
         </Style>
         <conv:ImagePathConverter x:Key="ImagePathConverter"/>
+        <Style x:Key="CustomThumbStyle" TargetType="Thumb">
+            <Setter Property="Height" Value="5"/>
+            <Setter Property="Background" Value="DarkGreen"/>
+        </Style>
+
+        <!-- Define the custom style for the horizontal scrollbar -->
+        <Style x:Key="CustomHorizontalScrollBarStyle" TargetType="ScrollBar">
+            <Setter Property="Height" Value="5"/>
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Padding" Value="0"/>
+            <!-- Ensure no extra padding -->
+            <Setter Property="Margin" Value="0"/>
+            <!-- Ensure no extra margin -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="{TemplateBinding Background}" Height="5">
+                            <Track Name="PART_Track" IsDirectionReversed="False" Orientation="Horizontal">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineLeftCommand" Background="Transparent" BorderBrush="Transparent" Width="0"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource CustomThumbStyle}"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineRightCommand" Background="Transparent" BorderBrush="Transparent" Width="0"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Define the custom template for the ScrollViewer -->
+        <ControlTemplate x:Key="CustomScrollViewerTemplate" TargetType="ScrollViewer">
+            <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.Column="0" />
+                <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="1" Value="{TemplateBinding VerticalOffset}"
+                        Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}"
+                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Row="1" Orientation="Horizontal" 
+                        Style="{StaticResource CustomHorizontalScrollBarStyle}" 
+                        Value="{TemplateBinding HorizontalOffset}" Maximum="{TemplateBinding ScrollableWidth}"
+                        ViewportSize="{TemplateBinding ViewportWidth}"
+                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+            </Grid>
+        </ControlTemplate>
     </Page.Resources>
   <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
     <Grid>
@@ -41,7 +97,7 @@
 
         <TextBlock Grid.Row="1"  Text="All Tours" Margin="30,0,0,0" Foreground="Green" FontWeight="SemiBold" FontSize="20"/>
 
-            <ItemsControl  ItemsSource="{Binding Tours}" Grid.Row="2" Margin="20,0,20,20">
+            <ItemsControl  ItemsSource="{Binding Tours}" Grid.Row="2" Margin="20,0,20,20" Width="380">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="#4e754a" BorderThickness="1" Margin="10" Background="#b2edb4" CornerRadius="5">
@@ -57,7 +113,7 @@
 
 
 
-                           <ScrollViewer Grid.Row="0" Margin="5" HorizontalScrollBarVisibility="Auto"
+                  <!--         <ScrollViewer Grid.Row="0" Margin="5" HorizontalScrollBarVisibility="Auto"
               VerticalScrollBarVisibility="Disabled" >
                                     <ItemsControl ItemsSource="{Binding Images}">
                                         <ItemsControl.ItemsPanel>
@@ -71,10 +127,25 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                </ScrollViewer> 
+                                </ScrollViewer> -->
 
 
-                                
+                                <ScrollViewer Grid.Row="0" Margin="10" Template="{StaticResource CustomScrollViewerTemplate}" HorizontalScrollBarVisibility="Visible"  Width="300" VerticalScrollBarVisibility="Hidden">
+
+                                    <ItemsControl ItemsSource="{Binding Images}" >
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Height="280" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding}"  Width="300" Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+
 
 
 
