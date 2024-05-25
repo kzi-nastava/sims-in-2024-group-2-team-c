@@ -131,7 +131,7 @@
 
 
 
-                    <Button Width="100" Height="30" HorizontalAlignment="Center" Grid.Row="8" Background="AliceBlue" Margin="10"  Click="BookButton_Click">
+                    <Button Width="100" Height="30" HorizontalAlignment="Center" Grid.Row="8" Background="AliceBlue" Margin="10"  Click="BookButton_Click" Command="{Binding BookingCommand}">
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <Grid>

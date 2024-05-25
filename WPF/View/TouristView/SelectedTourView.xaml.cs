@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model;
+using BookingApp.WPF.ViewModel.TouristViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,21 +35,38 @@ namespace BookingApp.WPF.View.TouristView
 
         private void BookButton_Click(object sender, RoutedEventArgs e)
         {
-            /*if (TourInstancesListView.SelectedItem != null)
+            
+            //this.NavigationService.Navigate(new BookTourView());
+
+            /* var viewModel = (SelectedTourViewModel)this.DataContext;
+             var selectedTour = viewModel.SelectedTour;
+
+             var bookTourView = new BookTourView
+             {
+                 DataContext = new BookTourViewModel(selectedTour)
+             };
+
+             this.NavigationService.Navigate(bookTourView);*/
+
+
+            var viewModel = (SelectedTourViewModel)this.DataContext;
+            var selectedTour = viewModel.SelectedTour;
+            var selectedTourInstance = (TourInstance)TourInstancesListView.SelectedItem;
+
+            if (selectedTourInstance != null)
             {
-                var selectedTour = (YourTourItemType)TourInstancesListView.SelectedItem;
-                var bookTourViewModel = new BookTourViewModel(selectedTour);
-                var bookTourView = new BookTourView();
-                bookTourView.DataContext = bookTourViewModel;
-                // Navigate to the BookTourView
-                // This depends on your navigation mechanism, such as Frame.Navigate() in UWP or NavigationService.Navigate() in WPF
+                var bookTourView = new BookTourView
+                {
+                    DataContext = new BookTourViewModel(selectedTour, selectedTourInstance)
+                };
+
+                this.NavigationService.Navigate(bookTourView);
             }
             else
             {
-                // Handle the case where no item is selected
-            }*/
+               
+            }
 
-            this.NavigationService.Navigate(new BookTourView());
         }
 
 

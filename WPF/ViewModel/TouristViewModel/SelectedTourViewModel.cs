@@ -87,6 +87,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 }
             }
         public ViewModelCommandd NextImageCommand { get;  }
+        public ViewModelCommandd BookingCommand { get; }
 
         public SelectedTourViewModel(HomeTourDTO selectedTour) { 
             SelectedTour = selectedTour;
@@ -100,6 +101,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _currentImageIndex = 1;
             UpdateCurrentImage();
             NextImageCommand = new ViewModelCommandd(NextImage);
+            BookingCommand = new ViewModelCommandd(BookTour);
 
         }
 
@@ -109,6 +111,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             _currentImageIndex = (_currentImageIndex + 1) % SelectedTour.Images.Count;
             UpdateCurrentImage();
         }
+
+        private void BookTour(object obj)
+        {
+            
+        }
+
 
         private void UpdateCurrentImage()
         {

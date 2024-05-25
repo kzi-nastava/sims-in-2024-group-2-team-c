@@ -29,6 +29,11 @@ namespace BookingApp.Service.TourServices
            _tourVoucherRepository.Save(tourVoucher);
         }
 
+        public void Delete(TourVoucher tourVoucher)
+        {
+            _tourVoucherRepository.Delete(tourVoucher);
+        }
+
         public List<TouristVoucherDTO> GetVouchersByTouristId(int touristId)
         {
 
@@ -71,26 +76,26 @@ namespace BookingApp.Service.TourServices
         }
 
 
-        public List<TouristVoucherDTO> GetVouchersByTourId(int tourId)
+        public List<TourVoucher> GetVouchersByTourId(int tourId)
         {
             // Retrieve all vouchers from the repository
             List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
 
             // Filter vouchers based on the given tourId
-            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TourId == tourId).ToList();
+            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TourId == tourId && v.TouristId == LoggedInUser.Id).ToList();
 
             // Map the filtered list of TourVoucher to TouristVoucherDTO
-            List<TouristVoucherDTO> vouchersDTO = filteredVouchers.Select(voucher => new TouristVoucherDTO
+           /* List<TouristVoucherDTO> vouchersDTO = filteredVouchers.Select(voucher => new TouristVoucherDTO
             {
                 TourId = voucher.TourId,
                 TouristId = voucher.TouristId,
                 ExpirationDate = voucher.ExpirationDate,
                 // Get the tour name using the tour repository
                 TourName = tourService.GetTourNameById(voucher.TourId)
-            }).ToList();
+            }).ToList();*/
 
             // Return the list of TouristVoucherDTO
-            return vouchersDTO;
+            return filteredVouchers;
         }
 
 

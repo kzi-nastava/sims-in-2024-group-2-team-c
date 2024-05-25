@@ -32,5 +32,20 @@ namespace BookingApp.DTO
             ViewLocation = string.Empty;
             BitmapImages = new List<BitmapImage>();
         }
+
+        public TourDTO(string name,string language,int duration)
+        {
+
+            Name = name;
+            Description = string.Empty;
+            Language = language;
+            Duration = duration;
+            KeyPointIds = new List<int>();
+            Images = new List<string>();
+            ViewLocation = string.Empty;
+            BitmapImages = new List<BitmapImage>();
+
+        }
+
     }
 }
