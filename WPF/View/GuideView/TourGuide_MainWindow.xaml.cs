@@ -25,6 +25,10 @@ namespace BookingApp.WPF.View.GuideView
             InitializeComponent();
             DataContext = new MainWindow_ViewModel();
         }
+        public Frame GetMainFrame()
+        {
+            return MainFrame;
+        }
         /*private void NavigateToHomePage()
         {
             MainFrame.Source = new Uri("WPF/View/GuideView/HomePage.xaml", UriKind.Relative);

@@ -1,4 +1,4 @@
-﻿<Page x:Class="BookingApp.WPF.View.GuideView.Guide_CreateTourByRequest"
+﻿<Page x:Class="BookingApp.WPF.View.GuideView.Guide_CreateTour"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:BookingApp.WPF.View.GuideView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Guide_CreateTourByRequest">
-    
+      Title="Guide_CreateTour">
+
     <Page.Resources>
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="LightGreen"/>
@@ -19,7 +19,7 @@
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -39,7 +39,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2">
             <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}" Height="30" Width="200">
                 <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
             </Button>
@@ -48,10 +48,10 @@
             </Button>
         </StackPanel>
 
-        <TextBlock Grid.Row ="1" Text="CREATE TOUR BY REQUEST" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,30 "/>
+        <TextBlock Grid.Row ="1" Text="CREATE TOUR" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,30 "/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Name:" Margin="5,40,5,0"/>
-        <TextBox x:Name="NameTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5,40,5,0"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Name:" Margin="0,0,0,0"/>
+        <TextBox x:Name="NameTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Location(City,Country):"/>
         <TextBox x:Name="LocationTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
@@ -65,23 +65,23 @@
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Max Tourists:"/>
         <TextBox x:Name="MaxTouristsTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding MaxTourists, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
-        <!--<StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">-->
-            <!--<TextBlock Text="Key Points:"/>-->
-           <!--<TextBox x:Name="KeyPointsTextBox" Text="{Binding KeyPoints.StartingPoint, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>-->
-           <!-- <TextBlock  Text="Key Points:"/>-->
-            <!--<TextBox x:Name="KeyPointsTextBox2" Text="{Binding KeyPoints.EndingPoint, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>-->
-            <!--<Button Click="AddKeyPoints_Click" Content="ADD KEY POINTS" HorizontalAlignment="Right" Margin="5,0,0,0"/>-->
-        <!--</StackPanel>-->
-        <TextBlock Grid.Row="7" Grid.Column="0" Text="Key Points:"/>
-        <TextBox x:Name="KeyPointsTextBox" Grid.Row="7" Grid.Column="1" Text="{Binding KeyPoints, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-        
-       <!-- <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2"> -->
-        <!-- <TextBlock Text="DATES:" Margin="5"/>-->
-        <!-- <DatePicker x:Name="DatePicker" Grid.Column="1" Margin="5" SelectedDateChanged="DatePicker_SelectedDateChanged"/>-->
-        <!--<Button Content="Add Date" Click="AddDateButton_Click" Margin="5"/>-->
-        <!--</StackPanel> -->
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="DATES:"/>
-        <TextBox x:Name="DateTextBox" Grid.Row="8" Grid.Column="1" Text="{Binding Dates, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2">
+            <TextBlock Text="Key Points:"/>
+            <TextBox x:Name="KeyPointsTextBox" Text="{Binding StartingPoint, UpdateSourceTrigger=PropertyChanged}" Margin="50,5,0,5" Width="120"/>
+            <TextBlock  Text="Key Points:" Margin="50,5,0,5"/>
+            <TextBox x:Name="KeyPointsTextBox2" Text="{Binding EndingPoint, UpdateSourceTrigger=PropertyChanged}" Margin="50,5,0,5" Width="124"/>
+            <Button Click="AddKeyPoints_Click" Content="ADD KEY POINTS" HorizontalAlignment="Right" Margin="80,0,0,0" Width="208" Height="20" Style="{StaticResource CustomButtonStyle}"/>
+        </StackPanel>
+        <!--<TextBlock Grid.Row="7" Grid.Column="0" Text="Key Points:"/>-->
+        <!--<TextBox x:Name="KeyPointsTextBox" Command="{Binding AddKeyPointsCommand}" Grid.Row="7" Grid.Column="1" Text="{Binding KeyPoints, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>-->
+
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2">
+            <TextBlock Text="DATES:" Margin="5"/>
+            <DatePicker x:Name="DatePicker" Grid.Column="1" Margin="208,0,0,0" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <Button Content="ADD DATE" Command="{Binding AddDateCommand}" Margin="27,0,0,0" Width="412" Height="20" Style="{StaticResource CustomButtonStyle}"/>
+        </StackPanel>
+        <!--<TextBlock Grid.Row="8" Grid.Column="0" Text="DATES:"/>-->
+        <!--<TextBox x:Name="DateTextBox" Grid.Row="8" Grid.Column="1" Text="{Binding Dates, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>-->
 
         <TextBlock Grid.Row="9" Grid.Column="0" Text="Duration:"/>
         <TextBox x:Name="DurationTextBox" Grid.Row="9" Grid.Column="1" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
@@ -89,7 +89,7 @@
         <TextBlock Grid.Row="10" Grid.Column="0" Text="Images:"/>
         <TextBox x:Name="ImagesTextBox" Grid.Row="10" Grid.Column="1" Text="{Binding Images, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
-        <Button Grid.Row="11" Grid.ColumnSpan="2" Command="{Binding SaveTourCommand}" Content="Save" HorizontalAlignment="Center" Margin="5,0,0,0"/>
+        <Button Grid.Row="11" Grid.ColumnSpan="2" Command="{Binding SaveTourCommand}" Content="SAVE" HorizontalAlignment="Right" Width="100" Height="30" Margin="5,0,5,0"  Style="{StaticResource CustomButtonStyle}"/>
 
         <TextBlock x:Name="infoTextBlock" Grid.Row ="12" Grid.ColumnSpan="2" Text="Tour is created." Foreground="Red" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="{Binding IsSaved}"/>
         <TextBlock x:Name="validationTextBlock" Grid.Row ="13" Grid.ColumnSpan="2" Text="Fill all fields." Foreground="Red" VerticalAlignment="Bottom" HorizontalAlignment="Center" Visibility="{Binding IsFIlled}"/>

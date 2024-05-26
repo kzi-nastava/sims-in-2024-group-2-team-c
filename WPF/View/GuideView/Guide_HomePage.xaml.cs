@@ -39,9 +39,10 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void CreateNewTourButton_Click(object sender, RoutedEventArgs e)
         {
-            TourForm tourForm = new TourForm();
-            tourForm.Show();
-            //MessageBox.Show("ALL TOURS VIEW button clicked.");
+            //TourForm tourForm = new TourForm();
+            //tourForm.Show();
+            Guide_CreateTour createTourPage = new Guide_CreateTour();
+            this.NavigationService.Navigate(createTourPage);
         }
         private void AllToursViewButton_Click(object sender, RoutedEventArgs e)
         {

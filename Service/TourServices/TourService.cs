@@ -85,7 +85,7 @@ namespace BookingApp.Service.TourServices
                 locationService.Save(location);
             }
 
-            if (keyPointIds.Count < 2)
+            if (keyPointIds.Count <= 2)
             {
                 throw new ArgumentException("Tura mora da sadrži barem dve ključne tačke.");
             }
