@@ -21,6 +21,8 @@
                         <RowDefinition Height="Auto"></RowDefinition> <!-- kljucne tacke-->
                         <RowDefinition Height="Auto"></RowDefinition> <!-- opis ture-->
                         <RowDefinition Height="200"></RowDefinition> <!-- druge slike-->
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition  Height="Auto"></RowDefinition> <!-- natpis instance ture-->
                         <RowDefinition Height="Auto"></RowDefinition> <!-- tabela sa instancama ture-->
                         <RowDefinition></RowDefinition> <!-- dugme book -->
@@ -107,9 +109,16 @@
                         </Button>
                     </Grid>
 
-                    <TextBlock Grid.Row="6" Text="Dates and time" HorizontalAlignment="Left" Margin="30,10,0,0" FontSize="15" FontWeight="SemiBold" Foreground="DarkGreen" ></TextBlock>
+                    <TextBlock Grid.Row="7" Text="Search by number of people" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="10"/>
 
-                    <ListView ItemsSource="{Binding TourInstances}" Grid.Row="7" Margin="0,20,0,20" Width="350"  Name="TourInstancesListView">
+                    <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                        <TextBox Height="20" Width="50" Margin="10,0" Text="{Binding NumberOfPeople}"/>
+                        <Button Content="Search" Height="20" Width="50" Command="{Binding SearchCommand}"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="6" Text="Dates and time" HorizontalAlignment="Left" Margin="30,20,0,0" FontSize="15" FontWeight="SemiBold" Foreground="DarkGreen" ></TextBlock>
+
+                    <ListView ItemsSource="{Binding TourInstances}" Grid.Row="9" Margin="0,20,0,20" Width="350"  Name="TourInstancesListView">
                         
                         <ListView.View>
                             <GridView>
@@ -131,7 +140,7 @@
 
 
 
-                    <Button Width="100" Height="30" HorizontalAlignment="Center" Grid.Row="8" Background="AliceBlue" Margin="10"  Click="BookButton_Click" Command="{Binding BookingCommand}">
+                    <Button Width="100" Height="30" HorizontalAlignment="Center" Grid.Row="10" Background="AliceBlue" Margin="10"  Click="BookButton_Click" Command="{Binding BookingCommand}">
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -146,7 +155,7 @@
                         </Button.ContentTemplate>
                     </Button>
 
-                    <TextBlock Grid.Row="9" Text="Reviews" HorizontalAlignment="Left" Margin="30,10,10,20" FontSize="15" FontWeight="SemiBold"/>
+                    <TextBlock Grid.Row="11" Text="Reviews" HorizontalAlignment="Left" Margin="30,10,10,20" FontSize="15" FontWeight="SemiBold"/>
 
                      
 

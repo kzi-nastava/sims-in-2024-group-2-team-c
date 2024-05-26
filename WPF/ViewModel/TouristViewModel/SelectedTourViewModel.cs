@@ -68,10 +68,21 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+        private int? _numberOfPeople;
+
+        public int? NumberOfPeople
+        {
+            get { return _numberOfPeople; }
+            set { _numberOfPeople = value;
+                OnPropertyChanged(nameof(NumberOfPeople));
+                } 
+        }
+
        
 
         private readonly FollowTourService _followTourService;
         private readonly TourInstanceService _tourInstanceService;
+        
 
         private int _currentImageIndex;
 
@@ -88,6 +99,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         public ViewModelCommandd NextImageCommand { get;  }
         public ViewModelCommandd BookingCommand { get; }
+        public ViewModelCommandd SearchCommand { get; }
 
         public SelectedTourViewModel(HomeTourDTO selectedTour) { 
             SelectedTour = selectedTour;
@@ -102,6 +114,23 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             UpdateCurrentImage();
             NextImageCommand = new ViewModelCommandd(NextImage);
             BookingCommand = new ViewModelCommandd(BookTour);
+            SearchCommand = new ViewModelCommandd(SearchPeopleNumber);
+
+        }
+
+
+        private void SearchPeopleNumber(object obj) {
+            
+            if(NumberOfPeople.HasValue)
+            {
+
+                TourInstances = new ObservableCollection<TourInstance>(_tourInstanceService.GetInstancesByTourIdAndAvailableSlots(SelectedTour.TourId, NumberOfPeople));
+            }
+            else
+            {
+                LoadTourInstances(SelectedTour.TourId);
+            }
+
 
         }
 
