@@ -299,6 +299,17 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+        public void ExecuteSearchCommand(string location,string language,int? duration)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/on home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new FilteredToursViewModel(location,language,duration);
+        }
+
 
 
     }

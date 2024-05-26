@@ -43,6 +43,9 @@
         <DataTemplate DataType="{x:Type viewModel:SavedReservationViewModel}">
             <local:SavedReservationView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:FilteredToursViewModel}">
+            <local:FilteredToursView/>
+        </DataTemplate>
     </Window.Resources>
 
 

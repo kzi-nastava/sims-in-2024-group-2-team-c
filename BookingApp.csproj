@@ -82,7 +82,6 @@
 
   <ItemGroup>
     <Folder Include="WPF\ViewModel\OwnerViewModel\" />
-    <Folder Include="Service\TourServices\" />
 
   </ItemGroup>
 

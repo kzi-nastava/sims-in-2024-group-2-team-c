@@ -23,6 +23,7 @@ namespace BookingApp.WPF.View.TouristView
     {
         public SearchTourView()
         {
+           
             InitializeComponent();
             DataContext = new SearchTourViewModel();
         }
@@ -31,5 +32,8 @@ namespace BookingApp.WPF.View.TouristView
         {
             this.NavigationService.GoBack();
         }
+
+
+
     }
 }
