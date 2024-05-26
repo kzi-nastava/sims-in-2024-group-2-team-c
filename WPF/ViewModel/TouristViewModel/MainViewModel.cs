@@ -276,7 +276,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 // Use followingTour object to set properties or perform actions
                 CurrentMarkerIconSource = "/Resources/Images/marker.png";
-                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentHomeIconSource = "/Resources/Images/on home.png";
                 CurrentUserIconSource = "/Resources/Images/tourist.png";
                 CurrentNotificationIconSource = "/Resources/Images/bell.png";
                 CurrentRequestIconSource = "/Resources/Images/tour-request.png";
@@ -287,7 +287,16 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         }
 
-        
+        public void ExecuteSavedReservation(object obj)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/on marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new SavedReservationViewModel();
+        }
 
 
 

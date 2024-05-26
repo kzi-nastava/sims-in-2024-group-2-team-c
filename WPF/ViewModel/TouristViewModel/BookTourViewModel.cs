@@ -149,7 +149,11 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         public ViewModelCommandd CheckCommand { get; }
         public ViewModelCommandd BookCommand { get; }
 
+        private readonly MainViewModel mainViewModel;
+
         public BookTourViewModel(HomeTourDTO selectedTour, TourInstance instance) {
+
+            mainViewModel = LoggedInUser.mainViewModel;
             tourReservationService = new TourReservationService();
             tourVoucherService = new TourVoucherService();
             tourInstanceService = new TourInstanceService();    
@@ -214,7 +218,10 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         {
 
 
-            tourVoucherService.Delete(SelectedVoucher);
+            if(SelectedVoucher != null)
+            {
+                tourVoucherService.Delete(SelectedVoucher);
+            }
             TourInstance.ReservedTourists = TourInstance.ReservedTourists + (int)TouristNumber;
             tourInstanceService.Update(TourInstance);
 
@@ -228,6 +235,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
 
             People.Clear();
+
+            
+           mainViewModel.ExecuteSavedReservation(obj);
 
         }
 

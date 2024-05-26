@@ -120,8 +120,11 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         private void UpdateCurrentImage()
         {
+            /* if(_currentImageIndex == null) {
+                 CurrentImage = SelectedTour.Images[_currentImageIndex];
+             }*/
+
             CurrentImage = SelectedTour.Images[_currentImageIndex];
-            
         }
 
 

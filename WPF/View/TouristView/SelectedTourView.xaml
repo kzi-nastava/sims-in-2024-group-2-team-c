@@ -148,7 +148,7 @@
 
                     <TextBlock Grid.Row="9" Text="Reviews" HorizontalAlignment="Left" Margin="30,10,10,20" FontSize="15" FontWeight="SemiBold"/>
 
-                    
+                     
 
                 </Grid>
 

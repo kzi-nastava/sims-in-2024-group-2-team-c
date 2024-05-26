@@ -37,6 +37,12 @@
         <DataTemplate DataType="{x:Type viewModel:SingleTourRequestViewModel}">
             <local:SingleTourRequestView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:BookTourViewModel}">
+            <local:BookTourView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SavedReservationViewModel}">
+            <local:SavedReservationView/>
+        </DataTemplate>
     </Window.Resources>
 
 
