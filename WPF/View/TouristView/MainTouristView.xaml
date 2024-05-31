@@ -46,6 +46,12 @@
         <DataTemplate DataType="{x:Type viewModel:FilteredToursViewModel}">
             <local:FilteredToursView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NoAvailableSpotsViewModel}">
+            <local:NoAvailableSpotsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AlternativeLocationTourViewModel}">
+            <local:AlternativeLocationnTourView/>
+        </DataTemplate>
     </Window.Resources>
 
 

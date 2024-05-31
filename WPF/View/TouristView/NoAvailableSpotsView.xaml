@@ -7,32 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="NoAvailableSpotsView">
-
+  
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="190"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="190"></RowDefinition>
+            </Grid.RowDefinitions>
 
 
-        <Border Grid.Row="0" Background="White" BorderBrush="Black" BorderThickness="2" Margin="20,30" Width="350">
-            <TextBlock Text="This tour has no available spots left" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green"  FontSize="15" FontWeight="SemiBold"></TextBlock>
-        </Border>
+            <Border Grid.Row="0" Background="White" BorderBrush="Black" BorderThickness="2" Margin="20,30" Width="350">
+                <TextBlock Text="This tour has no available spots left" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green"  FontSize="15" FontWeight="SemiBold"></TextBlock>
+            </Border>
 
-        <Border Grid.Row="1" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" Width="350" CornerRadius="20">
-            <StackPanel Margin="30">
-                <TextBlock TextWrapping="Wrap" MaxWidth="300" Text="Would you like to see alternative tours in the same location or find another date of this tour that suits you."
+            <Border Grid.Row="1" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" Width="350" CornerRadius="20">
+                <StackPanel Margin="30">
+                    <TextBlock TextWrapping="Wrap" MaxWidth="300" Text="Would you like to see alternative tours in the same location or find another date of this tour that suits you."
      HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="Black" FontWeight="SemiBold"></TextBlock>
-                <Grid Margin="20,0" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition ></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                    <Grid Margin="20,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0"  HorizontalAlignment="Left" Height="40" Margin="20" Content="Go Back" Background="White" ></Button>
-                    <Button Grid.Column="1" Content="See more" HorizontalAlignment="Right" Height="40" Margin="20" Background="White"></Button>
-                </Grid>
-            </StackPanel>
-        </Border>
+                        <Button Grid.Column="0"  HorizontalAlignment="Left" Height="40" Margin="20" Content="Go Back" Background="White" Click="Go_Back_Click" ></Button>
+                        <Button Grid.Column="1" Content="See more" HorizontalAlignment="Right" Height="40" Margin="20" Background="White" Command="{Binding SeeMoreCommand}"></Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

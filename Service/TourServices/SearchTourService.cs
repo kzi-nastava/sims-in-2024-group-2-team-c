@@ -75,9 +75,11 @@ namespace BookingApp.Service.TourServices
 
         private List<Tour> FilterByLocation(string location, List<Tour> tours)
         {
+            int locationId = 0;
             if (!string.IsNullOrEmpty(location))
             {
-                int locationId = locationService.GetIdByCityorCoutry(location);
+                locationId = locationService.GetIdByCityorCoutry(location);
+
                 tours = _tourService.GetToursByLocationId(locationId);
 
             }

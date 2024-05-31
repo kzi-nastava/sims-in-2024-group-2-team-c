@@ -2,6 +2,7 @@
 using BookingApp.DTO;
 using BookingApp.Model;
 using BookingApp.Service.TourServices;
+using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -99,7 +100,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         public ViewModelCommandd NextImageCommand { get;  }
         public ViewModelCommandd BookingCommand { get; }
+        
         public ViewModelCommandd SearchCommand { get; }
+
+        
+
+        private readonly MainViewModel _mainViewModel;
 
         public SelectedTourViewModel(HomeTourDTO selectedTour) { 
             SelectedTour = selectedTour;
@@ -109,15 +115,18 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             LoadTourInstances(SelectedTour.TourId);
             TourDescription = _followTourService.GetDescription(SelectedTour.TourId);
 
-            
+            _mainViewModel = LoggedInUser.mainViewModel;
             _currentImageIndex = 1;
             UpdateCurrentImage();
             NextImageCommand = new ViewModelCommandd(NextImage);
             BookingCommand = new ViewModelCommandd(BookTour);
             SearchCommand = new ViewModelCommandd(SearchPeopleNumber);
+           
 
         }
 
+
+       
 
         private void SearchPeopleNumber(object obj) {
             
@@ -143,7 +152,24 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         private void BookTour(object obj)
         {
-            
+            var selectedTourInstance = obj as TourInstance;
+            if (selectedTourInstance != null)
+            {
+                if (selectedTourInstance.MaxTourists > selectedTourInstance.ReservedTourists)
+                {
+                    _mainViewModel.ExecuteBookTour(SelectedTour,selectedTourInstance);
+
+                    // Navigation logic to switch views (e.g., using an event or messaging system)
+                }
+                else
+                {
+                    _mainViewModel.ExecuteNoAvailableSpotsLeft(SelectedTour.Location,SelectedTour.TourId);
+                }
+            }
+            else
+            {
+                // Handle no selected instance
+            }
         }
 
 

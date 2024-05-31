@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.WPF.ViewModel.TouristViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace BookingApp.WPF.View.TouristView
         public NoAvailableSpotsView()
         {
             InitializeComponent();
+        }
+
+        private void Go_Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

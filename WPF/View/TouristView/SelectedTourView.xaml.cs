@@ -33,43 +33,5 @@ namespace BookingApp.WPF.View.TouristView
         }
 
 
-        private void BookButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            //this.NavigationService.Navigate(new BookTourView());
-
-            /* var viewModel = (SelectedTourViewModel)this.DataContext;
-             var selectedTour = viewModel.SelectedTour;
-
-             var bookTourView = new BookTourView
-             {
-                 DataContext = new BookTourViewModel(selectedTour)
-             };
-
-             this.NavigationService.Navigate(bookTourView);*/
-
-
-            var viewModel = (SelectedTourViewModel)this.DataContext;
-            var selectedTour = viewModel.SelectedTour;
-            var selectedTourInstance = (TourInstance)TourInstancesListView.SelectedItem;
-
-            if (selectedTourInstance != null)
-            {
-                var bookTourView = new BookTourView
-                {
-                    DataContext = new BookTourViewModel(selectedTour, selectedTourInstance)
-                };
-
-                this.NavigationService.Navigate(bookTourView);
-            }
-            else
-            {
-               
-            }
-
-        }
-
-
-
     }
 }
