@@ -74,9 +74,10 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
                 LoadPieChart();
+                LoadTheLanguageChart();
+                Load();
 
-                
-               OnPropertyChanged(nameof(PieSeriesCollection));
+                OnPropertyChanged(nameof(PieSeriesCollection));
               //  LoadPieChart();
 
             }
@@ -95,6 +96,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 _selectedYear = value;
                 OnPropertyChanged(nameof(SelectedYear));
                 LoadNumberOfPeople();
+                
                 //OnPropertyChanged(nameof(NumberOfPeople));
             }
 
@@ -223,7 +225,18 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private void LoadTheLanguageChart()
         {
 
-            List<TourRequest> requests = _tourRequestService.GetByTourist(LoggedInUser.Id);
+            List<TourRequest> requests = new List<TourRequest>();
+
+            if (SelectedItem == 0)
+            {
+                 requests = _tourRequestService.GetByTourist(LoggedInUser.Id);
+            }
+            else
+            {
+                 requests = _tourRequestService.GetByTouristandYear(LoggedInUser.Id, SelectedItem);
+            }
+
+            
 
             var locationCounts = _tourStatisticsService.GroupByLocation(requests).OrderByDescending(x => x.Value) 
                          .ToList();
@@ -257,13 +270,27 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             LocationRequests  = locationRequests.Cast<object>().ToList();
 
+            OnPropertyChanged(nameof(LocationRequests));
+            OnPropertyChanged(nameof(LocationsCollection));
+            OnPropertyChanged(nameof(LocationLabels));
+            OnPropertyChanged(nameof(LocationValues));
+
         }
 
 
 
         private void Load()
         {
-            List<TourRequest> requests = _tourRequestService.GetByTourist(LoggedInUser.Id);
+            List<TourRequest> requests = new List<TourRequest>();
+
+            if (SelectedItem == 0)
+            {
+                requests = _tourRequestService.GetByTourist(LoggedInUser.Id);
+            }
+            else
+            {
+                requests = _tourRequestService.GetByTouristandYear(LoggedInUser.Id, SelectedItem);
+            }
 
             var languageCounts = requests.GroupBy(t => t.Language).ToDictionary(g => g.Key, g => g.Count());
 
@@ -290,6 +317,11 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                }
                
                );
+
+            OnPropertyChanged(nameof(LanguageRequests));
+            OnPropertyChanged(nameof(SeriesCollection));
+            OnPropertyChanged(nameof(Labels));
+            OnPropertyChanged(nameof(Values));
 
         }
 
