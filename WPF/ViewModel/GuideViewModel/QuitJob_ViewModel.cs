@@ -29,7 +29,9 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
 
         private void Quit(object obj)
         {
-            throw new NotImplementedException();
+            int guideId = LoggedInUser.Id;
+            futureToursService.CancelToursByGuide(guideId);
+            //tourVoucherService.UpdateVouchersForGuide(guideId);
         }
     }
 }

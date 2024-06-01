@@ -36,14 +36,17 @@ namespace BookingApp.Service.TourServices
 
         public List<TouristVoucherDTO> GetVouchersByTouristId(int touristId)
         {
-
-            List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
-            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == touristId).ToList();
+            List<TourVoucher> filteredVouchers = GetByTouristId(touristId);
             List<TouristVoucherDTO> vouchersDTO = FilterVouchers(filteredVouchers);
 
             return vouchersDTO;
         }
-
+        public List<TourVoucher> GetByTouristId(int touristId) 
+        {
+            List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
+            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == touristId).ToList();
+            return filteredVouchers;
+        }
 
         private List<TouristVoucherDTO> FilterVouchers(List<TourVoucher> filteredVouchers)
         {
@@ -74,7 +77,18 @@ namespace BookingApp.Service.TourServices
                 }
             }
         }
-
+        public bool TouristContainVoucher(int touristsId, Tour tour)
+        {
+            List<TourVoucher> touristsVouchers = GetByTouristId(touristsId);
+            foreach(TourVoucher voucher in touristsVouchers)
+            {
+                if(voucher.TourId == tour.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public List<TourVoucher> GetVouchersByTourId(int tourId)
         {
