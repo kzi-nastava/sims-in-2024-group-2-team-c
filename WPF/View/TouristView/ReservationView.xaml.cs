@@ -117,7 +117,7 @@ namespace BookingApp.View
             Tour = tour;
             
             Location = locationService.Get(tour.LocationId);
-            Vouchers = new ObservableCollection<TouristVoucherDTO>(tourVoucherService.GetVouchersByTourId(tour.Id));
+           // Vouchers = new ObservableCollection<TouristVoucherDTO>(tourVoucherService.GetVouchersByTourId(tour.Id));
 
 
             

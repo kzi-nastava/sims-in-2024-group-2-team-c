@@ -1,5 +1,4 @@
-﻿using BookingApp.Model;
-using BookingApp.WPF.ViewModel.TouristViewModel;
+﻿using BookingApp.WPF.ViewModel.TouristViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +17,18 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for SelectedTourView.xaml
+    /// Interaction logic for NoAvailableSpotsView.xaml
     /// </summary>
-    public partial class SelectedTourView : Page
+    public partial class NoAvailableSpotsView : Page
     {
-        public SelectedTourView()
+        public NoAvailableSpotsView()
         {
             InitializeComponent();
         }
 
-        private void Return_Click(object sender, RoutedEventArgs e)
+        private void Go_Back_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            NavigationService.GoBack();
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingApp.WPF.ViewModel.TouristViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,17 @@ namespace BookingApp.WPF.View.TouristView
     {
         public SearchTourView()
         {
+           
             InitializeComponent();
+            DataContext = new SearchTourViewModel();
         }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+
+
     }
 }

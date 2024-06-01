@@ -276,7 +276,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 // Use followingTour object to set properties or perform actions
                 CurrentMarkerIconSource = "/Resources/Images/marker.png";
-                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentHomeIconSource = "/Resources/Images/on home.png";
                 CurrentUserIconSource = "/Resources/Images/tourist.png";
                 CurrentNotificationIconSource = "/Resources/Images/bell.png";
                 CurrentRequestIconSource = "/Resources/Images/tour-request.png";
@@ -287,9 +287,63 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         }
 
-        
+        public void ExecuteSavedReservation(object obj)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/on marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new SavedReservationViewModel();
+        }
 
 
+        public void ExecuteSearchCommand(string location,string language,int? duration)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/on home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new FilteredToursViewModel(location,language,duration);
+        }
+
+
+        public void ExecuteNoAvailableSpotsLeft(string location,int tourId)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/on home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new NoAvailableSpotsViewModel(location,tourId);
+        }
+
+        public void ExecuteBookTour(HomeTourDTO selectedTour,TourInstance? tourInstance) {
+
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/on home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new BookTourViewModel(selectedTour,tourInstance);
+        }
+
+
+        public void ExecuteAlternativeTours(int location, int tourId)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/on home.png";
+            CurrentUserIconSource = "/Resources/Images/tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new AlternativeLocationTourViewModel(location,tourId);
+        }
 
 
     }

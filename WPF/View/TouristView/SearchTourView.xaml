@@ -9,6 +9,105 @@
       Title="SearchTourView">
 
     <Grid>
-        <TextBlock Text="SEARCH THE TOUR" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"  Margin="20,20,20,10" HorizontalAlignment="Left" Text="Search by.."
+                   Foreground="Green" FontSize="20" FontWeight="SemiBold"/>
+
+        <Border Grid.Row="1" Background="#88c97f" BorderBrush="Black" BorderThickness="1" Margin="20,0,20,0" CornerRadius="20" Height="70">
+           
+            <Grid>
+            <Rectangle Stroke="Black" StrokeThickness="2" StrokeDashArray="4,2" RadiusX="10" RadiusY="10"></Rectangle>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Column="0" Text="LOCATION"  Margin="30,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
+                    <ComboBox   ItemsSource="{Binding Locations}" SelectedValue="{Binding SelectedLocation}" Height="30" Width="200">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding City}"/>
+                                    <TextBlock Text=", "></TextBlock>
+                                    <TextBlock Text="{Binding Country}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+
+        <Border Grid.Row="2" Background="#88c97f" BorderBrush="Black" BorderThickness="1" Margin="20,0,20,0" CornerRadius="20" Height="70">
+
+            <Grid>
+                <Rectangle Stroke="Black" StrokeThickness="2" StrokeDashArray="4,2" RadiusX="10" RadiusY="10"></Rectangle>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Column="0" Text="DURATION"  Margin="30,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
+                    <TextBox Height="30" Width="200" Text="{Binding Duration}"></TextBox>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Background="#88c97f" BorderBrush="Black" BorderThickness="1" Margin="20,0,20,0" CornerRadius="20" Height="70">
+
+            <Grid>
+                <Rectangle Stroke="Black" StrokeThickness="2" StrokeDashArray="4,2" RadiusX="10" RadiusY="10"></Rectangle>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Column="0" Text="LOCATION"  Margin="30,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
+                    <ComboBox   ItemsSource="{Binding Locations}" SelectedValue="{Binding SelectedLocation}" Height="30" Width="200">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding City}"/>
+                                    <TextBlock Text=", "></TextBlock>
+                                    <TextBlock Text="{Binding Country}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        
+
+
+        <Border Grid.Row="3" Background="#88c97f" BorderBrush="Black" BorderThickness="1" Margin="20,0,20,0" CornerRadius="20" Height="70">
+
+            <Grid>
+                <Rectangle Stroke="Black" StrokeThickness="2" StrokeDashArray="4,2" RadiusX="10" RadiusY="10"></Rectangle>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Grid.Column="0" Text="LANGUAGES"  Margin="30,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
+                    <ComboBox Grid.Column="1"  ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage}" Height="30" Width="200">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"  HorizontalAlignment="Left" Height="40" Margin="20" Content="Go Back" Background="LightGreen" Click="GoBack_Click"></Button>
+            <Button Grid.Column="1" Content="Search" HorizontalAlignment="Right" Height="40" Margin="20" Background="LightGreen" Command="{Binding SearchCommand}"></Button>
+        </Grid>
+
+
     </Grid>
 </Page>

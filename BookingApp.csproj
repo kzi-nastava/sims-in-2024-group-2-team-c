@@ -31,6 +31,8 @@
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\gallery-image-icon.png" />
+    <None Remove="Resources\Images\Manchester3.jpg" />
+    <None Remove="Resources\Images\Manchester4.jpg" />
     <None Remove="Resources\Images\play.png" />
     <None Remove="Resources\Images\profileG.jpg" />
     <None Remove="Resources\Images\home.png" />
@@ -42,8 +44,11 @@
     <None Remove="Resources\Images\on marker.png" />
     <None Remove="Resources\Images\on tourist.png" />
     <None Remove="Resources\Images\on-tour-request.png" />
+    <None Remove="Resources\Images\Toronto1.jpg" />
+    <None Remove="Resources\Images\Toronto2.jpg" />
     <None Remove="Resources\Images\tour exit.png" />
     <None Remove="Resources\Images\tour-request.png" />
+    <None Remove="Resources\Images\tourist-next.png" />
     <None Remove="Resources\Images\tourist-notification.png" />
     <None Remove="Resources\Images\tourist-user.png" />
     <None Remove="Resources\Images\tourist.png" />
@@ -77,7 +82,6 @@
 
   <ItemGroup>
     <Folder Include="WPF\ViewModel\OwnerViewModel\" />
-    <Folder Include="Service\TourServices\" />
 
   </ItemGroup>
 
@@ -108,6 +112,8 @@
     <Resource Include="Resources\Images\gallery-image-icon.png" />
     <Resource Include="Resources\Images\home.png" />
     <Resource Include="Resources\Images\Manchester2.jpg" />
+    <Content Include="Resources\Images\Manchester3.jpg" />
+    <Content Include="Resources\Images\Manchester4.jpg" />
     <Resource Include="Resources\Images\map-marker.png" />
     <Resource Include="Resources\Images\marker.png" />
     <Resource Include="Resources\Images\on bell.png" />
@@ -115,8 +121,11 @@
     <Resource Include="Resources\Images\on marker.png" />
     <Resource Include="Resources\Images\on tourist.png" />
     <Resource Include="Resources\Images\on-tour-request.png" />
+    <Content Include="Resources\Images\Toronto1.jpg" />
+    <Content Include="Resources\Images\Toronto2.jpg" />
     <Resource Include="Resources\Images\tour exit.png" />
     <Resource Include="Resources\Images\tour-request.png" />
+    <Resource Include="Resources\Images\tourist-next.png" />
     <Resource Include="Resources\Images\tourist-notification.png" />
     <Resource Include="Resources\Images\tourist-user.png" />
     <Resource Include="Resources\Images\tourist.png" />

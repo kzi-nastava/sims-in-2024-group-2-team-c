@@ -7,8 +7,164 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="BookTourView">
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
-    <Grid>
-        <TextBlock Text="BOOK THE TOUR" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+            <Border Grid.Row="0" Margin="20" BorderBrush="Black" BorderThickness="2" Background="#88c97f">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="TOUR" Margin="10" FontWeight="SemiBold" FontSize="15"></TextBlock>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Name:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding Tour.Name}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Location:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding SelectedTour.Location}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Language:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding Tour.Language}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Duration:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding Tour.Duration}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Margin="20,0" BorderBrush="Black" BorderThickness="2" Background="#88c97f">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Green" Text="DETAILS" Margin="10" FontWeight="SemiBold" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="-90"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Date:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding TourInstance.Date}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Resreved spots:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding TourInstance.ReservedTourists}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Max Tourists:" Margin="5" FontWeight="Medium" FontSize="15"></TextBlock>
+                            <TextBlock Text="{Binding TourInstance.MaxTourists}" Margin="0,5" FontSize="15"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <TextBlock Grid.Row="2"  Text="BOOK" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="Green" Margin="20"/>
+
+            <Border Grid.Row="3"  BorderBrush="Black" BorderThickness="2" Background="#88c97f">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Check availability" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="10"/>
+                    <TextBlock Grid.Row="1" Text="Number of people" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"  Margin="20,10"/>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBox Width="50" Height="20" Margin="30,0,0,0" Text="{Binding TouristNumber}"/>
+                        <Button Content="Check" Width="50" Height="20" Margin="10" Command="{Binding CheckCommand}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding AvailableSpots}" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+
+            <ItemsControl Grid.Row="4" ItemsSource="{Binding People}" Margin="20" VerticalAlignment="Top">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#88c97f" BorderBrush="Black" BorderThickness="2" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="ADD A PERSON" Foreground="DarkGreen" FontSize="15" HorizontalAlignment="Center" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10"></TextBlock>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" Margin="10">
+                                        <TextBlock Grid.Row="0" Text="First Name:" Margin="10"  VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="Last Name:" Margin="10" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Age:" Margin="10" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="10">
+                                        <TextBox Grid.Row="1" Text="{Binding FirstName, Mode=TwoWay}" Margin="10" Width="50"/>
+                                        <TextBox Grid.Column="3" Text="{Binding LastName, Mode=TwoWay}" Margin="10" Width="50"/>
+                                        <TextBox Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Age, Mode=TwoWay}" Margin="10" Width="50"/>
+                                    </StackPanel>
+                                </Grid>
+
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Border Grid.Row="5" BorderBrush="Black" BorderThickness="2" Background="AliceBlue" Margin="20,0">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Use your vouchers" FontWeight="Medium" FontSize="15" Margin="10"/>
+                    <ComboBox  Width="200"  ItemsSource="{Binding Vouchers}" Margin="10,10,10,10" SelectedItem="{Binding SelectedVoucher}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Expires: " Foreground="Gray"/>
+                                    <TextBlock Text="{Binding ExpirationDate, StringFormat={}{0:MM/dd/yyyy}}" Foreground="Gray" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                
+            </Border>
+
+            <Grid Grid.Row="6" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Quit" Height="20" Width="50" Background="LightCoral" Click="Go_Back"/>
+                <Button Grid.Column="1" Content="Book" Height="20" Width="50" Background="LightGreen" IsEnabled="{Binding IsReservationApproved}" Command="{Binding BookCommand}"/>
+            </Grid>
+
+
+        </Grid>
+    </ScrollViewer>
 </Page>
