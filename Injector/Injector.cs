@@ -41,7 +41,7 @@ namespace BookingApp.Injector
 
            // {typeof(ITourReviewsRepository), new TourReviewsRepository() },
             {typeof(ITouristNotificationRepository), new TouristNotificationRepository() },
-            //{typeof(ITourRepository), new TourRepository() },
+            {typeof(IGuideRepository), new GuideRepository() },
             //{typeof(ITourInstanceRepository), new TourInstanceRepository() },
             {typeof(ITouristsRepository), new TouristRepository() },
             {typeof(IPeopleInfoRepository),new PeopleInfoRepository()},
