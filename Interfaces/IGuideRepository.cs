@@ -18,8 +18,8 @@ namespace BookingApp.Interfaces
         public void Delete(Guide guide);
         public Guide Update(Guide guide);
         public Guide GetById(int id);
-        public List<Guide> GetByIdList(List<int> ids);
+       // public List<Guide> GetByIdList(List<int> ids);
 
-        public List<Guide> GetGuidesByIds(List<int> guideIds);
+        //public List<Guide> GetGuidesByIds(List<int> guideIds);
     }
 }

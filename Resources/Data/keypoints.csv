@@ -19,13 +19,13 @@
 18|Copacabana Beach|Relax at Copacabana Beach, one of the most famous beaches in the world|False|False|True|1,2|1|6
 19|East Side Gallery|Explore the East Side Gallery, a long section of the Berlin Wall covered in vibrant street art|False|True|False|1,2|1|7
 20|Checkpoint Charlie|Visit Checkpoint Charlie, the famous border crossing point between East and West Berlin during the Cold War|False|False|True|1,2|1|7
-21|Sagrada Familia|Visit the Sagrada Familia, Gaud�'s unfinished masterpiece and a symbol of Barcelona|False|True|False|||8
-22|Park G�ell|Explore Park G�ell, a whimsical park designed by Gaud� with colorful mosaic sculptures and stunning views of the city.|False|False|False|||8
-23|Casa Batll�|Discover Casa Batll�, a unique and imaginative building designed by Gaud� with its distinctive facade and rooftop terrace|False|False|False|||8
-24|La Pedrera|Visit La Pedrera, also known as Casa Mil�, another of Gaud�'s architectural gems with its undulating stone facade and rooftop sculptures|False|False|False|||8
-25|Palau G�ell|Explore Palau G�ell, a mansion designed by Gaud� for a wealthy industrialist, known for its intricate ironwork and lavish interiors|False|False|False|||8
-26|Casa Vicens|Discover Casa Vicens, one of Gaud�'s earliest works and a UNESCO World Heritage Site, with its colorful tiles and eclectic architectural style|False|False|False|||8
-27|Colonia G�ell|Visit Colonia G�ell, a workers' village where Gaud� experimented with architectural techniques that would later influence his famous works in Barcelona|False|False|True|||8
+21|Sagrada Familia|Visit the Sagrada Familia, Gaudi's unfinished masterpiece and a symbol of Barcelona|False|True|False|||8
+22|Park Giell|Explore Park Giell, a whimsical park designed by Gaudi with colorful mosaic sculptures and stunning views of the city.|False|False|False|||8
+23|Casa Batlli|Discover Casa Batlli, a unique and imaginative building designed by Gaudi with its distinctive facade and rooftop terrace|False|False|False|||8
+24|La Pedrera|Visit La Pedrera, also known as Casa Mili, another of Gaudi's architectural gems with its undulating stone facade and rooftop sculptures|False|False|False|||8
+25|Palau Giell|Explore Palau Giell, a mansion designed by Gaudi for a wealthy industrialist, known for its intricate ironwork and lavish interiors|False|False|False|||8
+26|Casa Vicens|Discover Casa Vicens, one of Gaudi's earliest works and a UNESCO World Heritage Site, with its colorful tiles and eclectic architectural style|False|False|False|||8
+27|Colonia Giell|Visit Colonia Giell, a workers' village where Gaudi experimented with architectural techniques that would later influence his famous works in Barcelona|False|False|True|||8
 28|Uffizi Gallery|Explore the Uffizi Gallery, home to one of the most important art collections in the world, including works by Botticelli, Michelangelo, and Leonardo da Vinci|False|True|False|||9
 29|Florence Cathedral|Visit the Florence Cathedral, also known as the Duomo, with its iconic dome designed by Brunelleschi and stunning marble facade.|False|False|False|||9
 30|Ponte Vecchio|Stroll across the Ponte Vecchio, Florence's oldest bridge, lined with shops selling jewelry, art, and souvenirs|False|False|True|||9
@@ -39,13 +39,3 @@
 38|Sandhamn|Explore Sandhamn, a charming island with sandy beaches, quaint cottages, and scenic hiking trails|False|False|True|||12
 39|Giza Pyramids|Explore the Giza Pyramids, including the Great Pyramid of Giza, one of the Seven Wonders of the Ancient World|False|True|False|||13
 40|Sphinx|Visit the Sphinx, a mythical creature with the body of a lion and the head of a human, guarding the pyramids of Giza|False|False|True|||13
-41|kp1||False|True|False|||0
-42|kp4||False|False|True|||0
-43|kp1||False|False|False|||0
-44|kp4||False|False|False|||0
-45|||False|False|False|||0
-46|||False|False|False|||0
-47|kp1||False|True|False|||14
-48|kp4||False|False|True|||14
-49|||False|True|False|||0
-50|||False|False|True|||0
