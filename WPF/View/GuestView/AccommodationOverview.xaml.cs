@@ -156,7 +156,8 @@ namespace BookingApp.WPF.View.GuestView
 
         private void ForumsButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //NavigationService?.Navigate(new ForumsPage());
+            mainGuestWindow.ChangeHeaderText("Forums");
+            NavigationService?.Navigate(new ForumView(mainGuestWindow, NavigationService));
         }
 
 

@@ -189,5 +189,28 @@ namespace BookingApp.Service.AccommodationServices
             }
         }
 
+        public bool HasGuestVisitedLocation(int locationId)
+        {
+            List<GuestReservation> reservations = _guestReservationRepository.GetAll();
+            foreach (GuestReservation reservation in reservations)
+            {
+                int accommodationId = reservation.Accommodation.Id;
+                    
+                List<Accommodation> accommodations = _accommodationRepository.GetAll();
+
+                foreach(Accommodation accommodation in accommodations)
+                {
+                    if(accommodation.Id == accommodationId)
+                    {
+                        if(accommodation.Location.Id == locationId && reservation.GuestId == LoggedInUser.Id && reservation.IsReserved == true)
+                        {
+                            return true;
+                        }
+
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
