@@ -29,7 +29,7 @@ namespace BookingApp.Injector
             // { typeof(ITourService), new TourService() }
 
             { typeof(ITourRequestNotificationRepository), new TourRequestNotificationRepository() },
-            // { typeof(IAccommodationService), new AccommodationService() }
+            { typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository() },
 
             { typeof(ILocationRepository), new LocationRepository() },
            // { typeof(ITourRepository), new TourRepository() },
