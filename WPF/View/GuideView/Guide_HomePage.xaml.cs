@@ -98,7 +98,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void QuitJob_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_QuitJob guide_QuitJob = new Guide_QuitJob();
+            this.NavigationService.Navigate(guide_QuitJob);
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
