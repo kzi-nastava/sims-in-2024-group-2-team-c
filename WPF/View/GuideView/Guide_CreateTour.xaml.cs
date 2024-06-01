@@ -48,6 +48,7 @@ namespace BookingApp.WPF.View.GuideView
             };
             nextWindow.DataContext = nextViewModel;
             this.NavigationService?.Navigate(nextWindow);
+            //this.NavigationService?.GoBack();
         }
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {

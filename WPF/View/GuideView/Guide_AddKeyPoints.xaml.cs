@@ -29,6 +29,14 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+            var viewModel = DataContext as AddKeyPoints_ViewModel;
+            Guide_CreateTour nextWindow = new Guide_CreateTour();
+            CreateTour_ViewModel nextViewModel = new CreateTour_ViewModel()
+            {
+                KeyPoints = viewModel.KeyPoints
+            };
+            nextWindow.DataContext = nextViewModel;
+            //this.NavigationService?.Navigate(nextWindow);
             this.NavigationService?.GoBack();
         }
     }

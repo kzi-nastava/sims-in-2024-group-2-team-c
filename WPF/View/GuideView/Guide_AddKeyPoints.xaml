@@ -36,23 +36,20 @@
         <!-- NUMBER OF KEY POINTS -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
             <TextBlock Text="NUMBER OF KEY POINTS: " VerticalAlignment="Center"/>
-            <ComboBox x:Name="comboBox" Width="50" Margin="50,0,0,0">
-                <ComboBoxItem Content="1"/>
-                <ComboBoxItem Content="2"/>
-                <ComboBoxItem Content="3"/>
-                <ComboBoxItem Content="4"/>
-                <ComboBoxItem Content="5"/>
-                <ComboBoxItem Content="6"/>
-                <ComboBoxItem Content="7"/>
-                <ComboBoxItem Content="8"/>
-                <ComboBoxItem Content="9"/>
-                <ComboBoxItem Content="10"/>
+            <ComboBox x:Name="comboBox" Width="50" Margin="50,0,0,0" ItemsSource="{Binding Numbers}" SelectedItem="{Binding SelectedNumberOfPoints}">
             </ComboBox>
             <Button Content="INSERT" Command="{Binding InsertCommand}"  Style="{StaticResource CustomButtonStyle}" Height="30" Width="200" Margin="100,0,0,0"/>
         </StackPanel>
 
         <!-- StackPanels for generated content -->
-        <StackPanel x:Name="generatedStackPanel" Grid.Row="3"/>
+        <!--<StackPanel x:Name="generatedStackPanel"  Grid.Row="3"/>-->
+        <ItemsControl x:Name="generatedStackPanel" Grid.Row="3" ItemsSource="{Binding GeneratedElements}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
 
         <Button Grid.Row="4" Grid.ColumnSpan="2" Command="{Binding SaveTourCommand}" Content="SAVE" HorizontalAlignment="Right" Width="200" Height="30" Margin="5,0,5,0" Visibility="{Binding isInserted}" Style="{StaticResource CustomButtonStyle}"/>
     </Grid>

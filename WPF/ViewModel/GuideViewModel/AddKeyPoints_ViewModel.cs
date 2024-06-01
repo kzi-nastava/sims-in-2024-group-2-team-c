@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows;
 using BookingApp.Model;
 using BookingApp.Service.TourServices;
+using System.Reflection;
 
 namespace BookingApp.WPF.ViewModel.GuideViewModel
 {
@@ -24,6 +25,16 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             {
                 _selectedNumberOfPoints = value;
                 OnPropertyChanged(nameof(SelectedNumberOfPoints));
+            }
+        }
+        private ObservableCollection<int> _numbers;
+        public ObservableCollection<int> Numbers
+        {
+            get => _numbers;
+            set
+            {
+                _numbers = value;
+                OnPropertyChanged(nameof(Numbers));
             }
         }
 
@@ -59,7 +70,17 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             InsertCommand = new ViewModelCommandd(InsertPoints);
             SaveTourCommand = new ViewModelCommandd(SavePoints);
             isInserted = Visibility.Hidden;
+            Numbers= new ObservableCollection<int>(GetNumbers());
             //_keyPoints = new List<KeyPoint>();
+        }
+        private List<int> GetNumbers()
+        {
+            List<int> numbers = new List<int>();
+            for(int i = 0; i<11; i++)
+            {
+                numbers.Add(i);
+            }
+            return numbers;
         }
 
         private void InsertPoints(object parameter)
@@ -72,6 +93,8 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                 StackPanel stackPanel = new StackPanel();
                 stackPanel.Orientation = Orientation.Horizontal;
                 stackPanel.Margin = new Thickness(10);
+
+                stackPanel.Children.Add(new Label { Content = $"KEY POINT {i+1} :" });
 
                 TextBox textBox = new TextBox() { Width = 100 };
                 stackPanel.Children.Add(textBox);

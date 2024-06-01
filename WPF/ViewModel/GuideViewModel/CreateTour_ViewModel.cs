@@ -154,13 +154,13 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         private void SaveTour()
         {
             if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Location) || string.IsNullOrEmpty(Description) ||
-               string.IsNullOrEmpty(Language) || MaxTourists <= 0 || Dates.Count == 0 || Duration <= 0 ||
+               string.IsNullOrEmpty(Language) || MaxTourists <= 0 /* || Dates.Count == 0*/ || Duration <= 0 ||
                string.IsNullOrEmpty(Images))
             {
                 IsFilled = Visibility.Visible;
                 return;
             }
-
+            KeyPoints = GetKeyPoints();
             //var keyPoints = new List<string> { StartingPoint, EndingPoint };
             var keyPoints = ParseKeyPointIds(KeyPoints);
             var imagePathsList = new List<string> { Images };
