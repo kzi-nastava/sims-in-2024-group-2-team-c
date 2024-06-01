@@ -58,5 +58,9 @@ namespace BookingApp.WPF.View.GuideView
         {
             this.NavigationService?.GoBack();
         }
+        private void ViewToursButton_Click(object sender, RoutedEventArgs e)
+        {
+            //this.NavigationService?.GoBack();
+        }
     }
 }

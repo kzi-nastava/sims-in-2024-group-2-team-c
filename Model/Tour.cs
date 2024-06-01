@@ -1,4 +1,5 @@
-﻿using BookingApp.Serializer;
+﻿using BookingApp.DTO;
+using BookingApp.Serializer;
 using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,19 @@ namespace BookingApp.Model
             KeyPointIds = keyPointIds;
             Duration = duration;
             Images = images;
+        }
+        public Tour(TourDTO dto)
+        {
+            Name = dto.Name;
+            LocationId = dto.LocationId;
+            Description = dto.Description;
+            Language = dto.Language;
+            KeyPointIds = dto.KeyPointIds;
+            Duration = dto.Duration;
+            Images = dto.Images;
+            ViewLocation = dto.ViewLocation;
+            BitmapImages = dto.BitmapImages;
+
         }
 
         public void FromCSV(string[] values)
