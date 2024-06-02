@@ -54,9 +54,11 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void AllToursViewButton_Click(object sender, RoutedEventArgs e)
         {
-            TourOverview tourOverview = new TourOverview();
-            tourOverview.Show();
+            //TourOverview tourOverview = new TourOverview();
+            //tourOverview.Show();
             //MessageBox.Show("ALL TOURS VIEW button clicked.");
+            Guide_AllTourView allTourView = new Guide_AllTourView();
+            this.NavigationService.Navigate(allTourView);
         }
 
         private void FutureToursButton_Click(object sender, RoutedEventArgs e)

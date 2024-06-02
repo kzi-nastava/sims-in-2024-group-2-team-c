@@ -58,7 +58,7 @@
                     <Button Content="LOG OUT" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="272" Height="30" Grid.Row="6" Click="LogOut_Click"/>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/Images/play.png" Width="40" Height="40" HorizontalAlignment="Center" Margin="0,35,0,5"/>
-                        <Button Content="PLAY TUTORIAL" Style="{StaticResource CustomButtonStyle}" Margin="0,35,0,5" Width="234" Height="30" Grid.Row="7" Click="PlayTutorial_Click"/>
+                        <Button Content="PLAY TUTORIAL" Style="{StaticResource CustomButtonStyle}"  Margin="0,35,0,5" Width="234" Height="30" Grid.Row="7" Click="PlayTutorial_Click"/>
                     </StackPanel>
                 </StackPanel>
                 <!--</Border>-->

@@ -1,4 +1,6 @@
-﻿using BookingApp.WPF.ViewModel.GuideViewModel;
+﻿using BookingApp.Model;
+using BookingApp.Service.TourServices;
+using BookingApp.WPF.ViewModel.GuideViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,12 @@ namespace BookingApp.WPF.View.GuideView
     /// </summary>
     public partial class Guide_FollowTour : Page
     {
+        private readonly KeyPointService _keyPointService;
         public Guide_FollowTour()
         {
             InitializeComponent();
             DataContext = new FollowTour_ViewModel();
+            _keyPointService = new KeyPointService();
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
@@ -37,7 +41,18 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void ViewKeyPointsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacija
+            var MainViewModel = DataContext as FollowTour_ViewModel;
+            List<KeyPoint> keyPoints = _keyPointService.GetKeypointsByIds(MainViewModel.Tour.KeyPointIds);
+            ActiveKeyPoint_ViewModel viewModel = new ActiveKeyPoint_ViewModel
+            {
+                toursKeyPoints = keyPoints
+            };
+            Guide_ActivateKeyPoints newPage = new Guide_ActivateKeyPoints();
+            newPage.DataContext = viewModel;
+
+            this.NavigationService.Navigate(newPage);
+            //Guide_ActivateKeyPoints keyPointsView = new Guide_ActivateKeyPoints();
+            //this.NavigationService?.Navigate(keyPointsView);
         }
     }
 }
