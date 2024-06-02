@@ -1,5 +1,6 @@
 ﻿using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Service.TourServices;
 using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
@@ -120,6 +121,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public ViewModelCommandd RequestsCommand { get; }
 
+        private readonly TouristService touristService;
+        private readonly TourVoucherService tourVoucherService;
+
         public MainViewModel()
         {
 
@@ -137,7 +141,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
             CurrentRequestIconSource = "/Resources/Images/tour-request.png";
 
+            tourVoucherService = new TourVoucherService();
+            touristService = new TouristService();
 
+            CheckForUniversalVoucher();
+
+            
 
             CurrentChildView = new TouristHomeViewModel();
         }
@@ -437,6 +446,24 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
+
+        public void CheckForUniversalVoucher()
+        {
+           List<Tourist> tourists =  touristService.GetAll();
+
+            foreach(Tourist t in tourists)
+            {
+
+                if(t.YearlyTourNumber >= 5)
+                {
+                    tourVoucherService.CreateUniversalTourVoucher(t);
+                    t.YearlyTourNumber = 0;
+                    touristService.Update(t);
+                }
+
+            }
+
+        }
 
 
     }

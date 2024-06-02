@@ -7,27 +7,30 @@ using BookingApp.Serializer;
 
 namespace BookingApp.Model
 {
-    public class Tourist : User,ISerializable
-    { 
+    public class Tourist : User, ISerializable
+    {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int Age {  get; set; }
+        public int Age { get; set; }
 
         public bool Active { get; set; }
 
-       public  List<int> ReservationIds { get; set; }
+        public List<int> ReservationIds { get; set; }
 
-       public  List<int> TourRequestIds { get; set; }
+        public List<int> TourRequestIds { get; set; }
+
+        public int YearlyTourNumber {get; set; }
 
         public Tourist() { }
 
-        public Tourist(string firstName,string lastName, int age,List<int> reservationIds) { 
+        public Tourist(string firstName,string lastName, int age,List<int> reservationIds,int yearlyTourNumber) { 
         
             FirstName = firstName;  
             LastName = lastName;
             Age = age;
             Active = false;
             ReservationIds = reservationIds;
+            YearlyTourNumber = yearlyTourNumber;
         
         }
 
@@ -43,12 +46,13 @@ namespace BookingApp.Model
             Active = Convert.ToBoolean(values[5]);
             ReservationIds = values[6].Split(',').Select(int.Parse).ToList();
             TourRequestIds = values[7].Split(',').Select(int.Parse).ToList();
+            YearlyTourNumber = Convert.ToInt32(values[8]);
         }
 
         public string[] ToCSV()
         {
             //string[] userCSV = base.ToCSV(); // Call base class's ToCSV method
-            string[] touristCSV = { Id.ToString(),Username, FirstName, LastName, Age.ToString(), Active.ToString(), string.Join(",", ReservationIds), string.Join(",", TourRequestIds) };
+            string[] touristCSV = { Id.ToString(),Username, FirstName, LastName, Age.ToString(), Active.ToString(), string.Join(",", ReservationIds), string.Join(",", TourRequestIds),YearlyTourNumber.ToString() };
             return touristCSV;
         }
 

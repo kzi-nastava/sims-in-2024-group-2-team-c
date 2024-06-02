@@ -24,9 +24,9 @@ namespace BookingApp.Model
         public TourVoucher() { }
 
 
-        public TourVoucher(int id, int tourId, int touristId, DateTime expirationDate, bool isUniversal)
+        public TourVoucher( int tourId, int touristId, DateTime expirationDate, bool isUniversal)
         {
-            Id = id;
+           
             TourId = tourId;
             TouristId = touristId;
             ExpirationDate = expirationDate;
