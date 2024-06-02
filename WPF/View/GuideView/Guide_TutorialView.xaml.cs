@@ -23,7 +23,7 @@ namespace BookingApp.WPF.View.GuideView
         public Guide_TutorialView()
         {
             InitializeComponent();
-            TutorialVideo.Source = new Uri("path/to/your/video.mp4", UriKind.Relative); // Set the path to your video file
+            TutorialVideo.Source = new Uri("path/to/your/video.mp4", UriKind.Relative); // putanja
             TutorialVideo.LoadedBehavior = MediaState.Manual;
         }
         private void Back_Click(object sender, RoutedEventArgs e)

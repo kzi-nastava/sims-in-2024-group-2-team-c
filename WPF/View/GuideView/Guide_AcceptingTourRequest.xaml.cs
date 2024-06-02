@@ -19,7 +19,7 @@ namespace BookingApp.WPF.View.GuideView
     /// <summary>
     /// Interaction logic for Guide_AcceptingTourRequest.xaml
     /// </summary>
-    public partial class Guide_AcceptingTourRequest : Window
+    public partial class Guide_AcceptingTourRequest : Page
     {
         public Guide_AcceptingTourRequest()
         {
@@ -32,5 +32,17 @@ namespace BookingApp.WPF.View.GuideView
             viewModel.SendNotificationCommand.Execute(null);
 
         }
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
+        /*private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as AcceptingTourRequest_ViewModel;
+            
+            this.NavigationService.Navigate(viewModel);
+            //viewModel.SendNotificationCommand.Execute(null);
+
+        }*/
     }
 }

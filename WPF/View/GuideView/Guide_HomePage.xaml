@@ -161,7 +161,7 @@
                             </StackPanel>
                         </StackPanel>
                         <!-- Add more details about active tour here -->
-                        <Button x:Name="ActiveTourButton" Grid.Row="4" Content="FOLLOW TOUR" Width="272" BorderBrush="DarkGreen" BorderThickness="2" Background="LightGreen" HorizontalAlignment="Right" Grid.RowSpan="2">
+                        <Button x:Name="ActiveTourButton" Grid.Row="4" Content="FOLLOW TOUR" Click="Follow_Click" Width="272" BorderBrush="DarkGreen" BorderThickness="2" Background="LightGreen" HorizontalAlignment="Right" Grid.RowSpan="2">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Visibility" Value="Collapsed"/>

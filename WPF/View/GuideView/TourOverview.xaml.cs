@@ -138,9 +138,11 @@ namespace BookingApp.View
             if (SelectedTour != null)
             {
                 SelectedTour = (Tour)tourView.SelectedItem;
-                GuidedTourOverview guidedTourOverview = new GuidedTourOverview(SelectedTour);
-                guidedTourOverview.Show();
-                Close();
+                //GuidedTourOverview guidedTourOverview = new GuidedTourOverview(SelectedTour);
+                //guidedTourOverview.Show();
+                //TourOverview tourOverviewWindow = new TourOverview();
+                
+                //Close();
             }
             else
             {

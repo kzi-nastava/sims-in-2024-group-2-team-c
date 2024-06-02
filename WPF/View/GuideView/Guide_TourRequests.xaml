@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <Button Content="&lt;&lt; BACK" Click="BackButton_Click" Command="{Binding BackCommand}" Style="{StaticResource CustomButtonStyle}" Width="200" Height="30" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-        <Button Content="ACCEPT REQUEST" Command="{Binding AcceptTourRequestCommand}" Style="{StaticResource CustomButtonStyle}" Width="200" Height="30" Grid.Row="0" Margin="200,0,0,0" HorizontalAlignment="Left"/>
+        <Button Content="ACCEPT REQUEST" Click="AcceptButton_Click" Style="{StaticResource CustomButtonStyle}" Width="200" Height="30" Grid.Row="0" Margin="200,0,0,0" HorizontalAlignment="Left"/>
 
         <!-- Title: TOUR REQUESTS -->
         <TextBlock Text="TOUR REQUESTS" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,0 " Grid.Row="1"/>

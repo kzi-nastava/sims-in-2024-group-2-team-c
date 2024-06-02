@@ -32,10 +32,18 @@ namespace BookingApp.WPF.View.GuideView
         {
             // Implementacija logike za klik na dugme "TODAY'S TOUR"
         }
+        private void Follow_Click(object sender, RoutedEventArgs e)
+        {
+           Guide_FollowTour followTour = new Guide_FollowTour();
+            this.NavigationService.Navigate(followTour);
+        }
 
         private void SeeMore_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacija logike za klik na dugme "SEE MORE"
+            TourOverview tourOverviewWindow = new TourOverview();
+            //tourOverviewWindow.Show();
+            //Close();
+            this.NavigationService.Navigate(tourOverviewWindow);
         }
         private void CreateNewTourButton_Click(object sender, RoutedEventArgs e)
         {
