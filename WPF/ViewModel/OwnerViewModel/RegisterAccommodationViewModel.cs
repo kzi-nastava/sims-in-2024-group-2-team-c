@@ -180,21 +180,54 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrEmpty(Name) ||
-                string.IsNullOrEmpty(City) ||
-                string.IsNullOrEmpty(Type) ||
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(City) ||
+                string.IsNullOrWhiteSpace(Type) ||
                 MaxGuests <= 0 ||
                 MinBookingDays <= 0 ||
-                CancellationDays <= 0) //||
-               // string.IsNullOrEmpty(ImagePath))
+                CancellationDays <= 0)
             {
+                MessageBox.Show("Please fill in all fields.");
                 return false;
             }
-            else
+
+            if (!int.TryParse(MaxGuests.ToString(), out _))
             {
-                return true;
+                MessageBox.Show("Please enter a valid number for Max Guests.");
+                return false;
             }
+
+            if (!int.TryParse(MinBookingDays.ToString(), out _))
+            {
+                MessageBox.Show("Please enter a valid number for Min Booking Days.");
+                return false;
+            }
+
+            if (!int.TryParse(CancellationDays.ToString(), out _))
+            {
+                MessageBox.Show("Please enter a valid number for Cancellation Days.");
+                return false;
+            }
+
+            // Provera postojanja lokacije
+            string city = City.Trim().ToLower();
+            Location location = locationRepository.GetLocationByCity(city);
+            if (location == null)
+            {
+                MessageBox.Show("That City/County doesn't exist in our system.");
+                return false;
+            }
+
+            // Dodatne provere za ImagePath ako je potrebno
+             if (string.IsNullOrWhiteSpace(ImagePath))
+             {
+                 MessageBox.Show("Please provide at least one image.");
+                 return false;
+             }
+
+            return true;
         }
+
 
         public void BrowseImage_Click(object sender, RoutedEventArgs e)
         {

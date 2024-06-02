@@ -8,7 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OwnerHomePage">
 
-    <Grid Background="LightBlue" >
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/ResourcesLan.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -19,38 +27,40 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+       
+
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="20">
             <Button Margin="5" Height="36" FontSize="20" Click="NavigateToRegisterAccommodation_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="\Resources\Images\icons8-add-30.png" ></Image>
-                    <TextBlock Text="ADD NEW ACCOMMODATION"/>
+                    <Image Source="\Resources\Images\icons8-add-30.png" Width="20" Height="20"></Image>
+                    <TextBlock Text="{DynamicResource AddNewAccommodationText}" />
                 </StackPanel>
             </Button>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="20">
-            <Button Margin="5" Height="33" FontSize="20" Width="139" Click="NavigateToStatistics_Click">
+            <Button Margin="5" Height="33" FontSize="20"  Click="NavigateToStatistics_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="\Resources\Images\statisticICON.png" Width="28" Height="26" Margin="0,0,5,0"/>
-                    <TextBlock Text="STATISTICS" Height="24" Width="84"/>
+                    <Image Source="\Resources\Images\statisticICON.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                    <TextBlock Text="{DynamicResource StatisticsText}" Height="24"/>
                 </StackPanel>
             </Button>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="20">
-            <Button Margin="5" Height="36" FontSize="20" Width="274" Click="NavigateToScheduleRenovation_Click">
+            <Button Margin="5" Height="36" FontSize="20" Click="NavigateToScheduleRenovation_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="\Resources\Images\icons8-hammer-30.png" Width="22" Height="23" Margin="0,0,5,0"/>
-                    <TextBlock Text="SCHEDULE A RENOVATION" Height="26"/>
+                    <Image Source="\Resources\Images\icons8-hammer-30.png" Width="20" Height="20" Margin="0,0,5,0"/>
+                    <TextBlock Text="{DynamicResource ScheduleRenovationText}" Height="26"/>
                 </StackPanel>
             </Button>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="20">
-            <Button Margin="5" Height="31" FontSize="20">
+            <Button Margin="5" Height="31" FontSize="20" Click="ViewAccommodations_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="\Resources\Images\icons8-list-50.png" Width="20" Height="20" Margin="0,0,5,0"/>
-                    <TextBlock Text="VIEW YOUR ACCOMMODATIONS"/>
+                    <TextBlock Text="{DynamicResource ViewAccommodationsText}"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -59,15 +69,15 @@
             <Button Margin="5" FontSize="20" Click="NavigateToGuestRating_Click" Height="31">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="\Resources\Images\icons8-star-30.png" Width="20" Height="20" Margin="0,0,5,0"/>
-                    <TextBlock Text="RATE YOUR GUESTS"/>
+                    <TextBlock Text="{DynamicResource RateGuestsText}"/>
                 </StackPanel>
             </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="20">
-            <Button Margin="5" Height="27" FontSize="20" >
-                <StackPanel Orientation="Horizontal" >
+            <Button Margin="5" Height="27" FontSize="20">
+                <StackPanel Orientation="Horizontal">
                     <Image Source="\Resources\Images\icons8-forum-50.png" Width="20" Height="20" Margin="0,0,5,0"/>
-                    <TextBlock Text="FORUM"/>
+                    <TextBlock Text="{DynamicResource ForumText}"/>
                 </StackPanel>
             </Button>
         </StackPanel>
@@ -77,7 +87,5 @@
             Enter for submitting or sending forms,
             ESC to cancel the current action
         </TextBox>
-
-
     </Grid>
 </Page>

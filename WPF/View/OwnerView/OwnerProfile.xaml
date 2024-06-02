@@ -8,7 +8,8 @@
       d:DesignHeight="400" d:DesignWidth="800"
       Title="OwnerProfile">
 
-    <Grid Background="LightBlue" >
+
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -17,50 +18,44 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" VerticalAlignment="Top">
             <Image Source="\Resources\Images\icons8-user-64.png" Width="30" Height="30" Margin="0,0,10,0"/>
-            <TextBlock Text="User Info" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource UserInfo}" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <Button Content="LogOut" HorizontalAlignment="Right" Height="30" VerticalAlignment="Top" Margin="10" Click="LogOut"></Button>
+        <Button Content="{DynamicResource LogOut}" HorizontalAlignment="Right" Height="30" VerticalAlignment="Top" Margin="10" Click="LogOut_Click"></Button>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
-            <TextBlock Text="Name:" FontWeight="Bold" Margin="10,0"/>
+            <TextBlock Text="{DynamicResource Name}" FontWeight="Bold" Margin="10,0"/>
             <TextBox Text="{Binding OwnerName}" IsReadOnly="True" Margin="10,0"/>
-            <TextBlock Text="Surname:" FontWeight="Bold" Margin="10,0"/>
+            <TextBlock Text="{DynamicResource Surname}" FontWeight="Bold" Margin="10,0"/>
             <TextBox Text="{Binding OwnerSurname}" IsReadOnly="True" Margin="10,0"/>
-            <TextBlock Text="Phone:" FontWeight="Bold" Margin="10,0"/>
+            <TextBlock Text="{DynamicResource Phone}" FontWeight="Bold" Margin="10,0"/>
             <TextBox Text="{Binding OwnerPhone}" IsReadOnly="True" Margin="10,0"/>
-            <TextBlock Text="Email Address:" FontWeight="Bold" Margin="10,0"/>
+            <TextBlock Text="{DynamicResource EmailAddress}" FontWeight="Bold" Margin="10,0"/>
             <TextBox Text="{Binding OwnerEmail}" IsReadOnly="True" Margin="10,0"/>
-            <TextBlock Text="Super Owner:" FontWeight="Bold" Margin="10,0"/>
+            <TextBlock Text="{DynamicResource SuperOwner}" FontWeight="Bold" Margin="10,0"/>
             <TextBox Text="{Binding SuperOwner}" IsReadOnly="True" Margin="10,0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
             <Image Source="\Resources\Images\icons8-bell-24.png" Width="30" Height="30"/>
-            <Button Content="Notifications and Requests" Click="NotificationsAndRequests_Click"/>
+            <Button Content="{DynamicResource NotificationsAndRequests}" Click="NotificationsAndRequests_Click"/>
         </StackPanel>
-
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="0,0,10,0">
-                <TextBlock Text="Personalize" FontSize="18" FontWeight="Bold" VerticalAlignment="Top"/>
+                <TextBlock Text="{DynamicResource Personalize}" FontSize="18" FontWeight="Bold" VerticalAlignment="Top"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
-                <Image Source="\Resources\Images\icons8-language-50.png" Width="24" Height="24"/>
-                <ComboBox SelectedItem="{Binding SelectedLanguage}">
-                    <ComboBoxItem Content="Serbian" />
-                    <ComboBoxItem Content="English" />
-                </ComboBox>
-            </StackPanel>
 
-            <StackPanel Orientation="Vertical">
-                <Image Source="\Resources\Images\icons8-light-50.png" Width="24" Height="24"/>
-                <ComboBox SelectedItem="{Binding SelectedTheme}">
-                    <ComboBoxItem Content="Light" />
-                    <ComboBoxItem Content="Dark" />
-                </ComboBox>
-            </StackPanel>
+            <Image Source="\Resources\Images\icons8-language-50.png" Width="20" Height="20" VerticalAlignment="Top" Margin="5"/>
+            <Menu Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="5" Height="20" VerticalAlignment="Top">
+                <MenuItem Header="Language">
+                    <MenuItem Header="Serbian/Srpski" Click="ChangeLanguageToSerbian_Click"/>
+                    <MenuItem Header="English/Engleski" Click="ChangeLanguageToEnglish_Click"/>
+                </MenuItem>
+            </Menu>
+
+
         </StackPanel>
 
     </Grid>

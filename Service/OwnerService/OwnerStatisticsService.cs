@@ -131,6 +131,45 @@ namespace BookingApp.Service.OwnerService
             }
         }
 
+        public double CalculateOccupancyRate(Accommodation accommodation)
+        {
+            List<Reservation> reservations = _reservationService.GetAll()
+                .Where(reservation => reservation.Accommodation.Name == accommodation.Name)
+                .ToList();
+
+            
+            int totalReservedNights = reservations.Sum(reservation => (reservation.DepartureDate - reservation.ArrivalDate).Days);
+
+            
+            int totalCapacityNights = 365 * accommodation.MaxGuests;
+
+            if (totalCapacityNights == 0)
+            {
+                return 0;
+            }
+
+            double occupancyRate = (double)totalReservedNights / totalCapacityNights;
+            return occupancyRate;
+        }
+
+
+
+
+        public List<OwnerStatistics> GetPopularLocations(List<OwnerStatistics> statistics)
+        {
+            return statistics.OrderByDescending(s => s.ReservationsByYear.Values.Sum())
+                             .ThenByDescending(s => s.OccupancyRate)
+                             .Take(3)
+                             .ToList();
+        }
+
+        public List<OwnerStatistics> GetUnpopularLocations(List<OwnerStatistics> statistics)
+        {
+            return statistics.OrderBy(s => s.ReservationsByYear.Values.Sum())
+                             .ThenBy(s => s.OccupancyRate)
+                             .Take(3)
+                             .ToList();
+        }
 
     }
 }

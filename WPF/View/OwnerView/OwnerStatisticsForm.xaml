@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OwnerStatisticsForm">
 
-    <Grid Background="LightBlue">
+    <Grid Background="Transparent">
         <StackPanel Margin="20">
             <TextBlock Text="Owner Statistics" FontWeight="Bold" FontSize="20"/>
             <TextBlock Text="Choose an Accommodation" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0" FontSize="15"/>
@@ -155,5 +155,8 @@
                 </Grid>
             </StackPanel>
         </StackPanel>
+
+        <Button Content="Suggestions" Click="ViewSuggestions_Click" Margin="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+
     </Grid>
 </Page>

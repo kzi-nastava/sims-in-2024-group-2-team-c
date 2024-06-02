@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookingApp.Resources.Language;
 
 namespace BookingApp.WPF.View.OwnerView
 {
@@ -29,17 +30,9 @@ namespace BookingApp.WPF.View.OwnerView
         public OwnerHomePage()
         {
             InitializeComponent();
+            this.Loaded += BasePage_Loaded;
+            App.StaticPropertyChanged += OnAppPropertyChanged;
         }
-
-       /* private ICommand _navigateToGuestRatingCommand;
-
-        public ICommand NavigateToGuestRatingCommand
-        {
-            get
-            {
-                return _navigateToGuestRatingCommand ?? (_navigateToGuestRatingCommand = new RelayCommand(NavigateToGuestRating));
-            }
-        }*/
 
         private void NavigateToGuestRating_Click(object sender, RoutedEventArgs e)
         {
@@ -62,13 +55,78 @@ namespace BookingApp.WPF.View.OwnerView
             //this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\AccommodationStatistics.xaml", UriKind.RelativeOrAbsolute));
             }
 
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void ViewAccommodations_Click(object sender, RoutedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\AllAccommodationsPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        
+
+        //---- PROMENA JEZIKA I TEME ----
+         /*private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
+         {
+             ChangeLanguage("/Resources/ResourcesLanSerbian.xaml");
+         }
+
+         private void ChangeLanguageToEnglish_Click(object sender, RoutedEventArgs e)
+         {
+             ChangeLanguage("/Resources/ResourcesLan.xaml");
+         }
+
+         private void ChangeLanguage(string resourcePath)
+         {
+             try
+             {
+                 // Uklonite trenutne resurse
+                 //Application.Current.Resources.MergedDictionaries.Clear();
+
+                 // Učitajte novi resursni fajl
+                 ResourceDictionary newResource = new ResourceDictionary();
+                 newResource.Source = new Uri(resourcePath, UriKind.Relative);
+
+                 // Dodajte novi resursni fajl u MergedDictionaries
+                 Application.Current.Resources.MergedDictionaries.Add(newResource);
+
+                 // Osvežite trenutnu stranicu
+                 this.Resources.MergedDictionaries.Clear();
+                 this.Resources.MergedDictionaries.Add(newResource);
+
+                 MessageBox.Show("Language changed successfully.");
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show($"Error changing language: {ex.Message}");
+             }
+         }*/
+
+         public event PropertyChangedEventHandler? PropertyChanged;
+         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+         {
+             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+         }
+
+        private void BasePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetLanguage();
+        }
+
+        private void OnAppPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(App.CurrentLanguage))
+            {
+                SetLanguage();
+            }
+        }
+        private void SetLanguage()
+        {
+            string currentLanguage = App.CurrentLanguage;
+            var newResource = new ResourceDictionary
+            {
+                Source = new Uri(currentLanguage, UriKind.Relative)
+            };
+
+            this.Resources.MergedDictionaries.Clear();
+            this.Resources.MergedDictionaries.Add(newResource);
+        }
+
     }
 }

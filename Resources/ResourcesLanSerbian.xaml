@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="AddNewAccommodationText" xml:space="preserve">DODAJ NOVI SMEŠTAJ</sys:String>
+    <sys:String x:Key="StatisticsText" xml:space="preserve">STATISTIKA</sys:String>
+    <sys:String x:Key="ScheduleRenovationText" xml:space="preserve">ZAKAŽI RENOVACIJU</sys:String>
+    <sys:String x:Key="ViewAccommodationsText" xml:space="preserve">PRIKAŽI SMEŠTAJE</sys:String>
+    <sys:String x:Key="RateGuestsText" xml:space="preserve">OCENI GOSTE</sys:String>
+    <sys:String x:Key="ForumText" xml:space="preserve">FORUM</sys:String>
+    <sys:String x:Key="UserInfo">Informacije o korisniku</sys:String>
+    <sys:String x:Key="LogOut">Odjavi se</sys:String>
+    <sys:String x:Key="Name">Ime:</sys:String>
+    <sys:String x:Key="Surname">Prezime:</sys:String>
+    <sys:String x:Key="Phone">Telefon:</sys:String>
+    <sys:String x:Key="EmailAddress">Email adresa:</sys:String>
+    <sys:String x:Key="SuperOwner">Super vlasnik:</sys:String>
+    <sys:String x:Key="NotificationsAndRequests">Obaveštenja i Zahtevi</sys:String>
+    <sys:String x:Key="Personalize">Personalizuj</sys:String>
+    <sys:String x:Key="Serbian">Srpski</sys:String>
+    <sys:String x:Key="English">Engleski</sys:String>
+    <!-- <sys:String x:Key="Light">Svetlo</sys:String> -->
+    <!--<sys:String x:Key="Dark">Tamno</sys:String>-->
+    <sys:String x:Key="HomeButton">Početna</sys:String>
+    <sys:String x:Key="AccommodationsButton">Smeštaji</sys:String>
+    <sys:String x:Key="RatingsButton">Ocene</sys:String>
+    <sys:String x:Key="RenovationButton">Renoviranja</sys:String>
+    <sys:String x:Key="StatisticsButton">Statistika</sys:String>
+    <sys:String x:Key="YourProfile">Vaš Profil</sys:String>
+    <!-- Dodajte ostale resurse za prevod -->
+</ResourceDictionary>

@@ -22,5 +22,7 @@ namespace BookingApp.Model
         public Dictionary<int, Dictionary<int, int>> CancellationsByMonth { get; set; }
         public Dictionary<int, Dictionary<int, int>> DelaysByMonth { get; set; }
 
+        public double OccupancyRate { get; set; }
+
     }
 }

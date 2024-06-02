@@ -3,6 +3,7 @@ using BookingApp.Serializer;
 using BookingApp.View;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -79,8 +80,10 @@ namespace BookingApp.Repository
                 int Id = Convert.ToInt32(values[0]);
                 string AccommodationName = values[1];
                 string GuestUsername = values[2];
-                DateTime ArrivalDate = Convert.ToDateTime(values[3]);
-                DateTime DepartureDate = Convert.ToDateTime(values[4]);
+                // ArrivalDate = Convert.ToDateTime(values[3]);
+                DateTime ArrivalDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+                //DepartureDate = Convert.ToDateTime(values[4]);
+                DateTime DepartureDate = DateTime.ParseExact(values[4].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
                 bool IsReserved = Convert.ToBoolean(values[5]);
 
                 // Kreiraj rezervaciju i dodaj je u listu

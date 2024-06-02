@@ -6,7 +6,7 @@
       Title="ReservationDelayForm" Height="450" Width="800" >
 
 
-    <Grid Background="LightBlue">
+    <Grid Background="Transparent">
         <TextBlock Text="Notifications and Requests" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
         
@@ -36,9 +36,9 @@
         
         <Button Content="Deny" Background="Red" Foreground="White" Margin="290,0,0,15" Click="RejectButton_Click" Height="20" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         <Button Content="Allow" Background="Green" Foreground="White" Margin="605,0,0,15"  Click="ApproveButton_Click" Height="20" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-       
+
+        <TextBox Text="Enter Your Explanation Here (optional)" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="10" Margin="10,5,5,5"></TextBox>
         <TextBox x:Name="ExplanationTextBox"
-             Text="Enter Your Explanation Here (optional)"
              Width="275"
              Height="30"
              FontSize="16"
