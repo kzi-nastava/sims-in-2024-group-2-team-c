@@ -52,6 +52,21 @@
         <DataTemplate DataType="{x:Type viewModel:AlternativeLocationTourViewModel}">
             <local:AlternativeLocationnTourView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ComplexRequestCreationViewModel}">
+            <local:ComplexRequestCreationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ComplexTourRequestViewModel}">
+            <local:ComplexTourRequestView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SavedComplexTourRequestViewModel}">
+            <local:SavedComplexTourRequestView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ShowAllComplexToursViewModel}">
+            <local:ShowAllComplexToursView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SelectedComplexRequestViewModel}">
+            <local:SelectedComplexRequestView/>
+        </DataTemplate>
     </Window.Resources>
 
 

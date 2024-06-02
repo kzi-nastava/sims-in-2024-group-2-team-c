@@ -1,5 +1,4 @@
-﻿using BookingApp.DTO;
-using BookingApp.Model;
+﻿using BookingApp.Model;
 using BookingApp.Service.TourServices;
 using System;
 using System.Collections.Generic;
@@ -7,16 +6,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
-    public class TourRequestCreationViewModel : ViewModelBase
+    public  class ComplexRequestCreationViewModel : ViewModelBase
     {
 
         private readonly LocationService _locationService;
         private readonly LanguageService _languageService;
-        private readonly TourRequestService tourRequestService;
+        private readonly ComplexTourRequestService _complexTourRequestService;
 
 
         private readonly MainViewModel _mainViewModel;
@@ -116,7 +114,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _people = value;
                 OnPropertyChanged(nameof(People));
-                
+
 
             }
         }
@@ -130,7 +128,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 _peopleList = value;
                 OnPropertyChanged(nameof(PeopleList));
-                
+
             }
         }
 
@@ -146,20 +144,29 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
+        private PartViewModel _part;
+        public PartViewModel Part
+        {
+            get { return _part; }
+            set
+            {
+                _part = value;
+                OnPropertyChanged(nameof(Part));
+            }
+        }
 
 
+
+        private readonly ComplexTourRequestViewModel _complexTourRequestViewModel;
         public ViewModelCommandd SearchCommand { get; private set; }
         public ViewModelCommandd CreateRequestCommand { get; private set; }
-
-
-
-        public TourRequestCreationViewModel() {
-
+        public ComplexRequestCreationViewModel(PartViewModel part, ComplexTourRequestViewModel complexTourRequestViewModel) {
             _mainViewModel = LoggedInUser.mainViewModel;
-
+            Part = part;
+            _complexTourRequestViewModel = complexTourRequestViewModel;
             _locationService = new LocationService();
             _languageService = new LanguageService();
-            tourRequestService = new TourRequestService();
+            _complexTourRequestService = new ComplexTourRequestService();
 
             People = new ObservableCollection<PeopleInfo>();
             PeopleList = new List<PeopleInfo>();
@@ -174,22 +181,23 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+
         private void UpdateRequestCreatable()
         {
-            
+
             bool basicCriteriaMet = !string.IsNullOrEmpty(Description) &&
                                      SelectedLocation != null &&
                                      SelectedLanguage != null &&
                                      StartDate != DateTime.MinValue &&
                                      EndDate != DateTime.MinValue;
 
-            
+
             bool datesValid = StartDate < EndDate && StartDate > DateTime.Today && EndDate > DateTime.Today;
 
-           
+
             bool peoplePresent = People.Count > 0;
 
-            
+
             IsRequestCreatable = basicCriteriaMet && datesValid && peoplePresent;
         }
 
@@ -218,32 +226,38 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                 {
                     // Add a new person with empty details
                     People.Add(new PeopleInfo());
-                    
+
 
                 }
                 UpdateRequestCreatable();
             }
         }
 
-       
 
-        
+
+
         private void CreateRequest(object parameter)
         {
-            
+
             foreach (var person in People)
             {
                 PeopleList.Add(person);
             }
 
-            tourRequestService.CreateTourRequest(SelectedLocation, Description, SelectedLanguage, StartDate, EndDate, PeopleList);
-            
-            
+           int id =  _complexTourRequestService.CreateTourRequest(SelectedLocation, Description, SelectedLanguage, StartDate, EndDate, PeopleList);
+
+            Part.RequestId = id;
+            Part.Status = "Filled out";
+            Part.IsEnabled = false;
+
+            _mainViewModel.ExecuteGoBAckToComplexRequests(_complexTourRequestViewModel);
+
             People.Clear();
 
-            _mainViewModel.ExecuteSavedTourRequestView(parameter);
+            
 
         }
+
 
 
     }

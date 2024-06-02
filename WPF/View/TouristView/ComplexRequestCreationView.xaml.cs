@@ -1,5 +1,4 @@
-﻿using BookingApp.WPF.ViewModel.TouristViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,14 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for ShowAllComplexToursView.xaml
+    /// Interaction logic for ComplexRequestCreationView.xaml
     /// </summary>
-    public partial class ShowAllComplexToursView : Page
+    public partial class ComplexRequestCreationView : Page
     {
-        public ShowAllComplexToursView()
+        public ComplexRequestCreationView()
         {
             InitializeComponent();
-            DataContext = new ShowAllComplexToursViewModel();
+            
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
