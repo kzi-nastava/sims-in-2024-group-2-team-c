@@ -1,4 +1,5 @@
 ﻿using BookingApp.Model;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace BookingApp.Interfaces
         void Delete(TourRequest tourRequest);
         TourRequest Update(TourRequest tourRequest);
         TourRequest GetById(int id);
+        
+
     }
 }

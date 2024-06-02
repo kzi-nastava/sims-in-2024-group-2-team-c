@@ -422,6 +422,22 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+        public void ExecuteApprovedComplexRequest(object tourRequest)
+        {
+
+            if (tourRequest is ComplexTouristRequestDTO request)
+            {
+                CurrentMarkerIconSource = "/Resources/Images/marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/on tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+                CurrentChildView = new AcceptedComplexRequestViewModel(request);
+            }
+        }
+
+
 
     }
 }

@@ -7,8 +7,136 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="SelectedComplexRequestView">
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+        <Grid>
+            <Border Background='#b2edb4' Margin="20,30,20,20" BorderBrush="#294724" BorderThickness="2">
 
-    <Grid>
-        <TextBlock Text="nfedsiuzjbcjs"></TextBlock>
-    </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,25,0,0">
+                        <TextBlock Text="Complex Request " FontSize="30"/>
+                        <TextBlock Text="{Binding TourRequest.Number}" FontSize="30"/>
+                    </StackPanel>
+
+                    <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="15,30"  Click="Return_Click"
+                         Width="30" Height="30"  Background="Transparent" BorderThickness="0">
+                        <Image  Source="/Resources/Images/tour exit.png"/>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,15,0,0">
+                        <TextBlock Text="STATUS:  " FontSize="20"/>
+                        <TextBlock Grid.Column="1" Text="{Binding TourRequest.Activity}"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Green"/>
+                                    <!-- Default color -->
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TourRequest.Activity}" Value="INVALID">
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding TourRequest.Activity}" Value="ON HOLD">
+                                            <Setter Property="Foreground" Value="Orange"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="2" Margin="20" Text="Your Complex Tour Request will be approved when all parts of the tour are accepted by guides. You can check the parts by clicking on them down bellow." FontSize="15" 
+                               TextWrapping="Wrap" MaxWidth="300"/>
+
+
+
+                    <ItemsControl Grid.Row="3" ItemsSource="{Binding ComplexRequests}" HorizontalContentAlignment="Left" Margin="0,20">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Background="white" Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Activity}" Value="ACCEPTED">
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Activity}" Value="INVALID">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Activity}" Value="ON HOLD">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Grid  Height="50">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"></ColumnDefinition>
+                                            <ColumnDefinition Width="180"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                            <TextBlock  Text="Tour" Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>
+                                            <TextBlock  Text="{Binding Number}"  VerticalAlignment="Center" FontSize="15"/>
+                                        </StackPanel>
+
+
+
+
+                                        <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Text" Value="NO DATE IS PICKED"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Activity}" Value="ACCEPTED">
+                                                            <Setter Property="Text" Value="{Binding AcceptedDate}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+
+
+
+
+
+
+
+
+
+                                        <TextBlock Grid.Column="2" Text="{Binding Activity}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="Green"/>
+                                                    <!-- Default color -->
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Activity}" Value="INVALID">
+                                                            <Setter Property="Foreground" Value="Red"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Activity}" Value="ON HOLD">
+                                                            <Setter Property="Foreground" Value="Orange"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                </Grid>
+            
+            
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -67,6 +67,9 @@
         <DataTemplate DataType="{x:Type viewModel:SelectedComplexRequestViewModel}">
             <local:SelectedComplexRequestView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AcceptedComplexRequestViewModel}">
+            <local:AcceptedComplexRequestView/>
+        </DataTemplate>
     </Window.Resources>
 
 

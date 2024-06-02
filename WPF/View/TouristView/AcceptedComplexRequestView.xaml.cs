@@ -16,19 +16,18 @@ using System.Windows.Shapes;
 namespace BookingApp.WPF.View.TouristView
 {
     /// <summary>
-    /// Interaction logic for SelectedComplexRequestView.xaml
+    /// Interaction logic for AcceptedComplexRequestView.xaml
     /// </summary>
-    public partial class SelectedComplexRequestView : Page
+    public partial class AcceptedComplexRequestView : Page
     {
-        public SelectedComplexRequestView()
+        public AcceptedComplexRequestView()
         {
             InitializeComponent();
         }
 
-        private void Return_Click(object sender, RoutedEventArgs e)
+        private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            NavigationService.GoBack();
         }
-
     }
 }

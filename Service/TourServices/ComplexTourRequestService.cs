@@ -27,6 +27,13 @@ namespace BookingApp.Service.TourServices
             requestForComplexTourService = new RequestForComplexTourService();
         }
 
+        public ComplexTourRequest GetById(int id)
+        {
+            return complexTourRequestRepository.GetById(id);
+
+        }
+
+
         public List<ComplexTourRequest> GetAll()
         {
             return complexTourRequestRepository.GetAll();
