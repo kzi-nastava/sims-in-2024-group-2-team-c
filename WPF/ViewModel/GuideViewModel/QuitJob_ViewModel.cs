@@ -31,7 +31,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         {
             int guideId = LoggedInUser.Id;
             futureToursService.CancelToursByGuide(guideId);
-            //tourVoucherService.UpdateVouchersForGuide(guideId);
+            //logika za brisanje instanci, i korisnika
         }
     }
 }

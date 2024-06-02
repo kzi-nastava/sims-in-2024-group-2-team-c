@@ -76,7 +76,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void SeeStatus_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_Status guideStatus = new Guide_Status();
+            this.NavigationService.Navigate(guideStatus);
         }
         private void Reviews_Click(object sender, RoutedEventArgs e)
         {
@@ -111,7 +112,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void PlayTutorial_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_TutorialView tutorialView = new Guide_TutorialView();
+            this.NavigationService.Navigate(tutorialView);
         }
     }
 }

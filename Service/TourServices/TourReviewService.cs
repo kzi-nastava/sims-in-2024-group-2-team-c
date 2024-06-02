@@ -86,6 +86,33 @@ namespace BookingApp.Service.TourServices
             }
             return founded;
         }
+        public Tour GetTourByName(string name)
+        {
+            List<Tour> tours = tourService.GetAll();
+            Tour found = null;
+            foreach(Tour tour in tours)
+            {
+                if (tour.Name == name)
+                {
+                    found = tour;
+                }
+            }
+            return found;
+        }
+        public float CalculateScoreByLanguage(string language)
+        {
+            List<TourReviewDTO> reviews = GetReviewDTOs();
+            float score = 0;
+            foreach(TourReviewDTO dto in reviews)
+            {
+                Tour tour = GetTourByName(dto.TourName);
+                if(tour.Language == language)
+                {
+                    score += (float)((dto.LanguageGrade + dto.KnowledgeGrade + dto.InterestingGrade) / 3);
+                }
+            }
+            return score;
+        }
         public bool ReportReview(TourReviewDTO selectedReview)
         {
             TourReview review = GetById(selectedReview.Id);
