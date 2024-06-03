@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Add New Accommodation" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
+        <TextBlock Text="{DynamicResource AddNewAccommodationText}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
 
         <Grid Grid.Row="1" Margin="250,30,250,10" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
@@ -35,26 +35,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Name Of Accommodation" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="0" Grid.Column="0"  Content="{DynamicResource NameOfAccommodation}" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Country" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource CountryLabel}" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="City" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource CityLabel}" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Type" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource TypeLabel}" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="4" Grid.Column="0" Content="Maximum Guests"   FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource MaxGuestsLabel}"   FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MaxGuests, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="5" Grid.Column="0" Content="Minimum Booking Days"  FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="{DynamicResource MinBookingDaysLabel}"  FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding MinBookingDays, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
 
-            <Label Grid.Row="6" Grid.Column="0" Content="Cancellation Days" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource CancellationDaysLabel}" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding CancellationDays, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200" HorizontalAlignment="Left"/>
 
 
@@ -66,12 +66,12 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="5">
-                <Button Content="Add Images" Click="BrowseImage_Click" Height="22" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <Button Content="{DynamicResource AddImageTxt}" Click="BrowseImage_Click" Height="22" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtImagePath" Height="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" />
             </StackPanel>
 
-            <Button Grid.Row="10" Grid.Column="1" x:Name="btnSave" Content="Save" Click="SaveAccommodation" Margin="130,80,0,5" Width="70" Background="Green" Height="30" />
-            <Button Grid.Row="10" Grid.Column="0" Content="Cancel" Click="CancelButton_Click" Margin="5,80,0,5" Width="70" Background="IndianRed" Height="30" />
+            <Button Grid.Row="10" Grid.Column="1" x:Name="btnSave" Content="{DynamicResource SaveButtonContent}" Click="SaveAccommodation" Margin="130,80,0,5" Width="70" Background="Green" Height="30" />
+            <Button Grid.Row="10" Grid.Column="0" Content="{DynamicResource CancelButtonContent}" Click="CancelButton_Click" Margin="5,80,0,5" Width="70" Background="IndianRed" Height="30" />
 
         </Grid>
     </Grid>

@@ -50,18 +50,19 @@
 
 
         <Menu HorizontalAlignment="Right" Margin="5,15,150,0" Height="20" VerticalAlignment="Top" Background="LightSeaGreen">
-            <MenuItem Header="Language">
-                <MenuItem Header="Serbian/Srpski" Click="ChangeLanguageToSerbian_Click"/>
-                <MenuItem Header="English/Engleski" Click="ChangeLanguageToEnglish_Click"/>
+            <MenuItem Header="{DynamicResource Language}">
+                <MenuItem Header="{DynamicResource Serbian}" Click="ChangeLanguageToSerbian_Click"/>
+                <MenuItem Header="{DynamicResource English}" Click="ChangeLanguageToEnglish_Click"/>
             </MenuItem>
         </Menu>
 
         <Menu HorizontalAlignment="Right" Margin="5,15,100,0" Height="20" VerticalAlignment="Top" Background="LightSeaGreen">
-            <MenuItem Header="Theme">
-                <MenuItem Header="Light" Click="ChangeThemeToLight_Click"/>
-                <MenuItem Header="Dark" Click="ChangeThemeToDark_Click"/>
+            <MenuItem Header="{DynamicResource Theme}">
+                <MenuItem Header="{DynamicResource Light}" Click="ChangeThemeToLight_Click"/>
+                <MenuItem Header="{DynamicResource Dark}" Click="ChangeThemeToDark_Click"/>
             </MenuItem>
         </Menu>
+
 
 
 

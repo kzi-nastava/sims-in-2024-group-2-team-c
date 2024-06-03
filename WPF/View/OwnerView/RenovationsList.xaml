@@ -8,16 +8,16 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RenovationsList">
     <Grid  Background="Transparent">
-        <TextBlock Text="All Renovations" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+        <TextBlock Text="{DynamicResource AllRenovations}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
         <DataGrid ItemsSource="{Binding Renovations}" AutoGenerateColumns="False" Margin="50,125,292,125" Height="200" SelectionMode="Single" IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged" FontSize="20" HorizontalAlignment="Center">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Accommodation" Binding="{Binding Accommodation.Name}" />
-                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" />
-                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="{DynamicResource Accommodation}" Binding="{Binding Accommodation.Name}" />
+                <DataGridTextColumn Header="{DynamicResource StartDate}" Binding="{Binding StartDate}" />
+                <DataGridTextColumn Header="{DynamicResource EndDate}" Binding="{Binding EndDate}" />
+                <DataGridTextColumn Header="{DynamicResource Description}" Binding="{Binding Description}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Cancel Renovation" Background="Red" Click="CancelRenovationButton_Click" HorizontalAlignment="Right" Margin="10,10,50,40" VerticalAlignment="Bottom" Height="30" />
-        <TextBlock Text="You can select a renovation you'd like to cancell" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="370,0,0,45" ></TextBlock>
+        <Button Content="{DynamicResource CancelRenovation}" Background="Red" Click="CancelRenovationButton_Click" HorizontalAlignment="Right" Margin="10,10,50,40" VerticalAlignment="Bottom" Height="30" />
+        <TextBlock Text="{DynamicResource SelectRenovationToCancel}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="370,0,0,45" ></TextBlock>
     </Grid>
 </Page>

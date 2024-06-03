@@ -82,10 +82,8 @@
             </Button>
         </StackPanel>
 
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="Auto" Width="200" Background="YellowGreen" TextWrapping="Wrap" Margin="5">
-            Use arrows to move through;
-            Enter for submitting or sending forms,
-            ESC to cancel the current action
-        </TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="Auto" Width="200" Background="YellowGreen" TextWrapping="Wrap" Margin="5"
+         Text="{DynamicResource TextBoxInstructions}" />
+
     </Grid>
 </Page>

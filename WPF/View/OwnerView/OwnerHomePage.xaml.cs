@@ -61,43 +61,6 @@ namespace BookingApp.WPF.View.OwnerView
         }
 
 
-        //---- PROMENA JEZIKA I TEME ----
-         /*private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
-         {
-             ChangeLanguage("/Resources/ResourcesLanSerbian.xaml");
-         }
-
-         private void ChangeLanguageToEnglish_Click(object sender, RoutedEventArgs e)
-         {
-             ChangeLanguage("/Resources/ResourcesLan.xaml");
-         }
-
-         private void ChangeLanguage(string resourcePath)
-         {
-             try
-             {
-                 // Uklonite trenutne resurse
-                 //Application.Current.Resources.MergedDictionaries.Clear();
-
-                 // Učitajte novi resursni fajl
-                 ResourceDictionary newResource = new ResourceDictionary();
-                 newResource.Source = new Uri(resourcePath, UriKind.Relative);
-
-                 // Dodajte novi resursni fajl u MergedDictionaries
-                 Application.Current.Resources.MergedDictionaries.Add(newResource);
-
-                 // Osvežite trenutnu stranicu
-                 this.Resources.MergedDictionaries.Clear();
-                 this.Resources.MergedDictionaries.Add(newResource);
-
-                 MessageBox.Show("Language changed successfully.");
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show($"Error changing language: {ex.Message}");
-             }
-         }*/
-
          public event PropertyChangedEventHandler? PropertyChanged;
          protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
          {

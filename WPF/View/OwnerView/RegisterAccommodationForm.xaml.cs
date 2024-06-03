@@ -24,9 +24,33 @@ namespace BookingApp.View
             InitializeComponent();
             viewModel = new RegisterAccommodationViewModel();
             DataContext = viewModel;
-
+            this.Loaded += BasePage_Loaded;
+            App.StaticPropertyChanged += OnAppPropertyChanged;
         }
 
+        private void BasePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetLanguage();
+        }
+
+        private void OnAppPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(App.CurrentLanguage))
+            {
+                SetLanguage();
+            }
+        }
+        private void SetLanguage()
+        {
+            string currentLanguage = App.CurrentLanguage;
+            var newResource = new ResourceDictionary
+            {
+                Source = new Uri(currentLanguage, UriKind.Relative)
+            };
+
+            this.Resources.MergedDictionaries.Clear();
+            this.Resources.MergedDictionaries.Add(newResource);
+        }
 
         private void BrowseImage_Click(object sender, RoutedEventArgs e)
         {
