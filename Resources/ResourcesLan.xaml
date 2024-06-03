@@ -87,6 +87,7 @@
     <sys:String x:Key="Language">Language</sys:String>
     <sys:String x:Key="Theme">Theme</sys:String>
     <sys:String x:Key="TextBoxInstructions">Use arrows to move through; Enter for submitting or sending forms, ESC to cancel the current action</sys:String>
-
+    <sys:String x:Key="AverageRateReport">Average Rate Report</sys:String>
+    
 
 </ResourceDictionary>

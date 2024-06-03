@@ -38,6 +38,11 @@ namespace BookingApp.WPF.View.OwnerView
             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\ReservationDelayForm.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void AverageRR_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\AccommodationReportView.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -56,43 +61,7 @@ namespace BookingApp.WPF.View.OwnerView
             }
         }
 
-        //------PROMENA JEZIKA I TEME ------
-
-        /* private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
-         {
-             ChangeLanguage("/Resources/ResourcesLanSerbian.xaml");
-         }
-
-         private void ChangeLanguageToEnglish_Click(object sender, RoutedEventArgs e)
-         {
-             ChangeLanguage("/Resources/ResourcesLan.xaml");
-         }
-
-         private void ChangeLanguage(string resourcePath)
-         {
-             try
-             {
-                 // Uklonite trenutne resurse
-                 Application.Current.Resources.MergedDictionaries.Clear();
-
-                 // Učitajte novi resursni fajl
-                 ResourceDictionary newResource = new ResourceDictionary();
-                 newResource.Source = new Uri(resourcePath, UriKind.Relative);
-
-                 // Dodajte novi resursni fajl u MergedDictionaries
-                 Application.Current.Resources.MergedDictionaries.Add(newResource);
-
-                 // Osvežite trenutnu stranicu
-                 this.Resources.MergedDictionaries.Clear();
-                 this.Resources.MergedDictionaries.Add(newResource);
-
-                 MessageBox.Show("Language changed successfully.");
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show($"Error changing language: {ex.Message}");
-             }
-         } */
+        
 
         private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
         {

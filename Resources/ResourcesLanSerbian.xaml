@@ -87,5 +87,5 @@
     <sys:String x:Key="Theme">Tema</sys:String>
     <sys:String x:Key="TextBoxInstructions">Koristite strelice za kretanje; Enter za slanje ili potvrdu obrazaca, ESC za otkazivanje trenutne radnje</sys:String>
     <sys:String x:Key="Language">Jezik</sys:String>
-
+    <sys:String x:Key="AverageRateReport">Izveštaj o Prosečnoj Oceni Smeštaja</sys:String>
 </ResourceDictionary>

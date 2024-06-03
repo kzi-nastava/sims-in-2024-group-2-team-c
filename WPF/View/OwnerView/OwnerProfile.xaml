@@ -38,25 +38,13 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
             <Image Source="\Resources\Images\icons8-bell-24.png" Width="30" Height="30"/>
-            <Button Content="{DynamicResource NotificationsAndRequests}" Click="NotificationsAndRequests_Click"/>
+            <Button Content="{DynamicResource NotificationsAndRequests}" FontSize="15"  Click="NotificationsAndRequests_Click"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical" Margin="0,0,10,0">
-                <TextBlock Text="{DynamicResource Personalize}" FontSize="18" FontWeight="Bold" VerticalAlignment="Top"/>
-            </StackPanel>
-
-
-            <Image Source="\Resources\Images\icons8-language-50.png" Width="20" Height="20" VerticalAlignment="Top" Margin="5"/>
-            <Menu Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="5" Height="20" VerticalAlignment="Top">
-                <MenuItem Header="Language">
-                    <MenuItem Header="Serbian/Srpski" Click="ChangeLanguageToSerbian_Click"/>
-                    <MenuItem Header="English/Engleski" Click="ChangeLanguageToEnglish_Click"/>
-                </MenuItem>
-            </Menu>
-
-
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40">
+            <Button Content="{DynamicResource AverageRateReport}" Click="AverageRR_Click" FontSize="15" ></Button>
         </StackPanel>
+
 
     </Grid>
 </Page>

@@ -73,6 +73,7 @@
         </StackPanel>
 
         <!-- Frame za prikaz stranica -->
-        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,55,0,0"/>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,55,0,0" Source="\WPF\View\OwnerView\AccommodationReportView.xaml"/>
+        
     </Grid>
 </Window>
