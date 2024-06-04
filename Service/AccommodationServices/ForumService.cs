@@ -8,24 +8,30 @@ using BookingApp.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace BookingApp.Service.AccommodationServices
 {
     public class ForumService
     {
         private readonly IForumRepository _forumRepository;
+        private readonly UserRepository _userRepository;
         private readonly LocationService _locationService;
         private readonly GuestReservationService _guestReservationService;
+        private readonly AccommodationRepository accommodationRepository;
 
         public ForumService()
         {
             _forumRepository = Injectorr.CreateInstance<IForumRepository>();
             _locationService = new LocationService();
             _guestReservationService = new GuestReservationService();
+            _userRepository = new UserRepository();
+            accommodationRepository = new AccommodationRepository();
         }
 
         public void SaveForum(string location, string forumComment)
@@ -63,30 +69,46 @@ namespace BookingApp.Service.AccommodationServices
         {
             List<ForumDTO> myForums = new List<ForumDTO>();
             List<Forum> forums = _forumRepository.GetAll();
+            HashSet<string> addedLocations = new HashSet<string>();
 
             foreach (Forum forum in forums)
             {
-                if (forum.User.Id == LoggedInUserId && forum.IsForumMine == true) {
-
-                    Location forumLocation = GetLocationsByUserId(LoggedInUserId);
+                if (forum.User.Id == LoggedInUserId && forum.IsForumMine == true)
+                {
+                    Location forumLocation = GetLocationsByForumId(forum.Id);
                     string location = $"{forumLocation.Country}, {forumLocation.City}";
 
-                    int numberfComments = CountCommentsForLocation(forumLocation.Id);
-
-                    ForumDTO myForumDTO = new ForumDTO
+                    if (!addedLocations.Contains(location))
                     {
-                        Id = forum.Id,
-                        Location = location,
-                        NumOfComments = numberfComments
-                    };
+                        var commentsFromGuests = forums
+                            .Where(f => f.Location.Id == forumLocation.Id && f.HasBeenVisited)
+                            .Count();
 
-                    myForums.Add(myForumDTO);
+                        List<Accommodation> accommodations = accommodationRepository.GetAll();
+                        var commentsFromOwners = accommodations
+                            .Where(f => f.Location.Id == forumLocation.Id) //&& LoggedInUser.Id == f.Owner.Id)
+                            .Count();
+
+                        bool isVeryUseful = commentsFromGuests >= 3 && commentsFromOwners >= 2;
+
+                        int numberfComments = CountCommentsForLocation(forumLocation.Id);
+
+                        ForumDTO myForumDTO = new ForumDTO
+                        {
+                            Id = forum.Id,
+                            Location = location,
+                            NumOfComments = numberfComments,
+                            IsForumVeryUseful = isVeryUseful
+                        };
+
+                        myForums.Add(myForumDTO);
+                        addedLocations.Add(location);
+                    }
                 }
-                
             }
-
             return myForums;
         }
+
 
         private int CountCommentsForLocation(int id)
         {
@@ -102,19 +124,19 @@ namespace BookingApp.Service.AccommodationServices
             return count;
         }
 
-        public Location GetLocationsByUserId(int loggedInUserId)
+        public Location GetLocationsByForumId(int forumId)
         {
             List<Forum> forums = _forumRepository.GetAll();
             foreach (Forum forum in forums)
             {
-                if (forum.User.Id == loggedInUserId)
+                if (forum.Id == forumId)
                 {
                     int LocationId = forum.Location.Id;
                     Location location = _locationService.GetById(LocationId);
                     return location;
                 }
             }
-            return null; ;
+            return null;
         }
 
 
@@ -122,25 +144,43 @@ namespace BookingApp.Service.AccommodationServices
         {
             List<ForumDTO> otherForums = new List<ForumDTO>();
             List<Forum> forums = _forumRepository.GetAll();
+            HashSet<string> addedLocations = new HashSet<string>();
 
             foreach (Forum forum in forums)
             {
-                if (forum.User.Id == LoggedInUserId && forum.IsForumMine == false)
+                if (forum.User.Id != LoggedInUserId) // forum.User.Id == LoggedInUserId && forum.IsForumMine == false)
                 {
 
-                    Location forumLocation = GetLocationsByUserId(LoggedInUserId);
+                    Location forumLocation = GetLocationsByForumId(forum.Id);
                     string location = $"{forumLocation.Country}, {forumLocation.City}";
 
-                    int numberfComments = CountCommentsForLocation(forumLocation.Id);
-
-                    ForumDTO otherForumDTO = new ForumDTO
+                    if (!addedLocations.Contains(location))
                     {
-                        Id = forum.Id,
-                        Location = location,
-                        NumOfComments = numberfComments
-                    };
 
-                    otherForums.Add(otherForumDTO);
+                        var commentsFromGuests = forums
+                            .Where(f => f.Location.Id == forumLocation.Id && f.HasBeenVisited)
+                            .Count();
+
+                        List<Accommodation> accommodations = accommodationRepository.GetAll();
+                        var commentsFromOwners = accommodations
+                            .Where(f => f.Location.Id == forumLocation.Id) //&& LoggedInUser.Id == f.Owner.Id)
+                            .Count();
+
+                        bool isVeryUseful = commentsFromGuests >= 3 && commentsFromOwners >= 2;
+
+                        int numberfComments = CountCommentsForLocation(forumLocation.Id);
+
+                        ForumDTO otherForumDTO = new ForumDTO
+                        {
+                            Id = forum.Id,
+                            Location = location,
+                            NumOfComments = numberfComments,
+                            IsForumVeryUseful = isVeryUseful
+                        };
+
+                        otherForums.Add(otherForumDTO);
+                        addedLocations.Add(location);
+                    }
                 }
 
             }
@@ -167,6 +207,98 @@ namespace BookingApp.Service.AccommodationServices
             catch (Exception ex)
             {
                 return $"Error closing forum: {ex.Message}";
+            }
+        }
+
+        public List<ForumDTO> GetAllForumComments(ForumDTO selectedForum)
+        {
+            List<ForumDTO> Forums = new List<ForumDTO>();
+            List<Forum> forums = _forumRepository.GetAll();
+
+            foreach (Forum forum in forums)
+            {
+
+                Location forumLocation = GetLocationsByForumId(forum.Id);
+                string location = $"{forumLocation.Country}, {forumLocation.City}";
+
+                if (location == selectedForum.Location) 
+                {
+
+                    User user = _userRepository.GetUserById(forum.User.Id);
+                    bool hasVisitedLocation = _guestReservationService.HasGuestVisitedLocation(forumLocation.Id);
+
+                    ForumDTO ForumDTO = new ForumDTO
+                    {
+                        Id = forum.Id,
+                        //Location = location,
+                        //NumOfComments = 0,
+                        ForumComment = forum.ForumComment,
+                        Username = user.Username,
+                        HasBeenVisited = hasVisitedLocation
+                    };
+
+                    Forums.Add(ForumDTO);
+
+                }
+            }
+            return Forums;
+        }
+
+        public void AddNewComment(ForumDTO selectedForum, string newComment)
+        {
+            try
+            {
+                List<Forum> forums = _forumRepository.GetAll();
+
+                foreach (Forum forum in forums)
+                {
+                    if(forum.IsForumClosed == true)
+                    {
+                        MessageBox.Show("This forum has been closed. You can not add new comments.");
+                    }
+                }
+
+                string location = selectedForum.Location;
+                string[] locationParts = location.Split(new[] { ", " }, StringSplitOptions.None);
+                string country = locationParts[0];
+                string city = locationParts[1];
+
+                Location location1 = _locationService.FindLocation(city, country);
+
+                bool mine = false;
+                List<ForumDTO> myForums= GetAllMyForums(LoggedInUser.Id);
+                ForumDTO thisForum = myForums.FirstOrDefault(a => a.Id == selectedForum.Id);
+                if (thisForum != null)
+                {
+                    mine = true;
+                }
+                else
+                {
+                    mine = false;
+                }
+
+                bool hasVisitedLocation = _guestReservationService.HasGuestVisitedLocation(location1.Id);
+
+                var data = new Forum
+                {
+
+                    Location = new Location() { Id = location1.Id },
+                    User = new User() { Id = LoggedInUser.Id },
+                    IsForumMine = mine,
+                    ForumComment = newComment,
+                    HasBeenVisited = hasVisitedLocation,
+                    IsForumClosed = false
+                };
+
+                _forumRepository.Save(data);
+
+
+                MessageBox.Show("Your comment has been successfully added.");
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
             }
         }
     }

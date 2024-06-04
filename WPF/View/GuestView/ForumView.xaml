@@ -17,6 +17,15 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
+
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsForumVeryUseful}" Value="True">
+                    <Setter Property="Background" Value="Violet"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+        </Style>
     </Page.Resources>
 
     <Grid Margin="10,52,10,10" Background="#F0F0F0">
@@ -33,12 +42,6 @@
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" ElementStyle="{StaticResource CenteredCellStyle}"/>
                 <DataGridTextColumn Header="Number of comments" Binding="{Binding NumOfComments}" ElementStyle="{StaticResource CenteredCellStyle}"/>
             </DataGrid.Columns>
-
-            <!--DataGrid.RowStyle-->
-            <!--Style TargetType="DataGridRow"-->
-            <!--Setter Property="Background" Value="{Binding CheckOut, Converter={StaticResource CheckOutDateToColorConverter}}"/-->
-            <!--/Style-->
-            <!--/DataGrid.RowStyle-->
         </DataGrid>
 
         <Label Content="Your forums:" 
@@ -67,14 +70,7 @@
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" ElementStyle="{StaticResource CenteredCellStyle}"/>
                 <DataGridTextColumn Header="Number of comments" Binding="{Binding NumOfComments}" ElementStyle="{StaticResource CenteredCellStyle}"/>
             </DataGrid.Columns>
-
-            <!--DataGrid.RowStyle-->
-            <!--Style TargetType="DataGridRow"-->
-            <!--Setter Property="Background" Value="{Binding CheckOut, Converter={StaticResource CheckOutDateToColorConverter}}"/-->
-            <!--/Style-->
-            <!--/DataGrid.RowStyle-->
         </DataGrid>
-
 
         <Button BorderThickness="0" Background="Transparent" Margin="1009,5,10,5" Click="GoBackButton_Click" Grid.Row="4">
             <Border CornerRadius="15" Background="CadetBlue" Padding="5" Width="220" Height="55">
@@ -87,4 +83,3 @@
         </Button>
     </Grid>
 </Page>
-   

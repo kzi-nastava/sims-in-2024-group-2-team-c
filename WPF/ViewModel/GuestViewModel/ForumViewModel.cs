@@ -26,6 +26,8 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
 
         public ICommand CloseSelectedForumCommand => new ViewModelCommand<object>(CloseForum);
 
+        public ICommand ForumDoubleClickCommand { get; }
+
         private ObservableCollection<ForumDTO> _myForums;
 
         public ObservableCollection<ForumDTO> MyForums
@@ -57,6 +59,7 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             MyForums = new ObservableCollection<ForumDTO>();
             OtherForums = new ObservableCollection<ForumDTO>();
             OpenForumPageCommand = new ViewModelCommand<object>(OpenForum);
+            ForumDoubleClickCommand = new ViewModelCommand<object>(ForumDoubleClick);
             _ownerNotificationService = new OwnerNotificationService();
 
             LoadMyForums();
@@ -114,18 +117,24 @@ namespace BookingApp.WPF.ViewModel.GuestViewModel
             {
                 if (!(selectedForumObj is ForumDTO selectedForum))
                 {
-                    MessageBox.Show("Please select a forum to close.");
+                    MessageBox.Show("Please select a forum to close from the list 'My Forums'.");
                     return;
                 }
                 int forumId = selectedForum.Id;
                 string result = _forumService.CloseForum(forumId);
-                string textMessage = "Forum with location " + selectedForum.Location + " has been closed.";
-                //_ownerNotificationService.save(selectedForum, textMessage);
-                MessageBox.Show(result);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error cancelling reservation: {ex.Message}");
+            }
+        }
+
+        private void ForumDoubleClick(object parameter)
+        {
+            if (parameter is ForumDTO selectedForum)
+            {
+                _mainGuestWindow.ChangeHeaderText("Forum");
+                _navigationService?.Navigate(new ForumDetailsView(selectedForum, _mainGuestWindow, _navigationService));
             }
         }
 

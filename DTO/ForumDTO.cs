@@ -11,5 +11,13 @@ namespace BookingApp.DTO
         public int Id { get; set; }
         public String Location { get; set; }
         public int NumOfComments { get; set; }
+
+        public string ForumComment { get; set; }
+
+        public string Username { get; set; }
+
+        public bool HasBeenVisited { get; set; }
+
+        public bool IsForumVeryUseful { get; set; }
     }
 }
