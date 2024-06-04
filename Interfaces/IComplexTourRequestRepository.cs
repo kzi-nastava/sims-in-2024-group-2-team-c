@@ -21,7 +21,10 @@ namespace BookingApp.Interfaces
         public void Delete(ComplexTourRequest request);
         public ComplexTourRequest Update(ComplexTourRequest request);
 
-        
+        public ComplexTourRequest GetById(int id);
+
+
+
 
     }
 }

@@ -17,7 +17,7 @@ namespace BookingApp.Model
 
         public string LastName { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         public bool Active { get; set; }
 
@@ -27,7 +27,7 @@ namespace BookingApp.Model
             Active = false;
         }
 
-        public PeopleInfo(string firstName, string lastName, int age, bool active)
+        public PeopleInfo(string firstName, string lastName, int? age, bool active)
         {
             
             FirstName = firstName;

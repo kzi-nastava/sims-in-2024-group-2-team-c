@@ -237,7 +237,7 @@ namespace BookingApp.View
                 string firstName, lastName, ageText;
                 GetInformation(i, out firstName, out lastName, out ageText);
 
-                int age = int.TryParse(ageText, out int parsedAge) ? parsedAge : 0;
+                int? age = int.TryParse(ageText, out int parsedAge) ? parsedAge : 0;
 
                 PeopleInfo onePerson = new PeopleInfo(firstName, lastName, age, false);
                 peopleInfoService.Save(onePerson);

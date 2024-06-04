@@ -1,18 +1,17 @@
-0|OnHold|10.05.2024. 12:00:00|19.06.2024. 12:00:00|5|1|1,2,3|Turkish|3|description|12.05.2024. 12:00:00|3
-1|OnHold|02.02.2024. 12:00:00|19.03.2024. 12:00:00|2|1|1,2,3|Bulgarian|1|description|12.05.2024. 12:00:00|2
-2|OnHold|11.06.2024. 12:00:00|17.06.2024. 12:00:00|5|1|1,2,3|Portuguese|3|description|12.05.2024. 12:00:00|4
-3|OnHold|10.05.2024. 12:00:00|26.06.2024. 12:00:00|1|1|1,2,3|Swedish|7|description|12.05.2024. 12:00:00|4
-4|OnHold|10.02.2024. 12:00:00|19.08.2024. 12:00:00|1|1|1,2,3|Polish|10|description|12.05.2024. 12:00:00|4
-5|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Slovenian|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|2
-6|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |12.05.2021. 12:00:00|2
-7|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Swedish|34|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|2
-8|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|2|3|17|Turkish|21|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|2
-9|OnHold|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Portuguese|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
-10|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17,2|Turkish|13|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|4
-11|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Bulgarian|1|bla bla bla bla bla bla bla |12.05.2023. 12:00:00|4
-12|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Portuguese|1|bla bla bla bla bla bla bla |12.05.2022. 12:00:00|4
-13|Accepted|22.08.2024. 00:00:00|25.10.2024. 00:00:00|4|3|18|Turkish|23|nskjzxhujgdesz|13.05.2024. 22:54:30|4
-14|OnHold|19.07.2024. 00:00:00|22.08.2024. 00:00:00|3|3|18|French|1|hbgfx|15.05.2024. 12:01:25|4
-15|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Bulgarian|12|bla bla bla bla bla bla bla |12.05.2022. 12:00:00|4
-16|OnHold|19.07.2024. 00:00:00|31.08.2024. 00:00:00|3|3|18|French|1|fvwdsh|15.05.2024. 16:10:01|4
-17|Accepted|06.06.2024. 00:00:00|29.06.2024. 00:00:00|3|3|18|English|1|vgfchg|15.05.2024. 17:52:59|4
+0|Accepted|10.05.2024. 12:00:00|19.06.2024. 12:00:00|5|1|1,2,3|Turkish|3|Experience the thrill of dune bashing in a 4x4 vehicle, navigating the towering sand dunes of the Arabian Desert. Hold on tight as your skilled driver takes you on an exhilarating ride. After the adventure, relax at a traditional Bedouin camp. Enjoy activities such as camel riding, henna painting, and sandboarding. Savor a delicious barbecue dinner while watching live cultural performances including belly dancing and Tanoura dance.|12.05.2024. 12:00:00|3
+1|Invalid|02.02.2024. 12:00:00|19.03.2024. 12:00:00|2|1|1,2,3|Bulgarian|1|description|12.05.2024. 12:00:00|2
+2|OnHold|11.06.2024. 12:00:00|17.06.2024. 12:00:00|5|1|1,2,3|Portuguese|3|Experience the thrill of dune bashing in a 4x4 vehicle, navigating the towering sand dunes of the Arabian Desert. Hold on tight as your skilled driver takes you on an exhilarating ride. After the adventure, relax at a traditional Bedouin camp. Enjoy activities such as camel riding, henna painting, and sandboarding. Savor a delicious barbecue dinner while watching live cultural performances including belly dancing and Tanoura dance.|12.05.2024. 12:00:00|4
+3|Invalid|10.05.2024. 12:00:00|26.06.2024. 12:00:00|1|1|1,2,3|Swedish|7|Begin your journey at the Manchester Museum,Delve into Manchester's pivotal role in the Industrial Revolution at the Science and Industry Museum. Explore the story of democracy and social justice in the UK at the People's History Museum. |12.05.2024. 12:00:00|4
+4|Invalid|10.02.2024. 12:00:00|19.08.2024. 12:00:00|1|1|1,2,3|Polish|10|Shoping tour - Begin your shopping adventure at Manchester Arndale, the largest city-center shopping mall in the UK. With over 200 stores, you'll find a mix of high-street favorites like Zara, H&M, and Primark, as well as unique boutique shops.|12.05.2024. 12:00:00|4
+5|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Slovenian|1|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|2
+6|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Turkish|1|bla bla bla bla bla bla bla |12.05.2021. 12:00:00|2
+7|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Swedish|34|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|2
+8|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|2|3|17|Turkish|21|bla bla bla bla bla bla bla |12.05.2024. 12:00:00|2
+9|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17|Portuguese|1|Begin your journey in Asakusa, home to Tokyo oldest and most famous Buddhist temple, Senso-ji. Marvel at the grand Kaminarimon Gate and wander through Nakamise Street, lined with traditional shops selling souvenirs, snacks, and crafts. |12.05.2024. 12:00:00|4
+10|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|4|3|17,2|Turkish|13|Ascend to the observation decks of Tokyo Skytree, the tallest structure in Japan. Take in breathtaking panoramic views of Tokyo and beyond from 450 meters above ground. |12.05.2024. 12:00:00|4
+11|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Bulgarian|1|Visit Atlantis The Palm, a majestic resort located on the iconic Palm Jumeirah island. Explore the Lost Chambers Aquarium, home to 65,000 marine animals, and experience the adrenaline-pumping Aquaventure Waterpark. |12.05.2023. 12:00:00|4
+12|Invalid|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Portuguese|1|Discover Dubai's rich history and heritage at the Dubai Museum, housed in the Al Fahidi Fort. Learn about the city's transformation from a small fishing village to a global metropolis.|12.05.2022. 12:00:00|4
+13|Accepted|22.08.2024. 00:00:00|25.10.2024. 00:00:00|4|3|18|Turkish|23|Visit Meiji Shrine, a tranquil oasis in the heart of Tokyo dedicated to Emperor Meiji and Empress Shoken. Walk through the lush forested grounds and admire the traditional Shinto architecture.|13.05.2024. 22:54:30|4
+14|OnHold|19.07.2024. 00:00:00|22.08.2024. 00:00:00|3|3|18|French|1| Take a ferry to Taronga Zoo, located on the shores of Sydney Harbour. Explore the diverse exhibits showcasing Australian native animals and exotic species from around the world.|15.05.2024. 12:01:25|4
+15|Accepted|01.06.2024. 00:00:00|31.08.2024. 00:00:00|5|3|17|Bulgarian|12|Join us for an unforgettable journey through Dubai, a city that epitomizes luxury, innovation, and tradition. From the towering Burj Khalifa to the serene desert sands, experience the best that Dubai has to offer. Book now and immerse yourself in the wonders of this dynamic and dazzling destination! |12.05.2022. 12:00:00|4
+16|OnHold|19.07.2024. 00:00:00|31.08.2024. 00:00:00|3|3|18|French|1|Stroll through the Royal Botanic Garden, a lush oasis in the heart of the city. Discover diverse plant species, beautifully landscaped gardens, and scenic views of the harb|12.05.2022. 12:00:00|4

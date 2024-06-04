@@ -48,13 +48,13 @@
                             <Binding Path="NumberOfParts" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" TargetNullValue="">
                                 <Binding.ValidationRules>
                                     <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
-                                    <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="5" />
+                                    <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="2" Max="9" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
 
-                    <TextBlock Grid.Column="0" Text="How many parts would you like your tour to have (1-5) " MaxWidth="300" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Grid.Column="0" Text="How many parts would you like your tour to have (2-9) " MaxWidth="300" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
 
                     <Button Grid.Column="2" Height="30" Width="50" Content="Search" Command="{Binding GeneratePartsCommand}"/>
                 </Grid>
@@ -85,8 +85,19 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding PartNumber}" FontSize="18" Margin="5"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Status}" FontSize="18" Margin="5" Foreground="Green"/>
-                                <Button Grid.Column="2"  Content="Fill out" FontSize="18" Margin="5" Command="{Binding DataContext.FillOutCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding PartNumber}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Status}" FontSize="18" Margin="5">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status}" Value="Filled out">
+                                                    <Setter Property="Foreground" Value="Green"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <Button Grid.Column="2"  Content="Fill out" FontSize="18" Margin="5" IsEnabled="{Binding IsEnabled}" Command="{Binding DataContext.FillOutCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}"/>
 
 
 
@@ -99,7 +110,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Button Grid.Row="3" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" FontSize="18" Width="100" Height="30"></Button>
+            <Button Grid.Row="3" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" FontSize="18" Width="100" Height="30" Command="{Binding CreateCommand}" IsEnabled="{Binding IsCreatable}"></Button>
 
         </Grid>
     </ScrollViewer>

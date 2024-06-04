@@ -36,7 +36,7 @@ namespace BookingApp.Service.TourServices
             {
 
                 Location singleLocation = locationService.GetById(tour.LocationId);
-                string locationString = $"{singleLocation.City}, {singleLocation.Country}";
+                string locationString = $"{singleLocation.Country}";
 
 
 

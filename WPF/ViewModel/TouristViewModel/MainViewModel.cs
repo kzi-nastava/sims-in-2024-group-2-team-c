@@ -1,8 +1,10 @@
 ﻿using BookingApp.DTO;
 using BookingApp.Model;
+using BookingApp.Service.TourServices;
 using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Resources;
 using System.Text;
@@ -14,6 +16,19 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private ObservableCollection<PartViewModel> _currentParts;
+        public ObservableCollection<PartViewModel> CurrentParts
+        {
+            get => _currentParts;
+            set
+            {
+                _currentParts = value;
+                OnPropertyChanged(nameof(CurrentParts));
+            }
+        }
+
+
+
 
         private ViewModelBase _currentChildView;
         public ViewModelBase CurrentChildView
@@ -106,6 +121,9 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         public ViewModelCommandd RequestsCommand { get; }
 
+        private readonly TouristService touristService;
+        private readonly TourVoucherService tourVoucherService;
+
         public MainViewModel()
         {
 
@@ -123,7 +141,12 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
             CurrentRequestIconSource = "/Resources/Images/tour-request.png";
 
+            tourVoucherService = new TourVoucherService();
+            touristService = new TouristService();
 
+            CheckForUniversalVoucher();
+
+            
 
             CurrentChildView = new TouristHomeViewModel();
         }
@@ -163,6 +186,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentHomeIconSource = "/Resources/Images/on home.png";
             CurrentUserIconSource = "/Resources/Images/tourist.png";
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
             CurrentChildView = new TouristHomeViewModel();
 
 
@@ -276,9 +300,26 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 // Use followingTour object to set properties or perform actions
                 CurrentMarkerIconSource = "/Resources/Images/marker.png";
-                CurrentHomeIconSource = "/Resources/Images/on home.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
                 CurrentUserIconSource = "/Resources/Images/tourist.png";
                 CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+
+                // Example of setting CurrentChildView to a new TourRequestCreationViewModel
+                CurrentChildView = new SingleTourRequestViewModel(request);
+            }
+
+        }
+
+        public void ExecuteSingleTourView1(object tourRequest)
+        {
+            if (tourRequest is TouristRequestDTO request)
+            {
+                // Use followingTour object to set properties or perform actions
+                CurrentMarkerIconSource = "/Resources/Images/marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/on bell.png";
                 CurrentRequestIconSource = "/Resources/Images/tour-request.png";
 
                 // Example of setting CurrentChildView to a new TourRequestCreationViewModel
@@ -343,6 +384,103 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentRequestIconSource = "/Resources/Images/tour-request.png";
 
             CurrentChildView = new AlternativeLocationTourViewModel(location,tourId);
+        }
+
+        public void ExecuteComplexRequestCreation(PartViewModel part, ComplexTourRequestViewModel complexTourRequestViewModel)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/on tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+            CurrentParts = complexTourRequestViewModel.Parts;
+
+
+            CurrentChildView = new ComplexRequestCreationViewModel(part,complexTourRequestViewModel);
+        }
+
+        public void ExecuteGoBAckToComplexRequests(ComplexTourRequestViewModel complexTourRequestViewModel)
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/on tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+            complexTourRequestViewModel.Parts = CurrentParts;
+            CurrentChildView = complexTourRequestViewModel;
+
+        }
+
+        public void ExecuteSavedComplexTourRequest()
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/on tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+            
+            CurrentChildView = new SavedComplexTourRequestViewModel();
+        }
+
+        public void ExecuteSeeComplexTours()
+        {
+            CurrentMarkerIconSource = "/Resources/Images/marker.png";
+            CurrentHomeIconSource = "/Resources/Images/home.png";
+            CurrentUserIconSource = "/Resources/Images/on tourist.png";
+            CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+            CurrentChildView = new ShowAllComplexToursViewModel();
+        }
+
+        public void ExecuteSelectedComplexRequestView(object tourRequest)
+        {
+
+            if (tourRequest is TouristRequestDTO request)
+            {
+                CurrentMarkerIconSource = "/Resources/Images/marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/on tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+                CurrentChildView = new SelectedComplexRequestViewModel(request);
+            }
+        }
+
+
+        public void ExecuteApprovedComplexRequest(object tourRequest)
+        {
+
+            if (tourRequest is ComplexTouristRequestDTO request)
+            {
+                CurrentMarkerIconSource = "/Resources/Images/marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/on tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/tour-request.png";
+
+                CurrentChildView = new AcceptedComplexRequestViewModel(request);
+            }
+        }
+
+
+        public void CheckForUniversalVoucher()
+        {
+           List<Tourist> tourists =  touristService.GetAll();
+
+            foreach(Tourist t in tourists)
+            {
+
+                if(t.YearlyTourNumber >= 5)
+                {
+                    tourVoucherService.CreateUniversalTourVoucher(t);
+                    t.YearlyTourNumber = 0;
+                    touristService.Update(t);
+                }
+
+            }
+
         }
 
 

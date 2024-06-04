@@ -16,16 +16,19 @@ namespace BookingApp.DTO
 
         public DateTime ExpirationDate { get; set; }
 
+        public bool IsUniversal { get; set; }
+
         public TouristVoucherDTO() {
             TourName = string.Empty;
         }
 
-        public TouristVoucherDTO(int tourId,string tourName, int touristId, DateTime expirationDate)
+        public TouristVoucherDTO(int tourId,string tourName, int touristId, DateTime expirationDate, bool isUniversal)
         {
             TourId = tourId;
             TourName = tourName;
             TouristId = touristId;
             ExpirationDate = expirationDate;
+            IsUniversal = isUniversal;
         }
     }
 }

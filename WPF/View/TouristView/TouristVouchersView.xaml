@@ -35,7 +35,18 @@
                                 <ColumnDefinition Width="280"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding TourName}" Margin="10,0" VerticalAlignment="Center" FontSize="15"/>
+                            <TextBlock Grid.Column="0" Margin="10,0" VerticalAlignment="Center" FontSize="15">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="{Binding TourName}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsUniversal}" Value="True">
+                                                <Setter Property="Text" Value="Universal" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
 
                             <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0">

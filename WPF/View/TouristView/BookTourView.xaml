@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      xmlns:val="clr-namespace:BookingApp.WPF.ViewModel.TouristViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="BookTourView">
@@ -80,21 +81,51 @@
             <TextBlock Grid.Row="2"  Text="BOOK" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="SemiBold" Foreground="Green" Margin="20"/>
 
             <Border Grid.Row="3"  BorderBrush="Black" BorderThickness="2" Background="#88c97f">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Check availability" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="10"/>
-                    <TextBlock Grid.Row="1" Text="Number of people" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"  Margin="20,10"/>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <TextBox Width="50" Height="20" Margin="30,0,0,0" Text="{Binding TouristNumber}"/>
-                        <Button Content="Check" Width="50" Height="20" Margin="10" Command="{Binding CheckCommand}"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding AvailableSpots}" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,0"/>
-                    </StackPanel>
-                </Grid>
+                        <TextBlock Grid.Row="0" Text="Check availability" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="10"/>
+                        <TextBlock Grid.Row="1" Text="Number of people" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15"  Margin="20,10"/>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal">
+
+
+
+                            <TextBox Grid.Column="1" x:Name="NumberOfPeopleTextBox" Width="50" Height="20" Margin="30,0,0,0">
+                                <TextBox.Text>
+                                    <Binding Path="TouristNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" TargetNullValue="">
+                                        <Binding.ValidationRules>
+                                            <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+                                            <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="7" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+
+
+                            <!--     <TextBox Width="50" Height="20" Margin="30,0,0,0" Text="{Binding TouristNumber}"/>  -->
+
+                            <Button Content="Check" Width="50" Height="20" Margin="10" Command="{Binding CheckCommand}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding AvailableSpots}" VerticalAlignment="Center" Width="Auto" Margin="0,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <AdornerDecorator Grid.Row="1">
+                        <TextBlock Foreground="Red" Margin="20,0,20,10">
+                            <TextBlock.Text>
+                                <Binding ElementName="NumberOfPeopleTextBox" Path="(Validation.Errors)">
+                                    <Binding.Converter>
+                                        <val:ValidationErrorsConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </AdornerDecorator>
+                </StackPanel>
             </Border>
 
 
@@ -119,14 +150,14 @@
                                     <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" Margin="10">
                                         <TextBlock Grid.Row="0" Text="First Name:" Margin="10"  VerticalAlignment="Center"/>
                                         <TextBlock Grid.Column="2" Text="Last Name:" Margin="10" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Age:" Margin="10" VerticalAlignment="Center"/>
+                                   <!--     <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Age:" Margin="10" VerticalAlignment="Center"/>  -->
                                     </StackPanel>
 
 
                                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="10">
                                         <TextBox Grid.Row="1" Text="{Binding FirstName, Mode=TwoWay}" Margin="10" Width="50"/>
                                         <TextBox Grid.Column="3" Text="{Binding LastName, Mode=TwoWay}" Margin="10" Width="50"/>
-                                        <TextBox Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Age, Mode=TwoWay}" Margin="10" Width="50"/>
+                                    <!--    <TextBox Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Age, Mode=TwoWay}" Margin="10" Width="50"/>  -->
                                     </StackPanel>
                                 </Grid>
 

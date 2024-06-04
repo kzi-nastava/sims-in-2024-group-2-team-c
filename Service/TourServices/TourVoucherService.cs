@@ -3,6 +3,7 @@ using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,8 @@ namespace BookingApp.Service.TourServices
                 TourId = voucher.TourId,
                 TouristId = voucher.TouristId,
                 ExpirationDate = voucher.ExpirationDate,
-                TourName = tourService.GetTourNameById(voucher.TourId)
+                TourName = tourService.GetTourNameById(voucher.TourId),
+                IsUniversal = voucher.IsUniversal
             }).ToList();
         }
 
@@ -92,24 +94,19 @@ namespace BookingApp.Service.TourServices
 
         public List<TourVoucher> GetVouchersByTourId(int tourId)
         {
-            // Retrieve all vouchers from the repository
+            
             List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
 
-            // Filter vouchers based on the given tourId
-            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TourId == tourId && v.TouristId == LoggedInUser.Id).ToList();
 
-            // Map the filtered list of TourVoucher to TouristVoucherDTO
-           /* List<TouristVoucherDTO> vouchersDTO = filteredVouchers.Select(voucher => new TouristVoucherDTO
-            {
-                TourId = voucher.TourId,
-                TouristId = voucher.TouristId,
-                ExpirationDate = voucher.ExpirationDate,
-                // Get the tour name using the tour repository
-                TourName = tourService.GetTourNameById(voucher.TourId)
-            }).ToList();*/
+            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == LoggedInUser.Id && (v.TourId == tourId || v.IsUniversal)).ToList();
 
-            // Return the list of TouristVoucherDTO
             return filteredVouchers;
+        }
+
+        public void CreateUniversalTourVoucher(Tourist t) { 
+            
+            TourVoucher voucher = new TourVoucher(0,t.Id, DateTime.Now.AddMonths(6),true);
+            Send(voucher);
         }
 
 

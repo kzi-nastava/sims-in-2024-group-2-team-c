@@ -228,6 +228,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             foreach (var person in People)
             {
+                person.Age = 20;
                 PeopleList.Add(person);
             }
 

@@ -69,7 +69,12 @@ namespace BookingApp.Repository
             return request;
         }
 
+        public ComplexTourRequest GetById(int id)
+        {
+            _requests = _serializer.FromCSV(FilePath);
+            return _requests.Find(c => c.Id == id);
 
+        }
 
 
     }

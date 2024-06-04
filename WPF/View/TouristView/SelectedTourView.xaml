@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      xmlns:val="clr-namespace:BookingApp.WPF.ViewModel.TouristViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="SelectedTourView">
@@ -111,12 +112,38 @@
 
                     <TextBlock Grid.Row="7" Text="Search by number of people" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="10"/>
 
-                    <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-                        <TextBox Height="20" Width="50" Margin="10,0" Text="{Binding NumberOfPeople}"/>
-                        <Button Content="Search" Height="20" Width="50" Command="{Binding SearchCommand}"/>
+                    <StackPanel Grid.Row="8" Orientation="Vertical">
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                            
+                            <TextBox  x:Name="myTextBox" Height="20" Width="50" Margin="10,0">
+                                <TextBox.Text>
+                                    <Binding Path="NumberOfPeople" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" TargetNullValue="">
+                                        <Binding.ValidationRules>
+                                            <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+                                            <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="0" Max="9" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+
+                            <Button Content="Search" Height="20" Width="50" Command="{Binding SearchCommand}"/>
+                        </StackPanel>
+
+                        <AdornerDecorator HorizontalAlignment="Center">
+                            <TextBlock Foreground="Red" Margin="20,10,0,0">
+                                <TextBlock.Text>
+                                    <Binding ElementName="myTextBox" Path="(Validation.Errors)">
+                                        <Binding.Converter>
+                                            <val:ValidationErrorsConverter />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </AdornerDecorator>
+
                     </StackPanel>
 
-                    <TextBlock Grid.Row="6" Text="Dates and time" HorizontalAlignment="Left" Margin="30,20,0,0" FontSize="15" FontWeight="SemiBold" Foreground="DarkGreen" ></TextBlock>
+                    <TextBlock Grid.Row="6" Text="Select Date and Time you want to book" HorizontalAlignment="Left" Margin="30,20,0,0" FontSize="15" FontWeight="SemiBold" Foreground="DarkGreen" ></TextBlock>
 
                     <ListView ItemsSource="{Binding TourInstances}" Grid.Row="9" Margin="0,20,0,20" Width="350"  Name="TourInstancesListView">
                         
@@ -155,7 +182,7 @@
                         </Button.ContentTemplate>
                     </Button>
 
-                    <TextBlock Grid.Row="11" Text="Reviews" HorizontalAlignment="Left" Margin="30,10,10,20" FontSize="15" FontWeight="SemiBold"/>
+                   
 
                      
 

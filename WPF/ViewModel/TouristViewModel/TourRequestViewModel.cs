@@ -48,7 +48,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
         private void RefreshTourRequests()
         {
-
+            
             List<TourRequest> requests = tourRequestService.GetAll();
             DateTime now = DateTime.Now;
 
@@ -70,7 +70,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                     }
 
 
-                }
+               }
 
             }
 
@@ -96,3 +96,4 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
     }
 }
+

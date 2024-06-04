@@ -16,12 +16,48 @@
         </Grid.RowDefinitions>
         
         <Button Grid.Row="0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="5,25,0,0"  Click="GoBack_Click"
-Width="30" Height="30"  Background="Transparent" BorderThickness="0">
+            Width="30" Height="30"  Background="Transparent" BorderThickness="0">
             <Image  Source="/Resources/Images/tour exit.png"/>
         </Button>
         <TextBlock  Grid.Row="0"   Text="Complex Tours" Margin="40,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center"
-Foreground="#40613c"
- FontWeight="Medium"
-FontSize="30" />
+            Foreground="#40613c" FontWeight="Medium" FontSize="30" />
+
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding TourRequests}" HorizontalContentAlignment="Left">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Background="#b2edb4" Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+                        <Grid  Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="300"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock  Text="Request" Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15"/>
+                                <TextBlock  Text="{Binding Number}"  VerticalAlignment="Center" FontSize="15"/>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Activity}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                        <!-- Default color -->
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Activity}" Value="INVALID">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Activity}" Value="ON HOLD">
+                                                <Setter Property="Foreground" Value="Orange"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+
     </Grid>
 </Page>
