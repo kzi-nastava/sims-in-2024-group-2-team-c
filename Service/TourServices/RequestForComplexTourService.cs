@@ -1,4 +1,5 @@
-﻿using BookingApp.Injector;
+﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
@@ -15,6 +16,7 @@ namespace BookingApp.Service.TourServices
     {
 
         private readonly IRequestsForComplexTourRepository requestsForComplexTourRepository;
+        //private readonly ComplexTourRequestService complexTourRequestService;
 
         public RequestForComplexTourService() {
             requestsForComplexTourRepository = Injectorr.CreateInstance<IRequestsForComplexTourRepository>();
@@ -23,6 +25,10 @@ namespace BookingApp.Service.TourServices
         public TourRequest Save(TourRequest tourRequest)
         {
            return requestsForComplexTourRepository.Save(tourRequest);
+        }
+        public TourRequest Update(TourRequest tourRequest)
+        {
+            return requestsForComplexTourRepository.Update(tourRequest);
         }
 
         public TourRequest GetById(int id)
@@ -35,6 +41,7 @@ namespace BookingApp.Service.TourServices
         {
             return requestsForComplexTourRepository.GetAll();
         }
+       
 
         public DateTime GetTimeOfFirstRequest(int id)
         {
