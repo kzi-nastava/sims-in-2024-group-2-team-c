@@ -20,6 +20,20 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         private readonly MainViewModel _mainViewModel;
 
 
+        private int? _peopleNumber;
+        public int? PeopleNumber
+        {
+
+            get { return _peopleNumber; }
+            set
+            {
+                _peopleNumber = value;
+                OnPropertyChanged(nameof(PeopleNumber));
+            }
+
+        }
+
+
         private ObservableCollection<Location> _locations;
         public ObservableCollection<Location> Locations
         {
@@ -81,7 +95,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
-        private DateTime _startDate = DateTime.Now;
+        private DateTime _startDate = DateTime.Now.AddMonths(2);
         public DateTime StartDate
         {
             get { return _startDate; }
@@ -93,7 +107,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             }
         }
 
-        private DateTime _endDate = DateTime.Now;
+        private DateTime _endDate = DateTime.Now.AddMonths(2);
         public DateTime EndDate
         {
             get { return _endDate; }
@@ -241,6 +255,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
 
             foreach (var person in People)
             {
+                person.Age = 20;
                 PeopleList.Add(person);
             }
 

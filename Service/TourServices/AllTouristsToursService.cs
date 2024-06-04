@@ -16,6 +16,7 @@ namespace BookingApp.Service.TourServices
         private readonly LocationService _locationService;
         private readonly TouristService _touristService;
         private readonly TourReservationService _tourReservationService;
+        private readonly KeyPointService _keyPointService;
 
 
         public AllTouristsToursService() {
@@ -26,6 +27,7 @@ namespace BookingApp.Service.TourServices
             _tourInstanceService = new TourInstanceService();
             _tourReservationService = new TourReservationService();
             _touristService = new TouristService();
+            _keyPointService = new KeyPointService();
 
 
         }
@@ -53,7 +55,7 @@ namespace BookingApp.Service.TourServices
                 Location location = _locationService.GetById(tour.LocationId);
                 string locationString = $"{location.City}, {location.Country}";
 
-                TouristPdfDTO tourPdf = new TouristPdfDTO(tour.Name, tour.Language, tour.Duration, locationString, tour.Description, tour.Images,t.Date);
+                TouristPdfDTO tourPdf = new TouristPdfDTO(tour.Name, tour.Language, tour.Duration, locationString, tour.Description, tour.Images,t.Date,tour.KeyPointIds);
 
 
                 touristPdfDTOs.Add(tourPdf);
@@ -64,7 +66,16 @@ namespace BookingApp.Service.TourServices
 
         }
 
-       
+
+        public List<KeyPoint> GetKeyPoints(List<int> keyPointIds)
+        {
+
+           return  _keyPointService.GetKeypointsByIds(keyPointIds);
+
+        }
+
+
+
 
 
 

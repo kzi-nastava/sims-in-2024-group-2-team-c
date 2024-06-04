@@ -186,6 +186,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             CurrentHomeIconSource = "/Resources/Images/on home.png";
             CurrentUserIconSource = "/Resources/Images/tourist.png";
             CurrentNotificationIconSource = "/Resources/Images/bell.png";
+            CurrentRequestIconSource = "/Resources/Images/tour-request.png";
             CurrentChildView = new TouristHomeViewModel();
 
 
@@ -299,9 +300,26 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             {
                 // Use followingTour object to set properties or perform actions
                 CurrentMarkerIconSource = "/Resources/Images/marker.png";
-                CurrentHomeIconSource = "/Resources/Images/on home.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
                 CurrentUserIconSource = "/Resources/Images/tourist.png";
                 CurrentNotificationIconSource = "/Resources/Images/bell.png";
+                CurrentRequestIconSource = "/Resources/Images/on-tour-request.png";
+
+                // Example of setting CurrentChildView to a new TourRequestCreationViewModel
+                CurrentChildView = new SingleTourRequestViewModel(request);
+            }
+
+        }
+
+        public void ExecuteSingleTourView1(object tourRequest)
+        {
+            if (tourRequest is TouristRequestDTO request)
+            {
+                // Use followingTour object to set properties or perform actions
+                CurrentMarkerIconSource = "/Resources/Images/marker.png";
+                CurrentHomeIconSource = "/Resources/Images/home.png";
+                CurrentUserIconSource = "/Resources/Images/tourist.png";
+                CurrentNotificationIconSource = "/Resources/Images/on bell.png";
                 CurrentRequestIconSource = "/Resources/Images/tour-request.png";
 
                 // Example of setting CurrentChildView to a new TourRequestCreationViewModel

@@ -114,9 +114,8 @@
 
 
 
-                                <ScrollViewer Grid.Row="0" Margin="10" Template="{StaticResource CustomScrollViewerTemplate}" HorizontalScrollBarVisibility="Visible"  Width="300" VerticalScrollBarVisibility="Hidden">
-
-                                    <ItemsControl ItemsSource="{Binding Images}" >
+                                <ScrollViewer Grid.Row="0" Margin="10" Template="{StaticResource CustomScrollViewerTemplate}" HorizontalScrollBarVisibility="Visible" Width="300" VerticalScrollBarVisibility="Hidden">
+                                    <ItemsControl ItemsSource="{Binding Images}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal" Height="280" />
@@ -124,7 +123,9 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding}"  Width="300" Margin="5"/>
+                                                <Grid Width="300" Height="250" ClipToBounds="True">
+                                                    <Image Source="{Binding}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                                                </Grid>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      xmlns:val="clr-namespace:BookingApp.WPF.ViewModel.TouristViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="SearchTourView">
@@ -47,11 +48,36 @@
 
             <Grid>
                 <Rectangle Stroke="Black" StrokeThickness="2" StrokeDashArray="4,2" RadiusX="10" RadiusY="10"></Rectangle>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Grid.Column="0" Text="DURATION"  Margin="30,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
-                    <TextBox Height="30" Width="200" Text="{Binding Duration}"></TextBox>
-                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Grid.Column="0" Text="DURATION"  Margin="30,20,30,0" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
+                     <!--   <TextBox Height="30" Width="200" Text="{Binding Duration}"></TextBox>  -->
 
+                        <TextBox  x:Name="myTextBox" Height="30" Width="200" Margin="0,20,30,0">
+                            <TextBox.Text>
+                                <Binding Path="Duration" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" TargetNullValue="">
+                                    <Binding.ValidationRules>
+                                        <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+                                        <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="15" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    
+                    </StackPanel>
+
+                    <AdornerDecorator >
+                        <TextBlock Foreground="Red" Margin="20,0,0,0">
+                            <TextBlock.Text>
+                                <Binding ElementName="myTextBox" Path="(Validation.Errors)">
+                                    <Binding.Converter>
+                                        <val:ValidationErrorsConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </AdornerDecorator>
+                </StackPanel>
             </Grid>
         </Border>
 
@@ -85,7 +111,7 @@
             <Grid>
                 <Rectangle Stroke="Black" StrokeThickness="2" StrokeDashArray="4,2" RadiusX="10" RadiusY="10"></Rectangle>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Grid.Column="0" Text="LANGUAGES"  Margin="30,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
+                    <TextBlock Grid.Column="0" Text="LANGUAGES"  Margin="30,10,20,10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
                     <ComboBox Grid.Column="1"  ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage}" Height="30" Width="200">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>

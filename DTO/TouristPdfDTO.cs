@@ -24,7 +24,7 @@ namespace BookingApp.DTO
         public DateTime Date { get; set; }
 
 
-        public TouristPdfDTO(string name, string language, int duration,string location, string description,List<string> imageNames, DateTime date)
+        public TouristPdfDTO(string name, string language, int duration,string location, string description,List<string> imageNames, DateTime date, List<int> keyPointIds)
         {
             
             Name = name;
@@ -34,8 +34,10 @@ namespace BookingApp.DTO
             Location = location;
             Date = date;
             Images = imageNames;
+            KeyPointIds = keyPointIds;
 
-            
+
+
         }
 
 

@@ -12,6 +12,8 @@ using System.Diagnostics;
 using BookingApp.DTO;
 using System.Windows.Media.Imaging;
 using System.Drawing.Imaging;
+using iTextSharp.text.pdf.draw;
+using Microsoft.Win32;
 
 
 namespace BookingApp.WPF.ViewModel.TouristViewModel
@@ -110,44 +112,102 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
         }
 
 
+        /* public void GeneratePdfForTours(List<TouristPdfDTO> tours)
+         {
+             // Create a new document for all tours
+             string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+             string fileName = "TouristInfo.pdf";
+             string path = Path.Combine(downloadsPath, "Downloads", fileName);
+
+             // Create a Document object
+             Document doc = new Document();
+
+             // Create a PdfWriter to write to the specified output path
+             PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
+
+
+             // Open the document for writing
+             doc.Open();
+
+             Paragraph title = new Paragraph("Report on all tour attendances in 2023", new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD));
+             title.Alignment = Element.ALIGN_CENTER;
+             doc.Add(title);
+
+             LineSeparator line = new LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, -2);
+             doc.Add(new Chunk(line));
+             doc.Add(new Paragraph('\n'));
+
+             foreach (var tour in tours)
+             {
+                 List<KeyPoint> keypoints = _allToursService.GetKeyPoints(tour.KeyPointIds);
+
+                 GeneratePdfPageForTour(doc, tour,keypoints );
+
+                 // Add a new page for the next tour
+                 //doc.NewPage();
+                 LineSeparator newLine = new LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, -2);
+                 doc.Add(new Chunk(newLine));
+                 doc.Add(new Paragraph('\n'));
+                 doc.NewPage();
+             }
+
+             // Close the document after adding all tours
+             doc.Close();
+         }*/
+
         public void GeneratePdfForTours(List<TouristPdfDTO> tours)
         {
-            // Create a new document for all tours
-            string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string fileName = "TouristInfo.pdf";
-            string path = Path.Combine(downloadsPath, "Downloads", fileName);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF file (*.pdf)|*.pdf";
+            saveFileDialog.Title = "Save PDF File";
+            saveFileDialog.FileName = "TouristInfo - MyTourApp.pdf";
 
-            // Create a Document object
-            Document doc = new Document();
-
-            // Create a PdfWriter to write to the specified output path
-            PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
-
-
-            // Open the document for writing
-            doc.Open();
-
-            Paragraph title = new Paragraph("Report on all tour attendances in 2023", new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD));
-            title.Alignment = Element.ALIGN_CENTER;
-            doc.Add(title);
-            doc.NewPage();
-
-            foreach (var tour in tours)
+            if (saveFileDialog.ShowDialog() == true)
             {
-                
-                GeneratePdfPageForTour(doc, tour );
+                string path = saveFileDialog.FileName;
 
-                // Add a new page for the next tour
-                doc.NewPage();
+                Document doc = new Document();
+                PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
+                doc.Open();
+
+                Paragraph title = new Paragraph("Report on all tour attendances in 2023", new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD))
+                {
+                    Alignment = Element.ALIGN_CENTER
+                };
+                doc.Add(title);
+
+                LineSeparator line = new LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, -2);
+                doc.Add(new Chunk(line));
+                doc.Add(new Paragraph('\n'));
+
+                foreach (var tour in tours)
+                {
+                    List<KeyPoint> keypoints = _allToursService.GetKeyPoints(tour.KeyPointIds);
+                    GeneratePdfPageForTour(doc, tour, keypoints);
+
+                    LineSeparator newLine = new LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, -2);
+                    doc.Add(new Chunk(newLine));
+                    doc.Add(new Paragraph('\n'));
+                    doc.NewPage();
+                }
+
+                Paragraph end = new Paragraph("MyTourApp", new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD))
+                {
+                    Alignment = Element.ALIGN_CENTER
+                };
+                doc.Add(end);
+
+                doc.Close();
+
+                // Open the saved PDF in the default viewer
+                Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
             }
-
-            // Close the document after adding all tours
-            doc.Close();
         }
 
 
 
-        public void GeneratePdfPageForTour(Document doc, TouristPdfDTO tour)
+
+        public void GeneratePdfPageForTour(Document doc, TouristPdfDTO tour, List<KeyPoint> keypoints)
         {
             string tourName = tour.Name;
             string tourDescription = tour.Description;
@@ -164,52 +224,60 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             titleFirstPage.SpacingBefore = 20f;
             titleFirstPage.SpacingAfter = 20f;
             doc.Add(titleFirstPage);
+
+
             Paragraph description = new Paragraph(tourDescription, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLDITALIC));
             description.Alignment = Element.ALIGN_CENTER;
             description.SpacingBefore = 10f;
             description.SpacingAfter = 10f;
             doc.Add(description);
 
-            Paragraph location = new Paragraph("Location:", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
+            Paragraph location = new Paragraph($"Location:{tourLocation}", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
             location.SpacingBefore = 10f;
-            location.SpacingAfter = 5f;
+            location.SpacingAfter = 10f;
             doc.Add(location);
 
-            Paragraph locationText = new Paragraph(tourLocation, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
-            locationText.SpacingBefore = 5f;
-            locationText.SpacingAfter = 10f;
-            doc.Add(locationText);
+            
 
-            Paragraph language = new Paragraph("Language:", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
+            Paragraph language = new Paragraph($"Language:{tourLanguage}", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
             language.SpacingBefore = 10f;
-            language.SpacingAfter = 5f;
+            language.SpacingAfter = 10f;
             doc.Add(language);
 
-            Paragraph languageText = new Paragraph(tourLanguage, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
-            languageText.SpacingBefore = 5f;
-            languageText.SpacingAfter = 10f;
-            doc.Add(languageText);
-
-
-            Paragraph date = new Paragraph("Date:", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
+            
+            Paragraph date = new Paragraph($"Date:{tourDate}", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
             date.SpacingBefore = 10f;
-            date.SpacingAfter = 5f;
+            date.SpacingAfter = 10f;
             doc.Add(date);
 
-            Paragraph dateText = new Paragraph(tourDate, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
-            dateText.SpacingBefore = 5f;
-            dateText.SpacingAfter = 10f;
-            doc.Add(dateText);
-
-            Paragraph duration = new Paragraph("Duration:", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
+            Paragraph duration = new Paragraph($"Duration:{Duration}", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
             duration.SpacingBefore = 10f;
-            duration.SpacingAfter = 5f;
+            duration.SpacingAfter = 10f;
             doc.Add(duration);
 
-            Paragraph durationText = new Paragraph(Duration, new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
-            durationText.SpacingBefore = 5f;
-            durationText.SpacingAfter = 30f;
-            doc.Add(durationText);
+
+            Paragraph keys = new Paragraph($"Key Points: ", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLDITALIC));
+            keys.SpacingBefore = 10f;
+            keys.SpacingAfter = 5f;
+            doc.Add(keys);
+
+            int number = 1;
+            foreach(KeyPoint keyPoint in keypoints)
+            {
+                string keyName = keyPoint.Name;
+                string desc = keyPoint.Description;
+                string numberString = number.ToString();
+                Paragraph keypoint = new Paragraph($"{numberString}. {keyName} ", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
+                Paragraph keyPoint2 = new Paragraph($"{desc}", new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL));
+                keypoint.SpacingAfter = 5f;
+                keypoint.SpacingAfter = 5f;
+                keyPoint2.SpacingAfter = 10f;
+                doc.Add(keypoint);
+                doc.Add(keyPoint2);
+                number += 1;
+
+            }
+
 
 
 
@@ -219,7 +287,26 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             PdfPTable table = new PdfPTable(2);
             table.WidthPercentage = 100f; 
             string directoryPath = @"D:\Mila\HAHHHAHAAH\sims-in-2024-group-2-team-c\Resources\Images";
+
+
+          /*  string baseImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images");
+            // string imagePath = Path.Combine("D:\\Mila\\AHHHHHHHHHHHH\\sims-in-2024-group-2-team-c\\Resources\\Images\\", imageName);
+            // string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Images", imageName);
+            string path = Directory.GetCurrentDirectory();
+            Console.WriteLine(path);
+            //string imagePath = Path.Combine(@"..\\Resources\\Images\\", imageName);
+
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            // Find the index of the substring "\bin\Debug\net6.0-windows\"
+            int index = baseDirectory.IndexOf("\\bin\\Debug\\net6.0-windows\\", StringComparison.OrdinalIgnoreCase);
+
+            // Remove the substring "\bin\Debug\net6.0-windows\" from the base directory
+            string directoryPath = baseDirectory.Remove(index);
+
             
+            */
+
             int count = 0;
             PdfPCell cell = null;
             foreach (var imageName in images)
