@@ -164,6 +164,9 @@ namespace BookingApp.Repository
             return _accommodations.FirstOrDefault(a => a.Id == id);
         }
 
-
+        public List<Accommodation> GetAccommodationsByOwner(int ownerId)
+        {
+            return _accommodations.Where(acc => acc.Owner.Id == ownerId).ToList();
+        }
     }
 }

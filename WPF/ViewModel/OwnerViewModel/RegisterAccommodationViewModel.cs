@@ -132,7 +132,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
 
             if (!ValidateInput())
             {
-                MessageBox.Show("Please fill in all fields.");
+                
                 return;
             }
 
@@ -144,17 +144,17 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
             int minBookingDays = MinBookingDays;
             int cancellationDays = CancellationDays;
 
-            string[] paths = ImagePath.Split('|');
+            //string[] paths = ImagePath.Split('|');
 
 
-            foreach (string path in paths)
+            /*foreach (string path in paths)
             {
 
                 if (!string.IsNullOrEmpty(path))
                 {
                     imagePaths.Add(path);
                 }
-            }
+            }*/
 
             Accommodation newAccommodation = new Accommodation()
             {
@@ -165,7 +165,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
                 MinBookingDays = minBookingDays,
                 CancellationDays = cancellationDays,
                 Owner = new Owner { Id = LoggedInUser.Id },
-                Images = imagePaths
+                //Images = imagePaths
             };
 
             _repository.Save(newAccommodation);
@@ -180,21 +180,76 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrEmpty(Name) ||
-                string.IsNullOrEmpty(City) ||
-                string.IsNullOrEmpty(Type) ||
-                MaxGuests <= 0 ||
-                MinBookingDays <= 0 ||
-                CancellationDays <= 0) //||
-               // string.IsNullOrEmpty(ImagePath))
+            if (
+                MaxGuests == 0 ||
+                MinBookingDays == 0 ||
+                CancellationDays == 0)
             {
+                MessageBox.Show("Please enter valid number of days.");
                 return false;
             }
-            else
+
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(City) ||
+                string.IsNullOrWhiteSpace(Type) )
             {
-                return true;
+                MessageBox.Show("Please fill in all of the fields.");
+                return false;
             }
+
+            if (
+                MaxGuests < 0 ||
+                MinBookingDays < 0 ||
+                CancellationDays < 0)
+            {
+                MessageBox.Show("Please enter number greater than 0.");
+                return false;
+            }
+
+            if (!int.TryParse(MaxGuests.ToString(), out _))
+            {
+                MessageBox.Show("Please enter a valid number for Max Guests.");
+                return false;
+            }
+
+            if (!int.TryParse(MinBookingDays.ToString(), out _))
+            {
+                MessageBox.Show("Please enter a valid number for Min Booking Days.");
+                return false;
+            }
+
+            if (!int.TryParse(CancellationDays.ToString(), out _))
+            {
+                MessageBox.Show("Please enter a valid number for Cancellation Days.");
+                return false;
+            }
+
+            // Provera postojanja lokacije
+            string city = City.Trim().ToLower();
+            Location location = locationRepository.GetLocationByCity(city);
+            if (location == null)
+            {
+                MessageBox.Show("That City doesn't exist in our system.");
+                return false;
+            }
+
+            string country = Country.Trim().ToLower();
+            Location location1 = locationRepository.GetLocationByCountry(country);
+            if (location1 == null)
+            {
+                MessageBox.Show("That County doesn't exist in our system.");
+                return false;
+            }
+            // Dodatne provere za ImagePath ako je potrebno
+            /* if (string.IsNullOrWhiteSpace(ImagePath))
+             {
+                 MessageBox.Show("Please provide at least one image.");
+                 return false;
+             }*/
+
+            return true;
         }
+
 
         public void BrowseImage_Click(object sender, RoutedEventArgs e)
         {

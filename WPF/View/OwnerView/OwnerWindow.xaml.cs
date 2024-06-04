@@ -1,7 +1,11 @@
-﻿using BookingApp.View;
+﻿using BookingApp.Commands;
+using BookingApp.Model;
+using BookingApp.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,31 +24,29 @@ namespace BookingApp.WPF.View.OwnerView
     /// </summary>
     public partial class OwnerWindow : Window
     {
+        
         public OwnerWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new OwnerHomePage()); 
+            MainFrame.Navigate(new OwnerHomePage());
         }
-
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            OwnerHomePage ownerHomePage = new OwnerHomePage();
-            this.Content = ownerHomePage;
+            //SetPageLanguageBasedOnWindowLanguage();
+            NavigateToPage("OwnerHomePage");
         }
 
         private void Ratings_Click(object sender, RoutedEventArgs e)
         {
-            GuestRatingForm guestRatingForm = new GuestRatingForm();
-            this.Content = guestRatingForm;
+            NavigateToPage("GuestRatingForm");
         }
 
         private void Renovations_Click(object sender, RoutedEventArgs e)
         {
-            RenovationsList renovationsList = new RenovationsList();
-            this.Content = renovationsList;
+            NavigateToPage("RenovationsList");
         }
 
-        //sve ostale uradi ovako, samo pazi da se ne preklapa tekst gore!
+        
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
             NavigateToPage("OwnerProfile");
@@ -55,24 +57,44 @@ namespace BookingApp.WPF.View.OwnerView
             NavigateToPage("OwnersRatings");
         }
 
+        private void Accommodations_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage("AllAccommodationsPage");
+        }
+
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage("OwnerStatisticsForm");
+        }
 
         private void NavigateToPage(string pageName)
         {
-            String pageUri = "WPF\\View\\OwnerView\\" + pageName + ".xaml"; // ovo je nacin sa putanjama, a moze da se instancira i nova stranica prilikom navigacije, pa da ne moraju da se koriste putanje, ali ima neke razlike u ponasanju stranica prilikom navigacije (procitati na linku)
-            MainFrame.Navigate(new Uri(pageUri, UriKind.RelativeOrAbsolute)); // ovo je skraceni zapis za MainFrame.NavigationService.Navigate(...);
+            string pageUri = "WPF\\View\\OwnerView\\" + pageName + ".xaml";
+            MainFrame.Navigate(new Uri(pageUri, UriKind.Relative));
         }
 
-
-
-        /* stari nacin
-         private void Profile_Click(object sender, RoutedEventArgs e)
+     
+        //-------PROMENA JEZIKA I TEME------
+        private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
          {
-             OwnerProfile ownerProfile = new OwnerProfile();
-             this.Content = ownerProfile;
-      
-         }*/
+             App.ChangeLanguage("\\Resources\\ResourcesLanSerbian.xaml");
+         }
 
+         private void ChangeLanguageToEnglish_Click(object sender, RoutedEventArgs e)
+         {
+             App.ChangeLanguage("\\Resources\\ResourcesLan.xaml");
+         }
         
+
+        private void ChangeThemeToLight_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChangeTheme("\\Resources\\Themes\\LightTheme.xaml");
+        }
+
+        private void ChangeThemeToDark_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChangeTheme("\\Resources\\Themes\\DarkTheme.xaml");
+        }
 
     }
 }

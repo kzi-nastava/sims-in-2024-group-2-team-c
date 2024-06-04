@@ -8,17 +8,17 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OwnersRatings">
 
-    <Grid Background="LightBlue">
+    <Grid Background="Transparent">
 
-        <TextBlock Text="How Guests Rated You" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+        <TextBlock Text="{DynamicResource HowGuestsRatedYou}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
-        <ListView x:Name="_accommodationRates" Grid.Row="0" IsEnabled="True" ItemsSource="{Binding _accommodationRates}" Margin="80,100,80,100" FontSize="20" Width="700">
+        <ListView x:Name="_accommodationRates" Grid.Row="0" IsEnabled="True" ItemsSource="{Binding _accommodationRates}" Margin="100,100,110,100" FontSize="20">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="GuestUsername" DisplayMemberBinding="{Binding GuestUsername}" Width="150" />
-                    <GridViewColumn Header="Cleanliness" DisplayMemberBinding="{Binding Cleanliness}"  Width="150"/>
-                    <GridViewColumn Header="Politeness " DisplayMemberBinding="{Binding OwnerRate}" Width="150"/>
-                    <GridViewColumn Header="Comment " DisplayMemberBinding="{Binding Comment}" Width="150"/>
+                    <GridViewColumn Header="{DynamicResource GuestUsername}" DisplayMemberBinding="{Binding GuestUsername}" Width="150" />
+                    <GridViewColumn Header="{DynamicResource Cleanliness}" DisplayMemberBinding="{Binding Cleanliness}"  Width="150"/>
+                    <GridViewColumn Header="{DynamicResource Politeness}" DisplayMemberBinding="{Binding OwnerRate}" Width="150"/>
+                    <GridViewColumn Header="{DynamicResource Comment}" DisplayMemberBinding="{Binding Comment}" Width="150"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>

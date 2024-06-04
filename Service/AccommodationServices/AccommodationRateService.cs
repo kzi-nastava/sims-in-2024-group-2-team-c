@@ -24,8 +24,8 @@ namespace BookingApp.Service.AccommodationServices
         private readonly AccommodationRate _ratedAccommodation;
         private List<AccommodationRate> _accommodationRates;
 
-        private ReservationService  reservationService;
-        private ReservationRepository reservationRepository ;
+        private ReservationService reservationService;
+        private ReservationRepository reservationRepository;
 
 
         public List<AccommodationRate> AccommodationRates
@@ -48,14 +48,14 @@ namespace BookingApp.Service.AccommodationServices
         }
 
         public AccommodationRateService(GuestReservationDTO selectedReservation)
-         {
+        {
             _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
 
             reservationRepository = new ReservationRepository();
             _accommodationRates = new List<AccommodationRate>();
             _selectedReservation = selectedReservation;
 
-         }
+        }
 
         public AccommodationRateService(AccommodationRate ratedAccommodation)
         {

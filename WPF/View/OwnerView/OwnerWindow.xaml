@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
         mc:Ignorable="d"
-        Title="OwnerWindow" Height="450" Width="800">
+        Title="OwnerWindow" Height="450" Width="800" >
     <Window.Resources>
         <Style x:Key="LinkButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
+           <!-- <Setter Property="Background"/> -->
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+           <!-- <Setter Property="Foreground" />  -->
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -21,7 +21,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                  <!--  <Setter Property="Foreground"  /> -->
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
@@ -34,28 +34,46 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="LightBlue">
+    <Grid Background="{DynamicResource BackgroundBrush}">
         <!-- Booking.com u gornjem levom uglu -->
         <TextBlock Text="Booking.com" FontSize="18" FontWeight="Bold" Foreground="DarkBlue" Margin="10"/>
 
         <!-- Horizontalni meni -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" >
-            <Button x:Name="HomeButton" Content="Home" Margin="5" Style="{StaticResource LinkButtonStyle}" Click="Home_Click" FontSize="15"/>
-            <Button x:Name="AccommodationsButton" Content="Accommodations" Margin="5" Style="{StaticResource LinkButtonStyle}" FontSize="15" />
-            <Button x:Name="RatingsButton" Content="Ratings" Margin="5" Style="{StaticResource LinkButtonStyle }" Click="Ratings_Click" FontSize="15"/>
-            <Button x:Name="RenovationButton" Content="Renovation" Margin="5" Style="{StaticResource LinkButtonStyle}" Click="Renovations_Click" FontSize="15"/>
-            <Button x:Name="StatisticsButton" Content="Statistics" Margin="5" Style="{StaticResource LinkButtonStyle}" FontSize="15"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Background="Transparent">
+            <!-- Dinamički generisana dugmad -->
+            <Button Content="{DynamicResource HomeButton}" Click="Home_Click" />
+            <Button Content="{DynamicResource AccommodationsButton}" Click="Accommodations_Click"/>
+            <Button Content="{DynamicResource RatingsButton}" Click="Ratings_Click" />
+            <Button Content="{DynamicResource RenovationButton}" Click="Renovations_Click"/>
+            <Button Content="{DynamicResource StatisticsButton}" Click="Statistics_Click"/>
         </StackPanel>
+
+
+        <Menu HorizontalAlignment="Right" Margin="5,15,150,0" Height="20" VerticalAlignment="Top" Background="LightSeaGreen">
+            <MenuItem Header="{DynamicResource Language}">
+                <MenuItem Header="{DynamicResource Serbian}" Click="ChangeLanguageToSerbian_Click"/>
+                <MenuItem Header="{DynamicResource English}" Click="ChangeLanguageToEnglish_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <Menu HorizontalAlignment="Right" Margin="5,15,100,0" Height="20" VerticalAlignment="Top" Background="LightSeaGreen">
+            <MenuItem Header="{DynamicResource Theme}">
+                <MenuItem Header="{DynamicResource Light}" Click="ChangeThemeToLight_Click"/>
+                <MenuItem Header="{DynamicResource Dark}" Click="ChangeThemeToDark_Click"/>
+            </MenuItem>
+        </Menu>
+
+
+
 
         <!-- Ikona za Profile u gornjem desnom uglu -->
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
             <Image Source="\Resources\Images\profileG.jpg" Width="24" Height="24" MouseLeftButtonDown="Profile_Click"/>
-            <TextBlock Text="Your Profile" Margin="5" VerticalAlignment="Center" MouseLeftButtonDown="Profile_Click"/>
+            <TextBlock Text="{DynamicResource YourProfile}" Margin="5" VerticalAlignment="Center" MouseLeftButtonDown="Profile_Click"/>
         </StackPanel>
 
-        <!-- <Button Content="See Your Ratings" Click="OwnersRatings_Click" Margin="200" />  -->
-
         <!-- Frame za prikaz stranica -->
-        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,55,0,0"/>
+        <Frame x:Name="MainFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,55,0,0" Source="\WPF\View\OwnerView\AccommodationReportView.xaml"/>
+        
     </Grid>
 </Window>

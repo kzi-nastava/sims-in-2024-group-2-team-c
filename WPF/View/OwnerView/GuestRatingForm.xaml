@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="GuestRatingFormm">
+      d:DesignHeight="450" d:DesignWidth="800" FocusManager.IsFocusScope="True" Focusable="True" Loaded="Page_Loaded"
+      Title="GuestRatingForm">
 
-    <Grid  Background="LightBlue">
+    <Grid  Background="Transparent" x:Name="MainGrid">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -16,16 +16,15 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-      
-        <TextBlock Text="Reservations" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
+        <TextBlock Text="{DynamicResource ReservationsHeader}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
 
-        <ListView x:Name="guestListView" SelectionChanged="ListView_SelectionChanged" Grid.Row="0" IsEnabled="True" ItemsSource="{Binding Reservations}" Margin="10,60,0,0"  HorizontalAlignment="Center" FontSize="15" Height="100" >
+        <ListView x:Name="guestListView" SelectionChanged="ListView_SelectionChanged" Grid.Row="0" IsEnabled="True" ItemsSource="{Binding Reservations}" Margin="10,60,0,70"  HorizontalAlignment="Center" FontSize="15" Height="100" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Guest" DisplayMemberBinding="{Binding Guest.Username}" />
-                    <GridViewColumn Header="Accommodation" DisplayMemberBinding="{Binding Accommodation.Name}" />
-                    <GridViewColumn Header="Arrival Date" DisplayMemberBinding="{Binding ArrivalDate}"/>
-                    <GridViewColumn Header="Departure Date" DisplayMemberBinding="{Binding DepartureDate}"/>
+                    <GridViewColumn Header="{DynamicResource Guest}" DisplayMemberBinding="{Binding Guest.Username}" />
+                    <GridViewColumn Header="{DynamicResource Accommodation}" DisplayMemberBinding="{Binding Accommodation.Name}" />
+                    <GridViewColumn Header="{DynamicResource ArrivalDate}" DisplayMemberBinding="{Binding ArrivalDate}"/>
+                    <GridViewColumn Header="{DynamicResource DepartureDate}" DisplayMemberBinding="{Binding DepartureDate}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -45,11 +44,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-           
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Rate Your Guests" FontWeight="Bold" FontSize="20" Margin="5"/>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{DynamicResource RateYourGuests}" FontWeight="Bold" FontSize="20" Margin="5"/>
 
-           
-            <Label Grid.Row="1" Grid.Column="0" Content="Cleanliness:" FontWeight="Bold" FontSize="15"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource CleanlinessLabel}" FontWeight="Bold" FontSize="15"/>
             <ComboBox Grid.Row="1" Grid.Column="1" x:Name="txtCleanliness" SelectedItem="{Binding Cleanliness}" Margin="5"  Width="50" HorizontalAlignment="Left">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
@@ -58,8 +55,7 @@
                 <ComboBoxItem Content="5"/>
             </ComboBox>
 
- 
-            <Label Grid.Row="2" Grid.Column="0" Content="Rule Respecting:" FontWeight="Bold" FontSize="15"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource RuleRespectingLabel}" FontWeight="Bold" FontSize="15"/>
             <ComboBox Grid.Row="2" Grid.Column="1" x:Name="txtRuleRespecting" SelectedItem="{Binding RuleRespecting}" Margin="5" Width="50" HorizontalAlignment="Left">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
@@ -68,12 +64,12 @@
                 <ComboBoxItem Content="5"/>
             </ComboBox>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Comment:" FontWeight="Bold" FontSize="15"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource CommentLabel}" FontWeight="Bold" FontSize="15"/>
             <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtComment" Text="{Binding Comment}" Margin="5" Width="400" HorizontalAlignment="Left"/>
 
-            <Button Grid.Row="4" Grid.Column="1" Content="Submit" Click="SaveGuestRating" FontSize="15" Margin="10" HorizontalAlignment="Left" Background="Green"/>
+            <Button Grid.Row="4" Grid.Column="1" Content="{DynamicResource SubmitButton}" Click="SaveGuestRating" FontSize="15" Margin="10" HorizontalAlignment="Left" Background="Green"/>
 
-            <Button Grid.Row="4" Grid.Column="1" Content="See How Guests Rated You" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="10" Click="OwnersRatings_Click" />
+            <Button Grid.Row="4" Grid.Column="1" Content="{DynamicResource GuestRatingsButton}" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="10" Click="OwnersRatings_Click" />
 
         </Grid>
     </Grid>
