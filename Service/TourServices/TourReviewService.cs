@@ -111,6 +111,7 @@ namespace BookingApp.Service.TourServices
                     score += (float)((dto.LanguageGrade + dto.KnowledgeGrade + dto.InterestingGrade) / 3);
                 }
             }
+            score = (float)(score / reviews.Count());
             return score;
         }
         public bool ReportReview(TourReviewDTO selectedReview)
