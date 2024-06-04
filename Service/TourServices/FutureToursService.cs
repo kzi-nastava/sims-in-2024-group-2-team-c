@@ -17,6 +17,7 @@ namespace BookingApp.Service.TourServices
         private TourService tourService;
         private LocationService locationService;
         private TourVoucherService tourVoucherService;
+        private GuideService guideService;
 
         public FutureToursService()
         {
@@ -24,6 +25,7 @@ namespace BookingApp.Service.TourServices
             tourService = new TourService();
             locationService = new LocationService();
             tourVoucherService = new TourVoucherService();
+            guideService = new GuideService();
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
@@ -62,15 +64,47 @@ namespace BookingApp.Service.TourServices
             //Za sve prijavljene turiste se salju vauceri!
             tourInstanceService.Delete(instance);
         }
-       /* public void CancelToursByGuide(int guideId)
+        public void CancelToursByGuide(int guideId)
         {
-            List<TourInstance> futureTours = tourInstanceService.GetFutureInstanceByGuide(guideId);
-            foreach (TourInstance tour in futureTours)
+            List<TourInstance> futureTours = tourInstanceService.GetFutureInstance();
+            List<TourInstance> guideInstances = guideService.getInstancesById(guideId);
+            foreach(TourInstance ti in guideInstances)
             {
-                CancelTour(tour.Id);
-                DeliverVoucherToTourists(tour.Id);
+                if (futureTours.Contains(ti))
+                {
+                    CancelTour(ti.Id);
+                    DeliverUniversalVoucher(ti.Id);
+                }
             }
-        }*/
+        }
+        public void DeliverUniversalVoucher(int TourInstanceId)
+        {
+            TourInstance instance = tourInstanceService.GetById(TourInstanceId);
+            Tour tour = tourService.GetById(instance.IdTour);
+            List<int> tourists = tourService.FindPresentTourists(tour);
+            if (tourists != null)
+            {
+                foreach (int id in tourists)
+                {
+                    if (tourVoucherService.TouristContainVoucher(id, tour))
+                    {
+                        TourVoucher voucher = new TourVoucher
+                        {
+                            TourId = tour.Id,
+                            TouristId = id,
+                            ExpirationDate = DateTime.Today.AddYears(2),
+                            IsUniversal = true
+                        };
+                        tourVoucherService.Send(voucher);
+                    }
+                    else
+                    {
+                        DeliverVoucherToTourists(instance.Id);
+                    }
+                }
+            }
+
+        }
         public void DeliverVoucherToTourists(int TourInstanceId)
         {
             TourInstance instance = tourInstanceService.GetById(TourInstanceId);
@@ -84,7 +118,8 @@ namespace BookingApp.Service.TourServices
                     {
                         TourId = tour.Id,
                         TouristId = id,
-                        ExpirationDate = DateTime.Today.AddYears(1)
+                        ExpirationDate = DateTime.Today.AddYears(1),
+                        IsUniversal = false
                     };
                     tourVoucherService.Send(voucher);
                 }

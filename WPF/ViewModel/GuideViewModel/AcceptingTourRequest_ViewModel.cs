@@ -18,23 +18,23 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         public TourRequestDTO TourRequest
         {
             get { return _tourRequest; }
-            set { _tourRequest= value; OnPropertyChanged(nameof(TourRequest)); }
+            set { _tourRequest = value; OnPropertyChanged(nameof(TourRequest)); }
         }
-        private DateTime _selectedDate = new DateTime(2024, 1, 1);
+        private DateTime _selectedDate = new DateTime(2024,6, 5);
         public DateTime SelectedDate
         {
             get { return _selectedDate; }
             set
             {
-                if(value > TourRequest.StartDate.Date && value< TourRequest.EndDate.Date)
+                if (value > TourRequest.StartDate.Date && value < TourRequest.EndDate.Date)
                 {
                     _selectedDate = value;
                 }
                 else
                 {
-                    MessageBox.Show("Selektuj turu izmedju " + TourRequest.StartDate.ToString("dd.MM.yyyy. HH:mm:ss") + "i " + TourRequest.EndDate.ToString("dd.MM.yyyy. HH:mm:ss"));
+                    MessageBox.Show("Selektuj turu izmedju " + TourRequest.StartDate.ToString("dd.MM.yyyy. HH:mm:ss") + " i " + TourRequest.EndDate.ToString("dd.MM.yyyy. HH:mm:ss"));
                 }
-                
+
                 OnPropertyChanged(nameof(SelectedDate));
             }
         }
@@ -57,8 +57,9 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             set { _isSent = value; OnPropertyChanged(nameof(IsSent)); }
         }
 
+        public ICommand AcceptCommand { get; private set; }
+        public ICommand SendNotificationCommand { get; private set; }
 
-        public ViewModelCommandd SendNotificationCommand;
         private readonly TourRequestNotificationService tourRequestNotificationService;
         private readonly TourRequestService tourRequestService;
         private readonly TourService tourService;
@@ -68,14 +69,18 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         {
             IsSent = Visibility.Hidden;
             SendNotificationCommand = new ViewModelCommandd(SendNotification);
+            AcceptCommand = new ViewModelCommandd(Accept);
+
             tourRequestService = new TourRequestService();
             tourService = new TourService();
             tourRequestNotificationService = new TourRequestNotificationService();
             tourReccommendationsService = new TourReccommendationsService();
-            /*if(SelectedDate!=null && SelectedDate < TourRequest.StartDate.Date && SelectedDate > TourRequest.EndDate.Date)
-            {
-                MessageBox.Show("Selektuj turu izmedju "+ TourRequest.StartDate.ToString("dd.MM.yyyy. HH:mm:ss") + "i "+ TourRequest.EndDate.ToString("dd.MM.yyyy. HH:mm:ss"));
-            }*/
+        }
+
+        private void Accept(object obj)
+        {
+            // Logika za prihvatanje zahteva
+            MessageBox.Show("Zahtev prihvaćen!");
         }
 
         private void SendNotification(object obj)
@@ -85,7 +90,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             List<string> images = new List<string>();
             List<DateTime> dates = new List<DateTime>();
             dates.Add(SelectedDate);
-            
+
             Tour tour = tourService.CreateTour(Name, location[0].Trim(), location[1].Trim(), Description, TourRequest.Language, 20, TourRequest.PeopleIds, dates, 2, images);
             TourRequestNotification notification = new TourRequestNotification
             {

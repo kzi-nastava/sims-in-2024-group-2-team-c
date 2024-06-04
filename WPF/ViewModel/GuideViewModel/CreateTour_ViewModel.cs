@@ -117,7 +117,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             get { return _isSaved; }
             set { _isSaved = value; OnPropertyChanged(nameof(IsSaved)); }
         }
-        private Visibility _isFilled;
+        private Visibility _isFilled = Visibility.Hidden;
         public Visibility IsFilled
         {
             get { return _isFilled; }
@@ -143,7 +143,6 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             TourDates = new ObservableCollection<DateTime>();
             IsSaved = Visibility.Hidden;
             IsFilled = Visibility.Hidden;
-
             SaveTourCommand = new RelayCommand(SaveTour);
             //BackCommand = new RelayCommand(Back);
             //ViewAllToursCommand = new RelayCommand(ViewAllTours);
@@ -158,7 +157,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
                string.IsNullOrEmpty(Images))
             {
                 IsFilled = Visibility.Visible;
-                return;
+                //return;
             }
             KeyPoints = GetKeyPoints();
             //var keyPoints = new List<string> { StartingPoint, EndingPoint };
@@ -168,7 +167,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
 
             _tourService.CreateTour(Name, location[0], location[1], Description, Language, MaxTourists, keyPoints, Dates, Duration, imagePathsList);
             IsSaved = Visibility.Visible;
-            IsFilled = Visibility.Collapsed;
+            IsFilled = Visibility.Hidden;
         }
 
         /*private void Back()

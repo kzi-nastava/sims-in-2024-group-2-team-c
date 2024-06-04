@@ -139,6 +139,15 @@ namespace BookingApp.Service.TourServices
         {
             Tour tour = GetByActivity();
             KeyPoint activeKeyPoint = keyPointService.FindActiveKeyPoint(tour.KeyPointIds);
+            string keyPointName = "";
+            if (activeKeyPoint != null)
+            {
+                keyPointName = activeKeyPoint.Name;
+            }
+            else
+            {
+                keyPointName = $"/";
+            }
             ActiveTourDTO activeTour = new ActiveTourDTO
             {
                 Name = tour.Name,
@@ -150,7 +159,7 @@ namespace BookingApp.Service.TourServices
                 //Images = tour.Images,
                 //BitmapImages = tour.BitmapImages,
                 Location = LoadLocation(tour.LocationId),
-                ActiveKeyPoint = activeKeyPoint.Name
+                ActiveKeyPoint = keyPointName
             };
             return activeTour;
         }

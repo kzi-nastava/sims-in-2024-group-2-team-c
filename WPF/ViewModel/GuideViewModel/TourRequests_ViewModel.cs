@@ -96,7 +96,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
         }
         public ViewModelCommandd BackCommand { get; }
 
-        public ViewModelCommandd AcceptTourRequestCommand { get; }
+        //public ViewModelCommandd AcceptTourRequestCommand { get; }
 
         public ViewModelCommandd SearchTourRequestCommand { get; }
         public TourRequests_ViewModel() 
@@ -105,7 +105,7 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             _tourRequestService = new TourRequestService();
             LoadRequests();
             BackCommand = new ViewModelCommandd(Back);
-            AcceptTourRequestCommand = new ViewModelCommandd(AcceptRequest);
+            //AcceptTourRequestCommand = new ViewModelCommandd(AcceptRequest);
             SearchTourRequestCommand = new ViewModelCommandd(SearchTourRequests);
         }
         public void LoadRequests()
@@ -171,19 +171,12 @@ namespace BookingApp.WPF.ViewModel.GuideViewModel
             TourRequests = new ObservableCollection<TourRequestDTO>(filteredTourRequests);
         }
 
-        private void AcceptRequest(object obj)
+        public void AcceptRequest()
         {
             
             if (SelectedTourRequest != null)
             {
                 _tourRequestService.AcceptRequest(SelectedTourRequest);
-                Guide_AcceptingTourRequest nextWindow  = new Guide_AcceptingTourRequest();
-                AcceptingTourRequest_ViewModel nextViewModel = new AcceptingTourRequest_ViewModel()
-                {
-                    TourRequest = SelectedTourRequest
-                };
-                nextWindow.DataContext = nextViewModel; // Postavite DataContext sledećeg prozora na novi ViewModel
-                nextWindow.Show();
                 TourRequests.Remove(SelectedTourRequest);
 
                 

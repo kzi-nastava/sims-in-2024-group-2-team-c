@@ -46,7 +46,6 @@ namespace BookingApp.View
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
          public KeyPointsOverview(List<KeyPoint> toursKeyPoints)
          {
              InitializeComponent();
@@ -126,8 +125,8 @@ namespace BookingApp.View
             }
             
             KeyPointsTuristsView touristsView = new KeyPointsTuristsView(peopleInfo, selectedKeyPoint);
-            touristsView.Show();
-
+            //touristsView.Show();
+            //this.NavigationService?.Navigate(touristsView);
 
 
             /*if (keyPointsListView.SelectedItem != null)

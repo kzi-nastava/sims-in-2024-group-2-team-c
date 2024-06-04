@@ -55,7 +55,18 @@ namespace BookingApp.Service.TourServices
 
             return founded;
         }
-
+        public TourInstance GetByActivity()
+        {
+            List<TourInstance> instances = GetAll();
+            foreach (TourInstance i in instances)
+            {
+                if (i.Started == true && i.Ended == false)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
 
         public List<TourInstance> GetTourInstancesByTourId(int tourId)
         {

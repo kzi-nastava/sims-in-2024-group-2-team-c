@@ -27,6 +27,7 @@
     <None Remove="Resources\Images\accommodation-sheraton.jpg" />
     <None Remove="Resources\Images\accommodation-silvia.jpg" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\Barcelona.jpg" />
     <None Remove="Resources\Images\bell.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\edit.png" />
@@ -63,6 +64,8 @@
     <None Remove="Resources\Images\icons8-user-64.png" />
     <None Remove="Resources\Images\statisticICON.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Tutorials\tutorial1.mp4" />
+    <None Remove="Resources\Tutorials\tutorial2.mp4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,6 +89,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
   </ItemGroup>
 
@@ -108,6 +112,7 @@
     <Resource Include="Resources\Images\accommodation-sara.jpg" />
     <Resource Include="Resources\Images\accommodation-sheraton.jpg" />
     <Resource Include="Resources\Images\accommodation-silvia.jpg" />
+    <Resource Include="Resources\Images\Barcelona.jpg" />
     <Resource Include="Resources\Images\bell.png" />
     <Resource Include="Resources\Images\gallery-image-icon.png" />
     <Resource Include="Resources\Images\home.png" />
@@ -141,6 +146,8 @@
     <Resource Include="Resources\Images\icons8-star-30.png" />
     <Resource Include="Resources\Images\icons8-user-64.png" />
     <Resource Include="Resources\Images\statisticICON.png" />
+    <Resource Include="Resources\Tutorials\tutorial1.mp4" />
+    <Resource Include="Resources\Tutorials\tutorial2.mp4" />
   </ItemGroup>
 
 </Project>
