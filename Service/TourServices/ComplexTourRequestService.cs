@@ -19,14 +19,39 @@ namespace BookingApp.Service.TourServices
         private readonly IComplexTourRequestRepository complexTourRequestRepository;
         private readonly PeopleInfoService peopleInfoService;
         private readonly RequestForComplexTourService requestForComplexTourService;
-        
+        private readonly GuideService guideAvailabilityService;
+
 
         public ComplexTourRequestService() {
             complexTourRequestRepository = Injectorr.CreateInstance<IComplexTourRequestRepository>();
             peopleInfoService = new PeopleInfoService();
             requestForComplexTourService = new RequestForComplexTourService();
+            guideAvailabilityService = new GuideService();
         }
-
+        public List<TourRequest> GetOnHoldRequests()
+        {
+            //List<TourRequest> requests = new List<TourRequest>();
+            List<ComplexTourRequest> complexRequests = GetAll();
+            List<TourRequest> dtos = new List<TourRequest>();
+            foreach (ComplexTourRequest complexRequest in complexRequests)
+            {
+                if (complexRequest.Status == ComplexTourRequestStatus.OnHold)
+                {
+                    if (requestForComplexTourService.AreAllRequestsOnHold(complexRequest.TourRequestIds))
+                    {
+                        foreach (int id in complexRequest.TourRequestIds)
+                        {
+                            TourRequest tr = requestForComplexTourService.GetById(id);
+                            if (tr.Status == TourRequestStatus.OnHold)
+                            {
+                                dtos.Add(tr);
+                            }
+                        }
+                    }
+                }
+            }
+            return dtos;
+        }
         public ComplexTourRequest GetById(int id)
         {
             return complexTourRequestRepository.GetById(id);
@@ -110,8 +135,33 @@ namespace BookingApp.Service.TourServices
 
             return requestDtos;
         }
+        public List<DateTime> GetUnAvailableTimeSlots(int tourRequestId, int guideId)
+        {
+            GuideService guideAvailabilityService = new GuideService();
+            TourRequest tourRequest = requestForComplexTourService.GetById(tourRequestId);
+            return guideAvailabilityService.GetUnAvailableTimeSlots(tourRequest.StartDate, tourRequest.EndDate, guideId);
+        }
 
+        public List<DateTime> GetAvailableTimeSlots(DateTime startDate, DateTime endDate, List<DateTime> unavailableSlots)
+        {
+            List<DateTime> available = new List<DateTime>();
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                if (!unavailableSlots.Contains(date))
+                {
+                    available.Add(date);
+                }
+            }
+            return available;
+        }
+        public void AcceptTourPart(int tourRequestId, int guideId, DateTime selectedTimeSlot)
+        {
+            var tourRequest = requestForComplexTourService.GetById(tourRequestId);
+            //tourRequest.Status = ComplexTourRequestStatus.Accepted;
+            tourRequest.Status = TourRequestStatus.Accepted;
+            requestForComplexTourService.Update(tourRequest);
 
+        }
 
 
     }
