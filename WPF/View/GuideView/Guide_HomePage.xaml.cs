@@ -122,7 +122,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void PlayTutorial_Click(object sender, RoutedEventArgs e)
         {
-            Guide_TutorialView tutorialView = new Guide_TutorialView();
+            string name = $"tutorial1";
+            Guide_TutorialView tutorialView = new Guide_TutorialView(name);
             this.NavigationService.Navigate(tutorialView);
         }
     }

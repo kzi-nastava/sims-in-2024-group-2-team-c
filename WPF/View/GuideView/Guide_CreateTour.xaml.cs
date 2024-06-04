@@ -36,7 +36,13 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void ViewToursButton_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService?.GoBack();
+            Guide_AllTourView allTourView = new Guide_AllTourView();
+            this.NavigationService.Navigate(allTourView);
+        }
+        private void Tutorial_Click(object sender, RoutedEventArgs e)
+        {
+            Guide_TutorialView tutorialView = new Guide_TutorialView("tutorial2");
+            this.NavigationService.Navigate(tutorialView);
         }
         private void AddKeyPoints_Click(object sender, RoutedEventArgs e)
         {

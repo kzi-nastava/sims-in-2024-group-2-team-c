@@ -30,10 +30,23 @@ namespace BookingApp.WPF.View.GuideView
         {
             this.NavigationService.GoBack();
         }
-        private void Details_Click(object sender, RoutedEventArgs e)
+        private void HomePage_Click(object sender, RoutedEventArgs e)
         {
-            //Guide_HomePage home = new Guide_HomePage();
-            //this.NavigationService?.Navigate(home);
+            Guide_HomePage home = new Guide_HomePage();
+            this.NavigationService?.Navigate(home);
         }
+        /*private void Details_Click(object sender, RoutedEventArgs e)
+        {
+            Guide_TourDetails details = new Guide_TourDetails();
+            var MainViewModel = DataContext as AllTour_ViewModel;
+            MainViewModel.AcceptRequest();
+            TourDetails_ViewModel viewModel = new TourDetails_ViewModel
+            {
+                Tour = MainViewModel.SelectedTour
+            };
+            Guide_AcceptingTourRequest acceptTourPage = new Guide_AcceptingTourRequest();
+            acceptTourPage.DataContext = viewModel;
+            this.NavigationService.Navigate(acceptTourPage);
+        }*/
     }
 }

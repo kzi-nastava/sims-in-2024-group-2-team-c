@@ -21,11 +21,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Left"  Height="30" Width="200">
+        <Button Grid.Row="0" Click="Back_Click" Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Left"  Height="30" Width="200">
             <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
         </Button>
 
@@ -34,7 +34,7 @@
         <TextBlock Text="In this tutorial we are demonstrating how easily you can use the app. If you have any further question feel free to contact us."
                    TextWrapping="Wrap" FontWeight="Bold" FontSize="18" TextAlignment="Center" Margin="20,10,20,0" HorizontalAlignment="Center" Grid.Row="2"/>
 
-        <MediaElement Name="TutorialVideo" Width="600" Height="300" Grid.Row="3" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+        <MediaElement x:Name="TutorialVideo" Grid.Row="3" Source="/Resources/Tutorials/tutorial2.mp4" Width="600" Height="300" HorizontalAlignment="Center" Margin="0,10,0,10"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="4" Margin="0,0,0,0">
             <Button Click="Play_Click" Style="{StaticResource CustomButtonStyle}" Height="30" Width="200">

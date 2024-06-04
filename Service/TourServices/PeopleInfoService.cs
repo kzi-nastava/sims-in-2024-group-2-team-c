@@ -28,6 +28,10 @@ namespace BookingApp.Service.TourServices
         {
             return _peopleInfoRepository.Save(peopleInfo);
         }
+        public PeopleInfo Update(PeopleInfo peopleInfo)
+        {
+            return _peopleInfoRepository.Update(peopleInfo);
+        }
 
         public List<int> SavePeopleInfoList(List<PeopleInfo> peopleInfoList)
         {
@@ -42,7 +46,10 @@ namespace BookingApp.Service.TourServices
 
             return savedIds;
         }
-
+        public List<PeopleInfo> GetAll()
+        {
+            return _peopleInfoRepository.GetAll();
+        }
 
     }
 }

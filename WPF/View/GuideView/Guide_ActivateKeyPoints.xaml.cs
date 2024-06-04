@@ -82,7 +82,8 @@ namespace BookingApp.WPF.View.GuideView
             }
 
             KeyPointsTuristsView touristsView = new KeyPointsTuristsView(peopleInfo, selectedKeyPoint);
-            touristsView.Show();
+            //touristsView.Show();
+            this.NavigationService.Navigate(touristsView);
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
