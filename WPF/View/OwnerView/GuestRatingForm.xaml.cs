@@ -36,6 +36,8 @@ namespace BookingApp.WPF.View.OwnerView
             DataContext = viewModel;
             this.Loaded += BasePage_Loaded;
             App.StaticPropertyChanged += OnAppPropertyChanged;
+            this.KeyDown += OwnerWindow_KeyDown;
+
         }
 
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
@@ -70,14 +72,21 @@ namespace BookingApp.WPF.View.OwnerView
 
         private void SaveGuestRating(object sender, RoutedEventArgs e)
         {
-            // Pozivanje metode za čuvanje ocene gosta
-            viewModel.SaveGuestRating(
-                int.Parse(txtCleanliness.Text),
-                int.Parse(txtRuleRespecting.Text),
-                txtComment.Text.Trim().ToLower()
-            );
-   
+            
+            if (string.IsNullOrEmpty(txtCleanliness.Text) || string.IsNullOrEmpty(txtRuleRespecting.Text))
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
+            int cleanliness, ruleRespecting;
+            if (!int.TryParse(txtCleanliness.Text, out cleanliness) || !int.TryParse(txtRuleRespecting.Text, out ruleRespecting))
+            {
+                MessageBox.Show("Invalid input. Please enter valid numbers.");
+                return;
+            }
+            viewModel.SaveGuestRating(cleanliness, ruleRespecting, txtComment.Text.Trim().ToLower());
         }
+
 
         private void OwnersRatings_Click(object sender, RoutedEventArgs e)
         {
@@ -85,9 +94,22 @@ namespace BookingApp.WPF.View.OwnerView
             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\OwnersRatings.xaml", UriKind.RelativeOrAbsolute));
             
         }
-        
 
-      
-
+        private void OwnerWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Proverite koji taster je pritisnut
+            switch (e.Key)
+            {
+                case Key.RightCtrl:
+                    SaveGuestRating(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Focus();
+        }
     }
 }

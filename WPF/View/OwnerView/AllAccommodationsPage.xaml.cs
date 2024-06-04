@@ -59,12 +59,5 @@ namespace BookingApp.WPF.View.OwnerView
             this.Resources.MergedDictionaries.Add(newResource);
         }
 
-        private void MoreInformation_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            var accommodation = button.DataContext as Accommodation;
-            var viewModel = DataContext as AllAccommodationsViewModel;
-            viewModel.NavigateToDetails(accommodation);
-        }
     }
 }

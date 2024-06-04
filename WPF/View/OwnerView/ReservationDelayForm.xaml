@@ -3,10 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       xmlns:vm="clr-namespace:BookingApp.View"
-      Title="ReservationDelayForm" Height="450" Width="800" >
+      Title="ReservationDelayForm" Height="450" Width="800"  FocusManager.IsFocusScope="True" Focusable="True" Loaded="Page_Loaded">
 
 
-    <Grid Background="Transparent">
+    <Grid Background="Transparent"  x:Name="MainGrid">
         <TextBlock Text="{DynamicResource NotificationsHeader}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
         

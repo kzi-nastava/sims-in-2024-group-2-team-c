@@ -26,13 +26,13 @@
     <sys:String x:Key="RenovationButton">Renovations</sys:String>
     <sys:String x:Key="StatisticsButton">Statistics</sys:String>
     <sys:String x:Key="YourProfile">Your Profile</sys:String>
-    <sys:String x:Key="NameOfAccommodation">Name Of Accommodation</sys:String>
-    <sys:String x:Key="CountryLabel">Country</sys:String>
-    <sys:String x:Key="CityLabel">City</sys:String>
-    <sys:String x:Key="TypeLabel">Type</sys:String>
-    <sys:String x:Key="MaxGuestsLabel">Maximum Guests</sys:String>
-    <sys:String x:Key="MinBookingDaysLabel">Minimum Booking Days</sys:String>
-    <sys:String x:Key="CancellationDaysLabel">Cancellation Days</sys:String>
+    <sys:String x:Key="NameOfAccommodation">Name Of Accommodation:</sys:String>
+    <sys:String x:Key="CountryLabel">Country:</sys:String>
+    <sys:String x:Key="CityLabel">City:</sys:String>
+    <sys:String x:Key="TypeLabel">Type:</sys:String>
+    <sys:String x:Key="MaxGuestsLabel">Maximum Guests:</sys:String>
+    <sys:String x:Key="MinBookingDaysLabel">Minimum Booking Days:</sys:String>
+    <sys:String x:Key="CancellationDaysLabel">Cancellation Days:</sys:String>
     <sys:String x:Key="SaveButtonContent">Save</sys:String>
     <sys:String x:Key="CancelButtonContent">Cancel</sys:String>
     <sys:String x:Key="AddImageTxt">Add Image</sys:String>
@@ -86,8 +86,8 @@
     <sys:String x:Key="Comment">Comment</sys:String>
     <sys:String x:Key="Language">Language</sys:String>
     <sys:String x:Key="Theme">Theme</sys:String>
-    <sys:String x:Key="TextBoxInstructions">Use arrows to move through; Enter for submitting or sending forms, ESC to cancel the current action</sys:String>
+    <sys:String x:Key="TextBoxInstructions">To navigate to a button, simply press the first letter of the action.For Scheduling Renovation use 'Z' ; Save - RightCtrl Cancel - LeftCtrl</sys:String>
     <sys:String x:Key="AverageRateReport">Average Rate Report</sys:String>
-    
-
+    <sys:String x:Key="Serbia">Serbia</sys:String>
+    <sys:String x:Key="Accommodations">All Your Accommodations</sys:String>
 </ResourceDictionary>

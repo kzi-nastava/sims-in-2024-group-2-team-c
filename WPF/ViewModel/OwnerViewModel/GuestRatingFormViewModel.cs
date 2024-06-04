@@ -78,7 +78,7 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
                 return;
             }
 
-            if (!ValidateCleanlinessAndRuleRespecting(cleanliness, ruleRespecting))
+            if (!ValidateCleanlinessAndRuleRespecting(cleanliness, ruleRespecting,comment))
                 return;
 
 
@@ -117,21 +117,31 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
 
         }
 
-        private bool ValidateCleanlinessAndRuleRespecting(int cleanliness, int ruleRespecting)
+        private bool ValidateCleanlinessAndRuleRespecting(int cleanliness, int ruleRespecting,string comment)
         {
-            if (cleanliness < 1 || cleanliness > 5)
+            if (cleanliness < 1 || cleanliness > 5 || cleanliness==null)
             {
                 MessageBox.Show("Please, enter a number between 1 and 5 for Cleanliness");
                 return false;
             }
 
-            if (ruleRespecting < 1 || ruleRespecting > 5)
+            if (ruleRespecting < 1 || ruleRespecting > 5 || ruleRespecting==null)
             {
                 MessageBox.Show("Please, enter a number between 1 and 5 for Rule Respecting");
                 return false;
             }
 
+            if (string.IsNullOrWhiteSpace(comment))
+            {
+                MessageBox.Show("Please fill in the comment.");
+                return false;
+            }
+
+            
+
             return true;
+
+            
         }
 
         protected void OnPropertyChanged(string propertyName)

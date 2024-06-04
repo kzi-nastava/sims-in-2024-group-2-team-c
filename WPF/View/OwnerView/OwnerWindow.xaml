@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
         mc:Ignorable="d"
-        Title="OwnerWindow" Height="450" Width="800">
+        Title="OwnerWindow" Height="450" Width="800" >
     <Window.Resources>
         <Style x:Key="LinkButtonStyle" TargetType="Button">
            <!-- <Setter Property="Background"/> -->

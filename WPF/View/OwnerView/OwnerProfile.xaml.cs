@@ -32,6 +32,7 @@ namespace BookingApp.WPF.View.OwnerView
             InitializeComponent();
             _viewModel = new OwnerProfileViewModel();
             DataContext = _viewModel;
+            this.KeyDown += OwnerWindow_KeyDown;
         }
         private void NotificationsAndRequests_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +62,30 @@ namespace BookingApp.WPF.View.OwnerView
             }
         }
 
-        
+        private void OwnerWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Proverite koji taster je pritisnut
+            switch (e.Key)
+            {
+                case Key.L:
+                    LogOut_Click(null, null);
+                    break;
+                case Key.A:
+                    AverageRR_Click(null, null);
+                    break;
+                case Key.N:
+                    NotificationsAndRequests_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Postavite fokus na stranicu
+            this.Focus();
+        }
+
 
         private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
         {

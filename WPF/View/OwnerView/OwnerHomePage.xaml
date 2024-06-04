@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OwnerHomePage">
+      Title="OwnerHomePage"
+      FocusManager.IsFocusScope="True" Focusable="True" Loaded="Page_Loaded">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -16,7 +17,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Background="Transparent">
+    <Grid Background="Transparent" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -74,7 +75,7 @@
             </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="20">
-            <Button Margin="5" Height="27" FontSize="20">
+            <Button Margin="5" Height="27" FontSize="20" Click="Forum_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="\Resources\Images\icons8-forum-50.png" Width="20" Height="20" Margin="0,0,5,0"/>
                     <TextBlock Text="{DynamicResource ForumText}"/>

@@ -3,7 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="AddNewAccommodationText" xml:space="preserve">DODAJ NOVI SMEŠTAJ</sys:String>
     <sys:String x:Key="StatisticsText" xml:space="preserve">STATISTIKA</sys:String>
-    <sys:String x:Key="ScheduleRenovationText" xml:space="preserve">ZAKAŽI RENOVACIJU</sys:String>
+    <sys:String x:Key="ScheduleRenovationText" xml:space="preserve">ZAKAŽI RENOVIRANJE</sys:String>
     <sys:String x:Key="ViewAccommodationsText" xml:space="preserve">PRIKAŽI SMEŠTAJE</sys:String>
     <sys:String x:Key="RateGuestsText" xml:space="preserve">OCENI GOSTE</sys:String>
     <sys:String x:Key="ForumText" xml:space="preserve">FORUM</sys:String>
@@ -26,13 +26,13 @@
     <sys:String x:Key="RenovationButton">Renoviranja</sys:String>
     <sys:String x:Key="StatisticsButton">Statistika</sys:String>
     <sys:String x:Key="YourProfile">Vaš Profil</sys:String>
-    <sys:String x:Key="NameOfAccommodation">Ime Smeštaja</sys:String>
-    <sys:String x:Key="CountryLabel">Država</sys:String>
-    <sys:String x:Key="CityLabel">Grad</sys:String>
-    <sys:String x:Key="TypeLabel">Tip Smeštaja</sys:String>
-    <sys:String x:Key="MaxGuestsLabel">Maksimalan broj gostiju </sys:String>
-    <sys:String x:Key="MinBookingDaysLabel">Najmanji broj rezervisanih dana</sys:String>
-    <sys:String x:Key="CancellationDaysLabel">Dani otkazivanja</sys:String>
+    <sys:String x:Key="NameOfAccommodation">Ime Smeštaja:</sys:String>
+    <sys:String x:Key="CountryLabel">Država:</sys:String>
+    <sys:String x:Key="CityLabel">Grad:</sys:String>
+    <sys:String x:Key="TypeLabel">Tip Smeštaja:</sys:String>
+    <sys:String x:Key="MaxGuestsLabel">Maksimalan broj gostiju:</sys:String>
+    <sys:String x:Key="MinBookingDaysLabel">Najmanji broj dana:</sys:String>
+    <sys:String x:Key="CancellationDaysLabel">Dani otkazivanja:</sys:String>
     <sys:String x:Key="SaveButtonContent">Sačuvaj</sys:String>
     <sys:String x:Key="CancelButtonContent">Otkaži</sys:String>
     <sys:String x:Key="AddImageTxt">Dodaj Sliku</sys:String>
@@ -85,7 +85,9 @@
     <sys:String x:Key="Politeness">Pristojnost</sys:String>
     <sys:String x:Key="Comment">Komentar</sys:String>
     <sys:String x:Key="Theme">Tema</sys:String>
-    <sys:String x:Key="TextBoxInstructions">Koristite strelice za kretanje; Enter za slanje ili potvrdu obrazaca, ESC za otkazivanje trenutne radnje</sys:String>
+    <sys:String x:Key="TextBoxInstructions">Prečice: A-Dodaj Novi Smeštaj; S-Statistika; Z- Zakaži renoviranje; V- (Vidi)Prikaži Smeštaje; R- Oceni Goste ; Sacuvaj - DesniCtrl Poništi - LeviCtrl</sys:String>
     <sys:String x:Key="Language">Jezik</sys:String>
     <sys:String x:Key="AverageRateReport">Izveštaj o Prosečnoj Oceni Smeštaja</sys:String>
+    <sys:String x:Key="Serbia">Srbija</sys:String>
+    <sys:String x:Key="Accommodations">Svi Vaši Smeštaji</sys:String>
 </ResourceDictionary>

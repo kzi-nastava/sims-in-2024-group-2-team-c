@@ -1,0 +1,49 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerView.ForumOwner"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ForumOwner">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Main Content Section -->
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Forum" FontSize="24" FontWeight="Bold" />
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <TextBlock Text="Select a location" VerticalAlignment="Center" />
+                <ComboBox Width="100" Margin="10,0" HorizontalAlignment="Left">
+                    <ComboBoxItem Content="Novi Sad" />
+                    <ComboBoxItem Content="Beograd" />
+                </ComboBox>
+                <TextBlock Text="You'll only be able to select locations where you have accommodation." VerticalAlignment="Center" FontSize="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10,0">
+                <TextBlock Text="Leave a comment" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Width="200" Height="50"/>
+                <Button Content="Submit" Margin="10,0"/>
+            </StackPanel>
+            <TextBlock Text="User Comments" FontSize="16" FontWeight="Bold" Margin="0,20,0,10"/>
+            <StackPanel Background="White" Margin="0,0,0,10">
+                <TextBlock Text="Beautiful city, everybody should visit at least once in their life!" Margin="10"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    <CheckBox Content="You can report comments from users who never visited this location." FontSize="10" />
+                    <Button Content="Report" FontSize="10" Margin="10,0"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="White" Margin="0,0,0,10">
+                <TextBlock Text="Been here 3 times already, and I'll come again :)" Margin="10"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    <Button Content="Report" FontSize="10" Margin="10,0"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

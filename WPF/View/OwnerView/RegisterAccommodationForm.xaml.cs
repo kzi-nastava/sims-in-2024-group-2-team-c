@@ -10,6 +10,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BookingApp.View
 {
@@ -26,6 +27,7 @@ namespace BookingApp.View
             DataContext = viewModel;
             this.Loaded += BasePage_Loaded;
             App.StaticPropertyChanged += OnAppPropertyChanged;
+            this.KeyDown += OwnerWindow_KeyDown;
         }
 
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
@@ -66,6 +68,25 @@ namespace BookingApp.View
             NavigationService?.GoBack();
         }
 
+        private void OwnerWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            switch (e.Key)
+            {
+                case Key.RightCtrl:
+                    SaveAccommodation(null, null);
 
+                    break;
+                case Key.LeftCtrl:
+                    CancelButton_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Focus();
+        }
     }
 }

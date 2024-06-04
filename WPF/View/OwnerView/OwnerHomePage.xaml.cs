@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BookingApp.Resources.Language;
 
+
 namespace BookingApp.WPF.View.OwnerView
 {
     /// <summary>
@@ -26,12 +27,14 @@ namespace BookingApp.WPF.View.OwnerView
     /// </summary>
     public partial class OwnerHomePage : Page
     {
+        public List<Button> Buttons { get; } = new List<Button>();
 
         public OwnerHomePage()
         {
             InitializeComponent();
             this.Loaded += BasePage_Loaded;
             App.StaticPropertyChanged += OnAppPropertyChanged;
+            this.KeyDown += OwnerWindow_KeyDown;
         }
 
         private void NavigateToGuestRating_Click(object sender, RoutedEventArgs e)
@@ -60,8 +63,13 @@ namespace BookingApp.WPF.View.OwnerView
             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\AllAccommodationsPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void Forum_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\ForumOwner.xaml", UriKind.RelativeOrAbsolute));
+        }
 
-         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
          protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
          {
              PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -91,5 +99,38 @@ namespace BookingApp.WPF.View.OwnerView
             this.Resources.MergedDictionaries.Add(newResource);
         }
 
+        private void OwnerWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Proverite koji taster je pritisnut
+            switch (e.Key)
+            {
+                case Key.A:
+                    NavigateToRegisterAccommodation_Click(null, null);
+                    
+                    break;
+                case Key.S:
+                    NavigateToStatistics_Click(null, null);
+                    break;
+                case Key.V:
+                    ViewAccommodations_Click(null, null);
+                    break;
+                    case Key.F:
+                    Forum_Click(null, null);
+                   break;
+                case Key.R:
+                    NavigateToGuestRating_Click(null, null);
+                    break;
+                case Key.Z:
+                    NavigateToScheduleRenovation_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Postavite fokus na stranicu
+            this.Focus();
+        }
     }
 }

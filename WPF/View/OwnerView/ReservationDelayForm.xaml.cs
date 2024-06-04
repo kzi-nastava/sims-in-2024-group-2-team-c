@@ -32,9 +32,29 @@ namespace BookingApp.WPF.View.OwnerView
             DataContext = _viewModel;
             this.Loaded += BasePage_Loaded;
             App.StaticPropertyChanged += OnAppPropertyChanged;
-
+            this.KeyDown += OwnerWindow_KeyDown;
         }
 
+        private void OwnerWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Proverite koji taster je pritisnut
+            switch (e.Key)
+            {
+                case Key.RightCtrl:
+                    ApproveButton_Click(null, null);
+                    break;
+                case Key.LeftCtrl:
+                    RejectButton_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Postavite fokus na stranicu
+            this.Focus();
+        }
         private void BasePage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLanguage();

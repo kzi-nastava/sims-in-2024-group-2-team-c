@@ -38,7 +38,8 @@ namespace BookingApp.Model
                 csvValues.Append($"{imagePath};");
             }
             */
-            csvValues = csvValues.Concat(Images).ToArray();
+            
+            //csvValues = csvValues.Concat(Images).ToArray();
             return csvValues;
         }
 
@@ -60,7 +61,7 @@ namespace BookingApp.Model
                 Images.Add(values[i]); 
             }
             */
-            Images = values.Skip(8).ToList();
+            //Images = values.Skip(8).ToList();
         }
     }
 }

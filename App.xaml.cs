@@ -72,7 +72,7 @@ namespace BookingApp
                 }
             }
 
-            MessageBox.Show("Theme changed successfully.");
+       
         }
 
         // Implementacija interfejsa INotifyPropertyChanged

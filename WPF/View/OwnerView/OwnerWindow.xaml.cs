@@ -29,7 +29,6 @@ namespace BookingApp.WPF.View.OwnerView
         {
             InitializeComponent();
             MainFrame.Navigate(new OwnerHomePage());
-         
         }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
@@ -74,46 +73,7 @@ namespace BookingApp.WPF.View.OwnerView
             MainFrame.Navigate(new Uri(pageUri, UriKind.Relative));
         }
 
-
-        /*private void SetPageLanguageBasedOnWindowLanguage(Page page)
-        {
-            string currentLanguage = App.CurrentLanguage;
-
-            string pageLanguage;
-            if (currentLanguage == "\\Resources\\ResourcesLan.xaml")
-            {
-                pageLanguage = "\\Resources\\ResourcesLan.xaml";
-            }
-            else
-            {
-                pageLanguage = "\\Resources\\ResourcesLanSerbian.xaml";
-            }
-
-            var newResource = new ResourceDictionary();
-            newResource.Source = new Uri(pageLanguage, UriKind.Relative);
-
-            if (page.Resources != null)
-            {
-                page.Resources.MergedDictionaries.Clear();
-                page.Resources.MergedDictionaries.Add(newResource);
-            }
-        }
-
-        private Page LoadPageFromUri(string pageUri)
-        {
-            var page = (Page)Application.LoadComponent(new Uri(pageUri, UriKind.Relative));
-            return page;
-        }
-
-        private void NavigateToPage(string pageUri)
-        {
-            Page page = LoadPageFromUri(pageUri);
-            SetPageLanguageBasedOnWindowLanguage(page);
-            MainFrame.Navigate(page);
-        }*/
-
-
-
+     
         //-------PROMENA JEZIKA I TEME------
         private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
          {
