@@ -13,7 +13,6 @@ using BookingApp.Repository;
 using BookingApp.Injector;
 using System.Windows.Shapes;
 using BookingApp.Service.AccommodationServices;
-using System.Windows.Controls;
 
 namespace BookingApp.Service.AccommodationServices
 {
@@ -25,8 +24,8 @@ namespace BookingApp.Service.AccommodationServices
         private readonly AccommodationRate _ratedAccommodation;
         private List<AccommodationRate> _accommodationRates;
 
-        private ReservationService  reservationService;
-        private ReservationRepository reservationRepository ;
+        private ReservationService reservationService;
+        private ReservationRepository reservationRepository;
 
 
         public List<AccommodationRate> AccommodationRates
@@ -49,14 +48,14 @@ namespace BookingApp.Service.AccommodationServices
         }
 
         public AccommodationRateService(GuestReservationDTO selectedReservation)
-         {
+        {
             _repository = Injectorr.CreateInstance<IAccommodationRateRepository>();
 
             reservationRepository = new ReservationRepository();
             _accommodationRates = new List<AccommodationRate>();
             _selectedReservation = selectedReservation;
 
-         }
+        }
 
         public AccommodationRateService(AccommodationRate ratedAccommodation)
         {
@@ -66,8 +65,6 @@ namespace BookingApp.Service.AccommodationServices
             _accommodationRates = new List<AccommodationRate>();
             _ratedAccommodation = ratedAccommodation;
         }
-
-     
 
         public AccommodationRate RateAccommodation(int cleanlinessRating, int correctnessOfTheOwner, string comment, List<string> Images)
         {
@@ -184,10 +181,6 @@ namespace BookingApp.Service.AccommodationServices
             }
         }
 
-    
-
-
-      
     }
 
 }
