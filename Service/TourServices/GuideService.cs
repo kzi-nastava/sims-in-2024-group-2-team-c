@@ -26,6 +26,24 @@ namespace BookingApp.Service.TourServices
         {
             return GuideRepository.GetById(id);
         }
+        public Guide Update(Guide guide)
+        {
+            return GuideRepository.Update(guide);
+        }
+        public List<Guide> GetAll()
+        {
+            return GuideRepository.GetAll();
+        }
+        public Guide GetByUserName(string name)
+        {
+            List<Guide> guides = GetAll();
+            foreach(Guide guide in guides)
+            {
+                if (guide.Username == name)
+                    return guide;
+            }
+            return null;
+        }
         public List<TourInstance> getInstancesById(int id)
         {
             Guide guide = GetById(id);

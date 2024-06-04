@@ -1,4 +1,5 @@
-﻿using BookingApp.WPF.ViewModel.GuideViewModel;
+﻿using BookingApp.View;
+using BookingApp.WPF.ViewModel.GuideViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,17 @@ namespace BookingApp.WPF.View.GuideView
         {
             this.NavigationService?.GoBack();
         }
+        private void QuitJob_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as QuitJob_ViewModel;
+            viewModel.QuitCommand.Execute(null);
+            Window parentWindow = Window.GetWindow(this);
+            parentWindow.Close();
+            SignInForm form = new SignInForm();
+            form.Show();
+            //SignInForm signInForm = new SignInForm();
+            //signInForm.Show();
+        }
+
     }
 }
