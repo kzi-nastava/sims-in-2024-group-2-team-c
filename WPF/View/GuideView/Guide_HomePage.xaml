@@ -179,7 +179,8 @@
 
                 <StackPanel>
                     <Button x:Name="CreateNewTourButton" Content="CREATE NEW TOUR" Style="{StaticResource CustomButtonStyle}" Margin="20,20,20,0" Width="600" Height="30" Click="CreateNewTourButton_Click"/>
-                    <Button x:Name="AllToursViewButton" Content="ALL TOURS VIEW" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="AllToursViewButton_Click"/>
+                    <!--<Button x:Name="AllToursViewButton" Content="ALL TOURS VIEW" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="AllToursViewButton_Click"/>-->
+                    <Button x:Name="AllToursViewButton" Content="COMPLEX TOUR REQUESTS VIEW" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="AllToursViewButton_Click"/>
                     <Button x:Name="FutureToursButton" Content="FUTURE TOURS" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="FutureToursButton_Click"/>
                     <Button x:Name="SeeTourStatisticButton" Content="SEE TOUR STATISTIC" Style="{StaticResource CustomButtonStyle}" Margin="20,35,20,0" Width="600" Height="30" Click="SeeTourStatisticButton_Click"/>
                 </StackPanel>

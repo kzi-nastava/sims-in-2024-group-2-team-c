@@ -64,9 +64,11 @@ namespace BookingApp.Service.TourServices
             //Za sve prijavljene turiste se salju vauceri!
             tourInstanceService.Delete(instance);
         }
-        public void CancelToursByGuide(int guideId)
+        public void CancelToursByGuide(string username)
         {
             List<TourInstance> futureTours = tourInstanceService.GetFutureInstance();
+            Guide guide = guideService.GetByUserName(username);
+            int guideId = guide.Id;
             List<TourInstance> guideInstances = guideService.getInstancesById(guideId);
             foreach(TourInstance ti in guideInstances)
             {

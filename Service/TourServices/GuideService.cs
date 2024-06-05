@@ -1,6 +1,7 @@
 ﻿using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
+using BookingApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,35 @@ namespace BookingApp.Service.TourServices
     {
         public IGuideRepository GuideRepository { get; set; }
         private TourInstanceService tourInstanceService;
+        private readonly IUserRepository userRepository;
         public GuideService() 
         {
             GuideRepository = Injectorr.CreateInstance<IGuideRepository>();
             tourInstanceService = new TourInstanceService();
+            userRepository = new UserRepository();
         }
 
         public Guide GetById(int id)
         {
             return GuideRepository.GetById(id);
+        }
+        public Guide Update(Guide guide)
+        {
+            return GuideRepository.Update(guide);
+        }
+        public List<Guide> GetAll()
+        {
+            return GuideRepository.GetAll();
+        }
+        public Guide GetByUserName(string name)
+        {
+            List<Guide> guides = GetAll();
+            foreach(Guide guide in guides)
+            {
+                if (guide.Username == name)
+                    return guide;
+            }
+            return null;
         }
         public List<TourInstance> getInstancesById(int id)
         {
@@ -34,6 +55,21 @@ namespace BookingApp.Service.TourServices
                 instances.Add(instance);
             }
             return instances;
+        }
+        public List<DateTime> GetUnAvailableTimeSlots(DateTime startDate, DateTime endDate, int guideId)
+        {
+            //List<DateTime> availableSlots = new List<DateTime>();
+            List<DateTime> unavailableSlots = new List<DateTime>();
+            //Guide guide = GetById(guideId);
+            List<TourInstance> instances = tourInstanceService.GetAll();
+            User guide = userRepository.GetUserById(guideId);
+            //foreach(int id in guide.TourInstancesIds)
+            foreach(TourInstance instance in instances)
+            {
+                //TourInstance instance = tourInstanceService.GetById(id);
+                unavailableSlots.Add(instance.Date);
+            }
+            return unavailableSlots;
         }
     }
 }
