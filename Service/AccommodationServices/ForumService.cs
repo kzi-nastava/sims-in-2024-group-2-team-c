@@ -188,6 +188,51 @@ namespace BookingApp.Service.AccommodationServices
             return otherForums;
         }
 
+        public List<ForumDTO> GetAllOtherForumsForOwner(int ownerId)
+        {
+            List<ForumDTO> otherForums = new List<ForumDTO>();
+            List<Forum> forums = _forumRepository.GetAll();
+            List<Accommodation> ownerAccommodations = accommodationRepository.GetAll().Where(a => a.Owner.Id == ownerId).ToList();
+            HashSet<string> addedLocations = new HashSet<string>();
+
+            foreach (Forum forum in forums)
+            {
+                if (forum.User.Id != ownerId)
+                {
+                    Location forumLocation = GetLocationsByForumId(forum.Id);
+                    string location = $"{forumLocation.Country}, {forumLocation.City}";
+
+                    if (!addedLocations.Contains(location) && ownerAccommodations.Any(a => a.Location.Id == forumLocation.Id))
+                    {
+                        var commentsFromGuests = forums
+                            .Where(f => f.Location.Id == forumLocation.Id && f.HasBeenVisited)
+                            .Count();
+
+                        var commentsFromOwners = ownerAccommodations
+                            .Where(a => a.Location.Id == forumLocation.Id)
+                            .Count();
+
+                        bool isVeryUseful = commentsFromGuests >= 3 && commentsFromOwners >= 2;
+
+                        int numberOfComments = CountCommentsForLocation(forumLocation.Id);
+
+                        ForumDTO otherForumDTO = new ForumDTO
+                        {
+                            Id = forum.Id,
+                            Location = location,
+                            NumOfComments = numberOfComments,
+                            IsForumVeryUseful = isVeryUseful
+                        };
+
+                        otherForums.Add(otherForumDTO);
+                        addedLocations.Add(location);
+                    }
+                }
+            }
+
+            return otherForums;
+        }
+
         public string CloseForum(int forumId)
         {
             try
@@ -301,5 +346,42 @@ namespace BookingApp.Service.AccommodationServices
                 throw;
             }
         }
+
+        public void AddNewCommentOwner(ForumDTO selectedForum, string newComment)
+        {
+            try
+            {
+
+                string location = selectedForum.Location;
+                string[] locationParts = location.Split(new[] { ", " }, StringSplitOptions.None);
+                string country = locationParts[0];
+                string city = locationParts[1];
+
+                Location location1 = _locationService.FindLocation(city, country);
+                // Kreiranje objekta Forum
+                var forum = new Forum
+                {
+                    Location = new Location() { Id = location1.Id },
+                    User = new User() { Id = LoggedInUser.Id },
+                    IsForumMine = false,
+                    ForumComment = newComment,
+                    HasBeenVisited = true,
+                    IsForumClosed = false
+                };
+
+                // Čuvanje komentara u bazi
+                _forumRepository.Save(forum);
+
+                MessageBox.Show("Your comment has been successfully added.");
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
+            }
+        }
+
+      
+
     }
 }

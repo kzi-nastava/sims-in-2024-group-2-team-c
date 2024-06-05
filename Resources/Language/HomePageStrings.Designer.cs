@@ -27,8 +27,7 @@ namespace BookingApp.Resources.Language {
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
-        public static string AddNewAccommodation { get; } = "Add New Accommodation";
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal HomePageStrings() {
         }
@@ -64,6 +63,10 @@ namespace BookingApp.Resources.Language {
         /// <summary>
         ///   Looks up a localized string similar to AddNewAccommodation.
         /// </summary>
-        
+        public static string AddNewAccommodation {
+            get {
+                return ResourceManager.GetString("AddNewAccommodation", resourceCulture);
+            }
+        }
     }
 }
