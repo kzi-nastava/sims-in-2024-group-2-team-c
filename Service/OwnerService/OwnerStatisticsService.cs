@@ -13,14 +13,31 @@ namespace BookingApp.Service.OwnerService
         private ReservationDelayService _reservationDelayService;
         private ReservationService _reservationService;
         private List<Reservation> _reservations;
+        private AccommodationRepository _accommodationRepository;
 
         public OwnerStatisticsService()
         {
             _reservationDelayService = new ReservationDelayService();
             _reservationService = new ReservationService();
             _reservations = new List<Reservation>();
+            _accommodationRepository = new AccommodationRepository();
         }
 
+
+        public string GetCityByAccommodationName(string accommodationName)
+        {
+            var accommodation = _accommodationRepository.GetAccommodationByName(accommodationName);
+            if (accommodation != null)
+            {
+                var location = accommodation.Location;
+                return location.City;
+            }
+            else
+            {
+                // Ako smeštaj nije pronađen, vratimo null vrednosti
+                return null;
+            }
+        }
         public Dictionary<int, int> NumberOfReservationsByYear(Accommodation accommodation)
         {
             List<Reservation> reservations = _reservationService.GetAll().Where(reservation => reservation.Accommodation.Name == accommodation.Name).ToList();

@@ -7,43 +7,52 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ForumOwner">
+   
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
-        <!-- Main Content Section -->
-        <StackPanel Grid.Row="1" Margin="20">
-            <TextBlock Text="Forum" FontSize="24" FontWeight="Bold" />
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Select a location" VerticalAlignment="Center" />
-                <ComboBox Width="100" Margin="10,0" HorizontalAlignment="Left">
-                    <ComboBoxItem Content="Novi Sad" />
-                    <ComboBoxItem Content="Beograd" />
-                </ComboBox>
-                <TextBlock Text="You'll only be able to select locations where you have accommodation." VerticalAlignment="Center" FontSize="10"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,0">
-                <TextBlock Text="Leave a comment" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBox Width="200" Height="50"/>
-                <Button Content="Submit" Margin="10,0"/>
-            </StackPanel>
-            <TextBlock Text="User Comments" FontSize="16" FontWeight="Bold" Margin="0,20,0,10"/>
-            <StackPanel Background="White" Margin="0,0,0,10">
-                <TextBlock Text="Beautiful city, everybody should visit at least once in their life!" Margin="10"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                    <CheckBox Content="You can report comments from users who never visited this location." FontSize="10" />
-                    <Button Content="Report" FontSize="10" Margin="10,0"/>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Background="White" Margin="0,0,0,10">
-                <TextBlock Text="Been here 3 times already, and I'll come again :)" Margin="10"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                    <Button Content="Report" FontSize="10" Margin="10,0"/>
-                </StackPanel>
-            </StackPanel>
+        <TextBlock Text="FORUM" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" />
+        <TextBlock Text="Locations" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30" />
+        <ListBox ItemsSource="{Binding OtherForums}" 
+         SelectedItem="{Binding SelectedForum}" 
+         SelectionChanged="Forum_SelectionChanged"
+         Margin="50"
+                 VerticalAlignment="Top" HorizontalAlignment="Left">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Location}" Margin="5" />
+                        <TextBlock Text="{Binding NumOfComments}" Margin="5" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+
+        <!-- Forum details and comments -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Comments" FontWeight="Bold" FontSize="16"/>
+            <ListBox ItemsSource="{Binding Comments}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Username}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ForumComment}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBox Text="{Binding NewComment, UpdateSourceTrigger=PropertyChanged}" 
+                     AcceptsReturn="True" 
+                     Height="100" 
+                     Margin="0,10,0,0"/>
+            <Button Content="Add Comment" Click="AddCommentButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>
