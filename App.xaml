@@ -5,18 +5,12 @@
              StartupUri="WPF/View/SignInForm.xaml">
 
 
-    <!-- StartupUri="WPF/View/GuideView/TourOverview.xaml">-->
-
-
-    <!--StartupUri="View/AccommodationOverview.xaml">-->
-
-    <!--StartupUri="View/ShowTours.xaml"> -->
-      
-              <!--StartupUri="View/RegisterAccommodationForm.xaml">-->
-
-    <!--StartupUri="View/AccommodationOverview.xaml">-->
-
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary Source="/Resources/ResourcesLan.xaml"/> 
+                <ResourceDictionary Source="/Resources/Themes/LightTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

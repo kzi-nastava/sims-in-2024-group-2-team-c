@@ -1,0 +1,52 @@
+﻿<Page x:Class="BookingApp.WPF.View.OwnerView.SuggestionsForAccommodations"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SuggestionsForAccommodations">
+
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Suggestions For New Accommodations" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.ColumnSpan="2"/>
+
+        <!-- Predlozi za popularne lokacije -->
+        <StackPanel Margin="10,50,10,10" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <TextBlock Text="Most Visited Accommodations" FontWeight="Bold" FontSize="16" Margin="0,10,0,10"/>
+            <ItemsControl ItemsSource="{Binding PopularLocations}" HorizontalAlignment="Center" FontSize="15">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Accommodation.Name}" Margin="5"/>
+                      
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Add New Accommodation" Click="AddNewAccommodation_Click" Grid.Column="0"  Width="200" ></Button>
+        </StackPanel>
+
+        <StackPanel Margin="10,50,10,10" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <TextBlock Text="Least Visited Accommodations" FontWeight="Bold" FontSize="16" Margin="0,10,0,10"/>
+            <ItemsControl ItemsSource="{Binding UnpopularLocations}" HorizontalAlignment="Center" FontSize="15">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Accommodation.Name}" Margin="5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <TextBlock Text="You can remove accommodations that are least visited." VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Background="PaleVioletRed"></TextBlock>
+    </Grid>
+</Page>

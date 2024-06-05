@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -21,6 +24,10 @@ namespace BookingApp.Model
         public Dictionary<int, Dictionary<int, int>> ReservationsByMonth { get; set; }
         public Dictionary<int, Dictionary<int, int>> CancellationsByMonth { get; set; }
         public Dictionary<int, Dictionary<int, int>> DelaysByMonth { get; set; }
+
+        public double OccupancyRate { get; set; }
+
+        public string City { get; set; }
 
     }
 }

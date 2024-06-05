@@ -38,6 +38,7 @@ namespace BookingApp.Model
                 csvValues.Append($"{imagePath};");
             }
             */
+            
             csvValues = csvValues.Concat(Images).ToArray();
             return csvValues;
         }

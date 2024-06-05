@@ -100,6 +100,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Resources\ResourcesLan.xaml" />
+    <Page Remove="Resources\ResourcesLanSerbian.xaml" />
+    <Page Remove="Resources\Themes\DarkTheme.xaml" />
+    <Page Remove="Resources\Themes\LightTheme.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\Images\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -145,7 +152,11 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="WPF\ViewModel\OwnerViewModel\" />
+
+    <Folder Include="Service\TourServices\" />
+
 
   </ItemGroup>
 
@@ -211,6 +222,35 @@
     <Resource Include="Resources\Tutorials\tutorial1.mp4" />
     <Resource Include="Resources\Tutorials\tutorial2.mp4" />
     <Resource Include="Resources\Images\touristPdf-picture.png" />
+    <Resource Include="Resources\ResourcesLan.xaml" />
+    <Resource Include="Resources\ResourcesLanSerbian.xaml" />
+    <Resource Include="Resources\Themes\DarkTheme.xaml" />
+    <Resource Include="Resources\Themes\LightTheme.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Language\HomePageStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HomePageStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Language\HomePageStringsSrpski.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HomePageStringsSrpski.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Language\HomePageStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomePageStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Language\HomePageStringsSrpski.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomePageStringsSrpski.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+
   </ItemGroup>
 
 </Project>

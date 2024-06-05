@@ -1,6 +1,7 @@
 ﻿using BookingApp.Repository;
 using BookingApp.Service.OwnerService;
 using BookingApp.View;
+using BookingApp;
 using BookingApp.WPF.ViewModel.OwnerViewModel;
 using System;
 using System.Collections.Generic;
@@ -31,23 +32,82 @@ namespace BookingApp.WPF.View.OwnerView
             InitializeComponent();
             _viewModel = new OwnerProfileViewModel();
             DataContext = _viewModel;
+            this.KeyDown += OwnerWindow_KeyDown;
         }
         private void NotificationsAndRequests_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\ReservationDelayForm.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void LogOut(object sender, RoutedEventArgs e)
+        private void AverageRR_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.LogOut();
-            Application.Current.Shutdown();
-            // Otvori SignInForm prozor
-            //var signInFormWindow = new SignInForm();
-            //signInFormWindow.Show();
-     
-            // Zatvori aplikaciju samo
+            this.NavigationService.Navigate(new Uri("WPF\\View\\OwnerView\\AccommodationReportView.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                
+                SignInForm signInForm = new SignInForm();
+                signInForm.Show();
+                
+                Window parentWindow = Window.GetWindow(this);
+                if (parentWindow != null)
+                {
+                    parentWindow.Close();
+                }
+            }
+        }
+
+        private void OwnerWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Proverite koji taster je pritisnut
+            switch (e.Key)
+            {
+                case Key.L:
+                    LogOut_Click(null, null);
+                    break;
+                case Key.A:
+                    AverageRR_Click(null, null);
+                    break;
+                case Key.N:
+                    NotificationsAndRequests_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Postavite fokus na stranicu
+            this.Focus();
+        }
+
+
+        private void ChangeLanguageToSerbian_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChangeLanguage("/Resources/ResourcesLanSerbian.xaml");
+        }
+
+        private void ChangeLanguageToEnglish_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChangeLanguage("/Resources/ResourcesLan.xaml");
+        }
+
+        private void ChangeThemeToLight_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChangeTheme("/Resources/Themes/LightTheme.xaml");
+        }
+
+        private void ChangeThemeToDark_Click(object sender, RoutedEventArgs e)
+        {
+            App.ChangeTheme("/Resources/Themes/DarkTheme.xaml");
+        }
+
+
+
     }
 }

@@ -73,8 +73,11 @@ namespace BookingApp.Injector
 
             { typeof(IRenovationAvailableDateRepository), new RenovationAvailableDateRepository() },
 
-            { typeof(IGuestReservationRepository), new GuestReservationRepository() }
+            { typeof(IGuestReservationRepository), new GuestReservationRepository() },
 
+
+            { typeof(IForumRepository), new ForumRepository() }
+            
 
         };
 

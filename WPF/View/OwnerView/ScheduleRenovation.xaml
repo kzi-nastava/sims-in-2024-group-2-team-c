@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.OwnerView"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800" FocusManager.IsFocusScope="True" Focusable="True" Loaded="Page_Loaded"
       Title="ScheduleRenovation">
 
-    <Grid  Background="LightBlue">
+    <Grid  Background="Transparent" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -17,27 +17,28 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Schedule a Renovation" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
+        <TextBlock Text="{DynamicResource ScheduleRenovationTitle}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="0"/>
 
-        <TextBlock Text="Choose an Accommodation" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,210,10" FontSize="20"/>
+        <TextBlock Text="{DynamicResource ChooseAccommodationText}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,210,10" FontSize="20"/>
         <ComboBox x:Name="accommodationsComboBox" 
           SelectedItem="{Binding SelectedAccommodation}" 
           ItemsSource="{Binding Accommodations}" 
           DisplayMemberPath="Name" 
-          Margin="400,60,300,10"  
+          Margin="430,60,270,10"  
           HorizontalAlignment="Center" 
-          FontSize="15" />
+          FontSize="15"
+          Width="100"        />
 
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Choose Start Date" HorizontalAlignment="Center" Margin="0,0,150,0" FontSize="20"/>
-        <DatePicker x:Name="startDatePicker" Grid.Row="1" Margin="420,10,300,10" VerticalAlignment="Top"  HorizontalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ChooseStartDateText}" HorizontalAlignment="Center" Margin="0,0,150,0" FontSize="20" VerticalAlignment="Bottom"/>
+        <DatePicker x:Name="startDatePicker" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="300,5,140,5" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Choose End Date" HorizontalAlignment="Center" Margin="0,0,150,0" FontSize="20"/>
-        <DatePicker x:Name="endDatePicker" Grid.Row="2" Margin="420,10,300,10" VerticalAlignment="Top"  HorizontalAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource ChooseEndDateText}" HorizontalAlignment="Center" Margin="0,0,150,0" FontSize="20" VerticalAlignment="Center"/>
+        <DatePicker x:Name="endDatePicker" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="300,5,140,5" />
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Duration" HorizontalAlignment="Center" Margin="5,0,110,0" FontSize="20"></Label>
-        <TextBox Grid.Row="3" Grid.Column="0" x:Name="Duration" Text="{Binding Duration}" Margin="420,10,300,10" VerticalAlignment="Top"  HorizontalAlignment="Center" Width="40"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource DurationText}" HorizontalAlignment="Center" Margin="5,0,110,0" FontSize="20" VerticalAlignment="Top"></Label>
+        <TextBox Grid.Row="3" Grid.Column="0" x:Name="Duration" Text="{Binding Duration}" Margin="430,10,320,10" VerticalAlignment="Top"  HorizontalAlignment="Center" Width="50"/>
 
-        <Button Content="Submit" Background="Green" Grid.Row="4" Grid.Column="0"  Margin="100,10,225,10" Width="70" Height="30" Click="SaveRenovation" HorizontalAlignment="Right"></Button>
+        <Button Content="{DynamicResource SubmitButtonText}" Background="Green" Grid.Row="4" Grid.Column="0"  Margin="100,10,225,10" Width="70" Height="30" Click="SaveRenovation" HorizontalAlignment="Right"></Button>
     </Grid>
 </Page>
