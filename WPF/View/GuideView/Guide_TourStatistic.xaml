@@ -23,7 +23,7 @@
                 <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
                     <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
                 </Button>
-                <Button Click="GenerateReport_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding GenerateReportCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+                <Button Style="{StaticResource CustomButtonStyle}"  Command ="{Binding GenerateReportCommand}" Height="30" Width="200" HorizontalAlignment="Left">
                     <TextBlock Text="GENERATE TOURISTS REPORT" FontSize="14"/>
                 </Button>
             </StackPanel>

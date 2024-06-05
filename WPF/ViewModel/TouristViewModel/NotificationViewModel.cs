@@ -135,7 +135,7 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
                TouristRequestDTO request = _notificationService.GetAcceptedRequest(requestId);
                 if (request != null)
                 {
-                    _mainViewModel.ExecuteSingleTourView(request);
+                    _mainViewModel.ExecuteSingleTourView1(request);
                 }
 
             }

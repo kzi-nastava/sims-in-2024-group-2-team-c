@@ -38,8 +38,8 @@ namespace BookingApp.WPF.ViewModel.TouristViewModel
             if (value is int)
             {
                 int intValue = (int)value;
-                if (intValue < Min) return new ValidationResult(false, "Value too small. Choose a number from 1-5");
-                if (intValue > Max) return new ValidationResult(false, "Value too large. Choose a number from 1-5");
+                if (intValue < Min) return new ValidationResult(false, $"Value too small. Choose a number from {Min}-{Max}");
+                if (intValue > Max) return new ValidationResult(false, $"Value too large. Choose a number from {Min}-{Max}");
                 return new ValidationResult(true, null);
             }
             else

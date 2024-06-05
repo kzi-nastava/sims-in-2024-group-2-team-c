@@ -1,7 +1,9 @@
-﻿using BookingApp.Injector;
+﻿using BookingApp.DTO;
+using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,12 @@ namespace BookingApp.Service.TourServices
             //tourLocationService = new(new LocationRepository());
             //tourReservationService = new(new TourReservationRepository());
         }
+
+        public List<Tourist> GetAll()
+        {
+            return iTouristRepository.GetAll();
+        }
+
         public Tourist GetById(int id)
         {
             return iTouristRepository.GetById(id);
@@ -40,6 +48,11 @@ namespace BookingApp.Service.TourServices
         {
             Tourist tourist = iTouristRepository.GetById(id);
             tourist.Active = true;
+            iTouristRepository.Update(tourist);
+        }
+
+        public void Update(Tourist tourist)
+        {
             iTouristRepository.Update(tourist);
         }
 
@@ -63,5 +76,6 @@ namespace BookingApp.Service.TourServices
 
         }
 
+       
     }
 }

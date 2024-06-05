@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      xmlns:val="clr-namespace:BookingApp.WPF.ViewModel.TouristViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="430" Background="White"
       Title="TourRequestCreationView">
@@ -98,9 +99,11 @@
                     <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
+                    
+                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="CHOOSE DATE INTERVAL"  Margin="10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Grid.Row="1" Text="Start date must be before end date"  Margin="10" VerticalAlignment="Center" FontSize="13" FontWeight="Normal"/>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Start Date" Margin="15" FontSize="15"></TextBlock>
                             <TextBlock Text="End Date" Margin="15" FontSize="15"></TextBlock>
@@ -126,17 +129,42 @@
 
 
             <Border Grid.Row="5" Background="#88c97f" BorderBrush="#40613c" BorderThickness="2" Margin="20,10,20,10">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="NUMBER OF PEOPLE"  Margin="10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="NUMBER OF PEOPLE"  Margin="10" VerticalAlignment="Center" FontSize="15" FontWeight="Medium"/>
-                    <TextBox Grid.Column="1" x:Name="NumberOfPeopleTextBox" Margin="10" Width="40" Height="20"/>
-                    <Button Grid.Column="2" Content="Search"  Width="50" Height="20" Margin="10,10,40,10" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=NumberOfPeopleTextBox}"/>
-                </Grid>
+                        <TextBox Grid.Column="1" x:Name="NumberOfPeopleTextBox" Height="20" Width="40" Margin="10">
+                            <TextBox.Text>
+                                <Binding Path="PeopleNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" TargetNullValue="">
+                                    <Binding.ValidationRules>
+                                        <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
+                                        <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="7" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+
+                        <Button Grid.Column="2" Content="Search"  Width="50" Height="20" Margin="10,10,40,10" Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=NumberOfPeopleTextBox}"/>
+                    </Grid>
+
+                    <AdornerDecorator Grid.Row="1">
+                        <TextBlock Foreground="Red" Margin="20,0,20,10">
+                            <TextBlock.Text>
+                                <Binding ElementName="NumberOfPeopleTextBox" Path="(Validation.Errors)">
+                                    <Binding.Converter>
+                                        <val:ValidationErrorsConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </AdornerDecorator>
+                </StackPanel>
             </Border>
 
 
@@ -146,24 +174,32 @@
                     <DataTemplate>
                         <Border Background="#88c97f" BorderBrush="#40613c" BorderThickness="2" Margin="0,0,0,10">
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
 
-                                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" Margin="10">
-                                    <TextBlock Grid.Row="0" Text="First Name:" Margin="10"  VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" Text="Last Name:" Margin="10" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Age:" Margin="10" VerticalAlignment="Center"/>
-                                </StackPanel>
+                                <TextBlock Text="ADD A PERSON" Foreground="DarkGreen" FontSize="15" HorizontalAlignment="Center" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10"></TextBlock>
+                                
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" Margin="10">
+                                        <TextBlock Grid.Row="0" Text="First Name:" Margin="10"  VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="Last Name:" Margin="10" VerticalAlignment="Center"/>
+                                     <!--   <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Age:" Margin="10" VerticalAlignment="Center"/>  -->
+                                    </StackPanel>
 
 
-                                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="10">
-                                    <TextBox Grid.Row="1" Text="{Binding FirstName, Mode=TwoWay}" Margin="10" Width="50"/>
-                                    <TextBox Grid.Column="3" Text="{Binding LastName, Mode=TwoWay}" Margin="10" Width="50"/>
-                                    <TextBox Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Age, Mode=TwoWay}" Margin="10" Width="50"/>
-                                </StackPanel>
-
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Margin="10">
+                                        <TextBox Grid.Row="1" Text="{Binding FirstName, Mode=TwoWay}" Margin="10" Width="50"/>
+                                        <TextBox Grid.Column="3" Text="{Binding LastName, Mode=TwoWay}" Margin="10" Width="50"/>
+                                       <!-- <TextBox Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Age, Mode=TwoWay}" Margin="10" Width="50"/>  -->
+                                    </StackPanel>
+                                </Grid>
                                
                             </Grid>
                         </Border>

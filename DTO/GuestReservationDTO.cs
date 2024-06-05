@@ -23,6 +23,8 @@ namespace BookingApp.DTO
 
         public DateTime CheckOut { get; set; }
 
+        public String OwnerUsername { get; set; }
+
 
 
 

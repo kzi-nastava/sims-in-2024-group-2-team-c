@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using BookingApp.WPF.View.GuestView;
+using BookingApp.Service.TourServices;
 
 namespace BookingApp.View
 {
@@ -17,6 +18,7 @@ namespace BookingApp.View
     {
 
         private readonly UserRepository _repository;
+        private readonly GuideService _guideService;
 
         private string _username;
         public string Username
@@ -44,6 +46,7 @@ namespace BookingApp.View
             InitializeComponent();
             DataContext = this;
             _repository = new UserRepository();
+            _guideService = new GuideService();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -85,12 +88,21 @@ namespace BookingApp.View
                     }
                     else if (user.Role == UserRole.guide)
                     {
+                        Guide g = _guideService.GetByUserName(Username);
+                        if(g.resigned == false)
+                        {
+                            mainGuideWindow.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ne mozete se ulogovati, niste vise vodic.");
+                        }
                         //homePage.Show();
                         //tourOverview.Show();
                         //futureToursOverview.Show();
                         //tourStatisticView.Show();
                         //reviewsOverview.Show();
-                        mainGuideWindow.Show();
+                        //mainGuideWindow.Show();
                     }
                     else if (user.Role == UserRole.tourist)
                     {

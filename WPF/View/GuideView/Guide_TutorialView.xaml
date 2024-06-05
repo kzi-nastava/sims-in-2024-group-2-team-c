@@ -1,0 +1,56 @@
+﻿<Page x:Class="BookingApp.WPF.View.GuideView.Guide_TutorialView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.GuideView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Guide_TutorialView">
+
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Click="Back_Click" Style="{StaticResource CustomButtonStyle}" HorizontalAlignment="Left"  Height="30" Width="200">
+            <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
+        </Button>
+
+        <TextBlock Grid.Row ="1" Text="TUTORIAL" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,30 "/>
+
+        <TextBlock Text="In this tutorial we are demonstrating how easily you can use the app. If you have any further question feel free to contact us."
+                   TextWrapping="Wrap" FontWeight="Bold" FontSize="18" TextAlignment="Center" Margin="20,10,20,0" HorizontalAlignment="Center" Grid.Row="2"/>
+
+        <MediaElement x:Name="TutorialVideo" Grid.Row="3" Source="/Resources/Tutorials/tutorial2.mp4" Width="600" Height="300" HorizontalAlignment="Center" Margin="0,10,0,10"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="4" Margin="0,0,0,0">
+            <Button Click="Play_Click" Style="{StaticResource CustomButtonStyle}" Height="30" Width="200">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/play3.png" HorizontalAlignment="Center"/>
+                    <TextBlock Text="PLAY" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Click="Pause_Click" Style="{StaticResource CustomButtonStyle}" Height="30" Width="200">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/pause2.png" HorizontalAlignment="Center"/>
+                    <TextBlock Text="PAUSE" HorizontalAlignment="Center"/>
+                </StackPanel> 
+            </Button>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

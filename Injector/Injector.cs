@@ -26,10 +26,10 @@ namespace BookingApp.Injector
             { typeof(ITourReviewsRepository), new TourReviewsRepository() },
             { typeof(ITourVoucherRepository), new TourVoucherRepository() },
             { typeof(ITourReservationRepository), new TourReservationRepository() },
-            // { typeof(ITourService), new TourService() }
+             { typeof(IRequestsForComplexTourRepository), new RequestsForComplexToursRepository() },
 
             { typeof(ITourRequestNotificationRepository), new TourRequestNotificationRepository() },
-            // { typeof(IAccommodationService), new AccommodationService() }
+            { typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository() },
 
             { typeof(ILocationRepository), new LocationRepository() },
            // { typeof(ITourRepository), new TourRepository() },
@@ -41,7 +41,7 @@ namespace BookingApp.Injector
 
            // {typeof(ITourReviewsRepository), new TourReviewsRepository() },
             {typeof(ITouristNotificationRepository), new TouristNotificationRepository() },
-            //{typeof(ITourRepository), new TourRepository() },
+            {typeof(IGuideRepository), new GuideRepository() },
             //{typeof(ITourInstanceRepository), new TourInstanceRepository() },
             {typeof(ITouristsRepository), new TouristRepository() },
             {typeof(IPeopleInfoRepository),new PeopleInfoRepository()},

@@ -27,10 +27,34 @@
     <None Remove="Resources\Images\accommodation-sheraton.jpg" />
     <None Remove="Resources\Images\accommodation-silvia.jpg" />
     <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\Amsterdam1.jpg" />
+    <None Remove="Resources\Images\Amsterdam2.jpg" />
+    <None Remove="Resources\Images\Athens1.jpg" />
+    <None Remove="Resources\Images\Athens2.jpg" />
+    <None Remove="Resources\Images\Barca1.jpg" />
+    <None Remove="Resources\Images\Barca2.jpg" />
+    <None Remove="Resources\Images\Barca3.jpg" />
+    <None Remove="Resources\Images\Barca4.jpg" />
     <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\Berlin1.jpg" />
+    <None Remove="Resources\Images\Berlin2.jpg" />
+    <None Remove="Resources\Images\Berlin3.jpg" />
+    <None Remove="Resources\Images\Cairo1.jpg" />
+    <None Remove="Resources\Images\Cairo2.jpg" />
     <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\Dubai1.jpg" />
+    <None Remove="Resources\Images\Dubai2.jpg" />
+    <None Remove="Resources\Images\Dubai3.jpg" />
     <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\Flo1.jpg" />
+    <None Remove="Resources\Images\Flo2.jpg" />
+    <None Remove="Resources\Images\Football1.jpg" />
+    <None Remove="Resources\Images\Football2.jpg" />
     <None Remove="Resources\Images\gallery-image-icon.png" />
+    <None Remove="Resources\Images\Hollywood1.jpg" />
+    <None Remove="Resources\Images\Hollywood2.jpg" />
+    <None Remove="Resources\Images\Manchester3.jpg" />
+    <None Remove="Resources\Images\Manchester4.jpg" />
     <None Remove="Resources\Images\play.png" />
     <None Remove="Resources\Images\profileG.jpg" />
     <None Remove="Resources\Images\home.png" />
@@ -42,8 +66,20 @@
     <None Remove="Resources\Images\on marker.png" />
     <None Remove="Resources\Images\on tourist.png" />
     <None Remove="Resources\Images\on-tour-request.png" />
+    <None Remove="Resources\Images\Rio1.jpg" />
+    <None Remove="Resources\Images\Rio2.jpg" />
+    <None Remove="Resources\Images\Stock.jpg" />
+    <None Remove="Resources\Images\Stock2.jpg" />
+    <None Remove="Resources\Images\Sydney1.jpg" />
+    <None Remove="Resources\Images\Sydney2.png" />
+    <None Remove="Resources\Images\Sydney3.png" />
+    <None Remove="Resources\Images\Tokyo1.jpg" />
+    <None Remove="Resources\Images\Tokyo2.jpg" />
+    <None Remove="Resources\Images\Toronto1.jpg" />
+    <None Remove="Resources\Images\Toronto2.jpg" />
     <None Remove="Resources\Images\tour exit.png" />
     <None Remove="Resources\Images\tour-request.png" />
+    <None Remove="Resources\Images\tourist-next.png" />
     <None Remove="Resources\Images\tourist-notification.png" />
     <None Remove="Resources\Images\tourist-user.png" />
     <None Remove="Resources\Images\tourist.png" />
@@ -57,19 +93,52 @@
     <None Remove="Resources\Images\icons8-star-30.png" />
     <None Remove="Resources\Images\icons8-user-64.png" />
     <None Remove="Resources\Images\statisticICON.png" />
+    <None Remove="Resources\Images\touristPdf-picture.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Tutorials\tutorial1.mp4" />
+    <None Remove="Resources\Tutorials\tutorial2.mp4" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Resources\Images\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Amsterdam1.jpg" />
+    <Content Include="Resources\Images\Amsterdam2.jpg" />
+    <Content Include="Resources\Images\Athens1.jpg" />
+    <Content Include="Resources\Images\Athens2.jpg" />
+    <Content Include="Resources\Images\Barca1.jpg" />
+    <Content Include="Resources\Images\Barca2.jpg" />
+    <Content Include="Resources\Images\Barca3.jpg" />
+    <Content Include="Resources\Images\Barca4.jpg" />
+    <Content Include="Resources\Images\Berlin1.jpg" />
+    <Content Include="Resources\Images\Berlin2.jpg" />
+    <Content Include="Resources\Images\Berlin3.jpg" />
+    <Content Include="Resources\Images\Cairo1.jpg" />
+    <Content Include="Resources\Images\Cairo2.jpg" />
     <Content Include="Resources\Images\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Dubai1.jpg" />
+    <Content Include="Resources\Images\Dubai2.jpg" />
+    <Content Include="Resources\Images\Dubai3.jpg" />
     <Content Include="Resources\Images\edit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Flo1.jpg" />
+    <Content Include="Resources\Images\Flo2.jpg" />
+    <Content Include="Resources\Images\Football1.jpg" />
+    <Content Include="Resources\Images\Football2.jpg" />
+    <Content Include="Resources\Images\Hollywood1.jpg" />
+    <Content Include="Resources\Images\Hollywood2.jpg" />
+    <Content Include="Resources\Images\Rio1.jpg" />
+    <Content Include="Resources\Images\Rio2.jpg" />
+    <Content Include="Resources\Images\Stock.jpg" />
+    <Content Include="Resources\Images\Stock2.jpg" />
+    <Content Include="Resources\Images\Sydney2.png" />
+    <Content Include="Resources\Images\Sydney3.png" />
+    <Content Include="Resources\Images\Tokyo1.jpg" />
+    <Content Include="Resources\Images\Tokyo2.jpg" />
     <Content Include="Resources\Images\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -77,11 +146,11 @@
 
   <ItemGroup>
     <Folder Include="WPF\ViewModel\OwnerViewModel\" />
-    <Folder Include="Service\TourServices\" />
 
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
   </ItemGroup>
 
@@ -104,10 +173,13 @@
     <Resource Include="Resources\Images\accommodation-sara.jpg" />
     <Resource Include="Resources\Images\accommodation-sheraton.jpg" />
     <Resource Include="Resources\Images\accommodation-silvia.jpg" />
+    <Resource Include="Resources\Images\Barcelona.jpg" />
     <Resource Include="Resources\Images\bell.png" />
     <Resource Include="Resources\Images\gallery-image-icon.png" />
     <Resource Include="Resources\Images\home.png" />
     <Resource Include="Resources\Images\Manchester2.jpg" />
+    <Content Include="Resources\Images\Manchester3.jpg" />
+    <Content Include="Resources\Images\Manchester4.jpg" />
     <Resource Include="Resources\Images\map-marker.png" />
     <Resource Include="Resources\Images\marker.png" />
     <Resource Include="Resources\Images\on bell.png" />
@@ -115,8 +187,12 @@
     <Resource Include="Resources\Images\on marker.png" />
     <Resource Include="Resources\Images\on tourist.png" />
     <Resource Include="Resources\Images\on-tour-request.png" />
+    <Content Include="Resources\Images\Toronto1.jpg" />
+    <Content Include="Resources\Images\Toronto2.jpg" />
+    <Content Include="Resources\Images\Sydney1.jpg" />
     <Resource Include="Resources\Images\tour exit.png" />
     <Resource Include="Resources\Images\tour-request.png" />
+    <Resource Include="Resources\Images\tourist-next.png" />
     <Resource Include="Resources\Images\tourist-notification.png" />
     <Resource Include="Resources\Images\tourist-user.png" />
     <Resource Include="Resources\Images\tourist.png" />
@@ -132,6 +208,9 @@
     <Resource Include="Resources\Images\icons8-star-30.png" />
     <Resource Include="Resources\Images\icons8-user-64.png" />
     <Resource Include="Resources\Images\statisticICON.png" />
+    <Resource Include="Resources\Tutorials\tutorial1.mp4" />
+    <Resource Include="Resources\Tutorials\tutorial2.mp4" />
+    <Resource Include="Resources\Images\touristPdf-picture.png" />
   </ItemGroup>
 
 </Project>

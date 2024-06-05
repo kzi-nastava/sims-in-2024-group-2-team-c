@@ -12,9 +12,11 @@ namespace BookingApp.Model
     {
 
         public int Id { get; set; }
-        public int TourId { get; set;}
+        public int TourId { get; set; }
 
-        public int TouristId {  get; set; }
+        public bool IsUniversal { get; set; }
+
+        public int TouristId { get; set; }
 
         public DateTime ExpirationDate { get; set; }
 
@@ -22,18 +24,19 @@ namespace BookingApp.Model
         public TourVoucher() { }
 
 
-        public TourVoucher(int id, int tourId, int touristId, DateTime expirationDate)
+        public TourVoucher( int tourId, int touristId, DateTime expirationDate, bool isUniversal)
         {
-            Id = id;
+           
             TourId = tourId;
             TouristId = touristId;
             ExpirationDate = expirationDate;
+            IsUniversal = isUniversal;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues = { Id.ToString(), TourId.ToString(), TouristId.ToString(),
-                ExpirationDate.ToString("dd.MM.yyyy. HH:mm:ss") };
+                ExpirationDate.ToString("dd.MM.yyyy. HH:mm:ss"), IsUniversal.ToString() };
             return csvValues;
         }
 
@@ -44,6 +47,7 @@ namespace BookingApp.Model
             TouristId = Convert.ToInt32(values[2]);
             //ExpirationDate = DateTime.Parse(values[3]);
             ExpirationDate = DateTime.ParseExact(values[3].Trim(), "dd.MM.yyyy. HH:mm:ss", CultureInfo.InvariantCulture);
+            IsUniversal = Convert.ToBoolean(values[4]);
         }
     }
 }

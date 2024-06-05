@@ -3,6 +3,7 @@ using BookingApp.Injector;
 using BookingApp.Interfaces;
 using BookingApp.Model;
 using BookingApp.Repository;
+using BookingApp.WPF.View.TouristView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,24 @@ namespace BookingApp.Service.TourServices
            _tourVoucherRepository.Save(tourVoucher);
         }
 
+        public void Delete(TourVoucher tourVoucher)
+        {
+            _tourVoucherRepository.Delete(tourVoucher);
+        }
+
         public List<TouristVoucherDTO> GetVouchersByTouristId(int touristId)
         {
-
-            List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
-            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == touristId).ToList();
+            List<TourVoucher> filteredVouchers = GetByTouristId(touristId);
             List<TouristVoucherDTO> vouchersDTO = FilterVouchers(filteredVouchers);
 
             return vouchersDTO;
         }
-
+        public List<TourVoucher> GetByTouristId(int touristId) 
+        {
+            List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
+            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == touristId).ToList();
+            return filteredVouchers;
+        }
 
         private List<TouristVoucherDTO> FilterVouchers(List<TourVoucher> filteredVouchers)
         {
@@ -47,7 +56,8 @@ namespace BookingApp.Service.TourServices
                 TourId = voucher.TourId,
                 TouristId = voucher.TouristId,
                 ExpirationDate = voucher.ExpirationDate,
-                TourName = tourService.GetTourNameById(voucher.TourId)
+                TourName = tourService.GetTourNameById(voucher.TourId),
+                IsUniversal = voucher.IsUniversal
             }).ToList();
         }
 
@@ -69,28 +79,34 @@ namespace BookingApp.Service.TourServices
                 }
             }
         }
-
-
-        public List<TouristVoucherDTO> GetVouchersByTourId(int tourId)
+        public bool TouristContainVoucher(int touristsId, Tour tour)
         {
-            // Retrieve all vouchers from the repository
+            List<TourVoucher> touristsVouchers = GetByTouristId(touristsId);
+            foreach(TourVoucher voucher in touristsVouchers)
+            {
+                if(voucher.TourId == tour.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public List<TourVoucher> GetVouchersByTourId(int tourId)
+        {
+            
             List<TourVoucher> allVouchers = _tourVoucherRepository.GetAll();
 
-            // Filter vouchers based on the given tourId
-            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TourId == tourId).ToList();
 
-            // Map the filtered list of TourVoucher to TouristVoucherDTO
-            List<TouristVoucherDTO> vouchersDTO = filteredVouchers.Select(voucher => new TouristVoucherDTO
-            {
-                TourId = voucher.TourId,
-                TouristId = voucher.TouristId,
-                ExpirationDate = voucher.ExpirationDate,
-                // Get the tour name using the tour repository
-                TourName = tourService.GetTourNameById(voucher.TourId)
-            }).ToList();
+            List<TourVoucher> filteredVouchers = allVouchers.Where(v => v.TouristId == LoggedInUser.Id && (v.TourId == tourId || v.IsUniversal)).ToList();
 
-            // Return the list of TouristVoucherDTO
-            return vouchersDTO;
+            return filteredVouchers;
+        }
+
+        public void CreateUniversalTourVoucher(Tourist t) { 
+            
+            TourVoucher voucher = new TourVoucher(0,t.Id, DateTime.Now.AddMonths(6),true);
+            Send(voucher);
         }
 
 

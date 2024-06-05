@@ -25,11 +25,11 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}"  Command ="{Binding BackCommand}" Height="30" Width="200" HorizontalAlignment="Left">
+            <Button Click="Back_Click" Style="{StaticResource CustomButtonStyle}" Height="30" Width="200" HorizontalAlignment="Left">
                 <TextBlock Text="&lt;&lt; BACK" FontSize="14"/>
             </Button>
 
-            <TextBlock Text="TOUR STATISTIC" Grid.Row="1" FontWeight="Bold" Margin="5"/>
+            <TextBlock Text="TOUR STATISTIC" Grid.Row="1" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" Margin ="30,0,0,30 "/>
 
             <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="Black" StrokeThickness="1" Grid.Row="2"/>
 
@@ -40,13 +40,13 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Vertical" Grid.Column="0">
-                    <ComboBox Margin="5" Name="LocationComboBox" VerticalAlignment="Top" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}">
+                    <ComboBox Margin="10" Name="LocationComboBox" VerticalAlignment="Top" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}">
                     </ComboBox>
-                    <ComboBox Margin="5" Name="LanguageComboBox" VerticalAlignment="Top" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
+                    <ComboBox Margin="10" Name="LanguageComboBox" VerticalAlignment="Top" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}">
                     </ComboBox>
-                    <ComboBox Margin="5" Name="YearComboBox" VerticalAlignment="Top" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"/>
+                    <ComboBox Margin="10" Name="YearComboBox" VerticalAlignment="Top" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}"/>
                     <!-- Button SEARCH -->
-                    <Button Content="SEARCH" Click="Search_Click" Command ="{Binding SearchCommand}" Grid.Column="1" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <Button Content="SEARCH" Click="Search_Click" Style="{StaticResource CustomButtonStyle}" Height="30" Width="100" Command ="{Binding SearchCommand}" Grid.Column="1" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right"/>
                 </StackPanel>
                 <!-- YearListBox -->
                 <ListView x:Name="CombinedListBox" Grid.Column="1" Margin="5" ItemsSource="{Binding TourRequests}" Visibility="Visible">
@@ -79,7 +79,7 @@
                             <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
                             <TextBlock Text="{Binding NumberOfRequestsByLocation}" Margin="5,20,0,0"/>
                         </StackPanel>
-                        <Button Content="CREATE TOUR" Command="{Binding CreateTourLocationCommand}" Click="CreateTourLocation_Click" Margin="5" HorizontalAlignment="Right"/>
+                        <Button Content="CREATE TOUR" Style="{StaticResource CustomButtonStyle}" Height="30" Width="100" Command="{Binding CreateTourLocationCommand}" Click="CreateTourLocation_Click" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -94,7 +94,7 @@
                             <TextBlock Text="NUMBER OF REQUESTS: " FontWeight="Bold" Margin="10,20,0,0"/>
                             <TextBlock Text="{Binding NumberOfRequestsByLanguage}" Margin="5,20,0,0"/>
                         </StackPanel>
-                        <Button Content="CREATE TOUR" Command="{Binding CreateTourLanguageCommand}" Click="CreateTourLanguage_Click" Margin="5" HorizontalAlignment="Right"/>
+                        <Button Content="CREATE TOUR" Style="{StaticResource CustomButtonStyle}" Height="30" Width="100" Command="{Binding CreateTourLanguageCommand}" Click="CreateTourLanguage_Click" Margin="5" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </GroupBox>
             </Grid>

@@ -167,6 +167,7 @@ namespace BookingApp.View
             TourOverview tourOverviewWindow = new TourOverview();
             tourOverviewWindow.Show();
             Close();
+            //this.NavigationService.Navigate(tourOverviewWindow);
         }
 
         private void ViewKeyPointsButton_Click(object sender, RoutedEventArgs e)

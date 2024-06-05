@@ -128,7 +128,7 @@ namespace BookingApp.Repository
             return _locations.FirstOrDefault(l => l.City.Equals(cityName, StringComparison.OrdinalIgnoreCase));
         }
 
-
+        
 
     }
 }

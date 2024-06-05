@@ -31,11 +31,20 @@ namespace BookingApp.WPF.View.GuideView
             viewModel = new TourRequests_ViewModel();
             DataContext = viewModel;
         }
-        /*private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.AcceptTourRequestCommand.Execute(requestsView.SelectedItem);
+            //viewModel.AcceptTourRequestCommand.Execute(requestsView.SelectedItem);
+            var MainViewModel = DataContext as TourRequests_ViewModel;
+            MainViewModel.AcceptRequest();
+            AcceptingTourRequest_ViewModel viewModel = new AcceptingTourRequest_ViewModel
+            {
+                TourRequest = MainViewModel.SelectedTourRequest
+            };
+            Guide_AcceptingTourRequest acceptTourPage = new Guide_AcceptingTourRequest();
+            acceptTourPage.DataContext = viewModel;
+            this.NavigationService.Navigate(acceptTourPage);
 
-        }*/
+        }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();

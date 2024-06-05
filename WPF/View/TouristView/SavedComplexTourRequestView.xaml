@@ -1,0 +1,34 @@
+﻿<Page x:Class="BookingApp.WPF.View.TouristView.SavedComplexTourRequestView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.TouristView"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430" Background="White"
+      Title="SavedComplexTourRequestView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="170"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Row="0" Background="White" BorderBrush="Black" BorderThickness="2" Margin="20,30" Width="350">
+            <TextBlock Text="Your complex tour request has been created" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green"  FontSize="15" FontWeight="SemiBold"></TextBlock>
+        </Border>
+
+        <Border Grid.Row="1" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" Width="350" CornerRadius="20">
+            <StackPanel Margin="30">
+                <TextBlock TextWrapping="Wrap" MaxWidth="300" Text="You can see all your complex tours here. Click the button below."
+HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="Black" FontWeight="SemiBold"></TextBlock>
+                <Button Content="Go to your complex requests" Margin="20" Command="{Binding TourCommand}"/>
+            </StackPanel>
+        </Border>
+
+        <Button Grid.Row="2" Content="Go to home page" Command="{Binding GoHomeCommand}" Margin="40,30" Width="300" Height="20" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>

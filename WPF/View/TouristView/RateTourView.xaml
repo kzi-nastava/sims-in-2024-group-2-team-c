@@ -32,40 +32,6 @@
                 <Image  Source="/Resources/Images/tour exit.png"/>
             </Button>
 
-           <!-- <StackPanel Grid.Row="1" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal"  Margin="10"  Background="#65b565">
-                    <TextBlock Text="Guides Knowledge (1-5)" FontSize="15" FontWeight="Medium" VerticalAlignment="Center" Width="322" Margin="10"/>
-                    <TextBox Text="{Binding KnowledgeGrade,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="50" Margin="5" />
-                </StackPanel>
-
-           </StackPanel> -->
-
-            <!-- <StackPanel Grid.Row="1"  Orientation="Vertical" >
-                <StackPanel Orientation="Horizontal" Margin="10" Background="#65b565">
-                    <TextBlock Text="Guides Knowledge (1-5)" FontSize="15" FontWeight="Medium" VerticalAlignment="Center" Width="322" Margin="10"/>
-                    <TextBox x:Name="myTextBox" Width="50" Margin="5">
-                        <TextBox.Text>
-                            <Binding Path="KnowledgeGrade" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <val:StringToDoubleValidationRule ValidationStep="RawProposedValue" />
-                                    <val:MinMaxValidationRule ValidationStep="ConvertedProposedValue" Min="1" Max="5" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-                    
-                    
-                    
-                    
-                    
-                    
-                </StackPanel>
-                <AdornerDecorator>
-                    <TextBlock Text="{Binding ElementName=myTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" Margin="20,0,0,0"/>
-                </AdornerDecorator>
-            </StackPanel> -->
-
-
             <StackPanel Grid.Row="1"  Orientation="Vertical" >
                 <StackPanel Orientation="Horizontal" Margin="10" Background="#65b565">
                     <TextBlock Text="Guides Knowledge (1-5)" FontSize="15" FontWeight="Medium" VerticalAlignment="Center" Width="322" Margin="10"/>

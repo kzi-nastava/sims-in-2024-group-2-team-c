@@ -51,5 +51,25 @@ namespace BookingApp.Service.TourServices
             locationRepository.Save(location);
         }
 
+        public int GetIdByCountry(string country)
+        {
+            List<Location> locations = locationRepository.GetAll();
+
+            foreach (Location location in locations)
+            {
+                // Check if the country matches
+                if (location.Country.ToLower().Trim() == country.ToLower().Trim())
+                {
+                    // Return the ID of the matching location
+                    return location.Id;
+                }
+            }
+
+            // If no matching location is found, return a default value or throw an exception
+            // Depending on your requirements
+            return -1;
+
+        }
+
     }
 }

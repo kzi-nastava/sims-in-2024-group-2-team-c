@@ -40,23 +40,23 @@ namespace BookingApp.Service.TourServices
         public List<TourRequest> GetAll() { return iTourRequestRepository.GetAll(); }
         public TourRequest GetById(int id) { return iTourRequestRepository.GetById(id); }
 
-        
 
 
-        public void CreateTourRequest(Location location,string description,Language language,DateTime startDate, DateTime endDate,List<PeopleInfo> peopleInfos)
+
+        public void CreateTourRequest(Location location, string description, Language language, DateTime startDate, DateTime endDate, List<PeopleInfo> peopleInfos)
         {
 
             List<int> peopleinfoIds = peopleInfoService.SavePeopleInfoList(peopleInfos);
-            
-            TourRequest tourRequest = new TourRequest(TourRequestStatus.OnHold,startDate,endDate,location.Id,3, peopleinfoIds, language.Name,peopleInfos.Count(),description, DateTime.Now, LoggedInUser.Id);
+
+            TourRequest tourRequest = new TourRequest(TourRequestStatus.OnHold, startDate, endDate, location.Id, 3, peopleinfoIds, language.Name, peopleInfos.Count(), description, DateTime.Now, LoggedInUser.Id);
             Save(tourRequest);
 
             touristService.UpdateTourRequests(tourRequest.Id);
 
         }
 
-        public List<TouristRequestDTO> GetTouristRequests() { 
-        
+        public List<TouristRequestDTO> GetTouristRequests() {
+
             List<TourRequest> requests = iTourRequestRepository.GetAll();
 
             List<TourRequest> touristsRequests = requests.Where(request => request.TouristId == LoggedInUser.Id).ToList();
@@ -72,7 +72,7 @@ namespace BookingApp.Service.TourServices
                 {
                     touristRequestDTO = new TouristRequestDTO("ACCEPTED", ++number, request.Id);
                 }
-                else if(request.Status == TourRequestStatus.Invalid)
+                else if (request.Status == TourRequestStatus.Invalid)
                 {
                     touristRequestDTO = new TouristRequestDTO("INVALID", ++number, request.Id);
                 }
@@ -94,7 +94,7 @@ namespace BookingApp.Service.TourServices
             List<TourRequestDTO> requests = GetAllTourRequestDTOs();
             foreach (TourRequestDTO request in requests)
             {
-                if(!locations.Contains(request.Location))
+                if (!locations.Contains(request.Location))
                     locations.Add(request.Location);
             }
             locations.Add("Location");
@@ -112,17 +112,17 @@ namespace BookingApp.Service.TourServices
             languages.Add("Language");
             return languages;
         }
-       public (string mostPopularLocation, int maxCount) GetMostPopularLocation() 
-       {
+        public (string mostPopularLocation, int maxCount) GetMostPopularLocation()
+        {
             List<StatisticTourRequestDTO> requests = GetTourRequestStatistics();
             Dictionary<string, int> locationCounts = new Dictionary<string, int>();
             foreach (var tourRequest in requests)
             {
                 if (!locationCounts.ContainsKey(tourRequest.Location))
                 {
-                    locationCounts[tourRequest.Location] = 0; 
+                    locationCounts[tourRequest.Location] = 0;
                 }
-                locationCounts[tourRequest.Location]++; 
+                locationCounts[tourRequest.Location]++;
             }
             int maxCount = 0;
             string mostPopularLocation = null;
@@ -166,9 +166,9 @@ namespace BookingApp.Service.TourServices
         {
             List<TourRequestDTO> requests = GetAllTourRequestDTOs();
             List<StatisticTourRequestDTO> dtos = new List<StatisticTourRequestDTO>();
-            foreach(TourRequestDTO request in requests)
+            foreach (TourRequestDTO request in requests)
             {
-                StatisticTourRequestDTO statistic = new StatisticTourRequestDTO 
+                StatisticTourRequestDTO statistic = new StatisticTourRequestDTO
                 {
                     Location = request.Location,
                     Language = request.Language,
@@ -202,7 +202,7 @@ namespace BookingApp.Service.TourServices
             List<StatisticTourRequestDTO> founded = new List<StatisticTourRequestDTO>();
             foreach (StatisticTourRequestDTO request in requests)
             {
-                if(request.Location == SelectedLocation)
+                if (request.Location == SelectedLocation)
                 {
                     request.YearNumberOfTours = CalculateNumberOfTourRequestByLocation(request.Location);
                     founded.Add(request);
@@ -259,7 +259,7 @@ namespace BookingApp.Service.TourServices
             int count = 0;
             foreach (TourRequestDTO request in requests)
             {
-                if(request.StartDate.Month == Month)
+                if (request.StartDate.Month == Month)
                 {
                     count++;
                 }
@@ -280,12 +280,22 @@ namespace BookingApp.Service.TourServices
             return count;
         }
 
-       
+
 
         public List<TourRequest> GetByTourist(int id)
         {
             List<TourRequest> requests = GetAll();
             List<TourRequest> touristsRequests = requests.Where(request => request.TouristId == id).ToList();
+
+            return touristsRequests;
+
+        }
+
+
+        public List<TourRequest> GetByTouristandYear(int id, int year)
+        {
+            List<TourRequest> requests = GetAll();
+            List<TourRequest> touristsRequests = requests.Where(request => request.TouristId == id && request.CreationDate.Year == year ).ToList();
 
             return touristsRequests;
 

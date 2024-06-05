@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Model;
+using BookingApp.WPF.ViewModel.TouristViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,27 +31,6 @@ namespace BookingApp.WPF.View.TouristView
         {
             this.NavigationService.GoBack();
         }
-
-
-        private void BookButton_Click(object sender, RoutedEventArgs e)
-        {
-            /*if (TourInstancesListView.SelectedItem != null)
-            {
-                var selectedTour = (YourTourItemType)TourInstancesListView.SelectedItem;
-                var bookTourViewModel = new BookTourViewModel(selectedTour);
-                var bookTourView = new BookTourView();
-                bookTourView.DataContext = bookTourViewModel;
-                // Navigate to the BookTourView
-                // This depends on your navigation mechanism, such as Frame.Navigate() in UWP or NavigationService.Navigate() in WPF
-            }
-            else
-            {
-                // Handle the case where no item is selected
-            }*/
-
-            this.NavigationService.Navigate(new BookTourView());
-        }
-
 
 
     }

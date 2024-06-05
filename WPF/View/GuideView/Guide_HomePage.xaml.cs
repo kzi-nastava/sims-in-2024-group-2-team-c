@@ -32,22 +32,32 @@ namespace BookingApp.WPF.View.GuideView
         {
             // Implementacija logike za klik na dugme "TODAY'S TOUR"
         }
+        private void Follow_Click(object sender, RoutedEventArgs e)
+        {
+           Guide_FollowTour followTour = new Guide_FollowTour();
+            this.NavigationService.Navigate(followTour);
+        }
 
         private void SeeMore_Click(object sender, RoutedEventArgs e)
         {
-            // Implementacija logike za klik na dugme "SEE MORE"
+            TourOverview tourOverviewWindow = new TourOverview();
+            //tourOverviewWindow.Show();
+            //Close();
+            this.NavigationService.Navigate(tourOverviewWindow);
         }
         private void CreateNewTourButton_Click(object sender, RoutedEventArgs e)
         {
-            TourForm tourForm = new TourForm();
-            tourForm.Show();
-            //MessageBox.Show("ALL TOURS VIEW button clicked.");
+            //TourForm tourForm = new TourForm();
+            //tourForm.Show();
+            Guide_CreateTour createTourPage = new Guide_CreateTour();
+            this.NavigationService.Navigate(createTourPage);
         }
         private void AllToursViewButton_Click(object sender, RoutedEventArgs e)
         {
-            TourOverview tourOverview = new TourOverview();
-            tourOverview.Show();
-            //MessageBox.Show("ALL TOURS VIEW button clicked.");
+            Guide_ComplexTourRequest complexTourRequest = new Guide_ComplexTourRequest();
+            this.NavigationService.Navigate(complexTourRequest);
+            //Guide_AllTourView allTourView = new Guide_AllTourView();
+            //this.NavigationService.Navigate(allTourView);
         }
 
         private void FutureToursButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +85,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void SeeStatus_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_Status guideStatus = new Guide_Status();
+            this.NavigationService.Navigate(guideStatus);
         }
         private void Reviews_Click(object sender, RoutedEventArgs e)
         {
@@ -97,7 +108,8 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void QuitJob_Click(object sender, RoutedEventArgs e)
         {
-            //
+            Guide_QuitJob guide_QuitJob = new Guide_QuitJob();
+            this.NavigationService.Navigate(guide_QuitJob);
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -109,7 +121,9 @@ namespace BookingApp.WPF.View.GuideView
         }
         private void PlayTutorial_Click(object sender, RoutedEventArgs e)
         {
-            //
+            string name = $"tutorial1";
+            Guide_TutorialView tutorialView = new Guide_TutorialView(name);
+            this.NavigationService.Navigate(tutorialView);
         }
     }
 }
