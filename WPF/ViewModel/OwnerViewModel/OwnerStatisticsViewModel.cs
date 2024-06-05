@@ -101,6 +101,21 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
             }
         }
 
+       private string _city;
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    OnPropertyChanged(nameof(City));
+                }
+            }
+        }
+
         public void GetMonthlyStatistics(int accommodationId, int year)
         {
             var accommodation = accommodationRepository.GetAccommodationById(accommodationId); // Pretpostavimo da imate ovu metodu
@@ -176,6 +191,8 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
                    // ReservationsByMonth= _ownerStatisticsService.NumberOfReservationsByMonth(accommodation,year), jel mi treba i za mesec
                     OccupancyRate = _ownerStatisticsService.CalculateOccupancyRate(accommodation)
                 };
+                ownerStatistic.City = _ownerStatisticsService.GetCityByAccommodationName(accommodation.Name);
+
                 OwnerStatistics.Add(ownerStatistic);
             }
             OnPropertyChanged(nameof(OwnerStatistics));
@@ -185,7 +202,20 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
         {
             PopularLocations = new ObservableCollection<OwnerStatistics>(_ownerStatisticsService.GetPopularLocations(OwnerStatistics.ToList()));
             UnpopularLocations = new ObservableCollection<OwnerStatistics>(_ownerStatisticsService.GetUnpopularLocations(OwnerStatistics.ToList()));
+
+            // Postavljanje City svojstva za svaki element u PopularLocations
+            foreach (var location in PopularLocations)
+            {
+                location.City = _ownerStatisticsService.GetCityByAccommodationName(location.Accommodation.Name);
+            }
+
+            // Postavljanje City svojstva za svaki element u UnpopularLocations
+            foreach (var location in UnpopularLocations)
+            {
+                location.City = _ownerStatisticsService.GetCityByAccommodationName(location.Accommodation.Name);
+            }
         }
+
 
         private void LoadCitySuggestions()
         {
@@ -198,7 +228,10 @@ namespace BookingApp.WPF.ViewModel.OwnerViewModel
             return locations.Select(l => l.Accommodation.Location.City).Distinct().ToList();
         }
 
-
+        public string GetCityByAccommodationName(string accommodationName)
+        {
+            return _ownerStatisticsService.GetCityByAccommodationName(accommodationName);
+        }
 
 
         // Implementacija interfejsa INotifyPropertyChanged
